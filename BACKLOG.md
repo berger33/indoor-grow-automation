@@ -23,7 +23,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 
 - [x] `F1-001 P0` Modelar amostra com valor, unidade, tempo e qualidade.
 - [x] `F1-002 P0` Validar envelopes físicos por tipo de sensor.
-- [ ] `F1-003 P0` Marcar leitura stale por idade máxima.
+- [x] `F1-003 P0` Marcar leitura stale por idade máxima.
 - [ ] `F1-004 P0` Modelar falhas de timeout, CRC, desconexão e calibração.
 - [ ] `F1-005 P0` Definir contrato versionado de telemetria MQTT.
 - [ ] `F1-006 P0` Validar schema e rejeitar payload malformado.
