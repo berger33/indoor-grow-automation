@@ -1,0 +1,71 @@
+name: Relatar defeito
+description: Registre um comportamento reproduzível que difere do esperado.
+title: "bug: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por ajudar. Não publique credenciais, endereços privados ou
+        dados que permitam acesso ao seu cultivo.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Resumo
+      description: O que ocorreu e qual era o comportamento esperado?
+    validations:
+      required: true
+  - type: dropdown
+    id: subsystem
+    attributes:
+      label: Subsistema
+      options:
+        - Firmware ESP32
+        - Hub Raspberry Pi
+        - Painel web
+        - Hardware e instalação
+        - Documentação
+        - Integração/CI
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Como reproduzir
+      description: Liste os passos, entradas e condições ambientais relevantes.
+      placeholder: |
+        1. Configure...
+        2. Execute...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidências sanitizadas
+      description: Inclua logs, leituras e imagens sem segredos ou dados privados.
+      render: shell
+  - type: input
+    id: version
+    attributes:
+      label: Versão ou commit
+      placeholder: v0.1.0 ou SHA do commit
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Ambiente
+      description: Hardware, revisão de PCB, firmware, SO e navegador aplicáveis.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Segurança
+      options:
+        - label: Desenergizei e coloquei atuadores em estado seguro antes de testar.
+          required: true
+        - label: Confirmei que este relato não contém credenciais ou segredos.
+          required: true

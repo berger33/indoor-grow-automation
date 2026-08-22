@@ -1,0 +1,52 @@
+name: Propor funcionalidade
+description: Sugira uma melhoria verificável para o sistema ou a documentação.
+title: "feat: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema a resolver
+      description: Descreva a necessidade do operador, sem começar pela solução.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Resultado esperado
+      description: Defina um resultado observável e verificável.
+    validations:
+      required: true
+  - type: dropdown
+    id: subsystem
+    attributes:
+      label: Subsistema principal
+      options:
+        - Firmware ESP32
+        - Hub Raspberry Pi
+        - Painel web
+        - Hardware e instalação
+        - Documentação
+        - Integração/CI
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceitação sugeridos
+      placeholder: |
+        - [ ] Dado que..., quando..., então...
+        - [ ] Falhas de sensor resultam em...
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Impactos de segurança e operação
+      description: Considere falhas, estado seguro, manutenção e operação offline.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: Registre soluções mais simples ou reversíveis já avaliadas.
