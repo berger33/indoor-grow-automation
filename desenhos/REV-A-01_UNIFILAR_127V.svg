@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100">
+  <defs>
+    <style>
+      .bg{fill:#02090d}.frame{fill:none;stroke:#4ed7ff;stroke-width:2}.title{fill:#e8f8ff;font:700 30px monospace}.h{fill:#9eeaff;font:700 20px monospace}.n{fill:#d8edf4;font:17px monospace}.s{fill:#8db1bf;font:14px monospace}.ac{fill:none;stroke:#ffbd59;stroke-width:7}.dc{fill:none;stroke:#57e38d;stroke-width:6}.pe{fill:none;stroke:#5ad45a;stroke-width:4;stroke-dasharray:12 8}.sig{fill:none;stroke:#ba8cff;stroke-width:4}.box{fill:#071923;stroke:#4ed7ff;stroke-width:2}.warn{fill:#25150a;stroke:#ffbd59;stroke-width:2}.safe{fill:#072318;stroke:#57e38d;stroke-width:2}.bad{fill:#ff827a;font:700 18px monospace}.dim{fill:#ffcf7c;font:15px monospace}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#ffbd59"/></marker>
+    <marker id="d" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#57e38d"/></marker>
+  </defs>
+  <rect width="1800" height="1100" class="bg"/><rect x="25" y="25" width="1750" height="1050" class="frame"/>
+  <text x="55" y="75" class="title">REV A — DIAGRAMA UNIFILAR • VARIANTE FIXA 127 V / 60 Hz</text>
+  <text x="55" y="108" class="s">Base preliminar: quatro painéis Yuxinou = 390 W • PCB somente SELV • execução conforme projeto elétrico validado</text>
+
+  <rect x="70" y="160" width="250" height="170" class="box"/><text x="100" y="202" class="h">ENTRADA DEDICADA</text><text x="100" y="240" class="n">127 V • L + N + PE</text><text x="100" y="270" class="n">20 A preliminar</text><text x="100" y="300" class="s">2,5 mm²: validar método/distância</text>
+  <path d="M320 245H410" class="ac" marker-end="url(#a)"/><path d="M100 330V390H1660" class="pe"/>
+  <rect x="410" y="160" width="190" height="170" class="box"/><text x="440" y="202" class="h">Q0</text><text x="440" y="238" class="n">Seccionadora 2P</text><text x="440" y="270" class="n">≥ 25 A</text><text x="440" y="300" class="s">bloqueável</text>
+  <path d="M600 245H690" class="ac" marker-end="url(#a)"/>
+  <rect x="690" y="160" width="230" height="170" class="warn"/><text x="720" y="202" class="h">DPS1 • TIPO 2</text><text x="720" y="238" class="n">Uc/arranjo: HOLD</text><text x="720" y="270" class="n">depende TT / TN-S</text><text x="720" y="300" class="s">coordenação com concessionária</text>
+  <path d="M920 245H1010" class="ac" marker-end="url(#a)"/>
+  <rect x="1010" y="160" width="230" height="170" class="safe"/><text x="1040" y="202" class="h">IDR1 • TIPO A</text><text x="1040" y="238" class="n">2P • ≥25 A</text><text x="1040" y="270" class="n">IΔn = 30 mA</text><text x="1040" y="300" class="s">não substitui PE/disjuntores</text>
+  <path d="M1240 245H1340" class="ac" marker-end="url(#a)"/>
+  <rect x="1340" y="160" width="340" height="170" class="box"/><text x="1370" y="202" class="h">BARRAMENTO CA PROTEGIDO</text><text x="1370" y="238" class="n">ramais separados</text><text x="1370" y="270" class="n">QF-L1 • QF-F1 • QF-C1</text><text x="1370" y="300" class="s">curvas fechadas após inrush/plaquetas</text>
+
+  <path d="M1510 330V420H245" class="ac"/><path d="M245 420V455M700 420V455M1100 420V455" class="ac"/>
+  <rect x="70" y="455" width="410" height="230" class="box"/><text x="100" y="497" class="h">QF-L1 → K-L1…K-L4</text><text x="100" y="535" class="n">4 contatores • bobina 24 VCC</text><text x="100" y="575" class="n">120 W • 120 W • 85 W • 65 W</text><text x="100" y="615" class="n">total ativo = 390 W</text><text x="100" y="650" class="dim">I provisória @ FP 0,90 = 3,41 A</text>
+  <rect x="535" y="455" width="330" height="230" class="warn"/><text x="565" y="497" class="h">QF-F1 → K-F1</text><text x="565" y="535" class="n">exaustor atual CA</text><text x="565" y="575" class="n">somente liga / desliga</text><text x="565" y="615" class="bad">SEM PWM / TRIAC / 0–10 V</text><text x="565" y="650" class="s">plaqueta e partida pendentes</text>
+  <rect x="920" y="455" width="360" height="230" class="safe"/><text x="950" y="497" class="h">QF-C1 → PSU-C</text><text x="950" y="535" class="n">HDR-60-24</text><text x="950" y="575" class="n">127 VCA → 24 VCC / 2,5 A</text><text x="950" y="615" class="n">DDR-15G-5 → 5 VCC / 3 A</text><text x="950" y="650" class="s">fontes em trilho DIN</text>
+  <rect x="1335" y="455" width="345" height="230" class="safe"/><text x="1365" y="497" class="h">PE / EQUIPOTENCIAL</text><text x="1365" y="535" class="n">gabinete • trilho • carcaças</text><text x="1365" y="575" class="n">PE dedicado</text><text x="1365" y="615" class="n">N nunca substitui PE</text><text x="1365" y="650" class="s">ensaio de continuidade obrigatório</text>
+
+  <path d="M1100 685V765" class="dc" marker-end="url(#d)"/>
+  <rect x="620" y="760" width="480" height="230" class="safe"/><text x="650" y="802" class="h">E-STOP + DISTRIBUIÇÃO 24 VCC</text><text x="650" y="840" class="n">contatos NF cortam energia de atuação</text><text x="650" y="878" class="n">fusível por canal • estado desenergizado</text><text x="650" y="916" class="n">lógica recebe feedback, não decide o corte</text><text x="650" y="954" class="s">parada física independente do Wi-Fi/hub</text>
+  <path d="M1100 875H1190" class="dc" marker-end="url(#d)"/>
+  <rect x="1190" y="760" width="490" height="230" class="box"/><text x="1220" y="802" class="h">PCB IGA-CTRL-REVA • SOMENTE SELV</text><text x="1220" y="840" class="n">ESP32 • 8 saídas MOSFET • entradas opto</text><text x="1220" y="878" class="n">24 V / 5 V / 3,3 V • máx. 1 A/canal</text><text x="1220" y="916" class="n">comanda bobinas, válvulas e dosadoras</text><text x="1220" y="954" class="s">rede CA proibida na placa</text>
+  <path d="M1435 760C1435 720 270 720 270 685" class="sig"/><path d="M1475 760C1475 735 700 735 700 685" class="sig"/>
+  <text x="75" y="1040" class="bad">NÃO FABRICAR/ENERGIZAR: DPS, disjuntores, cabos, contatores e cargas ainda exigem dados de placa + revisão profissional.</text>
+</svg>
