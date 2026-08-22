@@ -1,0 +1,74 @@
+{
+  "revision": "A0",
+  "release_state": "HOLD",
+  "purpose": "SELV controller carrier; no mains voltage",
+  "board": {
+    "width_mm": 160.0,
+    "height_mm": 100.0,
+    "thickness_mm": 1.6,
+    "layers": 4,
+    "material": "FR-4",
+    "minimum_tg_c": 135,
+    "copper_oz": {
+      "F.Cu": 1.0,
+      "In1.Cu": 1.0,
+      "In2.Cu": 1.0,
+      "B.Cu": 1.0
+    },
+    "finish": "lead-free HASL",
+    "solder_mask": "green",
+    "silkscreen": "white"
+  },
+  "fabrication_rules_mm": {
+    "minimum_track": 0.2,
+    "minimum_clearance": 0.2,
+    "minimum_via_drill": 0.3,
+    "minimum_via_diameter": 0.6,
+    "minimum_pth_annular_ring": 0.25,
+    "copper_to_board_edge": 0.5,
+    "hole_to_board_edge": 1.0,
+    "minimum_silkscreen_width": 0.15,
+    "minimum_solder_mask_sliver": 0.1
+  },
+  "net_classes": {
+    "SIGNAL": {"track_mm": 0.25, "clearance_mm": 0.25},
+    "I2C_1WIRE": {"track_mm": 0.25, "clearance_mm": 0.25},
+    "POWER_3V3_5V": {"track_mm": 0.5, "clearance_mm": 0.25},
+    "POWER_24V_LOGIC": {"track_mm": 1.0, "clearance_mm": 0.5},
+    "OUTPUT_1A": {"track_mm": 1.5, "clearance_mm": 0.5},
+    "BACKBONE_4A": {"track_mm": 3.0, "clearance_mm": 0.5}
+  },
+  "electrical_limits": {
+    "input_nominal_vdc": 24.0,
+    "input_maximum_vdc": 30.0,
+    "logic_rails_vdc": [5.0, 3.3],
+    "output_channel_maximum_a": 1.0,
+    "output_aggregate_maximum_a": 4.0,
+    "mains_allowed": false
+  },
+  "mounting": {
+    "hole_count": 4,
+    "hole_diameter_mm": 3.2,
+    "copper_keepout_diameter_mm": 6.0,
+    "minimum_edge_offset_mm": 5.0
+  },
+  "layout_zones": [
+    {"name": "24V outputs", "x_mm": 0, "y_mm": 0, "w_mm": 55, "h_mm": 100},
+    {"name": "ESP32 and digital", "x_mm": 55, "y_mm": 0, "w_mm": 60, "h_mm": 100},
+    {"name": "sensors and analog", "x_mm": 115, "y_mm": 0, "w_mm": 45, "h_mm": 100}
+  ],
+  "keepouts": [
+    {"name": "ESP32 antenna", "minimum_copper_clearance_mm": 15.0},
+    {"name": "mounting holes", "minimum_copper_clearance_mm": 3.0}
+  ],
+  "required_checks": [
+    "KiCad ERC zero unresolved errors",
+    "KiCad DRC zero unresolved errors",
+    "schematic-to-BOM cross-check",
+    "footprint-to-received-part fit check",
+    "one-unit prototype",
+    "24-hour thermal test at declared aggregate current",
+    "HIL safe-state test",
+    "water-only pilot"
+  ]
+}
