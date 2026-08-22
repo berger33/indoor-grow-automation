@@ -15,7 +15,10 @@ versionamento semântico a partir da primeira release.
 - portão local e CI com compilação Python, 29 testes e scan de segredos;
 - modelo imutável de amostras com unidade, timestamp e qualidade;
 - validação de plausibilidade e política de telemetria stale;
-- contrato MQTT de telemetria v1 com codec estrito e schema JSON.
+- contrato MQTT de telemetria v1 com codec estrito e schema JSON;
+- templates estruturados de issue e pull request;
+- política de branches, commits e releases;
+- atualizações semanais de Actions e dependências Python via Dependabot.
 
 ### Segurança
 
