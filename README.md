@@ -69,6 +69,9 @@ O detalhamento executável está em [`BACKLOG.md`](BACKLOG.md); as entregas fica
 em [`CHANGELOG.md`](CHANGELOG.md) e o diário em
 [`PROGRESS_LOG.md`](PROGRESS_LOG.md).
 
+Contribuições seguem o fluxo de branches, commits, testes e releases descrito
+em [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
 ## Segurança física
 
 Água e fertilizantes próximos à rede elétrica exigem projeto e execução por
