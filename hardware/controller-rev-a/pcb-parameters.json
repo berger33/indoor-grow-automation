@@ -44,6 +44,8 @@
     "logic_rails_vdc": [5.0, 3.3],
     "output_channel_maximum_a": 1.0,
     "output_aggregate_maximum_a": 4.0,
+    "installed_power_supply_rated_a": 2.5,
+    "installation_concurrent_limit_a": 2.0,
     "mains_allowed": false
   },
   "mounting": {

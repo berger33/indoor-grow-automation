@@ -19,6 +19,11 @@ comutadas por contatores externos com bobina 24 VCC. As oito saídas da placa s�
 low-side, no máximo 1 A por canal e 4 A agregados; bombas maiores usam interface
 externa.
 
+Na instalação padrão, a fonte HDR-60-24 limita o sistema a 2,5 A. O firmware
+deve impor no máximo 2,0 A simultâneos e sequenciar as seis dosadoras. Os 4 A são
+capacidade de projeto da distribuição da placa, não autorização para trocar a
+fonte sem nova revisão elétrica e térmica.
+
 Os canais pH/EC ficam em carriers Atlas isolados e externos. Sinais I²C longos
 não saem do gabinete; sensores distantes devem usar nó ESP32 local ou barramento
 diferencial.
