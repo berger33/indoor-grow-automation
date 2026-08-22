@@ -3,14 +3,31 @@
 Itens deste arquivo exigem confirmação humana ou evidência física. Eles não
 devem bloquear trabalho independente em outros módulos.
 
-## Instalação física
+## Instalação física — informações incorporadas
 
-- [ ] Confirmar tensão/frequência da instalação (127 ou 220 V; 50 ou 60 Hz).
-- [ ] Confirmar corrente e modelo da luminária que será dimerizada.
-- [ ] Confirmar modelo do exaustor e se a entrada é PWM, 0–10 V ou proprietária.
-- [ ] Confirmar volume útil e dimensões dos reservatórios disponíveis.
-- [ ] Confirmar limite total de potência e circuito elétrico dedicado.
-- [ ] Validar BOM e PCB antes de qualquer compra ou fabricação em lote.
+- [x] Adotar 127 V/60 Hz como base da instalação. A frequência brasileira é
+  60 Hz; ainda deve ser conferida no ponto de alimentação antes do comissionamento.
+- [x] Cadastrar como conjunto padrão quatro painéis Yuxinou: 2 × 120 W, 1 ×
+  85 W e 1 × 65 W, total de 390 W.
+- [x] Tratar o exaustor atual como motor CA liga/desliga. A imagem fornecida
+  mostra quatro fios para ligação 110/220 V, sem interface PWM/0–10 V comprovada.
+- [x] Reservar seis recipientes de concentrado de 1 L, um reservatório de água
+  de 50 L e um reservatório de mistura/rega de 50 L.
+- [x] Autorizar a elaboração e auditoria da BOM e da PCB Rev A.
+
+## Instalação física — validações ainda necessárias
+
+- [ ] Fotografar as plaquetas dos quatro drivers Yuxinou, incluindo tensão,
+  corrente, fator de potência, corrente de partida e terminais de dimerização.
+- [ ] Fotografar a plaqueta do exaustor atual e fornecer a do futuro substituto.
+- [ ] Medir dimensões internas, altura útil e material dos dois reservatórios de
+  50 L e dos seis recipientes de 1 L.
+- [ ] Informar distância do quadro ao ponto de alimentação, método de instalação
+  dos cabos, esquema de aterramento e cargas auxiliares pretendidas.
+- [ ] Dimensionar e executar circuito dedicado, DR/DPS, proteção e aterramento
+  com profissional habilitado conforme NBR 5410 e NR-10.
+- [ ] Executar ERC/DRC no KiCad, revisão independente, montagem de uma unidade,
+  ensaios elétricos/HIL e piloto com água antes de fabricar lote.
 
 ## Regras
 
