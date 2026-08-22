@@ -36,6 +36,10 @@ def main() -> int:
             [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"],
         )
 
+    hardware_validator = ROOT / "scripts" / "validate_hardware_manifest.py"
+    if hardware_validator.exists():
+        run("hardware manifests", [sys.executable, str(hardware_validator)])
+
     secret_scanner = ROOT / "scripts" / "secret_scan.py"
     if secret_scanner.exists():
         run("secret scan", [sys.executable, str(secret_scanner), "--tracked"])
@@ -46,4 +50,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
