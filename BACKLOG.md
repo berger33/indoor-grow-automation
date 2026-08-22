@@ -17,7 +17,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F0-009 P0` Implantar CI para testes, lint e segredos.
 - [x] `F0-010 P1` Criar templates de issue e pull request.
 - [x] `F0-011 P1` Documentar política de branches e releases.
-- [ ] `F0-012 P1` Configurar atualização automatizada de dependências.
+- [x] `F0-012 P1` Configurar atualização automatizada de dependências.
 
 ## Fase 1 — Núcleo de sensores
 
