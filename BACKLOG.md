@@ -26,7 +26,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F1-003 P0` Marcar leitura stale por idade máxima.
 - [ ] `F1-004 P0` Modelar falhas de timeout, CRC, desconexão e calibração.
 - [x] `F1-005 P0` Definir contrato versionado de telemetria MQTT.
-- [ ] `F1-006 P0` Validar schema e rejeitar payload malformado.
+- [x] `F1-006 P0` Validar schema e rejeitar payload malformado.
 - [ ] `F1-007 P1` Implementar filtro de mediana configurável.
 - [ ] `F1-008 P1` Implementar média móvel com janela configurável.
 - [ ] `F1-009 P1` Implementar debounce de entradas digitais.
