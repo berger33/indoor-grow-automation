@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://indoor-grow.local/contracts/mqtt/telemetry-v1.schema.json",
+  "title": "Indoor Grow Telemetry Envelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "message_id",
+    "station_id",
+    "sequence",
+    "sent_at",
+    "reading"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "message_id": { "type": "string", "format": "uuid" },
+    "station_id": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$" },
+    "sequence": { "type": "integer", "minimum": 0 },
+    "sent_at": { "type": "string", "format": "date-time" },
+    "reading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sensor_id",
+        "kind",
+        "value",
+        "unit",
+        "observed_at",
+        "quality",
+        "error_code"
+      ],
+      "properties": {
+        "sensor_id": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$" },
+        "kind": { "type": "string" },
+        "value": { "type": "number" },
+        "unit": { "type": "string" },
+        "observed_at": { "type": "string", "format": "date-time" },
+        "quality": { "type": "string" },
+        "error_code": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
+
