@@ -114,6 +114,11 @@ def validate_manifests() -> ManifestResult:
         errors.append("pcb-parameters: canal excede 1 A sem nova revisão")
     if limits.get("output_aggregate_maximum_a", 999) > 4:
         errors.append("pcb-parameters: agregado excede 4 A sem nova revisão")
+    board_limit = limits.get("output_aggregate_maximum_a", 0)
+    supply_limit = limits.get("installed_power_supply_rated_a", 999)
+    concurrent_limit = limits.get("installation_concurrent_limit_a", 999)
+    if not 0 < concurrent_limit <= supply_limit <= board_limit:
+        errors.append("pcb-parameters: limites placa/fonte/concorrência incoerentes")
 
     return ManifestResult(tuple(errors), tuple(holds), frozenset(references))
 
