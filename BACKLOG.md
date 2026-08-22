@@ -113,3 +113,12 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F5-010 P0` Gerar SBOM e auditar licenças.
 - [ ] `F5-011 P0` Publicar release candidate documentada.
 - [ ] `F5-012 P0` Publicar v1.0 após critérios de aceitação.
+- [x] `F5-013 P0` Documentar variante elétrica fixa 127 V/60 Hz.
+- [x] `F5-014 P0` Consolidar BOM A0 com alternativas e status de aprovação.
+- [x] `F5-015 P0` Definir I/O, netlist e parâmetros da PCB SELV A0.
+- [x] `F5-016 P0` Cruzar automaticamente BOM, I/O e netlist da PCB.
+- [ ] `F5-017 P0` Receber amostras e congelar footprints pela medição física.
+- [ ] `F5-018 P0` Criar esquema KiCad e zerar violações ERC não justificadas.
+- [ ] `F5-019 P0` Rotear PCB KiCad e zerar violações DRC não justificadas.
+- [ ] `F5-020 P0` Fabricar uma unidade A0 e executar ensaio elétrico/térmico.
+- [ ] `F5-021 P0` Liberar A1 somente após HIL e piloto com água.

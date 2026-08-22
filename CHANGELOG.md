@@ -19,6 +19,12 @@ versionamento semântico a partir da primeira release.
 - templates estruturados de issue e pull request;
 - política de branches, commits e releases;
 - atualizações semanais de Actions e dependências Python via Dependabot.
+- modelo de cargas configuráveis com corrente medida, de placa ou estimada;
+- base elétrica fixa 127 V/60 Hz para o conjunto padrão de 390 W;
+- BOM A0 de quadro, controladora, sensores, atuadores e hub;
+- manifestos de I/O, netlist e parâmetros de fabricação da PCB SELV;
+- validação automática de 161 referências entre BOM e manifestos;
+- laudo preliminar, matriz de riscos e dois desenhos técnicos da Rev A.
 
 ### Segurança
 
