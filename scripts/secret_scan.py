@@ -16,6 +16,7 @@ TEXT_SUFFIXES = {
     ".c",
     ".cpp",
     ".css",
+    ".csv",
     ".env",
     ".h",
     ".html",
