@@ -1,0 +1,2 @@
+"""Componentes do hub local."""
+
