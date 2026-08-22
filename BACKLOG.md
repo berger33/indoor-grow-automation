@@ -12,7 +12,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F0-004 P0` Registrar decisão de monorepo e contratos.
 - [x] `F0-005 P0` Registrar decisão de segurança local.
 - [x] `F0-006 P0` Registrar stack do hub e painel.
-- [ ] `F0-007 P0` Implantar portão de qualidade executável localmente.
+- [x] `F0-007 P0` Implantar portão de qualidade executável localmente.
 - [x] `F0-008 P0` Implantar scanner de segredos com testes.
 - [x] `F0-009 P0` Implantar CI para testes, lint e segredos.
 - [ ] `F0-010 P1` Criar templates de issue e pull request.
