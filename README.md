@@ -79,6 +79,23 @@ profissional habilitado, aterramento, DR/GFCI, fusíveis/disjuntores, separaçã
 CA/SELV, gabinete apropriado e contenção de vazamentos. Software não substitui
 proteções mecânicas e elétricas independentes.
 
+## Hardware Rev A
+
+A primeira revisão própria adota instalação fixa 127 V/60 Hz e mantém toda a
+rede CA fora da PCB. O pacote preliminar inclui:
+
+- [base elétrica e cálculo do conjunto de 390 W](docs/hardware/rev-a/BASE_ELETRICA_127V.md);
+- [BOM consolidada com disponibilidade e critérios de substituição](docs/hardware/rev-a/BOM_SISTEMA.md);
+- [controladora SELV, pinagem, netlist e parâmetros](hardware/controller-rev-a/README.md);
+- [laudo preliminar e gates de fabricação](docs/hardware/rev-a/LAUDO_REVISAO_REVA.md).
+
+![Unifilar da variante 127 V](desenhos/REV-A-01_UNIFILAR_127V.png)
+
+![Zonas funcionais da PCB Rev A](desenhos/REV-A-02_PCB_ZONAS.png)
+
+O estado atual é `A0/HOLD`: os arquivos servem para revisão e prototipagem, não
+para fabricar lote ou energizar cargas reais.
+
 ## Origem da referência
 
 O backlog parte de `ESPECIFICACAO_REFERENCIA.md`, produzido por análise dos
