@@ -4,22 +4,42 @@ Este documento fixa a organização funcional derivada do vídeo V1 e adaptada a
 volumes informados. Dimensões cotadas só serão congeladas depois da medição dos
 tanques e do local.
 
-![Visualização realista conceitual da estação completa](../../images/realistic/ESTACAO_COMPLETA_CONCEITUAL.webp)
+![Visualização realista conceitual da estação compacta](../../images/realistic/ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp)
+
+O ADR 0007 substitui a disposição excessivamente espalhada da primeira vista
+por um rack vertical inspirado no princípio espacial observado no vídeo. O
+[`estudo dirigido do painel`](../../referencia/ESTUDO_PAINEL_COMPACTO.md) separa
+evidências visuais de adaptações de segurança.
 
 ## 1. Zonas físicas
 
 | Zona | Conteúdo | Regra de posicionamento |
 |---|---|---|
-| A — quadro seco | proteções CA, fontes, controladora, bornes e E-stop | parede, acima e lateralmente afastado dos tanques |
-| B — dosagem | seis frascos de 1 L, seis agitadores e seis peristálticas | prateleira frontal, removível e com contenção própria |
+| A — quadro seco | proteções CA, fontes, controladora, bornes, HMI e E-stop | alto à esquerda, fechado e lateralmente afastado dos frascos |
+| B — dosagem | seis frascos de 1 L, seis agitadores e seis peristálticas | duas fileiras de três à direita, com bombas no painel seco adjacente |
 | C — água | reservatório de origem de 50 L, plataforma e boias | base rígida, nivelada, dentro de contenção |
 | D — mistura | reservatório de mistura/rega de 50 L, plataforma, sondas e bomba | base rígida, tampa acessível e sem apoiar tubos na balança |
-| E — hidráulica | bombas, válvulas, manifold, uniões e dreno | painel molhado separado, peças substituíveis sem desmontar o quadro |
+| E — hidráulica | bombas, válvulas, manifold, uniões e dreno | travessa central removível, abaixo de dosagem e acima dos tanques |
 | F — cultivo | emissores, bandeja de coleta, dreno e sensores climáticos | nenhum equipamento de rede exposto à névoa/rega |
 | G — hub | Raspberry Pi, rede e armazenamento | caixa seca, ventilada e acessível para backup |
 
 Mangueiras nunca passam sobre as zonas A ou G. Cabos que sobem de uma zona
 molhada formam laço de gotejamento antes do prensa-cabo.
+
+## 1.1 Envelope compacto A0
+
+| Parâmetro | Meta A0 | Estado |
+|---|---:|---|
+| rack | 1.200 × 600 × 2.000 mm | provisional; confirmar modelo/carga |
+| área de piso do rack | 0,72 m² | calculada pelo envelope |
+| faixa frontal de manutenção | mínimo 900 mm | conferir no ambiente |
+| tanque individual | máximo provisório 500 × 400 mm | HOLD por medição |
+| contenção inferior | mínimo 110 L úteis | HOLD por seleção/ensaio |
+| carga de projeto do rack | superior a 150 kg | HOLD por cálculo e fabricante |
+
+O rack não poderá ser comprado antes de conferir carga, dimensões dos tanques,
+ancoragem e risco de tombamento. O painel de fundo deve ser selado e removível;
+madeira crua não é superfície final aprovada.
 
 ## 2. Capacidade de atuação
 
@@ -82,7 +102,9 @@ antes de usar qualquer detalhe visual.
 
 ## 6. Estado da arquitetura
 
-`A0 / REWORK`: a fronteira e as funções estão definidas; capacidade de I/O,
-barramento e layout serão atualizados antes de iniciar KiCad. As imagens
-realistas do repositório são auxílio visual, não substituem P&ID, unifilar,
-desenho cotado, BOM ou inspeção profissional.
+`A0 / REWORK / HOLD`: a fronteira, as funções e a direção compacta estão
+definidas. A controladora possui envelope de 16 saídas; barramento e footprints
+continuam abertos antes do KiCad. O
+[`caderno de pranchas`](CADERNO_PRANCHAS.md) reúne implantação, planta baixa,
+elevação, P&ID, elétrica e instalações. Imagens realistas são auxílio visual e
+não substituem desenho as-built, BOM ou inspeção profissional.
