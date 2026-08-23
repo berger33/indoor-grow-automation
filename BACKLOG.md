@@ -39,7 +39,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F1-013 P1` Modelar driver Atlas pH e códigos de erro.
 - [x] `F1-014 P1` Modelar driver Atlas EC e códigos de erro.
 - [x] `F1-015 P1` Implementar compensação térmica de pH/EC validada.
-- [ ] `F1-016 P1` Modelar HX711 com tara e fator persistentes.
+- [x] `F1-016 P1` Modelar HX711 com tara e fator persistentes.
 - [ ] `F1-017 P1` Modelar nível ultrassônico com filtro e zona morta.
 - [ ] `F1-018 P0` Modelar vazamento latched com confirmação multiamostra.
 - [ ] `F1-019 P1` Detectar divergência entre sensores climáticos.
