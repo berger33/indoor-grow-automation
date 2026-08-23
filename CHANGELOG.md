@@ -33,9 +33,22 @@ versionamento semântico a partir da primeira release.
 - laudo preliminar e desenhos técnicos atualizados para `A0/REWORK/HOLD`;
 - três visualizações realistas conceituais da estação, fertirrigação e clima;
 - índice de tutorial em 15 etapas e capítulo inicial de segurança.
+- taxonomia canônica para timeout, CRC, desconexão, calibração e falhas de
+  protocolo dos sensores;
+- filtros configuráveis de mediana, média móvel e debounce digital;
+- decodificadores testáveis para DS18B20, BME280, MLX90614, Atlas EZO-pH e
+  Atlas EZO-EC;
+- compensação térmica validada para circuitos de pH/EC e normalização de EC;
+- calibração persistível de plataformas HX711 e estimativa ultrassônica de
+  volume com filtro e zona morta;
+- detecção de vazamento retida até confirmação seca e rearme explícito;
+- diagnóstico de divergência climática e cálculo de VPD foliar com alerta de
+  condensação.
 
 ### Segurança
 
 - rejeição de identificadores, unidades e números não finitos;
 - rejeição de campos MQTT ausentes, extras ou com tipos ambíguos;
 - scanner impede tokens, chaves privadas e segredos atribuídos.
+- falhas de aquisição preservam valor e timestamp brutos para diagnóstico;
+- vazamento não é apagado automaticamente quando o sensor volta a indicar seco.

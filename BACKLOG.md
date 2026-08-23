@@ -27,23 +27,23 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F1-001 P0` Modelar amostra com valor, unidade, tempo e qualidade.
 - [x] `F1-002 P0` Validar envelopes físicos por tipo de sensor.
 - [x] `F1-003 P0` Marcar leitura stale por idade máxima.
-- [ ] `F1-004 P0` Modelar falhas de timeout, CRC, desconexão e calibração.
+- [x] `F1-004 P0` Modelar falhas de timeout, CRC, desconexão e calibração.
 - [x] `F1-005 P0` Definir contrato versionado de telemetria MQTT.
 - [x] `F1-006 P0` Validar schema e rejeitar payload malformado.
-- [ ] `F1-007 P1` Implementar filtro de mediana configurável.
-- [ ] `F1-008 P1` Implementar média móvel com janela configurável.
-- [ ] `F1-009 P1` Implementar debounce de entradas digitais.
-- [ ] `F1-010 P1` Modelar driver DS18B20 com timeout e faixa física.
-- [ ] `F1-011 P1` Modelar driver BME280 com offset por dispositivo.
-- [ ] `F1-012 P1` Modelar driver MLX90614 e temperatura foliar.
-- [ ] `F1-013 P1` Modelar driver Atlas pH e códigos de erro.
-- [ ] `F1-014 P1` Modelar driver Atlas EC e códigos de erro.
-- [ ] `F1-015 P1` Implementar compensação térmica de pH/EC validada.
-- [ ] `F1-016 P1` Modelar HX711 com tara e fator persistentes.
-- [ ] `F1-017 P1` Modelar nível ultrassônico com filtro e zona morta.
-- [ ] `F1-018 P0` Modelar vazamento latched com confirmação multiamostra.
-- [ ] `F1-019 P1` Detectar divergência entre sensores climáticos.
-- [ ] `F1-020 P1` Calcular VPD com ar e temperatura foliar.
+- [x] `F1-007 P1` Implementar filtro de mediana configurável.
+- [x] `F1-008 P1` Implementar média móvel com janela configurável.
+- [x] `F1-009 P1` Implementar debounce de entradas digitais.
+- [x] `F1-010 P1` Modelar driver DS18B20 com timeout e faixa física.
+- [x] `F1-011 P1` Modelar driver BME280 com offset por dispositivo.
+- [x] `F1-012 P1` Modelar driver MLX90614 e temperatura foliar.
+- [x] `F1-013 P1` Modelar driver Atlas pH e códigos de erro.
+- [x] `F1-014 P1` Modelar driver Atlas EC e códigos de erro.
+- [x] `F1-015 P1` Implementar compensação térmica de pH/EC validada.
+- [x] `F1-016 P1` Modelar HX711 com tara e fator persistentes.
+- [x] `F1-017 P1` Modelar nível ultrassônico com filtro e zona morta.
+- [x] `F1-018 P0` Modelar vazamento latched com confirmação multiamostra.
+- [x] `F1-019 P1` Detectar divergência entre sensores climáticos.
+- [x] `F1-020 P1` Calcular VPD com ar e temperatura foliar.
 - [ ] `F1-021 P1` Criar simuladores determinísticos de todos os sensores.
 - [ ] `F1-022 P1` Publicar diagnóstico de qualidade/idade de cada leitura.
 

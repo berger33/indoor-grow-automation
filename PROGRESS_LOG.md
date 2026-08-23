@@ -45,3 +45,18 @@ Uma entrada é adicionada ao fim de cada sessão autônoma de desenvolvimento.
 Esta entrada substitui, para trabalho futuro, todas as menções a iluminação e
 plaquetas de luminárias registradas na sessão de 2026-08-22; o histórico anterior
 foi preservado apenas para rastreabilidade.
+
+### Continuação autônoma — núcleo de sensores
+
+- Commits: 16
+- Itens concluídos: falhas canônicas de aquisição; mediana; média móvel;
+  debounce; modelos DS18B20, BME280, MLX90614, Atlas pH, Atlas EC e HX711;
+  compensação térmica; nível ultrassônico; vazamento latched; divergência
+  climática; VPD foliar; changelog e diário.
+- Decisões tomadas: preservar amostra bruta em toda falha; não rearme automático
+  de vazamento; VPD negativo permanece visível como risco de condensação;
+  compensação de pH é enviada ao circuito Atlas com temperatura validada.
+- Bloqueios/pendências: permanecem os HOLDs físicos de plaquetas, dimensões,
+  hidráulica, aterramento, footprints, ERC/DRC, protótipo, HIL e piloto com água.
+- Próximos passos: criar simuladores determinísticos; publicar diagnóstico de
+  qualidade/idade; iniciar máquina de estados local BOOT/IDLE/MANUAL/BATCH/ALARM.
