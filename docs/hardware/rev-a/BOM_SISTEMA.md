@@ -13,7 +13,6 @@ A BOM cobre:
 
 - quadro 127 V/60 Hz e fontes SELV;
 - placa controladora Rev A sem tensão de rede;
-- quatro painéis padrão totalizando 390 W;
 - seis canais de dosagem para recipientes de 1 L;
 - dois reservatórios de 50 L;
 - pH, EC, temperatura, umidade, CO₂, nível/peso e vazamento;
@@ -46,7 +45,7 @@ cadeia adequada para itens elétricos críticos e não é fonte aprovada nesta r
 |---|---|---|
 | ESP32 DevKitC V4 38 pinos | [Mercado Livre](https://www.mercadolivre.com.br/esp32-wroom-32d-devkit-v4-38-pinos-soldados-imediato/p/MLB65017762) | disponível; validar variante física |
 | WEG RDWH tipo A, 30 mA | [catálogo WEG](https://www.weg.net/catalog/weg/BR/pt/c/BR_WDC_CIRCUITBREAKER_RDWH/list) | fornecedor brasileiro obrigatório |
-| WEG CWC07, bobina 24 VCC | [catálogo WEG](https://www.weg.net/catalog/weg/BR/pt/Automa%C3%A7%C3%A3o-e-Controle-Industrial/Controls/Partida-e-Prote%C3%A7%C3%A3o-de-Motores/Contatores/Pot%C3%AAncia/Minicontatores-CWC0-e-CW0/Minicontatores-CWC0/MINICONTATOR-AZ-CWC07-10-30C03-7A-24V-DC/p/12486689), [Mercado Livre](https://www.mercadolivre.com.br/mini-contator-tripolar-weg-cwc07-7a-690v-24vdc-para-painel-eletrico/p/MLB47182628) | disponível; validar inrush |
+| WEG CWC07, bobina 24 VCC | [catálogo WEG](https://www.weg.net/catalog/weg/BR/pt/Automa%C3%A7%C3%A3o-e-Controle-Industrial/Controls/Partida-e-Prote%C3%A7%C3%A3o-de-Motores/Contatores/Pot%C3%AAncia/Minicontatores-CWC0-e-CW0/Minicontatores-CWC0/MINICONTATOR-AZ-CWC07-10-30C03-7A-24V-DC/p/12486689), [Mercado Livre](https://www.mercadolivre.com.br/mini-contator-tripolar-weg-cwc07-7a-690v-24vdc-para-painel-eletrico/p/MLB47182628) | disponível para exaustor/umidificador; validar inrush |
 | Mean Well DDR-15G-5 | [Mean Well Brasil](https://www.meanwellbrasil.com.br/conversores-dcdc/conversor-dcdc-para-montagem-em-trilho-din-15w-entrada-de-9-a-36v-5v-3a), [Mercado Livre](https://produto.mercadolivre.com.br/MLB-6665335170-conversor-dc-dc-meanwell-ddr-15g-5-5v-3a-15w-tipo-trilho-din-_JM) | disponível |
 | ADS1115 | [Texas Instruments](https://www.ti.com/product/ADS1115), [Shopee](https://shopee.com.br/Conversor-Anal%C3%B3gico-Digital-ADS1115-16-Bits-Adc-Ardu%C3%ADno-i.457636598.20497412231) | módulo requer ensaio de autenticidade |
 | STP55NF06L | [STMicroelectronics](https://www.st.com/en/power-transistors/stp55nf06l.html), [Mercado Livre](https://lista.mercadolivre.com.br/55nf06) | comprar lote rastreável |
@@ -65,7 +64,7 @@ da marcação recebida.
 - STP55NF06 sem sufixo `L` não é substituto automático do `STP55NF06L`;
 - vazão de 700–3.000 mL/min é excessiva para correção fina de pH em 50 L;
 - tubos comuns podem ser incompatíveis com ácido/base/concentrados;
-- contatores só podem ser congelados após medir inrush dos quatro drivers;
+- contatores só podem ser congelados após medir exaustor e umidificador;
 - DPS depende do esquema de aterramento e da concessionária;
 - bomba de irrigação depende de altura manométrica e vazão, ainda desconhecidas;
 - Atlas em marketplace pode ter procedência incerta e custo elevado;
