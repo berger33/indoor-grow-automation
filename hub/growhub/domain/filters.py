@@ -49,3 +49,40 @@ class MovingAverageFilter:
         if len(self._samples) > self._window_size:
             self._sum -= self._samples.popleft()
         return self._sum / len(self._samples)
+
+
+class BooleanDebouncer:
+    """Confirma uma transição somente após N amostras digitais iguais."""
+
+    def __init__(self, required_consecutive: int, *, initial: bool | None = None) -> None:
+        if (
+            isinstance(required_consecutive, bool)
+            or not 1 <= required_consecutive <= 100
+        ):
+            raise ValueError("required_consecutive deve estar entre 1 e 100")
+        self._required = required_consecutive
+        self._stable = initial
+        self._candidate: bool | None = None
+        self._count = 0
+
+    @property
+    def stable(self) -> bool | None:
+        return self._stable
+
+    def update(self, raw: bool) -> bool | None:
+        if not isinstance(raw, bool):
+            raise TypeError("entrada digital deve ser bool")
+        if raw == self._stable:
+            self._candidate = None
+            self._count = 0
+            return self._stable
+        if raw != self._candidate:
+            self._candidate = raw
+            self._count = 1
+        else:
+            self._count += 1
+        if self._count >= self._required:
+            self._stable = raw
+            self._candidate = None
+            self._count = 0
+        return self._stable

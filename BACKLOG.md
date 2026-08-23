@@ -32,7 +32,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F1-006 P0` Validar schema e rejeitar payload malformado.
 - [x] `F1-007 P1` Implementar filtro de mediana configurável.
 - [x] `F1-008 P1` Implementar média móvel com janela configurável.
-- [ ] `F1-009 P1` Implementar debounce de entradas digitais.
+- [x] `F1-009 P1` Implementar debounce de entradas digitais.
 - [ ] `F1-010 P1` Modelar driver DS18B20 com timeout e faixa física.
 - [ ] `F1-011 P1` Modelar driver BME280 com offset por dispositivo.
 - [ ] `F1-012 P1` Modelar driver MLX90614 e temperatura foliar.

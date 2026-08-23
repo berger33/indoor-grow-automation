@@ -1,6 +1,10 @@
 from unittest import TestCase
 
-from hub.growhub.domain.filters import MedianFilter, MovingAverageFilter
+from hub.growhub.domain.filters import (
+    BooleanDebouncer,
+    MedianFilter,
+    MovingAverageFilter,
+)
 
 
 class MedianFilterTests(TestCase):
@@ -41,3 +45,22 @@ class MovingAverageFilterTests(TestCase):
             MovingAverageFilter(True)
         with self.assertRaises(ValueError):
             MovingAverageFilter(2).add(float("nan"))
+
+
+class BooleanDebouncerTests(TestCase):
+    def test_requires_consecutive_samples_to_change_state(self) -> None:
+        debounce = BooleanDebouncer(3, initial=False)
+        self.assertFalse(debounce.update(True))
+        self.assertFalse(debounce.update(False))
+        self.assertFalse(debounce.update(True))
+        self.assertFalse(debounce.update(True))
+        self.assertTrue(debounce.update(True))
+
+    def test_confirms_initial_unknown_state(self) -> None:
+        debounce = BooleanDebouncer(2)
+        self.assertIsNone(debounce.update(True))
+        self.assertTrue(debounce.update(True))
+
+    def test_rejects_non_boolean_input(self) -> None:
+        with self.assertRaises(TypeError):
+            BooleanDebouncer(2).update(1)  # type: ignore[arg-type]
