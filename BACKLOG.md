@@ -41,7 +41,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F1-015 P1` Implementar compensação térmica de pH/EC validada.
 - [x] `F1-016 P1` Modelar HX711 com tara e fator persistentes.
 - [x] `F1-017 P1` Modelar nível ultrassônico com filtro e zona morta.
-- [ ] `F1-018 P0` Modelar vazamento latched com confirmação multiamostra.
+- [x] `F1-018 P0` Modelar vazamento latched com confirmação multiamostra.
 - [ ] `F1-019 P1` Detectar divergência entre sensores climáticos.
 - [ ] `F1-020 P1` Calcular VPD com ar e temperatura foliar.
 - [ ] `F1-021 P1` Criar simuladores determinísticos de todos os sensores.
