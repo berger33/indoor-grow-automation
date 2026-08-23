@@ -11,6 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HARDWARE = ROOT / "hardware" / "controller-rev-a"
+SYSTEM_HARDWARE = ROOT / "hardware" / "system"
 REFERENCE_RANGE = re.compile(r"^([A-Z]+)(\d+)(?:-([A-Z]+)(\d+))?$")
 REFERENCE_IN_NET = re.compile(r"\b[A-Z]+\d+\b")
 VALID_STATUS = {"APPROVED_CLASS", "APPROVED_MODEL", "PROVISIONAL", "HOLD"}
@@ -51,6 +52,34 @@ def expand_reference_expression(value: str) -> tuple[str, ...]:
 def load_csv(name: str) -> list[dict[str, str]]:
     with (HARDWARE / name).open(encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def expected_output_channels(count: int) -> tuple[str, ...]:
+    if count < 1:
+        raise ValueError("quantidade de saídas deve ser positiva")
+    return tuple(f"OUT{number:02d}" for number in range(1, count + 1))
+
+
+def validate_actuator_rows(
+    rows: list[dict[str, str]], expected_count: int
+) -> tuple[str, ...]:
+    errors: list[str] = []
+    expected = expected_output_channels(expected_count)
+    channels = tuple(row.get("channel", "") for row in rows)
+    if channels != expected:
+        errors.append(
+            "actuator-map: canais devem ser exatamente " + ",".join(expected)
+        )
+    functions = [row.get("function", "") for row in rows]
+    duplicates = sorted({name for name in functions if functions.count(name) > 1})
+    if duplicates:
+        errors.append("actuator-map: funções duplicadas: " + ",".join(duplicates))
+    for line_number, row in enumerate(rows, start=2):
+        if not row.get("safe_state"):
+            errors.append(f"actuator-map:{line_number}: safe_state ausente")
+        if not row.get("interlock"):
+            errors.append(f"actuator-map:{line_number}: interlock ausente")
+    return tuple(errors)
 
 
 def validate_manifests() -> ManifestResult:
@@ -106,6 +135,13 @@ def validate_manifests() -> ManifestResult:
     with (HARDWARE / "pcb-parameters.json").open(encoding="utf-8") as handle:
         parameters = json.load(handle)
     limits = parameters["electrical_limits"]
+    with (SYSTEM_HARDWARE / "actuator-map.csv").open(
+        encoding="utf-8", newline=""
+    ) as handle:
+        actuator_rows = list(csv.DictReader(handle))
+    errors.extend(
+        validate_actuator_rows(actuator_rows, limits.get("output_channel_count", 0))
+    )
     if limits.get("mains_allowed") is not False:
         errors.append("pcb-parameters: rede CA deve permanecer proibida")
     if limits.get("input_maximum_vdc", 999) > 30:
