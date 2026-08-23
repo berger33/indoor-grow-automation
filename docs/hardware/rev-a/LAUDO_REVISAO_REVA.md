@@ -1,7 +1,7 @@
 # Laudo preliminar de revisão — hardware Rev A
 
-- Revisão avaliada: `A0`
-- Data: 2026-08-22
+- Revisão avaliada: `A0-rework`
+- Data: 2026-08-23
 - Resultado: **HOLD — não liberar fabricação nem energização**
 - Risco residual atual: **não aceitável para lote**
 
@@ -26,15 +26,16 @@ a liberação enquanto evidências obrigatórias estiverem ausentes.
 | I/O × conectores da BOM | coerente |
 | Netlist funcional × BOM | coerente |
 | Limites placa/fonte/concorrência | coerentes |
-| Testes automatizados do repositório | 45 aprovados |
+| Testes automatizados do repositório | 48 aprovados |
 | Scan de segredos | aprovado |
 | ERC KiCad | não executado — esquema ainda não existe |
 | DRC KiCad | não executado — layout ainda não existe |
 | Fit-check de componentes | não executado — amostras não recebidas |
 | Teste térmico/EMC/HIL | não executado — protótipo não existe |
 
-O validador encontrou 161 referências únicas e cinco bloqueios explícitos:
-`PCB-001`, `SAFE-003`, `SAFE-004`, `ACT-002` e `ACT-005`.
+O validador encontrou 248 referências únicas e 14 bloqueios explícitos. Além da
+PCB e das proteções, permanecem bloqueados exaustor, umidificador, bombas,
+tanques, contenção, plataformas, tubos, conexões e válvulas de retenção.
 
 ## 3. Revisão elétrica da PCB
 
@@ -49,7 +50,7 @@ O validador encontrou 161 referências únicas e cinco bloqueios explícitos:
 Isso elimina da placa os requisitos de creepage/clearance de 127/220 V, mas não
 elimina risco no quadro externo.
 
-### 3.2 Saídas indutivas
+### 3.2 Dezesseis saídas indutivas
 
 | Item | Verificação de primeira ordem | Resultado |
 |---|---|---|
@@ -61,18 +62,24 @@ elimina risco no quadro externo.
 | instalação | 2,0 A simultâneos | abaixo da fonte 2,5 A e da placa 4 A |
 
 As seis dosadoras não devem partir juntas. Corrente de stall de cada motor deve
-ser medida; corrente nominal de anúncio não é suficiente.
+ser medida; corrente nominal de anúncio não é suficiente. Bombas hidráulicas e
+banco de agitadores usam driver externo enquanto a corrente não comprovar
+compatibilidade com o limite de 1 A por canal.
 
 ### 3.3 Estado seguro de boot
 
-O `SN74AHCT244` fica em alta impedância por pullup de `BUFFER_OE`. GPIO26 só
-habilita o buffer através de Q9 open-collector, evitando aplicar 5 V ao ESP32.
-Cada MOSFET possui pulldown de gate. O firmware ainda deverá:
+Os dois `SN74HCT595` ficam em alta impedância por pullup de `REGISTER_OE`.
+GPIO26 só habilita as saídas através de Q17 open-collector, evitando aplicar 5 V
+ao ESP32. Cada MOSFET possui pulldown de gate. O firmware ainda deverá:
 
 1. configurar todas as saídas como desligadas;
-2. validar configuração e sensores de segurança;
-3. somente então elevar `OUTPUT_ENABLE`;
-4. remover a habilitação no watchdog, alarme ou perda de integridade.
+2. deslocar dezesseis zeros e transferi-los ao latch;
+3. validar configuração e sensores de segurança;
+4. somente então elevar `OUTPUT_ENABLE`;
+5. remover a habilitação no watchdog, alarme ou perda de integridade.
+
+O HIL deve injetar corrupção/interrupção em data, clock e latch. A atualização
+serial não é considerada feedback físico de bomba, válvula ou contator.
 
 O E-stop corta a alimentação de atuação fisicamente e não depende desse fluxo.
 
@@ -106,7 +113,9 @@ proteção externa. Esses canais não substituem os carriers isolados de pH/EC.
 
 ## 4. Revisão de fabricação
 
-Parâmetros internos usam trilha/espaço mínimo de 0,20/0,20 mm e vias de
+O envelope preliminar passou de 160 × 100 mm para 200 × 120 mm ao incorporar as
+15 funções observadas e uma saída reserva. Parâmetros internos usam
+trilha/espaço mínimo de 0,20/0,20 mm e vias de
 0,30/0,60 mm. Isso é mais conservador que as capacidades publicadas de 0,10/
 0,10 mm para 1 oz da JLCPCB e a recomendação de trabalhar acima de 0,15 mm da
 PCBWay. Essa comparação indica fabricabilidade geométrica **do conjunto de
@@ -135,20 +144,22 @@ Fontes: [capacidades JLCPCB](https://jlcpcb.com/capabilities/pcb-capabilities),
 | DevKitC “38 pinos” com largura/pinagem diferente | alta | placa inutilizável | receber amostra e criar footprint pela medição |
 | componente falsificado de marketplace | média/alta | falha elétrica/metrológica | vendedor rastreável, inspeção e teste de lote |
 | MOSFET sem sufixo `L` | média | aquecimento/não acionamento | MPN exato e curva a 5 V |
-| contator soldar por inrush LED | desconhecida | luz presa ligada/desligada | medir drivers e validar categoria |
 | motor do fan incompatível com controle | alta se dimerizado | queima/incêndio | somente liga/desliga até manual |
+| umidificador sem proteção de nível | desconhecida | sobreaquecimento/dano | modelo com proteção e intertravamento independente |
+| erro no latch serial de 16 canais | média no A0 | atuação incorreta | OE seguro, CRC/espelho lógico, watchdog e HIL |
 | bomba dosadora rápida demais | média | sobredosagem química | 30–200 mL/min e calibração de 10 ciclos |
 | tubo incompatível com pH+/pH− | desconhecida | vazamento/degradação | ensaio químico e material declarado |
 | ruído de motor em pH/EC | média | dosagem errada | isolação, segregação, pausa e teste EMC |
 | aquecimento de trilhas/bornes | desconhecida | delaminação/falha | teste 24 h a 2 A e teste curto a limite |
 | DPS/proteção inadequados ao aterramento | desconhecida | choque/dano por surto | projeto do quadro após identificar TT/TN-S |
 | altura/vazão hidráulica desconhecida | alta | bomba errada | medir percurso e selecionar curva da bomba |
+| dimensões dos tanques desconhecidas | alta | layout/plataforma incompatíveis | medir os dois tanques antes de cotar mecânica |
 
 ## 6. Critério de liberação A1
 
 A revisão poderá mudar de `HOLD` para `PROTOTYPE_RELEASE` somente quando:
 
-- fotos legíveis das quatro luminárias e do exaustor estiverem arquivadas;
+- foto legível da plaqueta do exaustor e dados do umidificador estiverem arquivados;
 - aterramento, circuito, distância e método dos cabos forem definidos;
 - amostras críticas forem medidas e os footprints congelados;
 - esquema KiCad passar ERC sem violações não justificadas;

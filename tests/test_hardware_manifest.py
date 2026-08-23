@@ -1,8 +1,10 @@
 from unittest import TestCase
 
 from scripts.validate_hardware_manifest import (
+    expected_output_channels,
     expand_reference_expression,
     expand_reference_group,
+    validate_actuator_rows,
     validate_manifests,
 )
 
@@ -32,4 +34,47 @@ class HardwareManifestTests(TestCase):
         self.assertEqual((), result.errors)
         self.assertIn("PCB-001", result.holds)
         self.assertIn("U1", result.references)
-        self.assertIn("J23", result.references)
+        self.assertIn("J31", result.references)
+
+
+class ActuatorMapTests(TestCase):
+    def test_formats_expected_channels_with_leading_zero(self) -> None:
+        self.assertEqual(("OUT01", "OUT02", "OUT03"), expected_output_channels(3))
+
+    def test_rejects_missing_channel(self) -> None:
+        rows = [
+            {
+                "channel": "OUT01",
+                "function": "pump",
+                "safe_state": "OFF",
+                "interlock": "timeout",
+            },
+            {
+                "channel": "OUT03",
+                "function": "fan",
+                "safe_state": "OFF",
+                "interlock": "sensor",
+            },
+        ]
+        errors = validate_actuator_rows(rows, 2)
+        self.assertTrue(any("exatamente" in error for error in errors))
+
+    def test_rejects_duplicate_function_and_missing_safety_fields(self) -> None:
+        rows = [
+            {
+                "channel": "OUT01",
+                "function": "pump",
+                "safe_state": "",
+                "interlock": "",
+            },
+            {
+                "channel": "OUT02",
+                "function": "pump",
+                "safe_state": "OFF",
+                "interlock": "timeout",
+            },
+        ]
+        errors = validate_actuator_rows(rows, 2)
+        self.assertTrue(any("duplicadas" in error for error in errors))
+        self.assertTrue(any("safe_state" in error for error in errors))
+        self.assertTrue(any("interlock" in error for error in errors))

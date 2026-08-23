@@ -19,12 +19,20 @@ versionamento semântico a partir da primeira release.
 - templates estruturados de issue e pull request;
 - política de branches, commits e releases;
 - atualizações semanais de Actions e dependências Python via Dependabot.
-- modelo de cargas configuráveis com corrente medida, de placa ou estimada;
-- base elétrica fixa 127 V/60 Hz para o conjunto padrão de 390 W;
-- BOM A0 de quadro, controladora, sensores, atuadores e hub;
-- manifestos de I/O, netlist e parâmetros de fabricação da PCB SELV;
-- validação automática de 161 referências entre BOM e manifestos;
-- laudo preliminar, matriz de riscos e dois desenhos técnicos da Rev A.
+- modelo de cargas ambientais configuráveis com corrente medida, de placa ou
+  estimada;
+- escopo v1 restrito a fertirrigação, irrigação, clima, segurança, hub e tutorial;
+- base elétrica fixa 127 V/60 Hz sem qualquer circuito de iluminação;
+- revisão dirigida do vídeo V1 de hardware com evidências por timestamp;
+- BOM A0 de quadro, controladora, seis frascos, dois tanques, hidráulica,
+  sensores, atuadores, contenção e hub;
+- matriz de 15 funções comandadas e controladora redimensionada para 16 canais;
+- registradores `SN74HCT595`, safe enable e atualização atômica das saídas;
+- manifestos de I/O, netlist e parâmetros de fabricação da PCB SELV 200 × 120 mm;
+- validação automática de 248 referências e da matriz de atuadores;
+- laudo preliminar e desenhos técnicos atualizados para `A0/REWORK/HOLD`;
+- três visualizações realistas conceituais da estação, fertirrigação e clima;
+- índice de tutorial em 15 etapas e capítulo inicial de segurança.
 
 ### Segurança
 

@@ -9,12 +9,11 @@ from enum import StrEnum
 from .sensors import IDENTIFIER
 
 
-class DimmingInterface(StrEnum):
-    NONE = "none"
+class ControlInterface(StrEnum):
+    SWITCH = "switch"
     UNKNOWN = "unknown"
     ZERO_TO_TEN_V = "0-10v"
     PWM = "pwm"
-    RESISTIVE = "resistive"
     DIGITAL = "digital"
 
 
@@ -37,7 +36,7 @@ class ElectricalLoad:
     name: str
     rated_power_w: float
     supply_voltage_v: int
-    dimming: DimmingInterface = DimmingInterface.NONE
+    control_interface: ControlInterface = ControlInterface.SWITCH
     nameplate_current_a: float | None = None
     measured_current_a: float | None = None
     power_factor: float | None = None
@@ -121,19 +120,3 @@ class CircuitProfile:
 
     def loads_missing_current(self) -> tuple[str, ...]:
         return tuple(load.load_id for load in self.loads if load.current() is None)
-
-
-def default_yuxinou_profile() -> CircuitProfile:
-    """Perfil informado pelo responsável; corrente e dimerização aguardam plaquetas."""
-    powers = (120.0, 120.0, 85.0, 65.0)
-    loads = tuple(
-        ElectricalLoad(
-            load_id=f"grow_light_{index}",
-            name=f"Painel Yuxinou {power:g} W",
-            rated_power_w=power,
-            supply_voltage_v=127,
-            dimming=DimmingInterface.UNKNOWN,
-        )
-        for index, power in enumerate(powers, start=1)
-    )
-    return CircuitProfile(supply_voltage_v=127, frequency_hz=60, loads=loads)

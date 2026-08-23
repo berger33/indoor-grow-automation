@@ -6,6 +6,11 @@
 
 > **Segurança:** o sistema combina água, fertilizantes concentrados e rede elétrica. A execução deve usar aterramento, DR/GFCI, proteção por sobrecorrente, segregação entre CA e SELV, gabinete compatível, alívio de tração e profissional habilitado conforme as normas locais. As pranchas são funcionais/conceituais, não desenhos executivos certificados.
 
+> **Aplicação no projeto próprio:** este arquivo preserva tudo que foi observado,
+> inclusive iluminação, para manter a fidelidade documental. O escopo executável
+> da v1.0 está em [`docs/ESCOPO_V1.md`](docs/ESCOPO_V1.md) e exclui completamente
+> automação de iluminação. Itens marcados `[REF-FORA]` não pertencem ao backlog.
+
 ## Convenções e rastreabilidade
 
 | Identificador | Material analisado | Duração |
@@ -498,22 +503,16 @@ Cada item foi escrito para poder virar uma tarefa isolada com demonstração ou 
 - [ ] **[MEL]** Adicionar controle opcional de CO₂ com intertravamento de exaustão e presença humana.
 - [ ] **[MEL]** Calcular dose/consumo de névoa e prever reabastecimento do umidificador.
 
-### 6.9 Iluminação e ciclo de cultivo
+### 6.9 Iluminação e ciclo de cultivo — somente referência
 
-- [ ] **[OBS-V1]** Configurar horário diário de ligar a luminária.
-- [ ] **[OBS-V1]** Configurar horário diário de desligar a luminária.
-- [ ] **[OBS-V1]** Executar fotoperíodo mesmo quando a UI não estiver aberta.
-- [ ] **[OBS-V1]** Expor dimerização manual no painel.
-- [ ] **[OBS-V1]** Gerar PWM de luz a 1220 Hz, invertido e gamma 1,0 na configuração compatível.
-- [ ] **[OBS-V2]** Disponibilizar duas saídas optoisoladas independentes de dimerização.
-- [ ] **[REP]** Validar que o driver aceita entrada autossuprida de dois fios antes de conectar PC817.
-- [ ] **[REP]** Restaurar estado de luz determinístico após reinício/queda de rede.
-- [ ] **[REP]** Registrar tempo ligado e percentual de dimerização acumulados.
-- [ ] **[MEL]** Implementar rampa de amanhecer/anoitecer com duração configurável.
-- [ ] **[MEL]** Suportar canais espectrais independentes somente quando o driver fornecer entradas separadas.
-- [ ] **[MEL]** Integrar mapa PPFD importado sem depender da máquina CNC experimental.
-- [ ] **[MEL]** Alarmar luz comandada ligada sem consumo elétrico correspondente.
-- [ ] **[MEL]** Contabilizar DLI a partir de PPFD/calibração da luminária.
+Os itens abaixo descrevem o sistema estudado, mas estão fora do produto próprio
+por decisão do ADR 0006. Não devem ser convertidos em tarefas de implementação.
+
+- **[REF-FORA][OBS-V1]** Configurar horários e executar fotoperíodo sem a UI.
+- **[REF-FORA][OBS-V1]** Expor dimerização manual e PWM compatível no painel.
+- **[REF-FORA][OBS-V2]** Disponibilizar saídas optoisoladas de dimerização.
+- **[REF-FORA][REP]** Validar interface do driver, restaurar estado e registrar consumo.
+- **[REF-FORA][MEL]** Implementar rampas, canais espectrais, PPFD e DLI.
 
 ### 6.10 Intertravamentos, alarmes e recuperação
 
@@ -821,4 +820,3 @@ A implementação não deve ser considerada pronta apenas porque reproduz a inte
 ### Licenciamento e proveniência
 
 O repositório original declara licença MIT para o material ali publicado. Arquivos, bibliotecas, integrações, modelos 3D e componentes de terceiros podem ter licenças próprias. Um projeto derivado deve preservar avisos aplicáveis, registrar a origem de cada ativo e publicar claramente quais pranchas/requisitos são novos e quais reproduzem a referência.
-

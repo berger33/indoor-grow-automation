@@ -7,8 +7,8 @@ devem bloquear trabalho independente em outros módulos.
 
 - [x] Adotar 127 V/60 Hz como base da instalação. A frequência brasileira é
   60 Hz; ainda deve ser conferida no ponto de alimentação antes do comissionamento.
-- [x] Cadastrar como conjunto padrão quatro painéis Yuxinou: 2 × 120 W, 1 ×
-  85 W e 1 × 65 W, total de 390 W.
+- [x] Excluir por completo a iluminação: a automação Yuxinou existente permanece
+  independente deste sistema.
 - [x] Tratar o exaustor atual como motor CA liga/desliga. A imagem fornecida
   mostra quatro fios para ligação 110/220 V, sem interface PWM/0–10 V comprovada.
 - [x] Reservar seis recipientes de concentrado de 1 L, um reservatório de água
@@ -17,11 +17,14 @@ devem bloquear trabalho independente em outros módulos.
 
 ## Instalação física — validações ainda necessárias
 
-- [ ] Fotografar as plaquetas dos quatro drivers Yuxinou, incluindo tensão,
-  corrente, fator de potência, corrente de partida e terminais de dimerização.
 - [ ] Fotografar a plaqueta do exaustor atual e fornecer a do futuro substituto.
 - [ ] Medir dimensões internas, altura útil e material dos dois reservatórios de
   50 L e dos seis recipientes de 1 L.
+- [ ] Informar a altura entre reservatórios, cultivo e destino do dreno, além da
+  distância total de cada linha hidráulica.
+- [ ] Confirmar se o reservatório de água será abastecido manualmente ou por uma
+  linha fixa com osmose reversa.
+- [ ] Definir modelo do umidificador ou autorizar a seleção após ensaio de bancada.
 - [ ] Informar distância do quadro ao ponto de alimentação, método de instalação
   dos cabos, esquema de aterramento e cargas auxiliares pretendidas.
 - [ ] Dimensionar e executar circuito dedicado, DR/DPS, proteção e aterramento
@@ -38,3 +41,5 @@ v1.0 será executada automaticamente com base apenas em suposição.
 
 - [x] Repositório público `berger33/indoor-grow-automation` criado, conectado e
   populado em 2026-08-22.
+- [x] Escopo v1.0 limitado a fertirrigação, irrigação, clima, segurança, hub e
+  tutorial de montagem em 2026-08-23.
