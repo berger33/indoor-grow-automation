@@ -1,131 +1,130 @@
-# Base elétrica Rev A — instalação 127 V/60 Hz
+# Base elétrica Rev A — controle, hidráulica e clima em 127 V/60 Hz
 
 > **Estado:** projeto preliminar para revisão por profissional habilitado. Não é
 > autorização de compra, montagem ou energização.
 
-## 1. Dados confirmados
+## 1. Dados incorporados
 
-| Parâmetro | Valor incorporado | Estado |
+| Parâmetro | Valor | Estado |
 |---|---:|---|
-| Alimentação do local | 127 V, fase-neutro-terra | Confirmado pelo responsável |
-| Frequência de projeto | 60 Hz | Padrão brasileiro; medir antes de comissionar |
-| Área iluminada padrão | 0,80 × 0,80 m | Confirmado |
-| Painéis | Yuxinou: 120 + 120 + 85 + 65 W | Confirmado, total 390 W |
-| Água de origem | reservatório de 50 L | Confirmado |
-| Solução preparada | reservatório de 50 L | Confirmado |
-| Concentrados | 6 × 1 L | Confirmado |
-| Exaustor atual | motor CA de quatro fios, 110/220 V por religação | Inferido da imagem |
-| Controle do exaustor atual | liga/desliga | Obrigatório até obter plaqueta/manual |
+| Alimentação do local | 127 V, fase-neutro-terra | confirmado pelo responsável |
+| Frequência de projeto | 60 Hz | padrão brasileiro; medir no comissionamento |
+| Água de origem | reservatório de 50 L | confirmado |
+| Solução preparada | reservatório de 50 L | confirmado |
+| Concentrados | 6 recipientes de 1 L | confirmado |
+| Exaustor atual | motor CA de quatro fios, 110/220 V por religação | inferido da imagem |
+| Controle do exaustor atual | liga/desliga | obrigatório até obter plaqueta/manual |
+| Iluminação | inexistente neste quadro/projeto | decisão ADR 0006 |
 
-O Brasil opera em 60 Hz. Fontes oficiais consultadas e documentos de instalações
-públicas usam 127/220 V a 60 Hz. A tensão real, polaridade, terra e frequência
-devem ser medidas no ponto de uso; a documentação não substitui essa inspeção.
+Não será instalado seletor 127/220 V. O quadro terá uma variante física fixa em
+127 V. Essa decisão elimina o risco de posição incorreta e simplifica proteção,
+identificação e manutenção.
 
-## 2. Cálculo do conjunto de iluminação
+## 2. Fronteira de energia
 
-Potência ativa informada:
+A PCB recebe somente 24 VCC, 5 VCC e 3,3 VCC. Nenhuma fase ou neutro entra na
+placa. As cargas preferenciais são:
+
+- bombas peristálticas e válvulas em 24 VCC;
+- bombas hidráulicas em 24 VCC quando a curva selecionada permitir;
+- bobinas de contatores em 24 VCC;
+- ESP32 em 5 VCC/3,3 VCC;
+- exaustor e umidificador em 127 V, comutados externamente.
+
+Se uma bomba adequada existir apenas em 127 V, ela receberá ramal, proteção e
+contator próprios no quadro; isso exige revisão do unifilar e da potência antes
+da compra.
+
+## 3. Cargas que ainda impedem o dimensionamento final
+
+| Carga | Dado obrigatório | Motivo |
+|---|---|---|
+| Exaustor atual/futuro | tensão, corrente, potência e corrente de partida | selecionar proteção e contator |
+| Umidificador | modelo, potência e corrente de partida | selecionar proteção, contator e anti-ciclo |
+| Bombas hidráulicas | tensão, corrente de trabalho/stall e regime | dimensionar fonte, fusível e driver |
+| Dosadoras | corrente nominal/stall de cada lote | validar limite por canal e simultaneidade |
+| Raspberry Pi | modelo e fonte escolhida | incluir consumo, proteção e autonomia |
+
+O cálculo de corrente só será fechado com valores de plaqueta ou medição. Para
+cada carga CA:
 
 ```text
-P = 2 × 120 W + 85 W + 65 W = 390 W
+I_estimada = P / (127 × FP)
 ```
 
-Sem corrente e fator de potência das plaquetas, a corrente exata é desconhecida.
-Somente para planejamento, se o fator de potência for explicitamente assumido
-como 0,90:
-
-```text
-I127 = 390 / (127 × 0,90) = 3,41 A
-I220 = 390 / (220 × 0,90) = 1,97 A
-```
-
-220 V reduz corrente e queda de tensão, mas não reduz automaticamente a energia
-ativa consumida pelos mesmos drivers. Para 390 W, essa redução não compensa o
-risco de um seletor de tensão. O projeto físico permanece fixo em 127 V.
-
-O software deve guardar cada painel como carga independente e aceitar:
-
-- potência nominal;
-- tensão nominal;
-- corrente de plaqueta ou corrente medida;
-- fator de potência, quando documentado;
-- corrente de partida/inrush;
-- tipo de dimerização;
-- grupo elétrico, estado comandado e feedback real.
-
+Essa expressão é apenas planejamento quando o fator de potência não foi medido.
 Corrente medida prevalece sobre plaqueta; plaqueta prevalece sobre estimativa.
-O sistema nunca deve escolher cabo, disjuntor ou contator apenas pelo valor
-estimado.
+Corrente de partida é tratada separadamente.
 
-## 3. Arquitetura recomendada do quadro
-
-Entrada preliminar: circuito dedicado 127 V, 20 A, cobre 2,5 mm². Esses valores
-são ponto de partida, não dimensionamento final: distância, queda de tensão,
-temperatura, agrupamento, método de instalação, capacidade de interrupção e
-aterramento podem exigir outra seção ou proteção.
+## 4. Arquitetura preliminar do quadro
 
 | Identificador | Função | Especificação preliminar |
 |---|---|---|
-| Q0 | seccionamento geral | 2 polos, 25 A ou superior, bloqueável |
-| DPS1 | surtos | Tipo 2; `Uc` e arranjo definidos após identificar TT/TN-S |
-| IDR1 | fuga à terra | tipo A, 2 polos, 25 A ou superior, 30 mA |
-| QF-L1 | iluminação | curva e corrente definidas após medir inrush; referência C10 A |
-| QF-F1 | exaustão | definido pela plaqueta do motor; referência C6 A |
-| QF-C1 | fontes de controle | referência C2 A |
-| K-L1…K-L4 | quatro painéis | contatores 24 VCC independentes; categoria/inrush a validar |
-| K-F1 | exaustor atual | contator 24 VCC independente, somente liga/desliga |
-| PSU-C | controle SELV | Mean Well HDR-60-24, 24 VCC/2,5 A/60 W ou equivalente |
-| E-STOP | parada local | cogumelo com contatos NF, cortando energia de atuação 24 VCC |
+| Q0 | seccionamento geral | 2 polos, bloqueável; corrente após memorial final |
+| DPS1 | surtos | Tipo 2; `Uc` e arranjo após identificar TT/TN-S |
+| IDR1 | fuga à terra | tipo A, 2 polos, 30 mA; corrente coordenada com Q0 |
+| QF-F1 | exaustão | curva/corrente após plaqueta do motor |
+| QF-H1 | umidificação | curva/corrente após modelo aprovado |
+| QF-C1 | fontes de controle | após somar fontes e inrush |
+| K-F1 | exaustor atual | contator 24 VCC, somente liga/desliga |
+| K-H1 | umidificador | contator 24 VCC, se o modelo não fornecer enable isolado |
+| PSU-C | atuação SELV | fonte 24 VCC dimensionada após medir cargas |
+| DC-L | lógica | conversor 24→5 V isolado ou fonte certificada equivalente |
+| E-STOP | parada local | contatos NF removem alimentação de atuação 24 VCC |
 
-Requisitos de execução:
+Não há disjuntor, contator, tomada ou borne reservado para luminárias.
 
-1. gabinete metálico ou policarbonato com grau IP adequado e placa de montagem;
-2. canaletas CA e SELV separadas, cruzamentos a 90° quando inevitáveis;
-3. barramento PE dedicado e todas as massas metálicas equipotencializadas;
-4. bornes identificados para fase, neutro e terra; neutro nunca usado como PE;
-5. prensa-cabos, alívio de tração, terminais tubulares e etiquetas permanentes;
-6. proteção individual por ramal e fusível por canal 24 VCC;
-7. nenhum condutor de rede na PCB controladora;
-8. quadro acima dos reservatórios, fora de trajetos de vazamento e com laço de
-   gotejamento nos cabos.
+## 5. Requisitos de execução
 
-DR e DPS não substituem aterramento, disjuntor, seccionamento ou isolamento. A
-NR-10 exige controle dos riscos e medidas preventivas; a execução deve observar
-a NBR 5410 e as regras da concessionária local.
+1. circuito dedicado e memorial de cálculo conforme distância, queda de tensão,
+   temperatura, agrupamento, capacidade de interrupção e aterramento locais;
+2. gabinete de grau IP adequado, placa de montagem e reserva mínima de 30%;
+3. canaletas CA e SELV separadas, cruzando a 90° apenas quando inevitável;
+4. barramento PE dedicado e massas metálicas equipotencializadas;
+5. fase, neutro e terra identificados; neutro nunca usado como PE;
+6. fusível por ramal 24 VCC e proteção individual de cada carga CA;
+7. prensa-cabos, alívio de tração, terminais tubulares e etiquetas permanentes;
+8. quadro acima e lateralmente afastado dos tanques, sem tubulação sobre ele;
+9. laço de gotejamento antes de todo cabo que entra no quadro;
+10. E-stop físico e proteção contra sobrecorrente independentes de firmware.
 
-## 4. Exaustor atual e futuro
+DR, DPS, aterramento, disjuntor, seccionamento e isolamento cumprem funções
+diferentes e nenhum substitui os demais. A execução de rede deve observar NBR
+5410, NR-10 e requisitos da concessionária por profissional habilitado.
 
-A imagem fornecida descreve combinações de fios diferentes para 110 e 220 V.
-Isso caracteriza religação de enrolamentos, não “bivolt automático” comprovado.
-Também não há terceiro fio de comando, entrada analógica ou protocolo.
+## 6. Exaustor atual e futuro
+
+A imagem recebida mostra combinações distintas dos quatro fios para 110 e 220 V.
+Isso evidencia religação de enrolamentos, não uma interface PWM/0–10 V nem
+“bivolt automático” comprovado.
 
 Para o exaustor atual:
 
-- configuração física única em 127 V, feita e isolada por profissional;
-- comando liga/desliga por contator;
-- proteção conforme corrente de placa;
-- sem PWM, dimmer, SSR aleatório ou inversor de frequência;
-- partida mínima, anti-ciclo e feedback por contato auxiliar/corrente.
+- ligação física fixa em 127 V, executada e isolada por profissional;
+- comando somente liga/desliga por contator;
+- proteção selecionada pela plaqueta;
+- sem dimmer, SSR por corte de fase, PWM ou inversor improvisado;
+- tempo mínimo ligado/desligado e feedback por contato auxiliar ou corrente.
 
-Para a substituição, preferir ventilador **EC** com entrada 0–10 V documentada,
-entrada de habilitação separada e alimentação compatível. A placa Rev A reserva
-uma interface isolada 0–10 V opcional, mas ela não será populada/ativada sem o
-manual do equipamento escolhido.
+Para substituição, é preferível ventilador EC com entrada 0–10 V documentada e
+habilitação separada. A interface analógica só poderá ser populada depois de
+confirmar manual, referência elétrica e comportamento de falha do modelo.
 
-## 5. Luminárias e dimerização
+## 7. Gate de liberação
 
-As quatro saídas liga/desliga são independentes. Isso permite trocar potências,
-desativar um painel e calcular cada ramal sem refazer a PCB. A dimerização não é
-universal: drivers podem usar 0–10 V, PWM, resistência externa ou potenciômetro
-isolado. O usuário selecionará a interface somente entre opções compatíveis com
-o modelo cadastrado; `unknown` mantém apenas liga/desliga.
+O quadro permanece `HOLD` até existirem:
 
-Até receber fotos das plaquetas/terminais dos drivers Yuxinou, o projeto não
-define ligação de dimerização e não calcula inrush de contatores.
+- lista final de cargas com plaquetas e correntes de partida;
+- distância e método de instalação do circuito;
+- esquema de aterramento verificado;
+- memorial de cálculo e unifilar revisados por profissional habilitado;
+- teste de DR, continuidade do PE, polaridade e isolação;
+- ensaio térmico e teste de falhas com cargas simuladas;
+- piloto hidráulico somente com água.
 
-## 6. Referências verificadas em 2026-08-22
+## 8. Referências
 
 - [NR-10 — Ministério do Trabalho e Emprego](https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/norma-regulamentadora-no-10-nr-10)
 - [Fonte Mean Well HDR-60 — especificação oficial](https://www.meanwell.com/Upload/PDF/HDR-60/HDR-60-SPEC.PDF)
 - [WEG RDWH tipo A — catálogo oficial](https://www.weg.net/catalog/weg/BR/pt/c/BR_WDC_CIRCUITBREAKER_RDWH/list)
-- [WEG CWC07 24 VCC — catálogo oficial](https://www.weg.net/catalog/weg/BR/pt/Automa%C3%A7%C3%A3o-e-Controle-Industrial/Controls/Partida-e-Prote%C3%A7%C3%A3o-de-Motores/Contatores/Pot%C3%AAncia/Minicontatores-CWC0-e-CW0/Minicontatores-CWC0/MINICONTATOR-AZ-CWC07-10-30C03-7A-24V-DC/p/12486689)
 - [ESP32-DevKitC V4 — documentação Espressif](https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp32-devkitc/user_guide.html)
