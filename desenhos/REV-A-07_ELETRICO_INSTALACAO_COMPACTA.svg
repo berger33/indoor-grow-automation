@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9z" fill="#d84315"/></marker>
+    <marker id="ab" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9z" fill="#1565c0"/></marker>
+    <style>
+      .ca{stroke:#d84315;stroke-width:5;fill:none;marker-end:url(#ar)}.selv{stroke:#1565c0;stroke-width:5;fill:none;marker-end:url(#ab)}
+      .sig{stroke:#7b1fa2;stroke-width:3;stroke-dasharray:9 6;fill:none}.pe{stroke:#2e7d32;stroke-width:4;stroke-dasharray:14 5;fill:none}
+      .box{stroke:#263238;stroke-width:3;fill:#eceff1}.dry{stroke:#ef6c00;stroke-width:4;fill:#fff3e0}.field{stroke:#0277bd;stroke-width:3;fill:#e1f5fe}
+      .txt{font:19px Arial,sans-serif;fill:#17202a}.small{font:15px Arial,sans-serif;fill:#37474f}.title{font:bold 29px Arial,sans-serif;fill:#102027}
+      .hold{font:bold 18px Arial,sans-serif;fill:#c62828}.zone{font:bold 21px Arial,sans-serif;fill:#263238}
+    </style>
+  </defs>
+  <rect width="1600" height="1000" fill="white"/>
+  <text x="55" y="48" class="title">REV-A-07 — PROJETO ELÉTRICO FUNCIONAL DA INSTALAÇÃO COMPACTA</text>
+  <text x="55" y="78" class="hold">A0 / HOLD — 127 V / 60 Hz FIXO; CABOS E PROTEÇÕES SOMENTE APÓS PLAQUETAS E PROJETO NBR 5410</text>
+
+  <rect x="45" y="125" width="440" height="770" rx="12" class="dry"/>
+  <text x="145" y="160" class="zone">QD-01 — ZONA SECA FECHADA</text>
+  <rect x="85" y="205" width="160" height="70" class="box"/><text x="110" y="235" class="small">CIRCUITO DEDICADO</text><text x="110" y="258" class="small">127 V / PE</text>
+  <path d="M245 240H300" class="ca"/>
+  <rect x="300" y="195" width="135" height="90" class="box"/><text x="327" y="225" class="small">DR + DPS</text><text x="318" y="250" class="small">DISJUNTOR</text><text x="325" y="273" class="small">seletivos</text>
+  <path d="M368 285V340" class="ca"/>
+  <rect x="250" y="340" width="235" height="90" class="box"/><text x="285" y="375" class="txt">PSU-01 24 VCC</text><text x="280" y="404" class="small">potência final em HOLD</text>
+  <path d="M250 385H190V490" class="ca"/>
+  <rect x="85" y="490" width="210" height="100" class="box"/><text x="113" y="528" class="txt">K-EX / K-HUM</text><text x="105" y="555" class="small">contatores 24 VCC</text><text x="110" y="578" class="small">cargas CA externas</text>
+  <path d="M368 430V485" class="selv"/>
+  <rect x="250" y="485" width="185" height="90" class="box"/><text x="276" y="520" class="txt">DC-DC 5 V</text><text x="270" y="550" class="small">hub/HMI isolados</text>
+  <rect x="85" y="650" width="350" height="120" class="box"/><text x="125" y="690" class="txt">TB-CA / TB-SELV / TB-PE</text><text x="110" y="720" class="small">trilhos e canaletas separados</text><text x="115" y="748" class="small">prensa-cabos por domínio</text>
+  <circle cx="118" cy="820" r="28" fill="#d32f2f" stroke="#f9a825" stroke-width="7"/><text x="165" y="826" class="txt">S0 E-STOP</text>
+  <path d="M145 810H330V590" class="sig"/>
+
+  <rect x="560" y="125" width="440" height="770" rx="12" fill="#ede7f6" stroke="#5e35b1" stroke-width="4"/>
+  <text x="665" y="160" class="zone">QC-01 — CONTROLE SELV</text>
+  <rect x="610" y="215" width="340" height="120" class="box"/><text x="700" y="260" class="txt">CONTROLADORA A0</text><text x="655" y="292" class="small">ESP32 + OE seguro + 16 saídas</text><text x="655" y="316" class="small">nenhuma tensão de rede na PCB</text>
+  <path d="M485 385H610V260" class="selv"/>
+  <rect x="610" y="390" width="340" height="120" class="box"/><text x="695" y="430" class="txt">FU-01…FU-13</text><text x="662" y="461" class="small">fusíveis por carga 24 VCC</text><text x="640" y="488" class="small">corrente nominal depende de amostra</text>
+  <path d="M780 335V390" class="selv"/>
+  <rect x="610" y="570" width="340" height="120" class="box"/><text x="680" y="610" class="txt">TB-OUT01…OUT16</text><text x="660" y="640" class="small">bornes plugáveis identificados</text><text x="660" y="667" class="small">OUT16 bloqueada/reserva</text>
+  <path d="M780 510V570" class="selv"/>
+  <path d="M610 285H520V540H295" class="sig"/>
+  <text x="505" y="525" class="small">comando K</text>
+
+  <rect x="1075" y="125" width="470" height="770" rx="12" class="field"/>
+  <text x="1190" y="160" class="zone">CAMPO — ZONA MOLHADA</text>
+  <g class="box">
+    <rect x="1120" y="205" width="180" height="85"/><rect x="1330" y="205" width="170" height="85"/>
+    <rect x="1120" y="350" width="180" height="85"/><rect x="1330" y="350" width="170" height="85"/>
+    <rect x="1120" y="495" width="180" height="85"/><rect x="1330" y="495" width="170" height="85"/>
+  </g>
+  <text x="1150" y="242" class="txt">DP-301…306</text><text x="1150" y="268" class="small">peristálticas</text>
+  <text x="1365" y="242" class="txt">XV-101/201</text><text x="1365" y="268" class="small">válvulas NC</text>
+  <text x="1150" y="387" class="txt">P-101…203</text><text x="1145" y="413" class="small">drivers externos</text>
+  <text x="1362" y="387" class="txt">AG-301…306</text><text x="1360" y="413" class="small">agitadores</text>
+  <text x="1150" y="532" class="txt">SENSORES</text><text x="1140" y="558" class="small">pH/EC/T/massa</text>
+  <text x="1368" y="532" class="txt">LD-101…401</text><text x="1360" y="558" class="small">vazamento</text>
+  <path d="M950 625H1050V247H1120" class="selv"/>
+  <path d="M1050 247V392H1120M1050 392V537H1120M1050 247H1330M1050 392H1330M1050 537H1330" class="selv"/>
+
+  <rect x="1120" y="670" width="380" height="130" class="box"/><text x="1190" y="710" class="txt">CARGAS CA SEPARADAS</text><text x="1160" y="742" class="small">exaustor e umidificador somente</text><text x="1160" y="770" class="small">corrente/feedback conforme plaqueta</text>
+  <path d="M295 540H1040V735H1120" class="ca"/>
+
+  <path d="M165 275V860H1480" class="pe"/><text x="500" y="882" class="small">PE: rack, quadro, trilho e partes metálicas conforme projeto profissional</text>
+  <rect x="45" y="930" width="1500" height="48" fill="none" stroke="#263238" stroke-width="2"/>
+  <text x="60" y="960" class="small">Proibido: seletor 127/220, tomadas soltas, CA na PCB, cabo sem PE, energização antes de inspeção e ensaios.</text>
+  <text x="1430" y="960" class="small">07/08</text>
+</svg>

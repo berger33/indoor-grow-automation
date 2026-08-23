@@ -40,6 +40,10 @@ def main() -> int:
     if hardware_validator.exists():
         run("hardware manifests", [sys.executable, str(hardware_validator)])
 
+    drawing_validator = ROOT / "scripts" / "validate_drawings.py"
+    if drawing_validator.exists():
+        run("Rev A drawings", [sys.executable, str(drawing_validator)])
+
     secret_scanner = ROOT / "scripts" / "secret_scan.py"
     if secret_scanner.exists():
         run("secret scan", [sys.executable, str(secret_scanner), "--tracked"])

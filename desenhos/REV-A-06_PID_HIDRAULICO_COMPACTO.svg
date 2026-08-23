@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <marker id="flow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#0277bd"/></marker>
+    <marker id="dose" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7b1fa2"/></marker>
+    <style>
+      .water{stroke:#0277bd;stroke-width:5;fill:none;marker-end:url(#flow)}.solution{stroke:#00897b;stroke-width:5;fill:none;marker-end:url(#flow)}
+      .dose{stroke:#7b1fa2;stroke-width:3;fill:none;marker-end:url(#dose)}.signal{stroke:#c62828;stroke-width:2;stroke-dasharray:9 6;fill:none}
+      .equip{stroke:#263238;stroke-width:3;fill:#eceff1}.tank{stroke:#0277bd;stroke-width:4;fill:#e1f5fe}
+      .inst{stroke:#5e35b1;stroke-width:3;fill:#ede7f6}.valve{stroke:#263238;stroke-width:3;fill:#fff}
+      .txt{font:19px Arial,sans-serif;fill:#17202a}.small{font:15px Arial,sans-serif;fill:#37474f}
+      .title{font:bold 29px Arial,sans-serif;fill:#102027}.hold{font:bold 18px Arial,sans-serif;fill:#c62828}
+    </style>
+  </defs>
+  <rect width="1600" height="1000" fill="white"/>
+  <text x="55" y="48" class="title">REV-A-06 — P&amp;ID HIDRÁULICO DA ESTAÇÃO COMPACTA</text>
+  <text x="55" y="78" class="hold">A0 / HOLD — DIÂMETROS, MATERIAIS, CURVAS DE BOMBA E DESTINO DO DRENO A MEDIR</text>
+
+  <text x="60" y="170" class="txt">ÁGUA MANUAL/RO</text>
+  <path d="M60 205H235" class="water"/>
+  <path d="M235 185l28 20-28 20z M291 185l-28 20 28 20z" class="valve"/>
+  <text x="235" y="165" class="small">XV-101 NC</text>
+  <path d="M291 205H370" class="water"/>
+
+  <path d="M370 165v220c0 35 200 35 200 0V165z" class="tank"/>
+  <text x="420" y="255" class="txt">TK-101</text><text x="408" y="282" class="small">ÁGUA 50 L</text>
+  <circle cx="550" cy="195" r="20" class="inst"/><text x="532" y="201" class="small">LSH</text>
+  <rect x="405" y="405" width="130" height="36" class="inst"/><text x="423" y="430" class="small">WIT-101</text>
+  <path d="M470 405V385" class="signal"/>
+
+  <path d="M570 350H650" class="water"/>
+  <circle cx="690" cy="350" r="38" class="equip"/><path d="M673 330l35 20-35 20z" fill="#0277bd"/><text x="660" y="410" class="small">P-101 transferência</text>
+  <path d="M728 350H790" class="water"/>
+  <path d="M790 330l25 20-25 20z M840 330l-25 20 25 20z" class="valve"/>
+  <text x="790" y="310" class="small">XV-201 NC</text>
+  <path d="M840 350H910" class="water"/>
+
+  <path d="M910 165v220c0 35 220 35 220 0V165z" class="tank"/>
+  <text x="975" y="250" class="txt">TK-201</text><text x="958" y="277" class="small">MISTURA 50 L</text>
+  <circle cx="1110" cy="195" r="20" class="inst"/><text x="1091" y="201" class="small">LSHH</text>
+  <rect x="950" y="405" width="140" height="36" class="inst"/><text x="968" y="430" class="small">WIT-201</text>
+
+  <g>
+    <rect x="220" y="520" width="105" height="70" rx="10" class="equip"/><rect x="360" y="520" width="105" height="70" rx="10" class="equip"/>
+    <rect x="500" y="520" width="105" height="70" rx="10" class="equip"/><rect x="640" y="520" width="105" height="70" rx="10" class="equip"/>
+    <rect x="780" y="520" width="105" height="70" rx="10" class="equip"/><rect x="920" y="520" width="105" height="70" rx="10" class="equip"/>
+    <text x="239" y="550" class="small">CT-301</text><text x="379" y="550" class="small">CT-302</text><text x="519" y="550" class="small">CT-303</text>
+    <text x="659" y="550" class="small">CT-304</text><text x="799" y="550" class="small">CT-305</text><text x="939" y="550" class="small">CT-306</text>
+    <text x="239" y="575" class="small">DP-301</text><text x="379" y="575" class="small">DP-302</text><text x="519" y="575" class="small">DP-303</text>
+    <text x="659" y="575" class="small">DP-304</text><text x="799" y="575" class="small">DP-305</text><text x="939" y="575" class="small">DP-306</text>
+  </g>
+  <path d="M272 590V640H1060V385M412 590V640M552 590V640M692 590V640M832 590V640M972 590V640" class="dose"/>
+  <text x="1040" y="622" class="small">CV individual + anti-sifão</text>
+
+  <path d="M955 375V710H1190" class="solution"/>
+  <circle cx="1230" cy="710" r="38" class="equip"/><path d="M1213 690l35 20-35 20z" fill="#00897b"/>
+  <text x="1185" y="770" class="small">P-201 mistura</text>
+  <path d="M1268 710H1335V285H1130" class="solution"/>
+  <circle cx="1335" cy="620" r="24" class="inst"/><text x="1317" y="626" class="small">FIT</text>
+  <circle cx="1335" cy="540" r="24" class="inst"/><text x="1317" y="546" class="small">AIT</text><text x="1370" y="545" class="small">pH/EC/T</text>
+
+  <path d="M1090 390V820H1190" class="solution"/>
+  <circle cx="1230" cy="820" r="38" class="equip"/><path d="M1213 800l35 20-35 20z" fill="#00897b"/>
+  <text x="1192" y="878" class="small">P-202 irrigação</text>
+  <path d="M1268 820H1450" class="solution"/><text x="1365" y="800" class="small">Z-401 cultivo</text>
+  <path d="M1450 850H1360" class="water"/>
+  <circle cx="1320" cy="850" r="38" class="equip"/><path d="M1337 830l-35 20 35 20z" fill="#0277bd"/>
+  <text x="1278" y="910" class="small">P-203 dreno</text><path d="M1282 850H1130" class="water"/>
+  <text x="1000" y="858" class="small">destino aprovado</text>
+
+  <rect x="75" y="700" width="250" height="120" rx="10" fill="#ffebee" stroke="#c62828" stroke-width="3"/>
+  <text x="105" y="738" class="txt">INTERTRAVAMENTOS</text>
+  <text x="95" y="770" class="small">LD-101/201/301/401</text><text x="95" y="797" class="small">E-stop • massa • timeout</text>
+  <path d="M325 760H690V388M325 780H1230V748" class="signal"/>
+
+  <rect x="55" y="940" width="1490" height="42" fill="none" stroke="#263238" stroke-width="2"/>
+  <text x="70" y="968" class="small">U = união; CV = retenção; todos os ramos recebem registro manual e ponto de teste conforme seleção final.</text>
+  <text x="1420" y="968" class="small">06/08</text>
+</svg>

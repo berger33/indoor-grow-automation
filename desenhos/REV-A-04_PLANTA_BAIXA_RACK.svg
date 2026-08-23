@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#1565c0"/></marker>
+    <style>
+      .frame{stroke:#263238;stroke-width:5;fill:none}.tank{stroke:#0277bd;stroke-width:3;fill:#e1f5fe}
+      .tray{stroke:#00695c;stroke-width:3;fill:#e0f2f1}.dry{stroke:#ef6c00;stroke-width:3;fill:#fff3e0}
+      .service{stroke:#43a047;stroke-width:2;stroke-dasharray:12 8;fill:#e8f5e9;fill-opacity:.5}
+      .dim{stroke:#1565c0;stroke-width:2;marker-start:url(#a);marker-end:url(#a)}
+      .line{stroke:#546e7a;stroke-width:2;fill:none}.txt{font-family:Arial,sans-serif;font-size:21px;fill:#17202a}
+      .small{font-family:Arial,sans-serif;font-size:17px;fill:#37474f}.title{font:bold 30px Arial,sans-serif;fill:#102027}
+      .hold{font:bold 18px Arial,sans-serif;fill:#c62828}
+    </style>
+  </defs>
+  <rect width="1400" height="900" fill="#fff"/>
+  <text x="60" y="55" class="title">REV-A-04 — PLANTA BAIXA DO RACK E CONTENÇÃO</text>
+  <text x="60" y="86" class="hold">A0 / HOLD — ENVELOPES MÁXIMOS; MEDIR OS DOIS RESERVATÓRIOS ANTES DA COMPRA</text>
+
+  <rect x="210" y="180" width="780" height="390" class="frame"/>
+  <text x="485" y="165" class="txt">RACK 1.200 × 600</text>
+  <rect x="245" y="215" width="710" height="320" rx="12" class="tray"/>
+  <text x="465" y="250" class="small">BACIA DE CONTENÇÃO ≥ 110 L</text>
+  <rect x="280" y="285" width="300" height="210" rx="14" class="tank"/>
+  <rect x="620" y="285" width="300" height="210" rx="14" class="tank"/>
+  <text x="352" y="380" class="txt">TK-101</text>
+  <text x="342" y="410" class="small">água 50 L</text>
+  <text x="692" y="380" class="txt">TK-201</text>
+  <text x="662" y="410" class="small">mistura 50 L</text>
+  <rect x="270" y="275" width="320" height="230" fill="none" stroke="#7e57c2" stroke-width="2" stroke-dasharray="8 6"/>
+  <rect x="610" y="275" width="320" height="230" fill="none" stroke="#7e57c2" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="325" y="525" class="small">plataforma WIT-101</text>
+  <text x="665" y="525" class="small">plataforma WIT-201</text>
+
+  <rect x="210" y="590" width="780" height="190" class="service"/>
+  <text x="400" y="680" class="txt">FAIXA DE EXTRAÇÃO E MANUTENÇÃO ≥ 900</text>
+  <path d="M430 495 V650 M770 495 V650" class="line" stroke-dasharray="10 7"/>
+  <text x="1015" y="330" class="small">LATERAL SECA</text>
+  <rect x="1000" y="350" width="140" height="100" class="dry"/>
+  <text x="1026" y="390" class="small">subida</text><text x="1019" y="414" class="small">de cabos</text>
+  <text x="50" y="330" class="small">LATERAL MOLHADA</text>
+  <rect x="80" y="350" width="110" height="100" class="tank"/>
+  <text x="96" y="390" class="small">tubos e</text><text x="103" y="414" class="small">dreno</text>
+
+  <line x1="210" y1="130" x2="990" y2="130" class="dim"/>
+  <text x="565" y="120" class="small">1.200</text>
+  <line x1="150" y1="180" x2="150" y2="570" class="dim"/>
+  <text x="95" y="385" class="small" transform="rotate(-90 95 385)">600</text>
+  <line x1="280" y1="265" x2="580" y2="265" class="dim"/>
+  <text x="410" y="258" class="small">≤ 500</text>
+  <line x1="600" y1="285" x2="600" y2="495" class="dim"/>
+  <text x="586" y="405" class="small" transform="rotate(-90 586 405)">≤ 400</text>
+  <line x1="580" y1="470" x2="620" y2="470" class="dim"/>
+  <text x="586" y="462" class="small">≥ 60</text>
+
+  <rect x="60" y="810" width="1280" height="60" fill="none" stroke="#263238" stroke-width="2"/>
+  <text x="75" y="838" class="small">Frente embaixo. Mangueiras flexíveis não podem tocar, puxar ou desviar carga das plataformas.</text>
+  <text x="75" y="861" class="small">Envelope do tanque: ≤500 × 400 mm; altura e tampa são verificadas na elevação. Unidades: mm.</text>
+  <text x="1170" y="838" class="small">FOLHA 04/08</text>
+</svg>

@@ -8,6 +8,7 @@ do escopo de engenharia em 2026-08-23; não retratam um protótipo já fabricado
 | `ESTACAO_COMPLETA_CONCEITUAL.webp` | relação espacial entre quadro seco, seis canais, dois tanques, hidráulica e tenda |
 | `FERTIRRIGACAO_CONCEITUAL.webp` | aproximação frontal dos frascos, dosadoras, bombas, válvulas, sondas e contenção |
 | `CLIMA_CONCEITUAL.webp` | exaustor, umidificador, sensores na copa, bandeja e dreno |
+| `ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp` | revisão compacta inspirada na disposição vertical do vídeo, com seis canais e dois tanques |
 
 ## O que é vinculante
 
@@ -43,3 +44,15 @@ validada antes da release v1.0.
   temperatura/UR/CO₂/folha, bandeja, dreno e detecção de vazamento;
 - em todas: sem luminárias, drivers, dimmers ou controles de iluminação; sem
   marcas, texto miúdo, rede exposta ou água sobre o quadro.
+
+### Revisão compacta vertical
+
+A revisão compacta foi gerada por edição da primeira vista geral, usando os
+quadros do painel original apenas como referência de disposição. O pedido fixou
+um rack de aproximadamente 1.200 × 600 × 2.000 mm, painel seco e seis
+peristálticas no alto à esquerda, seis recipientes em duas fileiras à direita,
+manifold úmido central e dois tanques de 50 L na contenção inferior. A imagem
+preserva a tenda, exaustão e umidificação e omite integralmente iluminação.
+
+Essa disposição é a direção A0 do projeto; cotas e componentes continuam
+dependentes da medição física e dos desenhos vinculantes.

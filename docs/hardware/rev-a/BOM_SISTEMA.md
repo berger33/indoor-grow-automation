@@ -17,6 +17,8 @@ A BOM cobre:
 - dois reservatórios de 50 L;
 - pH, EC, temperatura, umidade, CO₂, nível/peso e vazamento;
 - hub Raspberry Pi e interfaces de campo.
+- rack vertical de 1.200 × 600 × 2.000 mm, backboard selado, ancoragem,
+  prateleiras de três frascos, clips segregados e contenção comum.
 
 Tubos, conexões, recipientes, plataformas e contenção já aparecem como linhas
 `HOLD` no arquivo mestre. As especificações e quantidades finais serão fechadas
@@ -32,6 +34,7 @@ depois de receber dimensões/alturas, traçar o P&ID e medir o percurso hidrául
 | Química | pH, EC, temperatura, carriers e padrões de calibração | procedência/ensaio pendentes |
 | Clima | temperatura/UR, CO₂, folha, exaustor e umidificador | modelos finais pendentes |
 | Hub | Raspberry Pi, armazenamento e fonte | classe definida; kit final pendente |
+| Estrutura compacta | rack, backboard, ancoragem, duas prateleiras e contenção | carga, parede, tanques e amostras pendentes |
 
 ## Critérios de substituição
 
@@ -81,6 +84,12 @@ da marcação recebida.
 - bomba de irrigação depende de altura manométrica e vazão, ainda desconhecidas;
 - Atlas em marketplace pode ter procedência incerta e custo elevado;
 - gabinete 500 × 400 × 200 mm é envelope preliminar, não desenho final.
+- rack de 1.200 × 600 × 2.000 mm e carga superior a 150 kg são metas de
+  envelope, não especificação aprovada de um anúncio;
+- a contenção comum precisa ter ao menos 110 L úteis somente se o ensaio e a
+  análise de vazamento confirmarem essa estratégia;
+- ancoragem depende do material e estado reais da parede e do piso;
+- madeira crua observada na referência não é superfície final aprovada.
 
 ## Política de lote
 
