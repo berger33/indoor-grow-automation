@@ -17,6 +17,7 @@ class SensorFaultCode(StrEnum):
     CALIBRATION_REQUIRED = "calibration_required"
     SENSOR_NOT_READY = "sensor_not_ready"
     OUT_OF_RANGE = "out_of_sensor_range"
+    PROTOCOL_ERROR = "sensor_protocol_error"
 
 
 FAULT_QUALITY: Mapping[SensorFaultCode, ReadingQuality] = MappingProxyType(
@@ -27,6 +28,7 @@ FAULT_QUALITY: Mapping[SensorFaultCode, ReadingQuality] = MappingProxyType(
         SensorFaultCode.CALIBRATION_REQUIRED: ReadingQuality.UNCALIBRATED,
         SensorFaultCode.SENSOR_NOT_READY: ReadingQuality.INVALID,
         SensorFaultCode.OUT_OF_RANGE: ReadingQuality.INVALID,
+        SensorFaultCode.PROTOCOL_ERROR: ReadingQuality.INVALID,
     }
 )
 
