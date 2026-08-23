@@ -1,8 +1,8 @@
 # Indoor Grow Automation
 
-Stack open-source para monitoramento e automação de cultivo indoor em pequena
-escala, composta por nós ESP32, hub local em Raspberry Pi e painel web
-responsivo.
+Stack open-source para automatizar fertirrigação, irrigação e ambiente de cultivo
+indoor em pequena escala, composta por nós ESP32, hub local em Raspberry Pi e
+painel web responsivo.
 
 > **Status:** fundação da Fase 1. O projeto ainda não deve comandar cargas reais
 > sem a conclusão dos intertravamentos, testes elétricos e comissionamento.
@@ -11,12 +11,17 @@ responsivo.
 
 - adquirir pH, EC, temperatura da solução, temperatura/umidade do ar, nível e
   vazamento com qualidade de dado explícita;
-- controlar fertirrigação, correção química, iluminação e clima com limites e
+- controlar fertirrigação, correção química, irrigação e clima com limites e
   timeouts locais;
 - manter telemetria, API e interface no hub local, sem dependência obrigatória
   de nuvem;
 - oferecer documentação suficientemente detalhada para montagem por terceiros;
 - preservar operação segura quando Wi-Fi, broker ou servidor falharem.
+
+**Iluminação não faz parte deste projeto.** O responsável já possui uma
+automação independente; por isso não haverá acionamento, dimerização,
+fotoperíodo, carga elétrica, API ou tela de luz. Consulte o
+[`escopo executável da v1.0`](docs/ESCOPO_V1.md).
 
 ## Arquitetura planejada
 
@@ -32,6 +37,11 @@ Hub Raspberry Pi ── API + banco + MQTT ── Wi-Fi/LAN
         ▼
 Backup, histórico e alertas locais
 ```
+
+O arranjo físico padrão usa seis recipientes de concentrado de 1 L, um
+reservatório de água de 50 L e um reservatório de mistura/rega de 50 L. A
+revisão dirigida do vídeo de hardware está em
+[`docs/referencia/REVISAO_VIDEO_16MIN.md`](docs/referencia/REVISAO_VIDEO_16MIN.md).
 
 ## Estrutura
 
@@ -81,10 +91,11 @@ proteções mecânicas e elétricas independentes.
 
 ## Hardware Rev A
 
-A primeira revisão própria adota instalação fixa 127 V/60 Hz e mantém toda a
-rede CA fora da PCB. O pacote preliminar inclui:
+A primeira revisão própria adota instalação fixa 127 V/60 Hz, sem qualquer
+ramal de iluminação, e mantém toda a rede CA fora da PCB. O pacote preliminar
+inclui:
 
-- [base elétrica e cálculo do conjunto de 390 W](docs/hardware/rev-a/BASE_ELETRICA_127V.md);
+- [base elétrica de controle, hidráulica e clima](docs/hardware/rev-a/BASE_ELETRICA_127V.md);
 - [BOM consolidada com disponibilidade e critérios de substituição](docs/hardware/rev-a/BOM_SISTEMA.md);
 - [controladora SELV, pinagem, netlist e parâmetros](hardware/controller-rev-a/README.md);
 - [laudo preliminar e gates de fabricação](docs/hardware/rev-a/LAUDO_REVISAO_REVA.md).
