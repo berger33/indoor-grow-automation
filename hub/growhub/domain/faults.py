@@ -15,6 +15,8 @@ class SensorFaultCode(StrEnum):
     CRC_MISMATCH = "crc_mismatch"
     DISCONNECTED = "sensor_disconnected"
     CALIBRATION_REQUIRED = "calibration_required"
+    SENSOR_NOT_READY = "sensor_not_ready"
+    OUT_OF_RANGE = "out_of_sensor_range"
 
 
 FAULT_QUALITY: Mapping[SensorFaultCode, ReadingQuality] = MappingProxyType(
@@ -23,6 +25,8 @@ FAULT_QUALITY: Mapping[SensorFaultCode, ReadingQuality] = MappingProxyType(
         SensorFaultCode.CRC_MISMATCH: ReadingQuality.CRC_ERROR,
         SensorFaultCode.DISCONNECTED: ReadingQuality.DISCONNECTED,
         SensorFaultCode.CALIBRATION_REQUIRED: ReadingQuality.UNCALIBRATED,
+        SensorFaultCode.SENSOR_NOT_READY: ReadingQuality.INVALID,
+        SensorFaultCode.OUT_OF_RANGE: ReadingQuality.INVALID,
     }
 )
 
