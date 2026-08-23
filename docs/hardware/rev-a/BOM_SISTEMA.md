@@ -18,8 +18,20 @@ A BOM cobre:
 - pH, EC, temperatura, umidade, CO₂, nível/peso e vazamento;
 - hub Raspberry Pi e interfaces de campo.
 
-Tubos, conexões, suportes mecânicos e cabos serão fechados depois de receber as
-dimensões/alturas dos reservatórios e a distância do quadro.
+Tubos, conexões, recipientes, plataformas e contenção já aparecem como linhas
+`HOLD` no arquivo mestre. As especificações e quantidades finais serão fechadas
+depois de receber dimensões/alturas, traçar o P&ID e medir o percurso hidráulico.
+
+## Pacotes de compra
+
+| Pacote | Conteúdo | Estado atual |
+|---|---|---|
+| Controle | PCB, ESP32, fontes, bornes e proteção SELV | A0/HOLD |
+| Dosagem | 6 frascos, 6 peristálticas, 6 agitadores e tubos | amostras/compatibilidade pendentes |
+| Hidráulica | 2 tanques, 4 bombas, 2 válvulas, conexões e contenção | dimensões e curva pendentes |
+| Química | pH, EC, temperatura, carriers e padrões de calibração | procedência/ensaio pendentes |
+| Clima | temperatura/UR, CO₂, folha, exaustor e umidificador | modelos finais pendentes |
+| Hub | Raspberry Pi, armazenamento e fonte | classe definida; kit final pendente |
 
 ## Critérios de substituição
 
