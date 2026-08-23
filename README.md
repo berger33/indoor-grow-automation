@@ -100,12 +100,20 @@ inclui:
 - [controladora SELV, pinagem, netlist e parâmetros](hardware/controller-rev-a/README.md);
 - [laudo preliminar e gates de fabricação](docs/hardware/rev-a/LAUDO_REVISAO_REVA.md).
 
-![Unifilar da variante 127 V](desenhos/REV-A-01_UNIFILAR_127V.png)
+![Unifilar da variante 127 V](desenhos/REV-A-01_UNIFILAR_127V.svg)
 
-![Zonas funcionais da PCB Rev A](desenhos/REV-A-02_PCB_ZONAS.png)
+![Zonas funcionais da PCB Rev A](desenhos/REV-A-02_PCB_ZONAS.svg)
 
 O estado atual é `A0/HOLD`: os arquivos servem para revisão e prototipagem, não
 para fabricar lote ou energizar cargas reais.
+
+## Visualização do sistema pronto
+
+![Estação completa — visualização conceitual](docs/images/realistic/ESTACAO_COMPLETA_CONCEITUAL.webp)
+
+As [três vistas realistas e suas limitações](docs/images/realistic/README.md)
+mostram a aparência pretendida. Elas não substituem desenhos cotados, P&ID,
+unifilar ou arquivos de fabricação.
 
 ## Origem da referência
 

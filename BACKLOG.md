@@ -136,7 +136,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F5-026 P0` Selecionar tubos e vedações por compatibilidade química.
 - [ ] `F5-027 P0` Desenhar contenção secundária e trajetos de vazamento.
 - [ ] `F5-028 P0` Publicar layout físico cotado da estação em escala.
-- [ ] `F5-029 P1` Publicar imagens realistas marcadas como ilustrativas.
+- [x] `F5-029 P1` Publicar imagens realistas marcadas como ilustrativas.
 - [ ] `F5-030 P0` Criar tutorial 01 de inventário e conferência da compra.
 - [ ] `F5-031 P0` Criar tutorial 02 de montagem da estrutura seca.
 - [ ] `F5-032 P0` Criar tutorial 03 de reservatórios e plataformas de pesagem.

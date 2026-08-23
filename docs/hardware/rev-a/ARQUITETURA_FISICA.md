@@ -4,6 +4,8 @@ Este documento fixa a organização funcional derivada do vídeo V1 e adaptada a
 volumes informados. Dimensões cotadas só serão congeladas depois da medição dos
 tanques e do local.
 
+![Visualização realista conceitual da estação completa](../../images/realistic/ESTACAO_COMPLETA_CONCEITUAL.webp)
+
 ## 1. Zonas físicas
 
 | Zona | Conteúdo | Regra de posicionamento |
@@ -47,6 +49,8 @@ conector de campo correspondente está liberado para fabricação.
 
 ## 4. Fluxo hidráulico funcional
 
+![Visualização realista conceitual da fertirrigação](../../images/realistic/FERTIRRIGACAO_CONCEITUAL.webp)
+
 1. a entrada enche o tanque de água até limite de massa/boia;
 2. válvula e bomba transferem a quantidade prevista ao tanque de mistura;
 3. a mistura circula enquanto as dosadoras adicionam um canal por vez;
@@ -70,6 +74,11 @@ não é critério de dimensionamento.
   lateral de mangueiras;
 - cada cabo, tubo, borne, fusível, canal e sentido de fluxo recebe identificador;
 - bandejas e piso permitem testar cada sensor de vazamento sem molhar eletrônica.
+
+![Visualização realista conceitual do subsistema de clima](../../images/realistic/CLIMA_CONCEITUAL.webp)
+
+Consulte as [limitações das vistas realistas](../../images/realistic/README.md)
+antes de usar qualquer detalhe visual.
 
 ## 6. Estado da arquitetura
 
