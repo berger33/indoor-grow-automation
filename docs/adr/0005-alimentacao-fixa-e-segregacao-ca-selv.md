@@ -5,11 +5,11 @@
 
 ## Contexto
 
-A instalação informada é 127 V. O conjunto padrão possui quatro painéis Yuxinou
-de 120 W, 120 W, 85 W e 65 W, totalizando 390 W. O exaustor atual aparece apenas
-em uma instrução genérica de ligação com quatro fios e enrolamentos configuráveis
-para 110/220 V; a imagem não identifica modelo, corrente, potência ou interface
-de controle de velocidade.
+A instalação informada é 127 V. O exaustor atual aparece apenas em uma instrução
+genérica de ligação com quatro fios e enrolamentos configuráveis para 110/220 V;
+a imagem não identifica modelo, corrente, potência ou interface de controle de
+velocidade. A iluminação foi posteriormente excluída pelo ADR 0006 e não integra
+o quadro.
 
 Uma chave 127/220 V no equipamento ampliaria o número de contatos, combinações
 de ligação e falhas possíveis. Cargas conectadas na posição errada podem ser
@@ -30,9 +30,6 @@ danificadas, e o software não consegue provar a tensão física selecionada.
    24 VCC/5 VCC/3,3 VCC SELV e comandará contatores externos com bobina 24 VCC.
 6. O exaustor atual será somente liga/desliga. PWM, triac ou 0–10 V ficam
    inibidos até existir manual/plaqueta que declare expressamente a interface.
-7. Cada luminária será cadastrada separadamente. Liga/desliga usará contatores
-   externos; dimerização só será habilitada após identificar o driver e sua
-   interface documentada (0–10 V, PWM, resistor ou protocolo digital).
 
 ## Consequências
 
@@ -41,8 +38,6 @@ danificadas, e o software não consegue provar a tensão física selecionada.
   comutável em campo;
 - exige uma variante elétrica documentada para cada tensão;
 - preserva separação física e elétrica entre rede CA e lógica;
-- mantém pendentes a corrente de placa, o fator de potência, a corrente de
-  partida e o método de dimerização dos drivers Yuxinou;
 - mantém pendente a plaqueta do exaustor atual e do futuro substituto.
 
 ## Alternativas rejeitadas
