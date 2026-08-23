@@ -24,7 +24,7 @@ Uma entrada é adicionada ao fim de cada sessão autônoma de desenvolvimento.
 
 ## 2026-08-23
 
-- Commits: 20
+- Commits: 21
 - Itens concluídos: revisão dirigida do vídeo V1 de 16:36; escopo v1 sem
   iluminação; limpeza do backlog, decisões, README e domínio elétrico; base
   127 V revisada; BOM ampliada com seis frascos, dois tanques, hidráulica e
