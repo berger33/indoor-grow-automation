@@ -18,6 +18,9 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F0-010 P1` Criar templates de issue e pull request.
 - [x] `F0-011 P1` Documentar política de branches e releases.
 - [x] `F0-012 P1` Configurar atualização automatizada de dependências.
+- [x] `F0-013 P0` Fixar escopo v1 em fertirrigação, irrigação e clima.
+- [x] `F0-014 P0` Excluir iluminação de hardware, software e interface.
+- [x] `F0-015 P1` Revisar novamente o vídeo V1 de hardware com timestamps.
 
 ## Fase 1 — Núcleo de sensores
 
@@ -63,9 +66,13 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F2-015 P1` Implementar drenagem com timeout e pós-tempo.
 - [ ] `F2-016 P1` Implementar umidade com histerese e anti-ciclo.
 - [ ] `F2-017 P1` Implementar exaustor por temperatura/VPD.
-- [ ] `F2-018 P1` Implementar fotoperíodo e restauração pós-boot.
-- [ ] `F2-019 P2` Implementar rampa de amanhecer/anoitecer.
-- [ ] `F2-020 P0` Criar testes de perda de rede em cada estado crítico.
+- [ ] `F2-018 P0` Criar testes de perda de rede em cada estado crítico.
+- [ ] `F2-019 P0` Intertravar umidificador por nível mínimo e timeout.
+- [ ] `F2-020 P1` Monitorar CO₂ sem comandar injeção no MVP.
+- [ ] `F2-021 P1` Definir limites absolutos de temperatura e UR sobre o VPD.
+- [ ] `F2-022 P1` Detectar exaustor comandado sem feedback de corrente/contato.
+- [ ] `F2-023 P1` Implementar prioridade entre exaustão e umidificação.
+- [ ] `F2-024 P2` Modelar módulos opcionais de desumidificação e climatização.
 
 ## Fase 3 — Hub e conectividade
 
@@ -91,7 +98,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F4-003 P1` Criar gráficos de pH, EC, água e clima.
 - [ ] `F4-004 P1` Criar assistente de calibração guiada.
 - [ ] `F4-005 P1` Criar tela de receita e progresso da batelada.
-- [ ] `F4-006 P1` Criar tela de agenda de irrigação/luz.
+- [ ] `F4-006 P1` Criar tela de agenda de irrigação.
 - [ ] `F4-007 P0` Criar central de alarmes latched e confirmação.
 - [ ] `F4-008 P1` Diferenciar comando, estado e feedback físico.
 - [ ] `F4-009 P1` Explicar por que controles estão inibidos.
@@ -122,3 +129,27 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F5-019 P0` Rotear PCB KiCad e zerar violações DRC não justificadas.
 - [ ] `F5-020 P0` Fabricar uma unidade A0 e executar ensaio elétrico/térmico.
 - [ ] `F5-021 P0` Liberar A1 somente após HIL e piloto com água.
+- [ ] `F5-022 P0` Congelar matriz de atuadores e capacidade de saídas por nó.
+- [ ] `F5-023 P0` Definir plataforma mecânica de oito células para os dois tanques.
+- [ ] `F5-024 P0` Medir percurso hidráulico, vazão-alvo e altura manométrica.
+- [ ] `F5-025 P0` Selecionar bombas pelas curvas medidas e ensaio de recebimento.
+- [ ] `F5-026 P0` Selecionar tubos e vedações por compatibilidade química.
+- [ ] `F5-027 P0` Desenhar contenção secundária e trajetos de vazamento.
+- [ ] `F5-028 P0` Publicar layout físico cotado da estação em escala.
+- [ ] `F5-029 P1` Publicar imagens realistas marcadas como ilustrativas.
+- [ ] `F5-030 P0` Criar tutorial 01 de inventário e conferência da compra.
+- [ ] `F5-031 P0` Criar tutorial 02 de montagem da estrutura seca.
+- [ ] `F5-032 P0` Criar tutorial 03 de reservatórios e plataformas de pesagem.
+- [ ] `F5-033 P0` Criar tutorial 04 de válvulas, bombas e tubulação.
+- [ ] `F5-034 P0` Criar tutorial 05 de frascos, dosadoras e agitadores.
+- [ ] `F5-035 P0` Criar tutorial 06 de sondas e sensores de segurança.
+- [ ] `F5-036 P0` Criar tutorial 07 do quadro e chicotes SELV.
+- [ ] `F5-037 P0` Criar tutorial 08 da instalação CA por profissional habilitado.
+- [ ] `F5-038 P0` Criar tutorial 09 de gravação e provisionamento dos ESP32.
+- [ ] `F5-039 P0` Criar tutorial 10 de instalação do hub e painel.
+- [ ] `F5-040 P0` Criar tutorial 11 de calibração de massa, bombas, pH e EC.
+- [ ] `F5-041 P0` Criar tutorial 12 de teste seco, HIL e teste somente com água.
+- [ ] `F5-042 P0` Criar tutorial 13 de primeira batelada supervisionada.
+- [ ] `F5-043 P0` Criar guia de manutenção, limpeza e armazenamento de sondas.
+- [ ] `F5-044 P0` Validar o tutorial em montagem limpa sem conhecimento prévio.
+- [ ] `F5-045 P1` Fotografar a montagem validada e substituir imagens conceituais.
