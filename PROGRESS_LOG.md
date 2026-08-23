@@ -60,3 +60,21 @@ foi preservado apenas para rastreabilidade.
   hidráulica, aterramento, footprints, ERC/DRC, protótipo, HIL e piloto com água.
 - Próximos passos: criar simuladores determinísticos; publicar diagnóstico de
   qualidade/idade; iniciar máquina de estados local BOOT/IDLE/MANUAL/BATCH/ALARM.
+
+### Continuação dirigida — painel vertical compacto
+
+- Commits: 15
+- Itens concluídos: estudo detalhado do painel do vídeo; ADR do rack vertical;
+  nova imagem realista; implantação; planta baixa; elevação; P&ID; projeto
+  elétrico; rotas de instalações; validação automática dos SVG; caderno de
+  pranchas; arquitetura; BOM estrutural; tutorial de montagem seca; índices e
+  histórico.
+- Decisões tomadas: envelope A0 de 1.200 × 600 × 2.000 mm; seis canais de
+  concentrado apesar do sétimo cabeçote não identificado na referência; dois
+  tanques lado a lado na base; quadro seco no alto à esquerda; tubos no lado
+  molhado; CA não replica a régua de tomadas visível no vídeo.
+- Bloqueios/pendências: medir tanques, frascos, ambiente, parede e piso; validar
+  carga/ancoragem do rack; fechar contenção; medir hidráulica; selecionar bombas;
+  projeto elétrico profissional; ERC/DRC; HIL e piloto com água.
+- Próximos passos: levantar dimensões reais; converter cotas A0 em as-built;
+  desenvolver tutorial de tanques/plataformas e hidráulica.

@@ -109,11 +109,15 @@ para fabricar lote ou energizar cargas reais.
 
 ## Visualização do sistema pronto
 
-![Estação completa — visualização conceitual](docs/images/realistic/ESTACAO_COMPLETA_CONCEITUAL.webp)
+![Estação compacta vertical — visualização conceitual](docs/images/realistic/ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp)
 
 As [três vistas realistas e suas limitações](docs/images/realistic/README.md)
 mostram a aparência pretendida. Elas não substituem desenhos cotados, P&ID,
 unifilar ou arquivos de fabricação.
+
+O [caderno multidisciplinar Rev A](docs/hardware/rev-a/CADERNO_PRANCHAS.md)
+reúne implantação, planta baixa, elevação, projeto hidráulico, projeto elétrico
+e rotas de instalações da disposição vertical compacta.
 
 ## Origem da referência
 

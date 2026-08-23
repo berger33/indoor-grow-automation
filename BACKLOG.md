@@ -21,6 +21,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F0-013 P0` Fixar escopo v1 em fertirrigação, irrigação e clima.
 - [x] `F0-014 P0` Excluir iluminação de hardware, software e interface.
 - [x] `F0-015 P1` Revisar novamente o vídeo V1 de hardware com timestamps.
+- [x] `F0-016 P1` Estudar em detalhe a disposição compacta do painel original.
 
 ## Fase 1 — Núcleo de sensores
 
@@ -153,3 +154,8 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F5-043 P0` Criar guia de manutenção, limpeza e armazenamento de sondas.
 - [ ] `F5-044 P0` Validar o tutorial em montagem limpa sem conhecimento prévio.
 - [ ] `F5-045 P1` Fotografar a montagem validada e substituir imagens conceituais.
+- [x] `F5-046 P1` Publicar implantação e planta baixa compactas A0/HOLD.
+- [x] `F5-047 P1` Publicar elevação vertical do painel A0/HOLD.
+- [x] `F5-048 P1` Publicar P&ID hidráulico compacto A0/HOLD.
+- [x] `F5-049 P1` Publicar projeto elétrico e rotas de instalações A0/HOLD.
+- [x] `F5-050 P1` Validar automaticamente todas as pranchas Rev A.

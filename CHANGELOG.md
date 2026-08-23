@@ -44,6 +44,17 @@ versionamento semântico a partir da primeira release.
 - detecção de vazamento retida até confirmação seca e rearme explícito;
 - diagnóstico de divergência climática e cálculo de VPD foliar com alerta de
   condensação.
+- estudo detalhado da disposição compacta do painel original, incluindo a
+  ambiguidade entre seis frascos e sete cabeçotes aparentes;
+- direção vertical em rack de envelope A0 1.200 × 600 × 2.000 mm;
+- nova visualização realista compacta com seis canais e dois tanques de 50 L;
+- implantação, planta baixa, elevação, P&ID hidráulico, projeto elétrico e
+  planta de instalações em seis novas pranchas Rev A;
+- caderno multidisciplinar com hierarquia documental e gates para A1;
+- estrutura mecânica do rack incorporada à BOM com ancoragem e contenção em
+  estado HOLD;
+- tutorial A0 de montagem seca, inspeção dimensional e segregação das zonas;
+- validador de integridade para oito pranchas SVG integrado ao Quality Gate.
 
 ### Segurança
 
