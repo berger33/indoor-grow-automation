@@ -21,3 +21,27 @@ Uma entrada é adicionada ao fim de cada sessão autônoma de desenvolvimento.
   protótipo, teste térmico, HIL e piloto com água.
 - Próximos passos: criar esquema KiCad após receber amostras; modelar falhas de
   sensor; implementar filtro de mediana e média móvel configurável.
+
+## 2026-08-23
+
+- Commits: 20
+- Itens concluídos: revisão dirigida do vídeo V1 de 16:36; escopo v1 sem
+  iluminação; limpeza do backlog, decisões, README e domínio elétrico; base
+  127 V revisada; BOM ampliada com seis frascos, dois tanques, hidráulica e
+  contenção; matriz de 15 atuadores; controladora A0 redimensionada para 16
+  saídas; validador e 48 testes; laudo/unifilar/zonas atualizados; três vistas
+  realistas; índice do tutorial e etapa inicial de segurança.
+- Decisões tomadas: iluminação permanece integralmente separada; projeto físico
+  fixo 127 V/60 Hz sem seletor; PCB somente SELV; 16 saídas por registradores
+  `SN74HCT595` com OE seguro; cargas desconhecidas ou acima de 1 A usam driver
+  externo; imagens realistas são conceituais e desenhos as-built prevalecem.
+- Bloqueios/pendências: plaqueta/modelo do exaustor e do umidificador; dimensões
+  dos tanques/frascos; percurso, altura e vazão hidráulicos; abastecimento
+  manual ou RO; aterramento/circuito; amostras e footprints; escolha do
+  barramento climático; KiCad ERC/DRC; protótipo, HIL e piloto com água.
+- Próximos passos: modelar falhas dos sensores; decidir RS-485 versus CAN para o
+  nó de clima; fechar P&ID e seleção de bombas após receber as medições físicas.
+
+Esta entrada substitui, para trabalho futuro, todas as menções a iluminação e
+plaquetas de luminárias registradas na sessão de 2026-08-22; o histórico anterior
+foi preservado apenas para rastreabilidade.
