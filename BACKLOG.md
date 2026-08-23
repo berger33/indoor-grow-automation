@@ -35,7 +35,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F1-009 P1` Implementar debounce de entradas digitais.
 - [x] `F1-010 P1` Modelar driver DS18B20 com timeout e faixa física.
 - [x] `F1-011 P1` Modelar driver BME280 com offset por dispositivo.
-- [ ] `F1-012 P1` Modelar driver MLX90614 e temperatura foliar.
+- [x] `F1-012 P1` Modelar driver MLX90614 e temperatura foliar.
 - [ ] `F1-013 P1` Modelar driver Atlas pH e códigos de erro.
 - [ ] `F1-014 P1` Modelar driver Atlas EC e códigos de erro.
 - [ ] `F1-015 P1` Implementar compensação térmica de pH/EC validada.
