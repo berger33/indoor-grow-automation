@@ -41,6 +41,7 @@ class ReadingQuality(StrEnum):
     STALE = "stale"
     DISCONNECTED = "disconnected"
     TIMEOUT = "timeout"
+    CRC_ERROR = "crc_error"
     UNCALIBRATED = "uncalibrated"
 
 
@@ -109,4 +110,3 @@ class SensorReading:
             quality=quality,
             error_code=error_code,
         )
-
