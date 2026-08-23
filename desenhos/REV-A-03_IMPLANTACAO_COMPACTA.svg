@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L8,4 L0,8 z" fill="#1565c0"/>
+    </marker>
+    <style>
+      .wall{stroke:#263238;stroke-width:8;fill:none}.obj{stroke:#263238;stroke-width:3;fill:#eceff1}
+      .wet{stroke:#0277bd;stroke-width:3;fill:#e1f5fe}.dry{stroke:#ef6c00;stroke-width:3;fill:#fff3e0}
+      .clear{stroke:#43a047;stroke-width:2;stroke-dasharray:12 8;fill:#e8f5e9;fill-opacity:.45}
+      .dim{stroke:#1565c0;stroke-width:2;marker-start:url(#arrow);marker-end:url(#arrow)}
+      .thin{stroke:#607d8b;stroke-width:2;fill:none}.txt{font-family:Arial,sans-serif;fill:#17202a;font-size:22px}
+      .small{font-family:Arial,sans-serif;fill:#37474f;font-size:17px}.title{font-family:Arial,sans-serif;font-weight:700;fill:#102027;font-size:30px}
+      .hold{font-family:Arial,sans-serif;font-weight:700;fill:#c62828;font-size:18px}
+    </style>
+  </defs>
+  <rect width="1400" height="900" fill="white"/>
+  <text x="60" y="55" class="title">REV-A-03 — IMPLANTAÇÃO COMPACTA DA ESTAÇÃO E TENDA</text>
+  <text x="60" y="86" class="hold">A0 / HOLD — COTAS-ALVO; CONFERIR AMBIENTE, TANQUES E EQUIPAMENTOS REAIS</text>
+
+  <path d="M120 150 H1270 M120 150 V690 M1270 150 V690" class="wall"/>
+  <rect x="170" y="205" width="480" height="240" rx="8" class="dry"/>
+  <text x="270" y="270" class="txt">ESTAÇÃO VERTICAL</text>
+  <text x="273" y="303" class="small">1.200 × 600 mm</text>
+  <text x="220" y="342" class="small">dois tanques + painel + seis frascos</text>
+  <rect x="170" y="455" width="480" height="190" class="clear"/>
+  <text x="245" y="555" class="txt">FAIXA FRONTAL DE SERVIÇO</text>
+  <text x="350" y="587" class="small">mínimo 900 mm</text>
+
+  <rect x="790" y="205" width="320" height="320" rx="10" class="obj"/>
+  <text x="865" y="350" class="txt">TENDA</text>
+  <text x="855" y="383" class="small">800 × 800 mm</text>
+  <rect x="780" y="535" width="340" height="110" class="clear"/>
+  <text x="825" y="590" class="small">acesso frontal da tenda</text>
+
+  <rect x="1150" y="390" width="80" height="120" rx="8" class="wet"/>
+  <text x="1135" y="535" class="small">umidificador</text>
+  <path d="M1190 390 V300 H1110" class="wet" fill="none"/>
+  <text x="1070" y="285" class="small">névoa</text>
+
+  <circle cx="710" cy="185" r="22" class="dry"/>
+  <text x="678" y="142" class="small">ponto 127 V</text>
+  <path d="M710 207 V250 H650" class="thin" stroke-dasharray="7 5"/>
+  <text x="662" y="276" class="small">eletroduto seco</text>
+
+  <circle cx="1220" cy="640" r="22" class="wet"/>
+  <text x="1145" y="682" class="small">destino do dreno</text>
+  <path d="M650 410 C760 670 950 660 1198 640" class="wet" fill="none" stroke-dasharray="10 7"/>
+
+  <line x1="170" y1="180" x2="650" y2="180" class="dim"/>
+  <text x="355" y="172" class="small">1.200</text>
+  <line x1="680" y1="205" x2="680" y2="445" class="dim"/>
+  <text x="690" y="332" class="small">600</text>
+  <line x1="650" y1="325" x2="790" y2="325" class="dim"/>
+  <text x="695" y="315" class="small">≥ 350</text>
+  <line x1="790" y1="180" x2="1110" y2="180" class="dim"/>
+  <text x="920" y="172" class="small">800</text>
+
+  <rect x="60" y="730" width="1280" height="120" fill="none" stroke="#263238" stroke-width="2"/>
+  <line x1="910" y1="730" x2="910" y2="850" class="thin"/>
+  <line x1="1120" y1="730" x2="1120" y2="850" class="thin"/>
+  <text x="80" y="765" class="small">NOTAS: manter acesso frontal; não instalar iluminação; CA em quadro seco;</text>
+  <text x="80" y="795" class="small">confirmar ponto de dreno, tomada, aterramento, parede e ancoragem antes da montagem.</text>
+  <text x="80" y="825" class="small">Unidades: mm. A faixa verde não pode receber armazenamento.</text>
+  <text x="930" y="770" class="small">REVISÃO: A0</text>
+  <text x="930" y="805" class="small">ESCALA: ESQUEMÁTICA</text>
+  <text x="1140" y="770" class="small">FOLHA 03/08</text>
+  <text x="1140" y="805" class="small">STATUS: HOLD</text>
+</svg>
