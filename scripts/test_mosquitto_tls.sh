@@ -76,7 +76,9 @@ fi
 received="$(client grow-01-climate mosquitto_sub -C 1 -W 3 -t grow/v1/grow-01/climate/command/exhaust)"
 test "$received" = "off"
 
-if client grow-01-climate mosquitto_pub -t grow/v1/grow-01/fertigation/command/mixer -m start; then
+forbidden_topic="grow/v1/grow-01/fertigation/command/mixer"
+client grow-01-climate mosquitto_pub -r -t "$forbidden_topic" -m start || true
+if client grow-hub mosquitto_sub -C 1 -W 2 -t "$forbidden_topic" >/dev/null 2>&1; then
   echo "ACL permitiu publicação cruzada proibida" >&2
   exit 1
 fi
