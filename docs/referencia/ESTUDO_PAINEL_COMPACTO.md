@@ -6,6 +6,9 @@
   03:44–05:00, 07:20–09:00 e 15:07–16:29;
 - quadro aproximado do conjunto completo, fornecido em 2026-08-23;
 - recorte aproximado do painel de dosagem, fornecido em 2026-08-23.
+- vídeo complementar de projeto das PCBs, duração 13:43, principalmente
+  02:30–04:08 e 06:54–08:10;
+- vídeo Parte 2 de funcionalidade, duração 18:00, revisado integralmente.
 
 A resolução limita leitura de marcas, diâmetros e medidas. Este estudo registra
 somente o que é visualmente defensável e separa observação de adaptação.
@@ -45,6 +48,15 @@ preserva essa compactação, mas alimenta o banco por 12 VCC derivado da fonte d
 24 VCC, protege os rotores e exige tacômetro individual antes de dosar. A revisão
 com timestamps e HOLDs está em
 [`REVISAO_AGITACAO_MAGNETICA.md`](REVISAO_AGITACAO_MAGNETICA.md).
+
+## Exaustão e funcionalidade
+
+O vídeo de PCB confirma AC Infinity CLOUDLINE S4/S6 com motor EC e PWM. A
+revisão filmada usa 10 V/GND fornecidos pelo fan, mas versões atuais podem usar
+UIS; a pinagem permanece em HOLD. A Parte 2 confirma as cinco áreas de operação,
+receita, calibrações, cinco fertirrigações e interface responsiva. Consulte
+[`REVISAO_EXAUSTOR_PCB.md`](REVISAO_EXAUSTOR_PCB.md) e
+[`REVISAO_FUNCIONALIDADE_PARTE2.md`](REVISAO_FUNCIONALIDADE_PARTE2.md).
 
 ## Regras dimensionais derivadas
 

@@ -71,6 +71,7 @@ cadeia adequada para itens elétricos críticos e não é fonte aprovada nesta r
 | bomba peristáltica 24 V | [loja brasileira, 100/200 mL/min](https://www.hgrprinters.com.br/loja/bomba-peristaltica-ink-pump-3w-100-200ml-min-24v/) | classe adequada; tubo a validar |
 | SCD41 | [Sensirion](https://sensirion.com/products/catalog/SCD41) | usar módulo rastreável |
 | Atlas EZO pH/EC e isolação | [datasheets Atlas](https://atlas-scientific.com/datasheets-manuals/) | preferencial; custo e marketplace a confirmar |
+| AC Infinity CLOUDLINE S6 `AI-CLS6` | [AC Infinity](https://acinfinity.com/cloudline-s6-quiet-inline-fan-6-with-speed-controller/), [Mercado Livre](https://www.mercadolivre.com.br/exaustor-duto-ac-infinity-cloudline-s6-6-pol-402cfm-silencio/up/MLBU3997482170) | alvo de atualização; unidade e interface direta em HOLD |
 
 Links de marketplace são evidência temporal, não fornecedor travado. Antes da
 compra, o sistema deverá salvar data, vendedor, código, lote, nota fiscal e foto
