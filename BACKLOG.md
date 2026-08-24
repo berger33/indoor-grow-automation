@@ -45,19 +45,19 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F1-018 P0` Modelar vazamento latched com confirmação multiamostra.
 - [x] `F1-019 P1` Detectar divergência entre sensores climáticos.
 - [x] `F1-020 P1` Calcular VPD com ar e temperatura foliar.
-- [ ] `F1-021 P1` Criar simuladores determinísticos de todos os sensores.
-- [ ] `F1-022 P1` Publicar diagnóstico de qualidade/idade de cada leitura.
+- [x] `F1-021 P1` Criar simuladores determinísticos de todos os sensores.
+- [x] `F1-022 P1` Publicar diagnóstico de qualidade/idade de cada leitura.
 
 ## Fase 2 — Controle e segurança
 
-- [ ] `F2-001 P0` Modelar estados BOOT/IDLE/MANUAL/BATCH/ALARM.
-- [ ] `F2-002 P0` Implementar timeout absoluto de atuador local.
-- [ ] `F2-003 P0` Implementar corte local latched por vazamento.
-- [ ] `F2-004 P0` Definir estado seguro de todos os GPIO no boot.
-- [ ] `F2-005 P0` Implementar watchdog e motivo de reset.
-- [ ] `F2-006 P0` Implementar heartbeat e política de perda do hub.
-- [ ] `F2-007 P0` Bloquear pH+ e pH− simultâneos.
-- [ ] `F2-008 P0` Limitar dosagem por evento, hora e dia.
+- [x] `F2-001 P0` Modelar estados BOOT/IDLE/MANUAL/BATCH/ALARM.
+- [x] `F2-002 P0` Implementar timeout absoluto de atuador local.
+- [x] `F2-003 P0` Implementar corte local latched por vazamento.
+- [x] `F2-004 P0` Definir estado seguro de todos os GPIO no boot.
+- [x] `F2-005 P0` Implementar watchdog e motivo de reset.
+- [x] `F2-006 P0` Implementar heartbeat e política de perda do hub.
+- [x] `F2-007 P0` Bloquear pH+ e pH− simultâneos.
+- [x] `F2-008 P0` Limitar dosagem por evento, hora e dia.
 - [ ] `F2-009 P1` Calibrar curva volume×tempo por bomba.
 - [ ] `F2-010 P1` Implementar correção de pH com histerese e espera.
 - [ ] `F2-011 P1` Implementar receita de nutrientes como máquina de estados.
@@ -138,7 +138,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F5-027 P0` Desenhar contenção secundária e trajetos de vazamento.
 - [ ] `F5-028 P0` Publicar layout físico cotado da estação em escala.
 - [x] `F5-029 P1` Publicar imagens realistas marcadas como ilustrativas.
-- [ ] `F5-030 P0` Criar tutorial 01 de inventário e conferência da compra.
+- [x] `F5-030 P0` Criar tutorial 01 de inventário e conferência da compra.
 - [x] `F5-031 P0` Criar tutorial 02 de montagem da estrutura seca.
 - [ ] `F5-032 P0` Criar tutorial 03 de reservatórios e plataformas de pesagem.
 - [ ] `F5-033 P0` Criar tutorial 04 de válvulas, bombas e tubulação.

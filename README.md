@@ -4,8 +4,9 @@ Stack open-source para automatizar fertirrigação, irrigação e ambiente de cu
 indoor em pequena escala, composta por nós ESP32, hub local em Raspberry Pi e
 painel web responsivo.
 
-> **Status:** fundação da Fase 1. O projeto ainda não deve comandar cargas reais
-> sem a conclusão dos intertravamentos, testes elétricos e comissionamento.
+> **Status:** núcleo de sensores concluído e Fase 2 em desenvolvimento. O modelo
+> de controle já possui intertravamentos testados, mas ainda não deve comandar
+> cargas reais antes de firmware, testes elétricos, HIL e comissionamento.
 
 ## Objetivos
 
@@ -78,6 +79,21 @@ utilize. Segredos ficam em `.env`, que nunca é versionado.
 O detalhamento executável está em [`BACKLOG.md`](BACKLOG.md); as entregas ficam
 em [`CHANGELOG.md`](CHANGELOG.md) e o diário em
 [`PROGRESS_LOG.md`](PROGRESS_LOG.md).
+
+## Núcleo local executável
+
+O pacote `hub/growhub/control` funciona como especificação testável do firmware:
+
+- estados `BOOT`, `IDLE`, `MANUAL`, `BATCH` e `ALARM` retido;
+- corte por vazamento e timeout absoluto de cada atuador;
+- inicialização elétrica segura antes de habilitar saídas;
+- watchdog e heartbeat sem dependência de nuvem;
+- exclusão mútua de pH+ e pH−;
+- limites independentes de dose por evento, hora e dia.
+
+Os simuladores em `hub/growhub/simulation` cobrem todos os sensores da v1 e
+permitem injetar falhas canônicas sem hardware. O ADR 0008 fixa as invariantes
+que deverão ser reproduzidas no ESP32 antes de qualquer teste com atuadores.
 
 Contribuições seguem o fluxo de branches, commits, testes e releases descrito
 em [`CONTRIBUTING.md`](CONTRIBUTING.md).
