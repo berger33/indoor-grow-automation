@@ -43,5 +43,8 @@ jobs:
       - name: Install PlatformIO isolated
         run: pipx install platformio==6.1.19
 
+      - name: Test Mosquitto TLS and ACL
+        run: bash scripts/test_mosquitto_tls.sh
+
       - name: Run quality gate
         run: python scripts/quality_gate.py

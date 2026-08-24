@@ -1,0 +1,23 @@
+user grow-hub
+topic readwrite grow/v1/#
+
+user grow-01-fertigation
+topic write grow/v1/grow-01/fertigation/telemetry/#
+topic write grow/v1/grow-01/fertigation/state/#
+topic write grow/v1/grow-01/fertigation/alarm/#
+topic write grow/v1/grow-01/fertigation/ack/#
+topic read grow/v1/grow-01/fertigation/command/#
+
+user grow-01-climate
+topic write grow/v1/grow-01/climate/telemetry/#
+topic write grow/v1/grow-01/climate/state/#
+topic write grow/v1/grow-01/climate/alarm/#
+topic write grow/v1/grow-01/climate/ack/#
+topic read grow/v1/grow-01/climate/command/#
+
+user grow-01-safety
+topic write grow/v1/grow-01/safety/telemetry/#
+topic write grow/v1/grow-01/safety/state/#
+topic write grow/v1/grow-01/safety/alarm/#
+topic write grow/v1/grow-01/safety/ack/#
+topic read grow/v1/grow-01/safety/command/#
