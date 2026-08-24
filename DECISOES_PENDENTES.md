@@ -7,8 +7,9 @@ devem bloquear trabalho independente em outros módulos.
 
 - [x] Adotar 127 V/60 Hz como base da instalação. A frequência brasileira é
   60 Hz; ainda deve ser conferida no ponto de alimentação antes do comissionamento.
-- [x] Excluir por completo a iluminação: a automação Yuxinou existente permanece
-  independente deste sistema.
+- [x] Excluir por completo a **carga elétrica** de iluminação do rack/PCB e
+  integrar somente liga/desliga/agendamento das tomadas EKAZA via hub, conforme
+  ADR 0008.
 - [x] Tratar o exaustor atual como motor CA liga/desliga. A imagem fornecida
   mostra quatro fios para ligação 110/220 V, sem interface PWM/0–10 V comprovada.
 - [x] Reservar seis recipientes de concentrado de 1 L, um reservatório de água
@@ -20,6 +21,10 @@ devem bloquear trabalho independente em outros módulos.
 ## Instalação física — validações ainda necessárias
 
 - [ ] Fotografar a plaqueta do exaustor atual e fornecer a do futuro substituto.
+- [ ] Medir duto, curvas, filtro e pressão disponível antes de comprar o
+  CLOUDLINE S6 `AI-CLS6`; depois confirmar revisão, manual e pinagem recebidos.
+- [ ] Informar modelo/plaqueta das tomadas EKAZA e comprovar pareamento de cada
+  uma no Tuya Smart ou Smart Life; registrar corrente/inrush das quatro luzes.
 - [ ] Medir dimensões internas, altura útil e material dos dois reservatórios de
   50 L, inclusive tampa/alças/curso de retirada, e dos seis recipientes de 1 L.
 - [ ] Medir a área disponível para confirmar o envelope máximo de 900 × 600 ×
@@ -49,5 +54,6 @@ v1.0 será executada automaticamente com base apenas em suposição.
 
 - [x] Repositório público `berger33/indoor-grow-automation` criado, conectado e
   populado em 2026-08-22.
-- [x] Escopo v1.0 limitado a fertirrigação, irrigação, clima, segurança, hub e
-  tutorial de montagem em 2026-08-23.
+- [x] Escopo v1.0 centrado em fertirrigação, irrigação, clima, segurança, hub e
+  tutorial, com iluminação somente como integração lógica EKAZA/Tuya e sem
+  hardware no rack, em 2026-08-23.
