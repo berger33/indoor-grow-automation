@@ -15,8 +15,8 @@ Ao final, o conjunto deverá ter esta ordem, de cima para baixo:
 4. `TK-201`: mistura/rega, 50 L, sobre `PL2` e `LV2`;
 5. `CT1`: bacia inferior com pelo menos 110 L de volume livre demonstrado.
 
-Os dois tanques ficam no mesmo prumo. Eles **não** ficam lado a lado e nenhuma
-parte de `TK-101`, `PL1` ou `LV1` pode apoiar em `TK-201` ou em sua tampa.
+Os dois tanques ficam no mesmo prumo, em níveis sobrepostos. Nenhuma parte de
+`TK-101`, `PL1` ou `LV1` pode apoiar em `TK-201` ou em sua tampa.
 
 ![Elevação dos dois níveis](../../desenhos/REV-A-05_ELEVACAO_PAINEL_COMPACTO.svg)
 

@@ -6,9 +6,8 @@
 ## Contexto
 
 O painel do vídeo usa um rack vertical para concentrar interface, dosadoras,
-frascos e reservatórios em pequena área de piso. A revisão A0 anterior colocou
-os dois tanques lado a lado e alargou o rack sem necessidade. O projeto precisa
-preservar a eficiência espacial sem copiar improvisos como tomadas na zona
+frascos e reservatórios em pequena área de piso. O projeto precisa preservar a
+eficiência espacial sem copiar improvisos como tomadas na zona
 molhada, eletrônica exposta ou tubos sobre circuitos.
 
 ## Decisão
@@ -42,8 +41,7 @@ até cálculo geométrico e ensaio de derramamento.
 
 ## Consequências
 
-- área de piso-alvo da estação: no máximo 0,54 m², redução de 25% em relação à
-  revisão lado a lado de 0,72 m²;
+- área de piso-alvo da estação: no máximo 0,54 m²;
 - comprimento de tubos de dosagem e quantidade de cruzamentos são reduzidos;
 - a frente inteira precisa permanecer livre para retirada de cada nível;
 - tanque cheio não é retirado manualmente: deve ser drenado para massa segura;

@@ -54,9 +54,8 @@ direita; `TK-101` e `TK-201` ocupam níveis sobrepostos e independentes; o
 manifold usa uma faixa lateral molhada. A imagem preserva tenda, exaustão e
 umidificação e omite integralmente iluminação.
 
-As antigas vistas com os dois tanques lado a lado foram removidas da revisão
-corrente para evitar que sejam confundidas com instruções de montagem. Elas
-continuam recuperáveis apenas pelo histórico Git.
+Vistas incompatíveis com o contrato empilhado foram removidas da revisão
+corrente. Versões anteriores continuam recuperáveis apenas pelo histórico Git.
 
 Essa disposição é a direção A0 do projeto; cotas e componentes continuam
 dependentes da medição física e dos desenhos vinculantes.
