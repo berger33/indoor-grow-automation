@@ -46,5 +46,8 @@ jobs:
       - name: Test Mosquitto TLS and ACL
         run: bash scripts/test_mosquitto_tls.sh
 
+      - name: Validate ARM64 Compose structure
+        run: docker compose --env-file deploy/.env.example -f deploy/docker-compose.yml config --quiet
+
       - name: Run quality gate
         run: python scripts/quality_gate.py

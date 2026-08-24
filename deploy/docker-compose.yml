@@ -1,0 +1,99 @@
+name: indoor-grow
+
+services:
+  db:
+    image: postgres:17.6-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: growhub
+      POSTGRES_USER: growhub
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      TZ: America/Sao_Paulo
+    secrets:
+      - postgres_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready --username=growhub --dbname=growhub"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    deploy:
+      resources:
+        limits:
+          memory: 768M
+          cpus: "1.00"
+
+  broker:
+    image: eclipse-mosquitto:2.0.22
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${GROWHUB_MQTT_PORT:-8883}:8883"
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./mosquitto/growhub.acl:/mosquitto/config/growhub.acl:ro
+      - ${GROWHUB_CERTS_DIR:-./secrets/certs}:/mosquitto/config/certs:ro
+      - mosquitto_data:/mosquitto/data
+    healthcheck:
+      test: ["CMD-SHELL", "mosquitto_sub -h localhost -p 8883 --cafile /mosquitto/config/certs/ca.crt --cert /mosquitto/config/certs/grow-hub.crt --key /mosquitto/config/certs/grow-hub.key -t '$$SYS/broker/version' -C 1 -W 5 >/dev/null"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: "0.50"
+
+  hub:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    restart: unless-stopped
+    init: true
+    environment:
+      GROWHUB_BIND_HOST: 0.0.0.0
+      GROWHUB_BIND_PORT: "8000"
+      GROWHUB_DATABASE_URL_FILE: /run/secrets/database_url
+      GROWHUB_SESSION_KEY_FILE: /run/secrets/session_key
+      GROWHUB_HA_TOKEN_FILE: /run/secrets/home_assistant_token
+      GROWHUB_HA_URL: ${GROWHUB_HA_URL:-http://homeassistant.local:8123}
+      TZ: America/Sao_Paulo
+    secrets:
+      - database_url
+      - session_key
+      - home_assistant_token
+    ports:
+      - "127.0.0.1:${GROWHUB_HTTP_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      broker:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.50"
+
+volumes:
+  postgres_data:
+  mosquitto_data:
+
+secrets:
+  postgres_password:
+    file: ${GROWHUB_POSTGRES_PASSWORD_FILE:-./secrets/postgres_password}
+  database_url:
+    file: ${GROWHUB_DATABASE_URL_FILE:-./secrets/database_url}
+  session_key:
+    file: ${GROWHUB_SESSION_KEY_FILE:-./secrets/session_key}
+  home_assistant_token:
+    file: ${GROWHUB_HA_TOKEN_FILE:-./secrets/home_assistant_token}
