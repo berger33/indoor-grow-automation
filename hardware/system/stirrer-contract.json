@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "reference_revision": "A0",
+  "release_state": "HOLD",
+  "channel_count": 6,
+  "channels": [
+    {"index": 0, "name": "ph_down", "display_name": "pH Down", "pump": "P-D1", "stirrer": "M1", "tach": "STIR_TACH_1"},
+    {"index": 1, "name": "calmag", "display_name": "CalMag", "pump": "P-D2", "stirrer": "M2", "tach": "STIR_TACH_2"},
+    {"index": 2, "name": "micro", "display_name": "Micro", "pump": "P-D3", "stirrer": "M3", "tach": "STIR_TACH_3"},
+    {"index": 3, "name": "bloom", "display_name": "Bloom", "pump": "P-D4", "stirrer": "M4", "tach": "STIR_TACH_4"},
+    {"index": 4, "name": "veg", "display_name": "Veg (Grow)", "reference_alias": "Grow", "pump": "P-D5", "stirrer": "M5", "tach": "STIR_TACH_5"},
+    {"index": 5, "name": "ph_up", "display_name": "pH Up", "pump": "P-D6", "stirrer": "M6", "tach": "STIR_TACH_6"}
+  ],
+  "drive": {
+    "enable_output": "OUT07",
+    "supply_vdc": 12,
+    "mode": "grouped_full_speed",
+    "converter": "DC2",
+    "branch_fusing_required": true
+  },
+  "mechanics": {
+    "fan_model": "AFACO-080P2-GBA01",
+    "fan_envelope_mm": [80, 80, 25],
+    "magnets_per_fan": 2,
+    "magnet_retention_guard_required": true,
+    "stir_bar_coating": "PTFE"
+  },
+  "feedback": {
+    "type": "individual_rotation_heartbeat",
+    "required_before_dosing": true,
+    "required_during_dosing": true
+  },
+  "reference_sequence": {
+    "mixing_pump_lead_seconds": 5,
+    "nutrient_order": ["calmag", "micro", "bloom", "veg"],
+    "settling_between_nutrients_seconds": 60,
+    "settling_after_nutrients_seconds": 60,
+    "ph_channels_excluded_from_batch_recipe": ["ph_down", "ph_up"]
+  },
+  "release_holds": [
+    "measure bottles and fan samples",
+    "select magnet dimensions grade coating and retention method",
+    "select PTFE stir-bar dimensions by bench test",
+    "prove tach acquisition under six simultaneous channels",
+    "prove chemical compatibility from each product SDS",
+    "complete HIL and supervised water-only pilot"
+  ]
+}
