@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from enum import StrEnum
 
-from .sensors import ReadingQuality, SensorReading
+from .sensors import ReadingQuality, SensorKind, SensorReading
 from .staleness import StalenessPolicy
 
 
@@ -23,6 +23,13 @@ class ReadingDiagnostic:
     quality: ReadingQuality
     age_seconds: float
     reason: str
+
+
+@dataclass(frozen=True, slots=True)
+class StationDiagnostic:
+    state: DiagnosticState
+    readings: tuple[ReadingDiagnostic, ...]
+    missing_kinds: tuple[SensorKind, ...]
 
 
 def diagnose_reading(
@@ -52,3 +59,27 @@ def diagnose_reading(
         age_seconds=(now - effective.observed_at).total_seconds(),
         reason=reason,
     )
+
+
+def diagnose_station(
+    readings: tuple[SensorReading, ...],
+    *,
+    now: datetime,
+    required_kinds: frozenset[SensorKind],
+) -> StationDiagnostic:
+    """Resume saúde da estação sem ocultar sensores ausentes ou degradados."""
+    seen = {reading.kind for reading in readings}
+    missing = tuple(sorted(required_kinds - seen, key=lambda kind: kind.value))
+    details = tuple(
+        sorted(
+            (diagnose_reading(reading, now=now) for reading in readings),
+            key=lambda item: item.sensor_id,
+        )
+    )
+    if missing or any(item.state is DiagnosticState.FAILED for item in details):
+        state = DiagnosticState.FAILED
+    elif any(item.state is DiagnosticState.DEGRADED for item in details):
+        state = DiagnosticState.DEGRADED
+    else:
+        state = DiagnosticState.HEALTHY
+    return StationDiagnostic(state=state, readings=details, missing_kinds=missing)
