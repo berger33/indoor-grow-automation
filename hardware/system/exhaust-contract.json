@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "release_state": "HOLD",
+  "installed_profile": {
+    "name": "generic_bivolt_four_wire",
+    "supply": "127VAC_60Hz_fixed",
+    "control_mode": "contactor_on_off_only",
+    "output": "OUT14",
+    "reason": "modelo e interface do exaustor instalado não foram identificados"
+  },
+  "reference_video": {
+    "models_mentioned": ["CLOUDLINE S4", "CLOUDLINE S6"],
+    "motor": "EC",
+    "interface_observed": ["fan_10V", "fan_GND", "PWM_input"],
+    "signal_method": "open_drain_modulation_using_fan_10V",
+    "warning": "o autor relata que perda do PWM pode parar o exaustor"
+  },
+  "target_profile": {
+    "manufacturer": "AC Infinity",
+    "model": "CLOUDLINE S6",
+    "mpn": "AI-CLS6",
+    "supply_voltage_vac": [100, 240],
+    "frequency_hz": [50, 60],
+    "maximum_power_w": 70,
+    "airflow_cfm": 402,
+    "duct_in": 6,
+    "ingress_protection": "IP44",
+    "manufacturer_controller_levels": 10,
+    "direct_control_state": "HOLD_UNTIL_EXACT_REVISION_PINOUT"
+  },
+  "control_requirements": {
+    "local_fallback_required": true,
+    "loss_of_esp32_must_not_stop_required_ventilation": true,
+    "anti_cycle_required": true,
+    "command_feedback_separation_required": true,
+    "absolute_temperature_and_humidity_limits_override_vpd": true,
+    "minimum_safe_speed_requires_commissioning": true
+  },
+  "release_holds": [
+    "measure duct length bends filter and static-pressure losses",
+    "verify marketplace unit is genuine AI-CLS6",
+    "record received electrical nameplate and manual revision",
+    "identify whether direct 10V/GND/PWM terminals are actually exposed",
+    "validate fail-safe behavior with PWM cable disconnected",
+    "complete airflow smoke test HIL and supervised climate pilot"
+  ]
+}
