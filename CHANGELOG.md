@@ -61,6 +61,20 @@ versionamento semântico a partir da primeira release.
   inclusão de iluminação ou contenção inferior a 110 L livres;
 - quatro testes do contrato empilhado, elevando a suíte para 106 testes;
 - remoção das duas vistas realistas incompatíveis com a montagem corrente.
+- quatro PNGs reais com validação de assinatura, CRC, descompressão e dimensões;
+- vistas rotuladas de estação, conjunto aberto e quadro, sem dependência de WebP;
+- contrato de seis canais pH Down, CalMag, Micro, Bloom, Veg e pH Up;
+- banco de seis ARCTIC F8 12 V, doze ímãs, barras PTFE, proteções e tacômetros;
+- intertravamento de dosagem por rotação com alarme retido e 6 testes;
+- sequência de referência CalMag → Micro → Bloom → Veg, com pausas de 60 s;
+- revisão completa da Parte 2, do vídeo de PCB e do exaustor;
+- perfil alvo AC Infinity CLOUDLINE S6 com interface direta mantida em HOLD;
+- controle de exaustão por degraus com limites absolutos e fallback diferente de zero;
+- ADR de integração lógica com tomadas EKAZA via Home Assistant/Tuya;
+- agenda timezone-aware e override temporário das tomadas, sem GPIO ou carga local;
+- tutoriais de dosagem/agitação e de integração EKAZA;
+- pranchas Rev A de seis canais e quadro SELV aberto, totalizando dez folhas;
+- 132 testes unitários, 288 referências de hardware e 24 HOLDs explícitos.
 
 ### Segurança
 
@@ -69,3 +83,8 @@ versionamento semântico a partir da primeira release.
 - scanner impede tokens, chaves privadas e segredos atribuídos.
 - falhas de aquisição preservam valor e timestamp brutos para diagnóstico;
 - vazamento não é apagado automaticamente quando o sensor volta a indicar seco.
+- perda de rotação bloqueia a dosadora correspondente e exige rearme explícito;
+- perda de controlador ou sensores climáticos não seleciona exaustão zero;
+- controle direto do CLOUDLINE permanece bloqueado sem manual/pinagem da amostra;
+- iluminação não adiciona relé, borne, cabo ou credencial à PCB/ESP32;
+- portão rejeita PNG truncado e qualquer nova referência a WebP.
