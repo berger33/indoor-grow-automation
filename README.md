@@ -4,9 +4,9 @@ Stack open-source para automatizar fertirrigação, irrigação e ambiente de cu
 indoor em pequena escala, composta por nós ESP32, hub local em Raspberry Pi e
 painel web responsivo.
 
-> **Status:** núcleo de sensores concluído e Fase 2 em desenvolvimento. O modelo
-> de controle já possui intertravamentos testados, mas ainda não deve comandar
-> cargas reais antes de firmware, testes elétricos, HIL e comissionamento.
+> **Status:** núcleo de sensores e laços principais da Fase 2 concluídos em
+> software; API e tela EKAZA operacionais no hub. O sistema ainda não deve
+> comandar cargas reais antes de firmware, testes elétricos, HIL e comissionamento.
 
 ## Objetivos
 
@@ -44,7 +44,9 @@ Backup, histórico e alertas locais
 O arranjo físico padrão usa seis recipientes de concentrado de 1 L, um
 reservatório de água de 50 L e um reservatório de mistura/rega de 50 L. A
 revisão dirigida do vídeo de hardware está em
-[`docs/referencia/REVISAO_VIDEO_16MIN.md`](docs/referencia/REVISAO_VIDEO_16MIN.md).
+[`docs/referencia/REVISAO_VIDEO_16MIN.md`](docs/referencia/REVISAO_VIDEO_16MIN.md)
+e a conferência completa da Parte 2 de funcionalidades está em
+[`docs/referencia/REVISAO_VIDEO_PARTE2_FUNCIONALIDADES.md`](docs/referencia/REVISAO_VIDEO_PARTE2_FUNCIONALIDADES.md).
 
 ## Estrutura
 
@@ -60,15 +62,20 @@ revisão dirigida do vídeo de hardware está em
 
 ## Desenvolvimento local
 
-Requisito inicial: Python 3.12 ou superior.
+Requisitos: Python 3.12 ou superior e Node.js 24 para o painel.
 
 ```bash
-python -m unittest discover -s tests -v
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements-dev.txt
+npm ci --prefix web
 python scripts/quality_gate.py
 ```
 
-Dependências adicionais serão introduzidas somente quando houver código que as
-utilize. Segredos ficam em `.env`, que nunca é versionado.
+O serviço do Raspberry Pi é iniciado com `python -m hub.growhub.api` depois da
+configuração descrita no
+[`Tutorial 10A`](docs/tutorial/10a-integracao-tomadas-ekaza.md). Segredos ficam
+somente no ambiente do serviço e nunca são versionados.
 
 ## Roadmap
 
@@ -91,7 +98,9 @@ O pacote `hub/growhub/control` funciona como especificação testável do firmwa
 - inicialização elétrica segura antes de habilitar saídas;
 - watchdog e heartbeat sem dependência de nuvem;
 - exclusão mútua de pH+ e pH−;
-- limites independentes de dose por evento, hora e dia.
+- limites independentes de dose por evento, hora e dia;
+- calibração de bombas, receita sequencial, correção de pH/EC, mistura,
+  irrigação, dreno, umidificação e exaustão testados por simulação.
 
 Os simuladores em `hub/growhub/simulation` cobrem todos os sensores da v1 e
 permitem injetar falhas canônicas sem hardware. O ADR 0008 fixa as invariantes

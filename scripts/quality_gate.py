@@ -36,6 +36,17 @@ def main() -> int:
             [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"],
         )
 
+    web_package = ROOT / "web" / "package.json"
+    if web_package.exists():
+        run(
+            "panel typecheck",
+            ["node", "web/node_modules/typescript/bin/tsc", "-b", "web"],
+        )
+        run(
+            "panel build",
+            ["node", "web/node_modules/vite/bin/vite.js", "build", "web"],
+        )
+
     hardware_validator = ROOT / "scripts" / "validate_hardware_manifest.py"
     if hardware_validator.exists():
         run("hardware manifests", [sys.executable, str(hardware_validator)])

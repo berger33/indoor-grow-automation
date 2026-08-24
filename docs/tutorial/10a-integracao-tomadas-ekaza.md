@@ -72,6 +72,57 @@ O adaptador implementado usa a API REST oficial do Home Assistant: chama
 `switch.turn_on` ou `switch.turn_off` e, em seguida, relê a entidade. O painel
 somente mostra o comando como confirmado quando o estado observado coincide.
 
+## Instalação do serviço e do painel
+
+No checkout do projeto no Raspberry Pi, crie o ambiente e compile o painel:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements.txt
+npm ci --prefix web
+npm run build --prefix web
+```
+
+Confirme no Home Assistant os quatro IDs reais e inicialize o arquivo uma única
+vez. Substitua os exemplos abaixo se o Home Assistant atribuiu outros nomes:
+
+```bash
+python scripts/init_lighting_state.py \
+  --state ./var/lighting.json \
+  --entity switch.grow_light_1 \
+  --entity switch.grow_light_2 \
+  --entity switch.grow_light_3 \
+  --entity switch.grow_light_4
+```
+
+O inicializador recusa menos/mais de quatro entidades, duplicatas e
+sobrescrita. As agendas nascem desativadas; neste contrato, isso significa
+estado desejado `OFF`. Revise esse efeito e mantenha as luminárias em condição
+segura antes da primeira reconciliação.
+
+Configure o serviço sem gravar o token em arquivo versionado:
+
+```bash
+export GROWHUB_LIGHTING_STATE="$PWD/var/lighting.json"
+export GROWHUB_HA_URL="http://homeassistant.local:8123"
+read -rsp "Token exclusivo do Grow Hub: " GROWHUB_HA_TOKEN
+export GROWHUB_HA_TOKEN
+python -m hub.growhub.api
+```
+
+Por padrão a API escuta somente `127.0.0.1:8000`. Para acesso direto pela LAN,
+configure `GROWHUB_BIND_HOST=0.0.0.0` somente em rede confiável, com firewall e
+autenticação/reverse proxy conforme o comissionamento. O worker relê as tomadas
+a cada 30 s, aplica backoff em falhas e o painel consulta o snapshot a cada 30 s.
+
+Endpoints de verificação:
+
+- `GET /health` — processo local disponível;
+- `GET /api/v1/lighting` — agenda, desejado, observado e confirmação;
+- `PUT /api/v1/lighting/{entity_id}/schedule` — atualiza agenda persistida;
+- `POST /api/v1/lighting/{entity_id}/override` — override temporário/cancelamento.
+
 ## Teste antes da agenda
 
 Para cada tomada, repita 100 ciclos espaçados conforme o manual:

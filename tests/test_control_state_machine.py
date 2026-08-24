@@ -20,6 +20,20 @@ class LocalControlStateMachineTests(TestCase):
         machine.dispatch(ControlEvent.BOOT_COMPLETE)
         self.assertEqual(ControlState.MANUAL, machine.dispatch(ControlEvent.START_MANUAL))
         self.assertEqual(ControlState.IDLE, machine.dispatch(ControlEvent.STOP))
+
+    def test_runs_irrigation_and_maintenance_only_from_idle(self) -> None:
+        machine = LocalControlStateMachine()
+        machine.dispatch(ControlEvent.BOOT_COMPLETE)
+        self.assertEqual(
+            ControlState.IRRIGATING,
+            machine.dispatch(ControlEvent.START_IRRIGATION),
+        )
+        self.assertEqual(ControlState.IDLE, machine.dispatch(ControlEvent.STOP))
+        self.assertEqual(
+            ControlState.MAINTENANCE,
+            machine.dispatch(ControlEvent.START_MAINTENANCE),
+        )
+        self.assertEqual(ControlState.IDLE, machine.dispatch(ControlEvent.STOP))
         self.assertEqual(ControlState.BATCH, machine.dispatch(ControlEvent.START_BATCH))
         self.assertEqual(ControlState.IDLE, machine.dispatch(ControlEvent.STOP))
 

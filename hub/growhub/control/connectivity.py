@@ -53,7 +53,12 @@ class HubHeartbeatMonitor:
         return HubLinkState.ONLINE
 
     def loss_action(self, control_state: ControlState) -> HubLossAction:
-        if control_state in {ControlState.MANUAL, ControlState.BATCH}:
+        if control_state in {
+            ControlState.MANUAL,
+            ControlState.BATCH,
+            ControlState.IRRIGATING,
+            ControlState.MAINTENANCE,
+        }:
             return HubLossAction.TRIP_LOCAL_CONTROL
         return HubLossAction.REJECT_REMOTE_COMMANDS
 

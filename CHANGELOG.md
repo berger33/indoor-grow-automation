@@ -74,6 +74,19 @@ versionamento semântico a partir da primeira release.
 - reconciliador que compara estado desejado e observado sem repetir comandos;
 - ADR e tutorial de pareamento/homologação das tomadas EKAZA, mantendo toda a
   alimentação e fiação de iluminação fora da estação.
+- curva volume×tempo por dosadora, correção segura de pH, receita sequencial de
+  CalMag/Micro/Bloom/Grow, diluição por EC e mistura periódica;
+- agendas de até cinco irrigações, dreno com timeout/pós-tempo e umidificação
+  protegida por nível, vazamento, histerese e anti-ciclo;
+- controle liga/desliga do exaustor por temperatura/VPD, limites absolutos,
+  feedback de corrente/contato e prioridade sobre umidificação;
+- persistência atômica, worker com backoff, API FastAPI e inicializador para as
+  quatro entidades EKAZA;
+- painel React responsivo com agenda, override, estado desejado/observado e
+  estados confirmado, divergente ou indisponível;
+- revisão integral do vídeo Parte 2 de 18:00, com hash, timestamps, matriz de
+  aplicação e adaptações deliberadas;
+- validação TypeScript e build Vite incorporados ao Quality Gate e ao CI.
 
 ### Segurança
 
@@ -88,3 +101,9 @@ versionamento semântico a partir da primeira release.
 - pedido simultâneo de pH+ e pH− desenergiza ambos e bloqueia nova dose.
 - falha ou divergência de tomada remota permanece explícita e nunca interfere
   nos intertravamentos de fertirrigação, hidráulica ou clima.
+- lote químico verifica estoque/capacidade antes de iniciar e corta todas as
+  saídas diante de intertravamento;
+- leitura inválida, timeout ou reserva insuficiente interrompem imediatamente a
+  diluição e o dreno mantém alarme retido;
+- falha de sensores climáticos adota política degradada/fail-on para exaustão;
+- API e painel nunca transformam comando remoto sem confirmação em sucesso.

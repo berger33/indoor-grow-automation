@@ -1,15 +1,16 @@
 # Especificação de Referência — Sistema de Automação de Cultivo
 
 **Arquivo:** `ESPECIFICACAO_REFERENCIA.md`  
-**Escopo:** engenharia reversa documental de três vídeos, conferida contra os arquivos open-source publicados pelo autor.  
+**Escopo:** engenharia reversa documental de quatro vídeos, conferida contra os arquivos open-source publicados pelo autor.
 **Objetivo:** servir como referência técnica e backlog para uma implementação nova; não é uma autorização para copiar cegamente uma revisão de hardware não ensaiada.
 
 > **Segurança:** o sistema combina água, fertilizantes concentrados e rede elétrica. A execução deve usar aterramento, DR/GFCI, proteção por sobrecorrente, segregação entre CA e SELV, gabinete compatível, alívio de tração e profissional habilitado conforme as normas locais. As pranchas são funcionais/conceituais, não desenhos executivos certificados.
 
 > **Aplicação no projeto próprio:** este arquivo preserva tudo que foi observado,
 > inclusive iluminação, para manter a fidelidade documental. O escopo executável
-> da v1.0 está em [`docs/ESCOPO_V1.md`](docs/ESCOPO_V1.md) e exclui completamente
-> automação de iluminação. Itens marcados `[REF-FORA]` não pertencem ao backlog.
+> da v1.0 está em [`docs/ESCOPO_V1.md`](docs/ESCOPO_V1.md), exclui completamente
+> a elétrica da iluminação e admite somente integração lógica opcional com as
+> tomadas existentes. Itens marcados `[REF-FORA]` não pertencem ao backlog.
 
 ## Convenções e rastreabilidade
 
@@ -17,7 +18,11 @@
 |---|---|---:|
 | V1 | [My DIY Home Assistant Garden Automation System — Pt.1 Hardware](https://www.youtube.com/watch?v=Q9fjKeYOyqU) | 16:36 |
 | V2 | [Update on My Automated Garden System](https://www.youtube.com/watch?v=SMWJXIhill8) | 05:56 |
+| V2F | [My DIY Home Assistant Garden Automation System — Pt.2 Functionality](https://www.youtube.com/watch?v=XjcLWVci6_I) | 18:00 |
 | V3 | [Rebuilding My Automated Hydroponic Garden #5 — Designing the PCBs](https://www.youtube.com/watch?v=SrGKJrS0PVs) | 13:43 |
+
+A conferência quadro a quadro do anexo V2F, seu hash e a matriz de aplicação
+estão em [`docs/referencia/REVISAO_VIDEO_PARTE2_FUNCIONALIDADES.md`](docs/referencia/REVISAO_VIDEO_PARTE2_FUNCIONALIDADES.md).
 
 Fontes auxiliares publicadas pelo próprio criador: [repositório `ledgardener/gardenAutomation`](https://github.com/ledgardener/gardenAutomation), [lista de peças da geração V1](https://github.com/ledgardener/gardenAutomation/blob/master/parts_list_with_links.md), [firmware e configuração do Home Assistant](https://github.com/ledgardener/gardenAutomation/tree/master) e [pacote de PCB/3D no Dropbox](https://www.dropbox.com/sh/vm5qaalidt2vkax/AADD1yOENif5DczTDZ2ULJv0a?dl=0).
 
@@ -34,7 +39,7 @@ Nos requisitos da seção 6:
 
 O primeiro vídeo apresenta uma automação residencial construída durante aproximadamente um ano de tempo livre para uma tenda de 4 × 4 pés. O arranjo parte de água de osmose reversa, possui corte geral de água por solenoide, reservatório superior, reservatório de mistura pesado por quatro células de carga, medição de pH/EC/temperatura da solução, seis bombas peristálticas para concentrados, bombas submersíveis para transferência, mistura, fertirrigação e drenagem, umidificador ultrassônico caseiro, exaustor com PWM interceptado, iluminação agendada e quatro pontos de detecção de vazamento. O controle central é distribuído entre Home Assistant, ESP32 e Arduino Mega com Tentacle Shield; o protótipo usa protoboards, fios Dupont, relés, drivers L298N, tomadas Wi-Fi e uma fonte Mean Well de 12 V. O autor mostra falhas reais — cinco alagamentos em uma noite, drenos de 1/4 pol obstruídos e sensor eTape de nível instável — que motivaram alterações mecânicas e o uso de balança.
 
-### 1.2 Vídeo V2 — atualização, painel e publicação do código
+### 1.2 Vídeos V2/V2F — atualização, painel e publicação do código
 
 O segundo vídeo mostra a integração operacional: Home Assistant em Raspberry Pi 4, MQTT pela rede Wi-Fi, painel em tablet Amazon Fire HD 8 e a mesma interface em desktop/telefone. São exibidas telas de operação, calibração, controle manual, receita de nutrientes, clima, agenda de até cinco fertirrigações, diagnóstico do host e uma interface separada de medição PPFD por CNC. O painel permite calibrar pH, EC, balança e vazão das bombas, selecionar alvos, dosar um lote por mL/L, comandar relés/tomadas e ajustar PWM de luz/exaustor. O autor afirma ter gasto mais de um mês de tempo livre limpando o código e organizando MQTT antes de publicar o diagrama fio a fio, lista de peças e arquivos do sistema; também declara que foi seu primeiro projeto de programação.
 

@@ -114,3 +114,26 @@ foi preservado apenas para rastreabilidade.
   canal; persistência, execução periódica, API e tela ainda não implementadas.
 - Próximos passos: persistir agendas; executar reconciliação com backoff;
   integrar o snapshot à futura API e à tela mobile-first.
+
+### Continuação dirigida — vídeo Parte 2 e quatro mensagens finais
+
+- Commits: 22
+- Itens concluídos: revisão integral do anexo de 18:00; calibração volume×tempo;
+  correção de pH; receita CalMag/Micro/Bloom/Grow; diluição por EC; mistura;
+  até cinco irrigações; dreno; umidificação; exaustão liga/desliga e feedback;
+  prioridade climática; perda do hub nos estados energizados; persistência e
+  worker EKAZA; modelos do painel; tela React; build no CI; API FastAPI;
+  inicializador das quatro entidades; tutorial e rastreabilidade atualizados.
+- Decisões tomadas: a funcionalidade do vídeo é referência, não cópia cega;
+  elétrica, dimerização e PPFD das luminárias continuam excluídas; somente o
+  Raspberry Pi acessa o Home Assistant; o exaustor atual permanece liga/desliga;
+  o painel só declara sucesso após confirmação observada.
+- Verificação: 229 testes Python aprovados; TypeScript aprovado; build Vite de
+  produção aprovado; 255 referências de hardware coerentes; oito pranchas Rev A
+  válidas; scanner de segredos aprovado.
+- Bloqueios/pendências: IDs/modelos reais das tomadas; corrente/inrush e cem
+  ciclos de cada luminária; plaqueta/corrente de partida do exaustor; firmware
+  ESP32; persistência PostgreSQL; telas gerais, histórico e gráficos; medições
+  hidráulicas; ERC/DRC; protótipo; HIL e piloto supervisionado com água.
+- Próximos passos: receber os IDs `switch.*` e plaquetas, homologar EKAZA em
+  bancada, portar os laços testados para o firmware e avançar as telas gerais.

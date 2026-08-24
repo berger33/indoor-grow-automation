@@ -18,7 +18,12 @@ class LocalSafetySupervisor:
 
     @property
     def outputs_permitted(self) -> bool:
-        return self._machine.state in {ControlState.MANUAL, ControlState.BATCH}
+        return self._machine.state in {
+            ControlState.MANUAL,
+            ControlState.BATCH,
+            ControlState.IRRIGATING,
+            ControlState.MAINTENANCE,
+        }
 
     def update_leak(self, wet: bool) -> bool:
         latched = self._leak.update(wet)

@@ -59,26 +59,26 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F2-006 P0` Implementar heartbeat e política de perda do hub.
 - [x] `F2-007 P0` Bloquear pH+ e pH− simultâneos.
 - [x] `F2-008 P0` Limitar dosagem por evento, hora e dia.
-- [ ] `F2-009 P1` Calibrar curva volume×tempo por bomba.
-- [ ] `F2-010 P1` Implementar correção de pH com histerese e espera.
-- [ ] `F2-011 P1` Implementar receita de nutrientes como máquina de estados.
-- [ ] `F2-012 P1` Implementar diluição por EC com timeout.
-- [ ] `F2-013 P1` Implementar mistura periódica por nível.
-- [ ] `F2-014 P1` Implementar agenda de até cinco irrigações.
-- [ ] `F2-015 P1` Implementar drenagem com timeout e pós-tempo.
-- [ ] `F2-016 P1` Implementar umidade com histerese e anti-ciclo.
-- [ ] `F2-017 P1` Implementar exaustor por temperatura/VPD.
-- [ ] `F2-018 P0` Criar testes de perda de rede em cada estado crítico.
+- [x] `F2-009 P1` Calibrar curva volume×tempo por bomba.
+- [x] `F2-010 P1` Implementar correção de pH com histerese e espera.
+- [x] `F2-011 P1` Implementar receita de nutrientes como máquina de estados.
+- [x] `F2-012 P1` Implementar diluição por EC com timeout.
+- [x] `F2-013 P1` Implementar mistura periódica por nível.
+- [x] `F2-014 P1` Implementar agenda de até cinco irrigações.
+- [x] `F2-015 P1` Implementar drenagem com timeout e pós-tempo.
+- [x] `F2-016 P1` Implementar umidade com histerese e anti-ciclo.
+- [x] `F2-017 P1` Implementar exaustor por temperatura/VPD.
+- [x] `F2-018 P0` Criar testes de perda de rede em cada estado crítico.
 - [ ] `F2-019 P0` Intertravar umidificador por nível mínimo e timeout.
 - [ ] `F2-020 P1` Monitorar CO₂ sem comandar injeção no MVP.
-- [ ] `F2-021 P1` Definir limites absolutos de temperatura e UR sobre o VPD.
-- [ ] `F2-022 P1` Detectar exaustor comandado sem feedback de corrente/contato.
-- [ ] `F2-023 P1` Implementar prioridade entre exaustão e umidificação.
+- [x] `F2-021 P1` Definir limites absolutos de temperatura e UR sobre o VPD.
+- [x] `F2-022 P1` Detectar exaustor comandado sem feedback de corrente/contato.
+- [x] `F2-023 P1` Implementar prioridade entre exaustão e umidificação.
 - [ ] `F2-024 P2` Modelar módulos opcionais de desumidificação e climatização.
 
 ## Fase 3 — Hub e conectividade
 
-- [ ] `F3-001 P0` Criar serviço FastAPI com healthcheck.
+- [x] `F3-001 P0` Criar serviço FastAPI com healthcheck.
 - [ ] `F3-002 P0` Definir tópicos MQTT por estação e função.
 - [ ] `F3-003 P0` Implementar ACK/NACK idempotente de comandos.
 - [ ] `F3-004 P0` Configurar Mosquitto com ACL e TLS.
@@ -96,24 +96,24 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F3-016 P1` Integrar entidades `switch` pela API do Home Assistant.
 - [x] `F3-017 P1` Reconciliar estado desejado e observado sem comando repetido.
 - [ ] `F3-018 P1` Persistir agendas e overrides de tomadas no banco.
-- [ ] `F3-019 P1` Executar reconciliação periódica com backoff e telemetria.
+- [x] `F3-019 P1` Executar reconciliação periódica com backoff e telemetria.
 
 ## Fase 4 — Painel mobile-first
 
-- [ ] `F4-001 P1` Criar shell React responsivo e navegação.
+- [x] `F4-001 P1` Criar shell React responsivo e navegação.
 - [ ] `F4-002 P1` Criar tela Home com qualidade das leituras.
 - [ ] `F4-003 P1` Criar gráficos de pH, EC, água e clima.
 - [ ] `F4-004 P1` Criar assistente de calibração guiada.
 - [ ] `F4-005 P1` Criar tela de receita e progresso da batelada.
 - [ ] `F4-006 P1` Criar tela de agenda de irrigação.
 - [ ] `F4-007 P0` Criar central de alarmes latched e confirmação.
-- [ ] `F4-008 P1` Diferenciar comando, estado e feedback físico.
-- [ ] `F4-009 P1` Explicar por que controles estão inibidos.
+- [x] `F4-008 P1` Diferenciar comando, estado e feedback físico.
+- [x] `F4-009 P1` Explicar por que controles estão inibidos.
 - [ ] `F4-010 P2` Criar comparação de múltiplas tendas.
 - [ ] `F4-011 P2` Criar PWA com cache somente de leitura.
 - [ ] `F4-012 P1` Cobrir acessibilidade e operação por teclado.
-- [ ] `F4-013 P1` Criar tela opcional de tomadas com agenda e confirmação.
-- [ ] `F4-014 P1` Exibir tomada indisponível/divergente sem falso positivo.
+- [x] `F4-013 P1` Criar tela opcional de tomadas com agenda e confirmação.
+- [x] `F4-014 P1` Exibir tomada indisponível/divergente sem falso positivo.
 
 ## Fase 5 — Instalação e release
 
