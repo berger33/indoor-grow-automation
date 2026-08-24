@@ -4,7 +4,7 @@ Este documento fixa a organização funcional derivada do vídeo V1 e adaptada a
 volumes informados. Dimensões cotadas só serão congeladas depois da medição dos
 tanques e do local.
 
-![Visualização realista conceitual da estação compacta](../../images/realistic/ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp)
+![Visualização realista conceitual da estação compacta](../../images/realistic/01_ESTACAO_COMPLETA_REALISTA.png)
 
 O ADR 0007 substitui a disposição excessivamente espalhada da primeira vista
 por um rack vertical inspirado no princípio espacial observado no vídeo. O
@@ -101,7 +101,7 @@ não é critério de dimensionamento.
 - cada cabo, tubo, borne, fusível, canal e sentido de fluxo recebe identificador;
 - bandejas e piso permitem testar cada sensor de vazamento sem molhar eletrônica.
 
-![Visualização realista conceitual do subsistema de clima](../../images/realistic/CLIMA_CONCEITUAL.webp)
+![Visualização realista conceitual do subsistema de clima](../../images/realistic/CLIMA_CONCEITUAL.png)
 
 Consulte as [limitações das vistas realistas](../../images/realistic/README.md)
 antes de usar qualquer detalhe visual.

@@ -44,6 +44,10 @@ def main() -> int:
     if drawing_validator.exists():
         run("Rev A drawings", [sys.executable, str(drawing_validator)])
 
+    image_validator = ROOT / "scripts" / "validate_raster_images.py"
+    if image_validator.exists():
+        run("raster images", [sys.executable, str(image_validator)])
+
     secret_scanner = ROOT / "scripts" / "secret_scan.py"
     if secret_scanner.exists():
         run("secret scan", [sys.executable, str(secret_scanner), "--tracked"])

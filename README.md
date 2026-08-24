@@ -111,7 +111,7 @@ para fabricar lote ou energizar cargas reais.
 
 ## Visualização do sistema pronto
 
-![Estação compacta com reservatórios empilhados — visualização conceitual](docs/images/realistic/ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp)
+![Estação compacta com reservatórios empilhados — visualização conceitual](docs/images/realistic/01_ESTACAO_COMPLETA_REALISTA.png)
 
 As [vistas realistas e suas limitações](docs/images/realistic/README.md)
 mostram a aparência pretendida. Elas não substituem desenhos cotados, P&ID,

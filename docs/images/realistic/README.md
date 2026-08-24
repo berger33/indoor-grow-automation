@@ -1,17 +1,36 @@
-# Vistas realistas conceituais
+# Vistas realistas e técnicas conceituais
 
-Estas imagens ajudam a visualizar o sistema montado. Elas foram geradas a partir
-do escopo de engenharia em 2026-08-23; não retratam um protótipo já fabricado.
+Estas imagens foram geradas em PNG e validadas byte a byte em 2026-08-23. O
+portão de qualidade rejeita assinatura, CRC, dados comprimidos ou dimensões
+inválidas e também proíbe novas referências a WebP nesta pasta.
 
-| Arquivo | Intenção visual |
-|---|---|
-| `ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp` | vista principal corrigida: seis canais e dois tanques de 50 L empilhados em níveis independentes |
-| `CLIMA_CONCEITUAL.webp` | exaustor, umidificador, sensores na copa, bandeja e dreno |
+| Arquivo | Uso | O que deve aparecer |
+|---|---|---|
+| `01_ESTACAO_COMPLETA_REALISTA.png` | fotografia conceitual do sistema pronto | seis frascos, seis agitadores, seis dosadoras, dois tanques de 50 L empilhados, manifold, tenda, exaustor e umidificador |
+| `02_VISTA_TECNICA_CONJUNTO_ABERTO.png` | vista técnica frontal do conjunto | quadro aberto, dosagem/agitação, hidráulica e dois níveis de tanque independentes |
+| `03_QUADRO_CONTROLE_ABERTO_REALISTA.png` | estimativa visual do quadro aberto | controladora ESP32, distribuição/fusíveis, conversores SELV, bornes, hub Raspberry Pi separado e rotas de cabos |
+| `CLIMA_CONCEITUAL.png` | relação espacial do clima | exaustão, umidificação, sensores e contenção do cultivo |
+
+## Leitura correta da vista do quadro
+
+A imagem aberta representa classes de componentes, não modelos liberados nem um
+layout de fabricação. O projeto próprio **não usa Arduino Mega**: o ESP32 local
+assume o controle de campo e o Raspberry Pi executa MQTT, API, banco e painel em
+compartimento ventilado separado. A organização pretendida é:
+
+1. entrada e distribuição de 24 VCC protegidas;
+2. conversor isolado 24→12 VCC para os seis agitadores;
+3. conversor 24→5 VCC para lógica/hub conforme a revisão liberada;
+4. controladora SELV com ESP32 removível e 16 saídas protegidas;
+5. entradas digitais, analógicas, 1-Wire, fluxo, pH e EC;
+6. bornes com ponteiras e uma função por condutor;
+7. seis saídas de 12 V e seis retornos de tacômetro dos agitadores;
+8. Raspberry Pi com armazenamento e Ethernet em caixa seca ventilada.
 
 ## O que é vinculante
 
-Use estas imagens somente para compreender organização, acesso e aparência
-geral. Para comprar ou montar, prevalecem nesta ordem:
+As imagens servem para visualizar aparência, acesso e ocupação. Para comprar,
+fabricar ou montar, prevalecem, nesta ordem:
 
 1. BOM liberada e matriz de compatibilidade;
 2. P&ID e unifilar as-built;
@@ -21,41 +40,22 @@ geral. Para comprar ou montar, prevalecem nesta ordem:
 
 ## Limitações conhecidas
 
-- formas e dimensões dos tanques são ilustrativas até medir os recipientes reais;
-- a imagem mostra `TK-101` sobre `TK-201`, mas cada caixa usa prateleira e
-  plataforma próprias; não existe apoio sobre a tampa do tanque inferior;
-- conexões, válvulas e linhas visuais não constituem o P&ID;
-- suportes de frascos/agitadores serão detalhados em desenho mecânico;
-- gabinete fechado não mostra a segregação interna CA/SELV;
-- sensores aparecem em posições representativas, que serão cotadas no as-built;
-- nenhuma imagem autoriza ligação elétrica, escolha de proteção ou fabricação;
+- tubulação e componentes visuais não substituem o P&ID;
+- rótulos e microdetalhes gerados não definem tensão, MPN ou pinagem;
+- formas dos tanques são ilustrativas até medir os recipientes adquiridos;
+- nenhum desenho autoriza ligação em 127 V, compra em lote ou fabricação;
 - iluminação foi deliberadamente omitida e não integra o sistema.
+- fotos reais substituirão estes conceitos depois do protótipo, HIL e piloto
+  supervisionado somente com água.
 
 As imagens serão substituídas/complementadas por fotografias da montagem
 validada antes da release v1.0.
 
-## Direção usada na geração
+## Direção de geração
 
-- vista geral: estação compacta, exatamente seis frascos de 1 L e seis
-  peristálticas, duas caixas de 50 L empilhadas, quadro seco elevado, painel
-  hidráulico lateral, exaustão e umidificação;
-- vista de clima: tenda 80 × 80 cm, exaustor, umidificador externo, sensores de
-  temperatura/UR/CO₂/folha, bandeja, dreno e detecção de vazamento;
-- em todas: sem luminárias, drivers, dimmers ou controles de iluminação; sem
-  marcas, texto miúdo, rede exposta ou água sobre o quadro.
-
-### Revisão compacta vertical
-
-A revisão compacta foi gerada por edição da vista anterior e refinada com os
-quadros do painel original como referência de disposição. O envelope A0 passou
-a no máximo 900 × 600 × 2.000 mm. O painel seco/HMI e as seis peristálticas
-ficam no alto à esquerda; os seis recipientes em duas fileiras de três ficam à
-direita; `TK-101` e `TK-201` ocupam níveis sobrepostos e independentes; o
-manifold usa uma faixa lateral molhada. A imagem preserva tenda, exaustão e
-umidificação e omite integralmente iluminação.
-
-Vistas incompatíveis com o contrato empilhado foram removidas da revisão
-corrente. Versões anteriores continuam recuperáveis apenas pelo histórico Git.
-
-Essa disposição é a direção A0 do projeto; cotas e componentes continuam
-dependentes da medição física e dos desenhos vinculantes.
+As três vistas novas usaram o modo integrado de geração/edição de imagens. Os
+prompts fixaram rack máximo de 900 × 600 × 2.000 mm, seis canais de 1 L, seis
+ventoinhas agitadoras de 80 mm, seis dosadoras, `TK-101` e `TK-201` de 50 L em
+níveis independentes, segregação seco/molhado, Raspberry Pi, ESP32 e ausência
+total de iluminação. Resultados com contagem ou tensão visual incorreta foram
+descartados antes desta revisão.

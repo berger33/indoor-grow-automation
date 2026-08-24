@@ -11,7 +11,7 @@ zonas visíveis. Será possível simular `TK-101` sobre `TK-201`, em níveis
 independentes, e retirar cada gabarito pela frente. Nenhuma bomba, eletrônica,
 fluido ou cabo CA será instalado.
 
-![Estado visual pretendido](../images/realistic/ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp)
+![Estado visual pretendido](../images/realistic/01_ESTACAO_COMPLETA_REALISTA.png)
 
 ## Antes de começar
 
