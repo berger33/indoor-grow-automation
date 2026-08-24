@@ -17,7 +17,7 @@ responsabilidade de profissional habilitado.
 | 02 | [estrutura e zonas seca/molhada](02-estrutura-e-zonas.md) | suporte nivelado e distâncias aprovadas | montagem de tanques |
 | 03 | [tanques empilhados e plataformas de pesagem](03-reservatorios-e-plataformas.md) | níveis independentes, contenção e tara repetível | hidráulica |
 | 04 | bombas, válvulas e tubulação | teste de estanqueidade sem eletrônica | dosagem |
-| 05 | frascos, agitadores e peristálticas | seis linhas identificadas e sem sifão | sensores químicos |
+| 05 | [frascos, agitadores e peristálticas](05-frascos-dosadoras-agitadores.md) | seis linhas identificadas e sem sifão | sensores químicos |
 | 06 | pH, EC, temperatura, boias e vazamento | leituras/estados brutos plausíveis | quadro SELV |
 | 07 | controladora, fontes e chicotes SELV | continuidade/polaridade aprovadas sem CA | firmware |
 | 08 | instalação 127 V por profissional | laudo, PE, DR, isolação e proteções aprovados | energização controlada |
