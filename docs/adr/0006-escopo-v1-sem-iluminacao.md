@@ -1,6 +1,6 @@
 # ADR 0006 — Escopo v1 sem automação de iluminação
 
-- Estado: aceito
+- Estado: parcialmente superado pelo ADR 0008
 - Data: 2026-08-23
 
 ## Contexto
@@ -32,11 +32,11 @@ Ficam explicitamente fora do escopo:
 - acionamento, dimerização ou alimentação de luminárias;
 - fotoperíodo, amanhecer/anoitecer e mapas PPFD;
 - cadastro de painéis Yuxinou, potência de luz ou driver de LED;
-- contatores, disjuntores, chicotes, conectores, API e telas de iluminação.
+- contatores, disjuntores, chicotes, conectores ou dimerização de iluminação.
 
-O sistema de iluminação existente não será integrado nem monitorado. A única
-relação física permitida é compartilhar o mesmo ambiente de cultivo, mantendo
-circuitos, cabos, automações e responsabilidades separados.
+O ADR 0008 posteriormente autorizou somente integração lógica do Raspberry Pi
+com as tomadas Wi-Fi EKAZA. A fronteira física deste ADR permanece: circuitos,
+cabos, potência e responsabilidades elétricas continuam separados.
 
 ## Arquitetura física adotada
 
@@ -53,7 +53,7 @@ circuitos, cabos, automações e responsabilidades separados.
 ## Consequências
 
 - a BOM e o unifilar deixam de conter quatro painéis e seus contatores;
-- os modelos de software deixam de possuir perfil ou agenda de iluminação;
+- nenhuma agenda de iluminação atua por GPIO, borne ou circuito do rack;
 - a capacidade de I/O passa a ser calculada somente pelos atuadores hidráulicos,
   dosadores, agitadores e cargas de clima;
 - itens observados no vídeo sobre iluminação permanecem na especificação de
@@ -63,6 +63,6 @@ circuitos, cabos, automações e responsabilidades separados.
 
 ## Critério de reversão
 
-Uma integração futura com iluminação exigirá outro ADR, módulo opcional isolado,
-BOM própria e nova análise elétrica. Ela não poderá reintroduzir dependência no
-núcleo de fertirrigação e segurança.
+O ADR 0008 registra a integração lógica solicitada. Qualquer dimmer, circuito,
+medição elétrica ou ligação futura ainda exige novo ADR, BOM e análise elétrica,
+sem criar dependência no núcleo de fertirrigação e segurança.
