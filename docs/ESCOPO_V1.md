@@ -15,7 +15,7 @@ fertirrigação e clima localmente sem depender da nuvem.
 | Elemento | Configuração-base | Configurável antes do uso |
 |---|---|---|
 | Área de cultivo | 0,80 × 0,80 m | quantidade de zonas de irrigação |
-| Concentrados | 6 recipientes de 1 L | nome, densidade, limite e ordem de cada canal |
+| Concentrados | 6 recipientes de 1 L: pH Down, CalMag, Micro, Bloom, Veg e pH Up | fabricante, densidade, concentração e limites |
 | Água de origem | 1 reservatório de 50 L | tara, massa útil e limites alto/baixo |
 | Solução preparada | 1 reservatório de 50 L | tara, massa útil e volume de batelada |
 | Estrutura | rack de até 0,90 × 0,60 × 2,00 m; tanques empilhados | cotas as-built, carga, flecha e ancoragem |
@@ -23,9 +23,9 @@ fertirrigação e clima localmente sem depender da nuvem.
 | Exaustor atual | CA liga/desliga | modelo futuro pode usar 0–10 V documentado |
 | Hub | Raspberry Pi local | hostname, retenção, backup e usuários |
 
-Os nomes de produtos químicos vistos no vídeo são exemplos de canais, não uma
-receita agronômica. O software exige que o operador cadastre e valide sua própria
-receita, concentração e limites.
+O canal `Veg` corresponde ao canal `Grow` exibido no projeto original. Os seis
+nomes são a configuração padrão solicitada; não constituem receita agronômica.
+O software exige cadastro do fabricante, concentração e limites aplicáveis.
 
 ## Matriz de escopo
 
@@ -45,10 +45,10 @@ receita, concentração e limites.
 1. confirmar disponibilidade de água e capacidade livre na mistura;
 2. transferir a massa de água configurada de `TK-101` (nível superior) para
    `TK-201` (nível inferior), sem confiar apenas na gravidade;
-3. misturar e estabilizar temperatura/leituras;
-4. dosar cada concentrado sequencialmente, com pausa de homogeneização;
-5. verificar EC e diluir apenas dentro dos limites configurados;
-6. corrigir pH em pequenos pulsos, nunca pH+ e pH− simultaneamente;
+3. ligar a mistura e aguardar 5 s antes de habilitar os seis agitadores;
+4. confirmar rotação e dosar CalMag → Micro → Bloom → Veg, com 60 s entre eles;
+5. desligar os agitadores, aguardar 60 s e diluir até o alvo de EC ou limite;
+6. corrigir pH em rotina separada e pequenos pulsos, nunca Up/Down simultâneos;
 7. aguardar estabilidade e liberar a batelada;
 8. irrigar as zonas nos horários/durações configurados;
 9. coletar/drenar com timeout e confirmar variação de massa/fluxo;

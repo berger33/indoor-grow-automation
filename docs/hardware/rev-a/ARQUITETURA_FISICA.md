@@ -57,6 +57,30 @@ mapa vinculante está em
 Cargas acima de 1 A ou com corrente de partida desconhecida usam driver/contator
 externo e fusível próprio; a PCB fornece apenas o comando.
 
+### 2.1 Banco original de agitação/dosagem
+
+Os seis recipientes formam duas fileiras de três. Cada frasco fica imediatamente
+sobre um ventilador ARCTIC F8 PWM de 80 mm usado em 12 V e velocidade total. Dois
+ímãs simétricos presos ao rotor movimentam uma barra revestida em PTFE dentro do
+frasco. O sistema próprio mantém esse princípio, acrescenta proteção física para
+conter ímã solto e lê os seis tacômetros antes e durante a dosagem.
+
+| Índice | Produto neste projeto | Nome no original | Conjunto físico |
+|---:|---|---|---|
+| 0 | pH Down | pH Down | `B1/M1/PD1` |
+| 1 | CalMag | CalMag | `B2/M2/PD2` |
+| 2 | Micro | Micro | `B3/M3/PD3` |
+| 3 | Bloom | Bloom | `B4/M4/PD4` |
+| 4 | Veg | Grow | `B5/M5/PD5` |
+| 5 | pH Up | pH Up | `B6/M6/PD6` |
+
+`OUT07` habilita `DC2`, um conversor 24→12 V dedicado. Os ventiladores são
+ligados em grupo; a rotação é confirmada por canal. A identidade e a sequência
+executáveis ficam em
+[`stirrer-contract.json`](../../../hardware/system/stirrer-contract.json), e a
+montagem guiada está no
+[`Tutorial 05`](../../tutorial/05-frascos-dosadoras-agitadores.md).
+
 ## 3. Aquisição distribuída
 
 - pH, EC, temperatura da solução, massa e boias ficam na estação de mistura;
@@ -75,11 +99,16 @@ conector de campo correspondente está liberado para fabricação.
 
 1. a entrada enche o tanque de água até limite de massa/boia;
 2. válvula e bomba transferem a quantidade prevista ao tanque de mistura;
-3. a mistura circula enquanto as dosadoras adicionam um canal por vez;
-4. pH, EC e temperatura são lidos somente após pausas de homogeneização;
-5. uma batelada aprovada alimenta a bomba de irrigação;
-6. bandejas coletam retorno, que é drenado ao destino configurado;
-7. qualquer divergência de massa, timeout ou vazamento fecha válvulas e desliga
+3. a mistura circula por 5 s antes de habilitar os seis agitadores;
+4. com rotação confirmada, a receita dosa CalMag, Micro, Bloom e Veg (`Grow` na
+   referência), nessa ordem e com 60 s entre componentes;
+5. os agitadores desligam, a solução repousa 60 s e água dilui até o alvo de EC
+   ou o limite seguro de volume;
+6. pH Up/Down pertencem a uma rotina separada, mutuamente exclusiva e somente
+   após pausas de homogeneização;
+7. uma batelada aprovada alimenta a bomba de irrigação;
+8. bandejas coletam retorno, que é drenado ao destino configurado;
+9. qualquer divergência de massa, timeout ou vazamento fecha válvulas e desliga
    bombas localmente.
 
 O P&ID final definirá válvulas de retenção, registros manuais, uniões, diâmetros,
