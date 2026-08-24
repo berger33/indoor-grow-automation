@@ -21,13 +21,13 @@ responsabilidade de profissional habilitado.
 | 06 | [pH, EC, temperatura, boias e vazamento](06-sensores.md) | leituras/estados brutos plausíveis | quadro SELV |
 | 07 | [controladora, fontes e chicotes SELV](07-quadro-selv.md) | continuidade/polaridade aprovadas sem CA | firmware |
 | 08 | [instalação 127 V por profissional](08-instalacao-ca-profissional.md) | laudo, PE, DR, isolação e proteções aprovados | energização controlada |
-| 09 | gravação e provisionamento ESP32 | nós em safe boot e diagnosticáveis | hub |
-| 10 | Raspberry Pi, MQTT, API e painel | instalação limpa reproduzida | calibração |
+| 09 | [gravação e provisionamento ESP32](09-firmware-esp32.md) | nós em safe boot e diagnosticáveis | hub |
+| 10 | [Raspberry Pi, MQTT, API e painel](10-hub-e-painel.md) | instalação limpa reproduzida | calibração |
 | 10A | [integração lógica com tomadas EKAZA](10a-integracao-tomadas-ekaza.md) | estados remotos confirmados sem carga no rack | agenda de luz remota |
-| 11 | calibração guiada | massa, bombas, pH e EC dentro da tolerância | HIL |
-| 12 | teste seco, HIL e piloto com água | todas as falhas críticas injetadas | primeira batelada |
-| 13 | primeira batelada supervisionada | relatório aprovado sem alarme pendente | operação assistida |
-| 14 | manutenção e resposta a falhas | cronograma e procedimentos acessíveis | operação continuada |
+| 11 | [calibração guiada](11-calibracao.md) | massa, bombas, pH e EC dentro da tolerância | HIL |
+| 12 | [teste seco, HIL e piloto com água](12-hil-e-agua.md) | todas as falhas críticas injetadas | primeira batelada |
+| 13 | [primeira batelada supervisionada](13-primeira-batelada.md) | relatório aprovado sem alarme pendente | operação assistida |
+| 14 | [manutenção e resposta a falhas](14-manutencao.md) | cronograma e procedimentos acessíveis | operação continuada |
 
 ## Padrão obrigatório de cada capítulo
 

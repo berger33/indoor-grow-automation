@@ -154,12 +154,12 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F5-035 P0` Criar tutorial 06 de sondas e sensores de segurança.
 - [x] `F5-036 P0` Criar tutorial 07 do quadro e chicotes SELV.
 - [x] `F5-037 P0` Criar tutorial 08 da instalação CA por profissional habilitado.
-- [ ] `F5-038 P0` Criar tutorial 09 de gravação e provisionamento dos ESP32.
-- [ ] `F5-039 P0` Criar tutorial 10 de instalação do hub e painel.
-- [ ] `F5-040 P0` Criar tutorial 11 de calibração de massa, bombas, pH e EC.
-- [ ] `F5-041 P0` Criar tutorial 12 de teste seco, HIL e teste somente com água.
-- [ ] `F5-042 P0` Criar tutorial 13 de primeira batelada supervisionada.
-- [ ] `F5-043 P0` Criar guia de manutenção, limpeza e armazenamento de sondas.
+- [x] `F5-038 P0` Criar tutorial 09 de gravação e provisionamento dos ESP32.
+- [x] `F5-039 P0` Criar tutorial 10 de instalação do hub e painel.
+- [x] `F5-040 P0` Criar tutorial 11 de calibração de massa, bombas, pH e EC.
+- [x] `F5-041 P0` Criar tutorial 12 de teste seco, HIL e teste somente com água.
+- [x] `F5-042 P0` Criar tutorial 13 de primeira batelada supervisionada.
+- [x] `F5-043 P0` Criar guia de manutenção, limpeza e armazenamento de sondas.
 - [ ] `F5-044 P0` Validar o tutorial em montagem limpa sem conhecimento prévio.
 - [ ] `F5-045 P1` Fotografar a montagem validada e substituir imagens conceituais.
 - [x] `F5-046 P1` Publicar implantação e planta baixa compactas A0/HOLD.
