@@ -20,11 +20,18 @@ openssl req -x509 -newkey rsa:2048 -nodes -days 1 -subj "/CN=grow-test-ca" \
 
 issue_certificate() {
   local name="$1"
+  local request_extensions=()
+  local signing_extensions=()
+  if [[ "$name" == server ]]; then
+    request_extensions=(-addext "subjectAltName=IP:127.0.0.1,DNS:server")
+    signing_extensions=(-copy_extensions copy)
+  fi
   openssl req -newkey rsa:2048 -nodes -subj "/CN=$name" \
-    -keyout "$test_root/certs/$name.key" -out "$test_root/certs/$name.csr" >/dev/null 2>&1
+    "${request_extensions[@]}" -keyout "$test_root/certs/$name.key" \
+    -out "$test_root/certs/$name.csr" >/dev/null 2>&1
   openssl x509 -req -days 1 -sha256 -in "$test_root/certs/$name.csr" \
     -CA "$test_root/certs/ca.crt" -CAkey "$test_root/certs/ca.key" -CAcreateserial \
-    -out "$test_root/certs/$name.crt" >/dev/null 2>&1
+    "${signing_extensions[@]}" -out "$test_root/certs/$name.crt" >/dev/null 2>&1
 }
 
 issue_certificate server
@@ -39,20 +46,6 @@ docker run --rm -d --name "$broker_name" \
   -v "$test_root/data:/mosquitto/data" \
   eclipse-mosquitto:2.0.22 >/dev/null
 
-broker_ready=false
-for _ in $(seq 1 20); do
-  if docker logs "$broker_name" 2>&1 | grep -q "Opening ipv4 listen socket"; then
-    broker_ready=true
-    break
-  fi
-  sleep 0.25
-done
-if [[ "$broker_ready" != true ]]; then
-  echo "Mosquitto não iniciou no prazo; log do broker:" >&2
-  docker logs "$broker_name" >&2 || true
-  exit 1
-fi
-
 client() {
   local identity="$1"
   shift
@@ -62,7 +55,24 @@ client() {
     -h 127.0.0.1 -p 8883
 }
 
-client grow-hub mosquitto_pub -r -t grow/v1/grow-01/climate/command/exhaust -m off
+broker_ready=false
+for _ in $(seq 1 20); do
+  if client grow-hub mosquitto_pub -r \
+    -t grow/v1/grow-01/climate/command/exhaust -m off >/dev/null 2>&1; then
+    broker_ready=true
+    break
+  fi
+  sleep 0.25
+done
+if [[ "$broker_ready" != true ]]; then
+  echo "Mosquitto não iniciou no prazo; log do broker:" >&2
+  docker logs "$broker_name" >&2 || true
+  echo "Última tentativa de conexão mTLS:" >&2
+  client grow-hub mosquitto_pub -r \
+    -t grow/v1/grow-01/climate/command/exhaust -m off || true
+  exit 1
+fi
+
 received="$(client grow-01-climate mosquitto_sub -C 1 -W 3 -t grow/v1/grow-01/climate/command/exhaust)"
 test "$received" = "off"
 
