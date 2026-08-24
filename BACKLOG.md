@@ -84,34 +84,34 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F3-004 P0` Configurar Mosquitto com ACL e TLS.
 - [x] `F3-005 P1` Persistir telemetria no PostgreSQL.
 - [x] `F3-006 P1` Criar migrações iniciais Alembic.
-- [ ] `F3-007 P1` Expor API de estações e sensores.
-- [ ] `F3-008 P1` Expor API de setpoints e agendas.
-- [ ] `F3-009 P1` Expor stream WebSocket de telemetria.
-- [ ] `F3-010 P1` Implementar autenticação e perfis de operador.
-- [ ] `F3-011 P1` Implementar auditoria de comandos críticos.
-- [ ] `F3-012 P1` Criar backup e teste de restauração.
-- [ ] `F3-013 P2` Implementar buffer offline e deduplicação.
-- [ ] `F3-014 P1` Criar Docker Compose ARM64 do hub.
+- [x] `F3-007 P1` Expor API de estações e sensores.
+- [x] `F3-008 P1` Expor API de setpoints e agendas.
+- [x] `F3-009 P1` Expor stream WebSocket de telemetria.
+- [x] `F3-010 P1` Implementar autenticação e perfis de operador.
+- [x] `F3-011 P1` Implementar auditoria de comandos críticos.
+- [x] `F3-012 P1` Criar backup e teste de restauração.
+- [x] `F3-013 P2` Implementar buffer offline e deduplicação.
+- [x] `F3-014 P1` Criar Docker Compose ARM64 do hub.
 - [x] `F3-015 P1` Modelar agenda semanal de tomadas com timezone e override.
 - [x] `F3-016 P1` Integrar entidades `switch` pela API do Home Assistant.
 - [x] `F3-017 P1` Reconciliar estado desejado e observado sem comando repetido.
-- [ ] `F3-018 P1` Persistir agendas e overrides de tomadas no banco.
+- [x] `F3-018 P1` Persistir agendas e overrides de tomadas no banco.
 - [x] `F3-019 P1` Executar reconciliação periódica com backoff e telemetria.
 
 ## Fase 4 — Painel mobile-first
 
 - [x] `F4-001 P1` Criar shell React responsivo e navegação.
-- [ ] `F4-002 P1` Criar tela Home com qualidade das leituras.
-- [ ] `F4-003 P1` Criar gráficos de pH, EC, água e clima.
-- [ ] `F4-004 P1` Criar assistente de calibração guiada.
-- [ ] `F4-005 P1` Criar tela de receita e progresso da batelada.
-- [ ] `F4-006 P1` Criar tela de agenda de irrigação.
-- [ ] `F4-007 P0` Criar central de alarmes latched e confirmação.
+- [x] `F4-002 P1` Criar tela Home com qualidade das leituras.
+- [x] `F4-003 P1` Criar gráficos de pH, EC, água e clima.
+- [x] `F4-004 P1` Criar assistente de calibração guiada.
+- [x] `F4-005 P1` Criar tela de receita e progresso da batelada.
+- [x] `F4-006 P1` Criar tela de agenda de irrigação.
+- [x] `F4-007 P0` Criar central de alarmes latched e confirmação.
 - [x] `F4-008 P1` Diferenciar comando, estado e feedback físico.
 - [x] `F4-009 P1` Explicar por que controles estão inibidos.
 - [ ] `F4-010 P2` Criar comparação de múltiplas tendas.
-- [ ] `F4-011 P2` Criar PWA com cache somente de leitura.
-- [ ] `F4-012 P1` Cobrir acessibilidade e operação por teclado.
+- [x] `F4-011 P2` Criar PWA com cache somente de leitura.
+- [x] `F4-012 P1` Cobrir acessibilidade e operação por teclado.
 - [x] `F4-013 P1` Criar tela opcional de tomadas com agenda e confirmação.
 - [x] `F4-014 P1` Exibir tomada indisponível/divergente sem falso positivo.
 
@@ -120,10 +120,10 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F5-001 P0` Fechar BOM com alternativas e correntes.
 - [ ] `F5-002 P0` Publicar pinagem e chicotes por revisão.
 - [ ] `F5-003 P0` Publicar P&ID e unifilar as-built.
-- [ ] `F5-004 P0` Criar guia leigo de montagem mecânica.
-- [ ] `F5-005 P0` Criar guia leigo de instalação elétrica segura.
-- [ ] `F5-006 P0` Criar assistente de instalação do Raspberry Pi.
-- [ ] `F5-007 P0` Criar checklist de comissionamento com água.
+- [x] `F5-004 P0` Criar guia leigo de montagem mecânica.
+- [x] `F5-005 P0` Criar guia leigo de instalação elétrica segura.
+- [x] `F5-006 P0` Criar assistente de instalação do Raspberry Pi.
+- [x] `F5-007 P0` Criar checklist de comissionamento com água.
 - [ ] `F5-008 P0` Executar HIL e piloto supervisionado.
 - [ ] `F5-009 P1` Publicar matriz de compatibilidade de hardware.
 - [ ] `F5-010 P0` Gerar SBOM e auditar licenças.

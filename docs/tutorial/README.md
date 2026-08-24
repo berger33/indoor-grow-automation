@@ -1,7 +1,8 @@
 # Tutorial de montagem — índice e contrato editorial
 
-> **Status:** estrutura aprovada; capítulos serão liberados junto com os gates de
-> hardware. Não compre nem energize o conjunto usando documentos A0/HOLD.
+> **Status:** capítulos 00–14 publicados para revisão; validação em montagem
+> limpa e fotografias reais continuam pendentes. Não compre nem energize o
+> conjunto usando documentos A0/HOLD.
 
 O objetivo deste tutorial é permitir que uma pessoa sem experiência prévia
 entenda o sistema, confira as peças e execute todas as etapas permitidas. Rede
@@ -50,7 +51,7 @@ orientação agronômica aplicável.
 
 ## Área Ajuda do painel
 
-O painel mobile-first reproduzirá este índice e abrirá o capítulo compatível com
+O painel mobile-first oferece Ajuda local e abre o capítulo compatível com
 a tela atual. Alarmes terão instruções curtas de estado seguro e link para o
 procedimento completo. A Ajuda será instalada localmente no Raspberry Pi e
 continuará disponível sem internet.

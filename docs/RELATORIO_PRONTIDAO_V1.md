@@ -15,7 +15,7 @@ físico ainda inexistente. “Implementado” não significa homologado no equip
 | 5–6 | Sensores ambientais/químicos | drivers, qualidade, compensação e falhas cobertos por testes |
 | 7–8 | Fertirrigação, hidráulica e clima | máquinas de estado, limites e intertravamentos implementados/simulados |
 | 9 | HIL virtual | seis cenários terminam com saídas OFF; HIL físico pendente |
-| 10–11 | MQTT e comandos | tópicos v1, UUID, sequência, expiração, deduplicação e ACK/NACK |
+| 10–11 | MQTT e comandos | gateway TLS ativo, tópicos v1, UUID, sequência, expiração, deduplicação e ACK/NACK |
 | 12 | Broker | TLS 1.3 mútuo + ACL; execução em contêiner aguardando CI |
 | 13–18 | Banco, API, segurança e tempo real | Alembic, retenção, perfis, auditoria e replay implementados/testados |
 | 19 | Raspberry Pi | Compose ARM64, limites, previsão, backup/restore; hardware real pendente |
@@ -26,7 +26,7 @@ físico ainda inexistente. “Implementado” não significa homologado no equip
 
 ## Evidência automatizada local
 
-- suíte Python com mais de 260 testes;
+- suíte Python com 279 testes;
 - seis cenários HIL nativos fail-safe;
 - TypeScript e build Vite;
 - 255 referências dos manifestos de hardware;

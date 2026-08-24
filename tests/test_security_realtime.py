@@ -36,4 +36,3 @@ class RealtimeTests(TestCase):
             buffer.unsubscribe(queue)
 
         asyncio.run(scenario())
-
