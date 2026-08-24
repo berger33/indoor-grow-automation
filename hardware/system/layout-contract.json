@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "lighting_included": false,
+  "arrangement": "vertical_stacked",
+  "rack_envelope_max_mm": {
+    "width": 900,
+    "depth": 600,
+    "height": 2000
+  },
+  "tanks": [
+    {
+      "id": "TK-101",
+      "role": "source_water",
+      "nominal_volume_l": 50,
+      "tier": "upper",
+      "platform": "PL1",
+      "shelf": "LV1"
+    },
+    {
+      "id": "TK-201",
+      "role": "mix_irrigation",
+      "nominal_volume_l": 50,
+      "tier": "lower",
+      "platform": "PL2",
+      "shelf": "LV2"
+    }
+  ],
+  "containment": {
+    "upper_collector": "CT2",
+    "upper_drain_count": 2,
+    "drains_to": "CT1",
+    "base": "CT1",
+    "base_free_volume_l": 110
+  }
+}

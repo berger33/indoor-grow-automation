@@ -82,6 +82,68 @@ def validate_actuator_rows(
     return tuple(errors)
 
 
+def validate_layout_contract(contract: dict[str, object]) -> tuple[str, ...]:
+    """Impede regressão para tanques lado a lado ou apoios compartilhados."""
+    errors: list[str] = []
+    if contract.get("schema_version") != 1:
+        errors.append("layout-contract: schema_version deve ser 1")
+    if contract.get("lighting_included") is not False:
+        errors.append("layout-contract: iluminação deve permanecer ausente")
+    if contract.get("arrangement") != "vertical_stacked":
+        errors.append("layout-contract: arrangement deve ser vertical_stacked")
+
+    envelope = contract.get("rack_envelope_max_mm")
+    expected_envelope = {"width": 900, "depth": 600, "height": 2000}
+    if envelope != expected_envelope:
+        errors.append("layout-contract: envelope máximo deve ser 900x600x2000 mm")
+
+    tanks = contract.get("tanks")
+    if not isinstance(tanks, list) or len(tanks) != 2:
+        errors.append("layout-contract: devem existir exatamente dois tanques")
+        return tuple(errors)
+    expected = {
+        "TK-101": ("source_water", "upper"),
+        "TK-201": ("mix_irrigation", "lower"),
+    }
+    platforms: set[object] = set()
+    shelves: set[object] = set()
+    for tank in tanks:
+        if not isinstance(tank, dict):
+            errors.append("layout-contract: tanque deve ser objeto")
+            continue
+        tank_id = tank.get("id")
+        if tank_id not in expected:
+            errors.append(f"layout-contract: tanque inesperado {tank_id}")
+            continue
+        role, tier = expected[str(tank_id)]
+        if (tank.get("role"), tank.get("tier")) != (role, tier):
+            errors.append(f"layout-contract: função/nível inválido em {tank_id}")
+        if tank.get("nominal_volume_l") != 50:
+            errors.append(f"layout-contract: {tank_id} deve ter 50 L nominais")
+        platforms.add(tank.get("platform"))
+        shelves.add(tank.get("shelf"))
+    if None in platforms or len(platforms) != 2:
+        errors.append("layout-contract: plataformas devem ser independentes")
+    if None in shelves or len(shelves) != 2:
+        errors.append("layout-contract: prateleiras devem ser independentes")
+
+    containment = contract.get("containment")
+    if not isinstance(containment, dict):
+        errors.append("layout-contract: contenção ausente")
+    else:
+        if containment.get("upper_collector") != "CT2":
+            errors.append("layout-contract: coletor superior deve ser CT2")
+        if containment.get("upper_drain_count") != 2:
+            errors.append("layout-contract: CT2 deve ter dois drenos")
+        if containment.get("drains_to") != containment.get("base"):
+            errors.append("layout-contract: CT2 deve drenar para a contenção-base")
+        if containment.get("base") != "CT1":
+            errors.append("layout-contract: contenção-base deve ser CT1")
+        if containment.get("base_free_volume_l") != 110:
+            errors.append("layout-contract: CT1 deve declarar 110 L livres")
+    return tuple(errors)
+
+
 def validate_manifests() -> ManifestResult:
     errors: list[str] = []
     holds: list[str] = []
@@ -142,6 +204,8 @@ def validate_manifests() -> ManifestResult:
     errors.extend(
         validate_actuator_rows(actuator_rows, limits.get("output_channel_count", 0))
     )
+    with (SYSTEM_HARDWARE / "layout-contract.json").open(encoding="utf-8") as handle:
+        errors.extend(validate_layout_contract(json.load(handle)))
     if limits.get("mains_allowed") is not False:
         errors.append("pcb-parameters: rede CA deve permanecer proibida")
     if limits.get("input_maximum_vdc", 999) > 30:
