@@ -131,16 +131,16 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F5-020 P0` Fabricar uma unidade A0 e executar ensaio elétrico/térmico.
 - [ ] `F5-021 P0` Liberar A1 somente após HIL e piloto com água.
 - [ ] `F5-022 P0` Congelar matriz de atuadores e capacidade de saídas por nó.
-- [ ] `F5-023 P0` Definir plataforma mecânica de oito células para os dois tanques.
+- [ ] `F5-023 P0` Fechar duas plataformas independentes de quatro células, uma por nível.
 - [ ] `F5-024 P0` Medir percurso hidráulico, vazão-alvo e altura manométrica.
 - [ ] `F5-025 P0` Selecionar bombas pelas curvas medidas e ensaio de recebimento.
 - [ ] `F5-026 P0` Selecionar tubos e vedações por compatibilidade química.
-- [ ] `F5-027 P0` Desenhar contenção secundária e trajetos de vazamento.
-- [ ] `F5-028 P0` Publicar layout físico cotado da estação em escala.
+- [ ] `F5-027 P0` Validar contenção em cascata CT2→CT1 e 110 L livres por ensaio.
+- [ ] `F5-028 P0` Converter o layout empilhado A0 em desenho cotado as-built.
 - [x] `F5-029 P1` Publicar imagens realistas marcadas como ilustrativas.
 - [ ] `F5-030 P0` Criar tutorial 01 de inventário e conferência da compra.
 - [x] `F5-031 P0` Criar tutorial 02 de montagem da estrutura seca.
-- [ ] `F5-032 P0` Criar tutorial 03 de reservatórios e plataformas de pesagem.
+- [x] `F5-032 P0` Criar tutorial 03 de reservatórios e plataformas de pesagem.
 - [ ] `F5-033 P0` Criar tutorial 04 de válvulas, bombas e tubulação.
 - [ ] `F5-034 P0` Criar tutorial 05 de frascos, dosadoras e agitadores.
 - [ ] `F5-035 P0` Criar tutorial 06 de sondas e sensores de segurança.
@@ -154,8 +154,11 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F5-043 P0` Criar guia de manutenção, limpeza e armazenamento de sondas.
 - [ ] `F5-044 P0` Validar o tutorial em montagem limpa sem conhecimento prévio.
 - [ ] `F5-045 P1` Fotografar a montagem validada e substituir imagens conceituais.
-- [x] `F5-046 P1` Publicar implantação e planta baixa compactas A0/HOLD.
-- [x] `F5-047 P1` Publicar elevação vertical do painel A0/HOLD.
+- [x] `F5-046 P1` Publicar implantação e planta baixa empilhadas A0/HOLD.
+- [x] `F5-047 P1` Publicar elevação com prateleiras de tanque independentes A0/HOLD.
 - [x] `F5-048 P1` Publicar P&ID hidráulico compacto A0/HOLD.
 - [x] `F5-049 P1` Publicar projeto elétrico e rotas de instalações A0/HOLD.
 - [x] `F5-050 P1` Validar automaticamente todas as pranchas Rev A.
+- [x] `F5-051 P0` Remover a disposição antiga de tanques lado a lado dos artefatos correntes.
+- [x] `F5-052 P0` Fixar contrato executável do rack 900 × 600 × 2.000 mm máximo.
+- [x] `F5-053 P1` Substituir a vista realista pela estação com tanques empilhados.
