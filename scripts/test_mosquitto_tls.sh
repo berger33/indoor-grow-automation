@@ -12,6 +12,7 @@ cleanup() {
 trap cleanup EXIT
 
 mkdir -p "$test_root/certs" "$test_root/data"
+chmod 755 "$test_root" "$test_root/certs"
 chmod 777 "$test_root/data"
 
 openssl req -x509 -newkey rsa:2048 -nodes -days 1 -subj "/CN=grow-test-ca" \
@@ -38,11 +39,19 @@ docker run --rm -d --name "$broker_name" \
   -v "$test_root/data:/mosquitto/data" \
   eclipse-mosquitto:2.0.22 >/dev/null
 
+broker_ready=false
 for _ in $(seq 1 20); do
-  docker logs "$broker_name" 2>&1 | grep -q "Opening ipv4 listen socket" && break
+  if docker logs "$broker_name" 2>&1 | grep -q "Opening ipv4 listen socket"; then
+    broker_ready=true
+    break
+  fi
   sleep 0.25
 done
-docker logs "$broker_name" 2>&1 | grep -q "Opening ipv4 listen socket"
+if [[ "$broker_ready" != true ]]; then
+  echo "Mosquitto não iniciou no prazo; log do broker:" >&2
+  docker logs "$broker_name" >&2 || true
+  exit 1
+fi
 
 client() {
   local identity="$1"
