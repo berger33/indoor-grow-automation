@@ -27,8 +27,10 @@ pela placa efetivamente comprada.
 ## Preparação simples
 
 1. Instale Raspberry Pi OS 64-bit, Docker Engine e o plugin Compose.
-2. Copie `deploy/.env.example` para `deploy/.env` e ajuste somente endereços e
-   portas. Não coloque senhas no arquivo.
+2. Copie `deploy/.env.example` para `deploy/.env`, ajuste endereços/portas e
+   preencha `GROWHUB_EKAZA_ENTITIES` com os quatro IDs `switch.*` confirmados,
+   separados por vírgula. Não coloque senhas no arquivo. Enquanto os IDs reais
+   não forem conhecidos, mantenha vazio e o serviço ficará em bloqueio seguro.
 3. Crie `deploy/secrets/` com permissões `0700` e arquivos legíveis apenas pelo
    administrador:
    - `postgres_password`: senha aleatória do usuário do banco;

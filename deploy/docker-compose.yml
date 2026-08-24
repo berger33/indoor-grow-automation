@@ -60,6 +60,7 @@ services:
       GROWHUB_SESSION_KEY_FILE: /run/secrets/session_key
       GROWHUB_HA_TOKEN_FILE: /run/secrets/home_assistant_token
       GROWHUB_HA_URL: ${GROWHUB_HA_URL:-http://homeassistant.local:8123}
+      GROWHUB_EKAZA_ENTITIES: ${GROWHUB_EKAZA_ENTITIES:-}
       TZ: America/Sao_Paulo
     secrets:
       - database_url
