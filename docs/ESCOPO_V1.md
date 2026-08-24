@@ -18,6 +18,7 @@ fertirrigação e clima localmente sem depender da nuvem.
 | Concentrados | 6 recipientes de 1 L | nome, densidade, limite e ordem de cada canal |
 | Água de origem | 1 reservatório de 50 L | tara, massa útil e limites alto/baixo |
 | Solução preparada | 1 reservatório de 50 L | tara, massa útil e volume de batelada |
+| Estrutura | rack de até 0,90 × 0,60 × 2,00 m; tanques empilhados | cotas as-built, carga, flecha e ancoragem |
 | Rede do local | 127 V, 60 Hz | somente após medição e validação profissional |
 | Exaustor atual | CA liga/desliga | modelo futuro pode usar 0–10 V documentado |
 | Hub | Raspberry Pi local | hostname, retenção, backup e usuários |
@@ -42,7 +43,8 @@ receita, concentração e limites.
 ## Fluxo operacional-alvo
 
 1. confirmar disponibilidade de água e capacidade livre na mistura;
-2. transferir a massa de água configurada;
+2. transferir a massa de água configurada de `TK-101` (nível superior) para
+   `TK-201` (nível inferior), sem confiar apenas na gravidade;
 3. misturar e estabilizar temperatura/leituras;
 4. dosar cada concentrado sequencialmente, com pausa de homogeneização;
 5. verificar EC e diluir apenas dentro dos limites configurados;
@@ -63,6 +65,7 @@ itens abaixo estiverem aprovados:
 - BOM com MPN, alternativa, fornecedor e teste de recebimento;
 - esquema e PCB com ERC/DRC reais, revisão independente e protótipo aprovado;
 - P&ID, unifilar SELV/CA, chicotes e desenhos mecânicos congelados;
+- rack, prateleiras independentes, plataformas e contenção em cascata ensaiados;
 - ensaio de bancada, térmico, HIL e piloto somente com água;
 - tutorial validado por uma montagem limpa feita a partir dos próprios arquivos;
 - lista explícita das etapas que exigem eletricista/profissional habilitado;

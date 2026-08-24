@@ -39,8 +39,10 @@ Backup, histórico e alertas locais
 ```
 
 O arranjo físico padrão usa seis recipientes de concentrado de 1 L, um
-reservatório de água de 50 L e um reservatório de mistura/rega de 50 L. A
-revisão dirigida do vídeo de hardware está em
+reservatório de água de 50 L e um reservatório de mistura/rega de 50 L. Para
+economizar piso, `TK-101` fica acima de `TK-201` em prateleiras e plataformas
+independentes, dentro de um rack de no máximo 900 × 600 × 2.000 mm. Uma caixa
+nunca se apoia na tampa da outra. A revisão dirigida do vídeo de hardware está em
 [`docs/referencia/REVISAO_VIDEO_16MIN.md`](docs/referencia/REVISAO_VIDEO_16MIN.md).
 
 ## Estrutura
@@ -109,7 +111,7 @@ para fabricar lote ou energizar cargas reais.
 
 ## Visualização do sistema pronto
 
-![Estação compacta vertical — visualização conceitual](docs/images/realistic/ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp)
+![Estação compacta com reservatórios empilhados — visualização conceitual](docs/images/realistic/ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp)
 
 As [vistas realistas e suas limitações](docs/images/realistic/README.md)
 mostram a aparência pretendida. Elas não substituem desenhos cotados, P&ID,
