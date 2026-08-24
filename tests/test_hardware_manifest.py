@@ -88,7 +88,8 @@ class LayoutContractTests(TestCase):
     def setUp(self) -> None:
         self.contract = {
             "schema_version": 1,
-            "lighting_included": False,
+            "lighting_hardware_included": False,
+            "lighting_software_integration": "ekaza_tuya_via_hub",
             "arrangement": "vertical_stacked",
             "rack_envelope_max_mm": {
                 "width": 900,

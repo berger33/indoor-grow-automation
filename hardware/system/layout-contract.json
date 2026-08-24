@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
-  "lighting_included": false,
+  "lighting_hardware_included": false,
+  "lighting_software_integration": "ekaza_tuya_via_hub",
   "arrangement": "vertical_stacked",
   "rack_envelope_max_mm": {
     "width": 900,

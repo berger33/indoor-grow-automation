@@ -38,7 +38,7 @@ O software exige cadastro do fabricante, concentração e limites aplicáveis.
 | Segurança | vazamento latched, E-stop, timeout, watchdog, estado seguro | confiar apenas em Wi-Fi, servidor ou UI |
 | Hub/painel | MQTT, API, histórico, alarmes, configuração mobile | dependência obrigatória de nuvem |
 | Instalação | BOM, chicotes, desenhos, inspeções e tutorial leigo | energização de rede por pessoa não habilitada |
-| Iluminação | nenhuma função | acionamento, medição, agenda, dimerização e PPFD |
+| Iluminação remota | liga/desliga e agenda das tomadas Wi-Fi EKAZA via hub/Tuya | qualquer circuito no rack/PCB, dimmer, PPFD e controle por ESP32 |
 
 ## Fluxo operacional-alvo
 

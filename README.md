@@ -18,9 +18,11 @@ painel web responsivo.
 - oferecer documentação suficientemente detalhada para montagem por terceiros;
 - preservar operação segura quando Wi-Fi, broker ou servidor falharem.
 
-**Iluminação não faz parte deste projeto.** O responsável já possui uma
-automação independente; por isso não haverá acionamento, dimerização,
-fotoperíodo, carga elétrica, API ou tela de luz. Consulte o
+**Nenhuma carga de iluminação entra neste projeto elétrico.** O responsável já
+possui tomadas Wi-Fi EKAZA; o Raspberry Pi poderá programá-las por integração
+lógica Tuya/Home Assistant, sem qualquer relé, borne ou cabo de potência no
+rack. Não haverá dimerização, PPFD nem controle por ESP32; fotoperíodo, estado e
+comando remoto aparecem no painel como módulo isolado. Consulte o
 [`escopo executável da v1.0`](docs/ESCOPO_V1.md).
 
 ## Arquitetura planejada

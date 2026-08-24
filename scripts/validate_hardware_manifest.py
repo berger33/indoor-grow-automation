@@ -87,8 +87,10 @@ def validate_layout_contract(contract: dict[str, object]) -> tuple[str, ...]:
     errors: list[str] = []
     if contract.get("schema_version") != 1:
         errors.append("layout-contract: schema_version deve ser 1")
-    if contract.get("lighting_included") is not False:
-        errors.append("layout-contract: iluminação deve permanecer ausente")
+    if contract.get("lighting_hardware_included") is not False:
+        errors.append("layout-contract: hardware de iluminação deve permanecer ausente")
+    if contract.get("lighting_software_integration") != "ekaza_tuya_via_hub":
+        errors.append("layout-contract: integração de luz deve ocorrer somente pelo hub")
     if contract.get("arrangement") != "vertical_stacked":
         errors.append("layout-contract: arrangement deve ser vertical_stacked")
 
