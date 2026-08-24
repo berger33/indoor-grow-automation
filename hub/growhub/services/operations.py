@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import math
 import uuid
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime, time
 from enum import StrEnum
 
@@ -277,6 +277,27 @@ class InMemoryOperations:
         record = AuditRecord(str(uuid.uuid4()), user_id, station_id, action, target, status, now, details)
         self.audit.append(record)
         return record
+
+    def update_audit_status(self, audit_id: str, status: str, *, now: datetime, **details: object) -> AuditRecord:
+        for index, record in enumerate(self.audit):
+            if record.audit_id != audit_id:
+                continue
+            updated = replace(
+                record,
+                status=status,
+                details={**record.details, **details, "statusUpdatedAt": now.isoformat()},
+            )
+            self.audit[index] = updated
+            return updated
+        raise KeyError("registro de auditoria não encontrado")
+
+    def save_alarm(self, alarm: AlarmRecord) -> bool:
+        if alarm.station_id not in self.stations:
+            raise KeyError("estação do alarme não cadastrada")
+        if alarm.alarm_id in self.alarms:
+            return False
+        self.alarms[alarm.alarm_id] = alarm
+        return True
 
     def acknowledge_alarm(self, alarm_id: str, user_id: str, now: datetime) -> AlarmRecord:
         alarm = self.alarms[alarm_id]

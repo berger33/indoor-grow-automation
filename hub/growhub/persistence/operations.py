@@ -167,6 +167,38 @@ class SqlOperations(InMemoryOperations):
             session.add(CommandAuditRow(audit_id=record.audit_id, user_id=user_id, station_id=station_id, action=action, target=target, status=status, occurred_at=now, details=details))
         return record
 
+    def update_audit_status(self, audit_id: str, status: str, *, now: datetime, **details: object) -> AuditRecord:
+        record = super().update_audit_status(audit_id, status, now=now, **details)
+        with self._sessions.begin() as session:
+            row = session.get(CommandAuditRow, audit_id)
+            if row is None:
+                raise KeyError("registro de auditoria não encontrado")
+            row.status = record.status
+            row.details = record.details
+        return record
+
+    def save_alarm(self, alarm: AlarmRecord) -> bool:
+        if alarm.station_id not in self.stations:
+            raise KeyError("estação do alarme não cadastrada")
+        with self._sessions.begin() as session:
+            if session.get(AlarmRow, alarm.alarm_id) is not None:
+                return False
+            session.add(
+                AlarmRow(
+                    alarm_id=alarm.alarm_id,
+                    station_id=alarm.station_id,
+                    code=alarm.code,
+                    severity=alarm.severity,
+                    cause=alarm.cause,
+                    procedure=alarm.procedure,
+                    raised_at=alarm.raised_at,
+                    latched=alarm.latched,
+                    acknowledged_at=alarm.acknowledged_at,
+                    acknowledged_by=alarm.acknowledged_by,
+                )
+            )
+        return super().save_alarm(alarm)
+
     def acknowledge_alarm(self, alarm_id: str, user_id: str, now: datetime) -> AlarmRecord:
         alarm = super().acknowledge_alarm(alarm_id, user_id, now)
         with self._sessions.begin() as session:
