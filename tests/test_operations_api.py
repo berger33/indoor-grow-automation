@@ -108,6 +108,12 @@ class OperationsApiTests(TestCase):
             },
         )
         self.assertEqual(201, recipe.status_code, recipe.text)
+        calibration = self.client.post(
+            "/api/v1/stations/grow_a/calibrations",
+            json={"deviceId": "scale_1", "kind": "mass", "measurements": {"tareCounts": 1000, "referenceCounts": 501000, "referenceMassKg": 5}},
+        )
+        self.assertEqual(201, calibration.status_code, calibration.text)
+        self.assertEqual("calculated", calibration.json()["status"])
         irrigation = self.client.put(
             "/api/v1/stations/grow_a/irrigation-schedules",
             json=[{"windowId": "morning", "startTime": "08:00", "durationSeconds": 90, "weekdays": [0, 1, 2, 3, 4, 5, 6]}],
@@ -122,6 +128,13 @@ class OperationsApiTests(TestCase):
         self.assertEqual(202, command.status_code)
         self.assertEqual("queued", command.json()["status"])
         self.assertIn("ACK/NACK", command.json()["explanation"])
+        batch = self.client.post(
+            "/api/v1/stations/grow_a/commands",
+            json={"action": "start_batch", "target": "vegetative"},
+        )
+        self.assertEqual(202, batch.status_code, batch.text)
+        run = self.client.get("/api/v1/stations/grow_a/batch-runs").json()["runs"][0]
+        self.assertEqual("awaiting_ack", run["currentStep"])
 
     def test_admin_creates_user_and_reads_audit(self) -> None:
         self.login("admin", "administrator-password")

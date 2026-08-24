@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import uuid
 from collections.abc import Callable
 from datetime import UTC, datetime, timedelta, time
 from typing import Annotated, Literal
@@ -9,7 +10,8 @@ from typing import Annotated, Literal
 from fastapi import APIRouter, Cookie, Depends, HTTPException, Query, Response, WebSocket, WebSocketDisconnect, status
 from pydantic import BaseModel, ConfigDict, Field
 
-from ..services.operations import InMemoryOperations, IrrigationWindow, Recipe, RecipeStep, Setpoints
+from ..services.calibration import evaluate_calibration
+from ..services.operations import BatchRunRecord, CalibrationRecord, InMemoryOperations, IrrigationWindow, Recipe, RecipeStep, Setpoints
 from ..services.realtime import RealtimeBuffer
 from ..services.security import AuthService, UserAccount, UserRole
 
@@ -72,6 +74,13 @@ class CommandPayload(BaseModel):
         "safe_stop",
     ]
     target: str
+
+
+class CalibrationPayload(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+    device_id: str = Field(alias="deviceId")
+    kind: Literal["mass", "pump", "ph", "ec"]
+    measurements: dict[str, object]
 
 
 def _setpoints_payload(value: Setpoints) -> dict[str, float]:
@@ -280,9 +289,68 @@ def create_operations_router(
     async def command(station_id: str, payload: CommandPayload, account: UserAccount = Depends(operator)) -> dict[str, str]:
         if station_id not in operations.stations:
             raise HTTPException(status_code=404, detail="estação não encontrada")
+        if payload.action == "start_batch":
+            if payload.target not in operations.recipes.get(station_id, {}):
+                raise HTTPException(status_code=400, detail="receita não encontrada")
+            active = any(run.station_id == station_id and run.status in {"queued", "running"} for run in operations.batch_runs.values())
+            if active:
+                raise HTTPException(status_code=409, detail="já existe uma batelada ativa")
         audit = operations.record_audit(account.user_id, station_id, payload.action, payload.target, "queued", clock())
+        if payload.action == "start_batch":
+            operations.batch_runs[audit.audit_id] = BatchRunRecord(audit.audit_id, station_id, payload.target, "queued", "awaiting_ack", 0, clock())
+        elif payload.action == "stop_batch":
+            for run in operations.batch_runs.values():
+                if run.station_id == station_id and run.status in {"queued", "running"}:
+                    run.status = "stop_queued"
         await realtime.publish("command.queued", station_id, clock(), {"auditId": audit.audit_id, "action": payload.action, "target": payload.target})
         return {"auditId": audit.audit_id, "status": "queued", "explanation": "aguardando ACK/NACK do firmware"}
+
+    @router.get("/stations/{station_id}/batch-runs")
+    def batch_runs(station_id: str, _: UserAccount = Depends(viewer)) -> dict[str, object]:
+        return {"runs": [
+            {
+                "batchId": run.batch_id,
+                "recipeId": run.recipe_id,
+                "status": run.status,
+                "currentStep": run.current_step,
+                "progressPercent": run.progress_percent,
+                "startedAt": run.started_at.isoformat(),
+                "finishedAt": run.finished_at.isoformat() if run.finished_at else None,
+                "failureCode": run.failure_code,
+            }
+            for run in sorted(operations.batch_runs.values(), key=lambda item: item.started_at, reverse=True)
+            if run.station_id == station_id
+        ]}
+
+    @router.get("/stations/{station_id}/calibrations")
+    def calibrations(station_id: str, _: UserAccount = Depends(viewer)) -> dict[str, object]:
+        return {"calibrations": [
+            {
+                "calibrationId": item.calibration_id,
+                "deviceId": item.device_id,
+                "kind": item.kind,
+                "coefficients": item.coefficients,
+                "status": item.status,
+                "calibratedAt": item.calibrated_at.isoformat(),
+                "calibratedBy": item.calibrated_by,
+            }
+            for item in reversed(operations.calibrations)
+            if item.station_id == station_id
+        ]}
+
+    @router.post("/stations/{station_id}/calibrations", status_code=201)
+    async def calibrate(station_id: str, payload: CalibrationPayload, account: UserAccount = Depends(operator)) -> dict[str, object]:
+        if station_id not in operations.stations:
+            raise HTTPException(status_code=404, detail="estação não encontrada")
+        try:
+            result = evaluate_calibration(payload.kind, payload.measurements, device_id=payload.device_id, now=clock())
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        record = CalibrationRecord(str(uuid.uuid4()), station_id, payload.device_id, payload.kind, result.coefficients, result.status, clock(), account.user_id)
+        operations.calibrations.append(record)
+        operations.record_audit(account.user_id, station_id, "calibration_record", payload.device_id, result.status, clock(), kind=payload.kind)
+        await realtime.publish("calibration.updated", station_id, clock(), {"calibrationId": record.calibration_id, "status": result.status})
+        return {"calibrationId": record.calibration_id, "status": result.status, "coefficients": result.coefficients, "explanation": result.explanation}
 
     @router.get("/audit")
     def audit(_: UserAccount = Depends(admin)) -> dict[str, object]:

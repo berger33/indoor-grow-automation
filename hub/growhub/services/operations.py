@@ -142,6 +142,31 @@ class AuditRecord:
     details: dict[str, object] = field(default_factory=dict)
 
 
+@dataclass(frozen=True, slots=True)
+class CalibrationRecord:
+    calibration_id: str
+    station_id: str
+    device_id: str
+    kind: str
+    coefficients: dict[str, object]
+    status: str
+    calibrated_at: datetime
+    calibrated_by: str
+
+
+@dataclass(slots=True)
+class BatchRunRecord:
+    batch_id: str
+    station_id: str
+    recipe_id: str
+    status: str
+    current_step: str
+    progress_percent: float
+    started_at: datetime
+    finished_at: datetime | None = None
+    failure_code: str | None = None
+
+
 class InMemoryOperations:
     """Implementação determinística; o adaptador SQL mantém o mesmo contrato."""
 
@@ -155,6 +180,8 @@ class InMemoryOperations:
         self.irrigation: dict[str, tuple[IrrigationWindow, ...]] = {}
         self.alarms: dict[str, AlarmRecord] = {}
         self.audit: list[AuditRecord] = []
+        self.calibrations: list[CalibrationRecord] = []
+        self.batch_runs: dict[str, BatchRunRecord] = {}
 
     def record_reading(self, reading: SensorReading, *, maximum_samples: int = 2_880) -> None:
         """Atualiza a leitura corrente e mantém até 24 h a 30 s por padrão."""
