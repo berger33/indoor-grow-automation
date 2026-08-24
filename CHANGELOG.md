@@ -46,15 +46,21 @@ versionamento semântico a partir da primeira release.
   condensação.
 - estudo detalhado da disposição compacta do painel original, incluindo a
   ambiguidade entre seis frascos e sete cabeçotes aparentes;
-- direção vertical em rack de envelope A0 1.200 × 600 × 2.000 mm;
-- nova visualização realista compacta com seis canais e dois tanques de 50 L;
+- direção vertical em rack de envelope máximo A0 900 × 600 × 2.000 mm, com
+  `TK-101` acima de `TK-201` em níveis independentes;
+- visualização realista compacta corrigida com seis canais e dois tanques de
+  50 L empilhados;
 - implantação, planta baixa, elevação, P&ID hidráulico, projeto elétrico e
   planta de instalações em seis novas pranchas Rev A;
 - caderno multidisciplinar com hierarquia documental e gates para A1;
-- estrutura mecânica do rack incorporada à BOM com ancoragem e contenção em
-  estado HOLD;
-- tutorial A0 de montagem seca, inspeção dimensional e segregação das zonas;
+- estrutura mecânica incorporada à BOM com rack de 250 kg, prateleiras de
+  100 kg, ancoragem e contenção `CT2 → CT1` em estado HOLD;
+- tutoriais A0 de montagem seca, níveis independentes, plataformas e contenção;
 - validador de integridade para oito pranchas SVG integrado ao Quality Gate.
+- contrato executável que rejeita regressão de geometria, apoio compartilhado,
+  inclusão de iluminação ou contenção inferior a 110 L livres;
+- quatro testes do contrato empilhado, elevando a suíte para 106 testes;
+- remoção das duas vistas realistas incompatíveis com a montagem corrente.
 
 ### Segurança
 

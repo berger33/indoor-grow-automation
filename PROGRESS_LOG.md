@@ -65,16 +65,36 @@ foi preservado apenas para rastreabilidade.
 
 - Commits: 15
 - Itens concluídos: estudo detalhado do painel do vídeo; ADR do rack vertical;
-  nova imagem realista; implantação; planta baixa; elevação; P&ID; projeto
-  elétrico; rotas de instalações; validação automática dos SVG; caderno de
-  pranchas; arquitetura; BOM estrutural; tutorial de montagem seca; índices e
-  histórico.
-- Decisões tomadas: envelope A0 de 1.200 × 600 × 2.000 mm; seis canais de
-  concentrado apesar do sétimo cabeçote não identificado na referência; dois
-  tanques lado a lado na base; quadro seco no alto à esquerda; tubos no lado
-  molhado; CA não replica a régua de tomadas visível no vídeo.
+  implantação, planta baixa, elevação, P&ID, projeto elétrico, rotas de
+  instalações, validação dos SVG, caderno, arquitetura, BOM e tutorial. Os
+  artefatos mecânicos foram reemitidos na correção dirigida abaixo.
+- Decisões tomadas: seis canais de concentrado apesar do sétimo cabeçote não
+  identificado; quadro seco no alto à esquerda; tubos no lado molhado; CA não
+  replica a régua de tomadas visível no vídeo.
 - Bloqueios/pendências: medir tanques, frascos, ambiente, parede e piso; validar
   carga/ancoragem do rack; fechar contenção; medir hidráulica; selecionar bombas;
   projeto elétrico profissional; ERC/DRC; HIL e piloto com água.
 - Próximos passos: levantar dimensões reais; converter cotas A0 em as-built;
   desenvolver tutorial de tanques/plataformas e hidráulica.
+
+### Correção dirigida — reservatórios empilhados
+
+- Commits: 20
+- Itens concluídos: confirmação dos limites da evidência do vídeo; ADR corrigido;
+  imagem realista substituída; remoção das vistas incompatíveis; implantação,
+  planta, elevação, P&ID e rotas reemitidos; arquitetura e caderno consolidados;
+  BOM de rack/prateleiras/contenção em cascata; tutoriais 02 e 03; contrato de
+  layout e quatro testes; backlog, escopo, decisões e histórico atualizados.
+- Decisões tomadas: rack A0 de no máximo 900 × 600 × 2.000 mm; `TK-101` de
+  50 L acima de `TK-201` de 50 L; plataformas e prateleiras independentes;
+  capacidade mínima de 250 kg no rack e 100 kg por nível; `CT2` com dois drenos
+  para `CT1` de 110 L livres. A capacidade dos totes do vídeo permanece não
+  identificada; 50 L é requisito do responsável, não dado inferido da imagem.
+- Bloqueios/pendências: medir tanques, tampas, local, parede e piso; selecionar
+  rack e ancoragem; calcular/ensaiar `CT1/CT2`; congelar plataformas; revisar a
+  estrutura e a elétrica profissionalmente; ERC/DRC, protótipo, HIL e piloto
+  somente com água.
+- Testes: 106 testes unitários; 8 SVG Rev A válidos; 256 referências de hardware
+  coerentes; scan de segredos aprovado; 19 itens continuam em HOLD explícito.
+- Próximos passos: levantar as dimensões as-built; cotar uma amostra de rack que
+  cumpra carga/flecha; iniciar a máquina de estados local e os intertravamentos.
