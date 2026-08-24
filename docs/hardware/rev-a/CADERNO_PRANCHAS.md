@@ -15,6 +15,8 @@
 | 06 | `REV-A-06_PID_HIDRAULICO_COMPACTO.svg` | processo | fluxo, instrumentos e intertravamentos | vazões, alturas, materiais e dreno |
 | 07 | `REV-A-07_ELETRICO_INSTALACAO_COMPACTA.svg` | elétrica | distribuição funcional por zona | cálculo, seletividade, cabos e laudo |
 | 08 | `REV-A-08_INSTALACOES_ROTAS.svg` | instalações | rotas CA, SELV, dados, tubos e dreno | comprimentos e prensa-cabos reais |
+| 09 | `REV-A-09_AGITACAO_DOSAGEM.svg` | processo/mecânica | seis produtos, agitadores e linhas separadas | amostras, retenção, tubo e ensaio |
+| 10 | `REV-A-10_QUADRO_SELV_ABERTO.svg` | elétrica/automação | componentes internos, hub e fronteira EKAZA | footprints, térmica, ERC/DRC e HIL |
 
 ## Hierarquia de autoridade
 
@@ -78,6 +80,22 @@ não substitui projeto executivo conforme NBR 5410 nem trabalho habilitado.
 CA sobe pela lateral seca; SELV e dados usam canaletas próprias; tubos e dreno
 ficam no lado molhado. Os dois drenos de `CT2` descem de modo visível até `CT1`.
 Cruzamentos inevitáveis são perpendiculares e protegidos.
+
+## Banco de agitação e dosagem
+
+![Seis canais químicos](../../../desenhos/REV-A-09_AGITACAO_DOSAGEM.svg)
+
+Os canais são pH Down, CalMag, Micro, Bloom, Veg (`Grow` na referência) e pH Up.
+Cada frasco possui ventilador F8 12 V, dois ímãs, barra PTFE, proteção, tacômetro
+e bomba correspondente. pH Up/Down não integram a receita base de nutrientes.
+
+## Quadro aberto e hub
+
+![Quadro SELV aberto](../../../desenhos/REV-A-10_QUADRO_SELV_ABERTO.svg)
+
+A folha mostra classes e identificadores dentro do gabinete, não um layout de
+fabricação. O Raspberry Pi fica em caixa seca separada; as tomadas EKAZA são
+somente integração lógica e não acrescentam carga ou chicote ao rack.
 
 ## Critérios para revisão A1
 

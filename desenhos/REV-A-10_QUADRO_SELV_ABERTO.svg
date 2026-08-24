@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="950" viewBox="0 0 1500 950">
+  <defs><style>
+    .title{font:bold 29px Arial,sans-serif;fill:#102027}.hold{font:bold 18px Arial,sans-serif;fill:#c62828}.h{font:bold 20px Arial,sans-serif;fill:#17202a}.n{font:17px Arial,sans-serif;fill:#263238}.s{font:14px Arial,sans-serif;fill:#455a64}.enc{stroke:#263238;stroke-width:6;fill:#eceff1}.din{stroke:#546e7a;stroke-width:4}.dev{stroke:#1565c0;stroke-width:3;fill:#e3f2fd}.safe{stroke:#ef6c00;stroke-width:3;fill:#fff3e0}.term{stroke:#6a1b9a;stroke-width:3;fill:#f3e5f5}.wire{stroke:#1565c0;stroke-width:4;fill:none}.data{stroke:#6a1b9a;stroke-width:3;stroke-dasharray:8 5;fill:none}.barrier{stroke:#c62828;stroke-width:3;stroke-dasharray:9 5;fill:none}
+  </style></defs>
+  <rect width="1500" height="950" fill="white"/>
+  <text x="55" y="48" class="title">REV-A-10 — QUADRO SELV ABERTO E HUB SEPARADO</text>
+  <text x="55" y="78" class="hold">A0 / HOLD — LAYOUT FINAL DEPENDE DE AMOSTRAS, TÉRMICA, ERC/DRC, HIL E REVISÃO ELÉTRICA</text>
+  <rect x="70" y="115" width="1020" height="720" rx="12" class="enc"/>
+  <text x="95" y="150" class="h">ENC1 — GABINETE SECO IP65 (ESTIMATIVA 500 × 400 × 200 mm)</text>
+  <line x1="120" y1="230" x2="1040" y2="230" class="din"/><line x1="120" y1="430" x2="1040" y2="430" class="din"/><line x1="120" y1="650" x2="1040" y2="650" class="din"/>
+  <rect x="120" y="170" width="150" height="120" class="safe"/><text x="153" y="215" class="h">PSU1</text><text x="135" y="245" class="n">HDR-60-24</text><text x="145" y="273" class="s">127 V → 24 V</text>
+  <rect x="310" y="170" width="150" height="120" class="dev"/><text x="363" y="215" class="h">DC1</text><text x="330" y="245" class="n">DDR-15G-5</text><text x="340" y="273" class="s">24 V → 5 V</text>
+  <rect x="500" y="170" width="160" height="120" class="dev"/><text x="555" y="215" class="h">DC2</text><text x="520" y="245" class="n">DDR-30G-12</text><text x="530" y="273" class="s">6× F8 • 12 V</text>
+  <rect x="700" y="170" width="310" height="120" class="safe"/><text x="765" y="210" class="h">DISTRIBUIÇÃO PROTEGIDA</text><text x="735" y="242" class="n">E-stop • fusíveis por ramal</text><text x="730" y="270" class="s">drivers externos para cargas &gt;1 A</text>
+  <rect x="120" y="345" width="540" height="200" class="dev"/><text x="295" y="380" class="h">PCB1 — IGA-CTRL-REVA (SOMENTE SELV)</text><rect x="165" y="405" width="170" height="105" class="term"/><text x="205" y="445" class="h">ESP32</text><text x="185" y="475" class="s">DevKitC em soquete</text><rect x="365" y="405" width="250" height="105" class="term"/><text x="402" y="445" class="h">16 SAÍDAS SEGURAS</text><text x="385" y="475" class="s">OE fail-safe • MOSFET • flyback</text>
+  <rect x="700" y="345" width="310" height="200" class="term"/><text x="785" y="382" class="h">ENTRADAS</text><text x="735" y="418" class="n">8× 24 V fail-safe</text><text x="735" y="448" class="n">6× tach agitadores</text><text x="735" y="478" class="n">pH • EC • 1-Wire • fluxo</text><text x="735" y="508" class="s">I²C somente local</text>
+  <rect x="120" y="585" width="890" height="130" class="term"/><text x="390" y="620" class="h">BORNES E CHICOTES IDENTIFICADOS</text><text x="155" y="662" class="n">PD1…PD6 • válvulas • transferência • mistura • irrigação • dreno • clima</text><text x="155" y="695" class="s">uma função por condutor • ponteiras • laços de gotejamento • sem Dupont solto</text>
+  <path d="M270 230H310" class="wire"/><path d="M460 230H500" class="wire"/><path d="M580 290V345" class="wire"/><path d="M660 445H700" class="data"/><path d="M565 545V585" class="wire"/>
+  <line x1="80" y1="320" x2="1080" y2="320" class="barrier"/><text x="815" y="312" class="s">barreira funcional energia/lógica</text>
+  <rect x="1150" y="115" width="300" height="360" rx="12" class="enc"/><text x="1220" y="155" class="h">ENC-HUB SECO</text><rect x="1200" y="195" width="200" height="130" class="dev"/><text x="1245" y="245" class="h">Raspberry Pi 4</text><text x="1225" y="275" class="n">API • banco • MQTT</text><text x="1215" y="305" class="s">Ethernet • backup • ventilação</text><path d="M1090 390H1150" class="data"/><text x="1175" y="420" class="s">fisicamente separado de fluido</text>
+  <rect x="1150" y="520" width="300" height="230" rx="12" class="safe"/><text x="1205" y="560" class="h">ILUMINAÇÃO REMOTA</text><text x="1180" y="602" class="n">4× tomadas EKAZA</text><text x="1180" y="635" class="n">Home Assistant / Tuya</text><text x="1180" y="668" class="s">Wi-Fi/nuvem; estado confirmado</text><text x="1175" y="705" class="hold">ZERO CABO / RELÉ DE LUZ NO RACK</text>
+  <text x="70" y="875" class="h">Fronteira: CA fica em zona profissional; PCB até 30 VCC; Raspberry Pi fora do gabinete molhado; luz somente por integração lógica.</text>
+  <text x="1370" y="915" class="s">10/10</text>
+</svg>

@@ -7,7 +7,7 @@ from scripts.validate_drawings import ROOT, validate_drawing, validate_drawings
 
 class DrawingValidationTests(TestCase):
     def test_repository_rev_a_drawings_are_valid(self) -> None:
-        self.assertGreaterEqual(validate_drawings(ROOT / "desenhos"), 8)
+        self.assertGreaterEqual(validate_drawings(ROOT / "desenhos"), 10)
 
     def test_rejects_missing_hold_status(self) -> None:
         with TemporaryDirectory() as directory:

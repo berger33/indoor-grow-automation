@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="950" viewBox="0 0 1500 950">
+  <defs><style>
+    .title{font:bold 29px Arial,sans-serif;fill:#102027}.hold{font:bold 18px Arial,sans-serif;fill:#c62828}.h{font:bold 20px Arial,sans-serif;fill:#17202a}.n{font:17px Arial,sans-serif;fill:#263238}.s{font:14px Arial,sans-serif;fill:#455a64}.box{stroke:#263238;stroke-width:3;fill:#fafafa}.jar{stroke:#0277bd;stroke-width:3;fill:#e1f5fe}.fan{stroke:#37474f;stroke-width:3;fill:#cfd8dc}.pump{stroke:#6a1b9a;stroke-width:3;fill:#f3e5f5}.tube{stroke:#00897b;stroke-width:4;fill:none}.wire{stroke:#1565c0;stroke-width:3;fill:none}.mag{fill:#c62828}.bar{stroke:#6a1b9a;stroke-width:6}.dash{stroke:#ef6c00;stroke-width:3;stroke-dasharray:8 5;fill:none}
+  </style></defs>
+  <rect width="1500" height="950" fill="white"/>
+  <text x="55" y="48" class="title">REV-A-09 — BANCO DE AGITAÇÃO E DOSAGEM DE SEIS CANAIS</text>
+  <text x="55" y="78" class="hold">A0 / HOLD — ÍMÃ, FIXAÇÃO, BARRA, PROTEÇÃO E TUBO DEPENDEM DE AMOSTRA E ENSAIO</text>
+  <rect x="55" y="115" width="940" height="690" class="box"/>
+  <text x="80" y="150" class="h">ELEVAÇÃO FRONTAL — DUAS FILEIRAS DE TRÊS</text>
+  <g transform="translate(95 185)">
+    <g transform="translate(0 0)"><rect width="190" height="150" rx="20" class="jar"/><text x="55" y="55" class="h">pH Down</text><text x="67" y="82" class="s">B1 • 1 L</text><rect x="20" y="160" width="150" height="65" class="fan"/><text x="54" y="199" class="n">M1 • F8</text><circle cx="55" cy="172" r="8" class="mag"/><circle cx="135" cy="172" r="8" class="mag"/><rect x="50" y="238" width="90" height="60" rx="8" class="pump"/><text x="72" y="274" class="n">PD1</text></g>
+    <g transform="translate(280 0)"><rect width="190" height="150" rx="20" class="jar"/><text x="58" y="55" class="h">CalMag</text><text x="67" y="82" class="s">B2 • 1 L</text><rect x="20" y="160" width="150" height="65" class="fan"/><text x="54" y="199" class="n">M2 • F8</text><circle cx="55" cy="172" r="8" class="mag"/><circle cx="135" cy="172" r="8" class="mag"/><rect x="50" y="238" width="90" height="60" rx="8" class="pump"/><text x="72" y="274" class="n">PD2</text></g>
+    <g transform="translate(560 0)"><rect width="190" height="150" rx="20" class="jar"/><text x="65" y="55" class="h">Micro</text><text x="67" y="82" class="s">B3 • 1 L</text><rect x="20" y="160" width="150" height="65" class="fan"/><text x="54" y="199" class="n">M3 • F8</text><circle cx="55" cy="172" r="8" class="mag"/><circle cx="135" cy="172" r="8" class="mag"/><rect x="50" y="238" width="90" height="60" rx="8" class="pump"/><text x="72" y="274" class="n">PD3</text></g>
+    <g transform="translate(0 340)"><rect width="190" height="150" rx="20" class="jar"/><text x="60" y="55" class="h">Bloom</text><text x="67" y="82" class="s">B4 • 1 L</text><rect x="20" y="160" width="150" height="65" class="fan"/><text x="54" y="199" class="n">M4 • F8</text><circle cx="55" cy="172" r="8" class="mag"/><circle cx="135" cy="172" r="8" class="mag"/><rect x="50" y="238" width="90" height="60" rx="8" class="pump"/><text x="72" y="274" class="n">PD4</text></g>
+    <g transform="translate(280 340)"><rect width="190" height="150" rx="20" class="jar"/><text x="42" y="55" class="h">Veg (Grow)</text><text x="67" y="82" class="s">B5 • 1 L</text><rect x="20" y="160" width="150" height="65" class="fan"/><text x="54" y="199" class="n">M5 • F8</text><circle cx="55" cy="172" r="8" class="mag"/><circle cx="135" cy="172" r="8" class="mag"/><rect x="50" y="238" width="90" height="60" rx="8" class="pump"/><text x="72" y="274" class="n">PD5</text></g>
+    <g transform="translate(560 340)"><rect width="190" height="150" rx="20" class="jar"/><text x="65" y="55" class="h">pH Up</text><text x="67" y="82" class="s">B6 • 1 L</text><rect x="20" y="160" width="150" height="65" class="fan"/><text x="54" y="199" class="n">M6 • F8</text><circle cx="55" cy="172" r="8" class="mag"/><circle cx="135" cy="172" r="8" class="mag"/><rect x="50" y="238" width="90" height="60" rx="8" class="pump"/><text x="72" y="274" class="n">PD6</text></g>
+  </g>
+  <rect x="1030" y="115" width="415" height="690" class="box"/>
+  <text x="1060" y="150" class="h">CORTE DE UM CANAL</text>
+  <rect x="1110" y="190" width="250" height="185" rx="25" class="jar"/><line x1="1190" y1="320" x2="1280" y2="320" class="bar"/><text x="1080" y="410" class="s">barra PTFE dentro do líquido</text>
+  <rect x="1135" y="430" width="200" height="95" class="fan"/><circle cx="1190" cy="455" r="14" class="mag"/><circle cx="1280" cy="455" r="14" class="mag"/><rect x="1120" y="415" width="230" height="125" class="dash"/><text x="1070" y="570" class="s">SGn contém contato e ímã solto</text>
+  <path d="M1235 190V150H1400V680H1325" class="tube"/><rect x="1110" y="650" width="215" height="90" rx="10" class="pump"/><text x="1165" y="702" class="h">PDn → TK-201</text>
+  <path d="M1135 500H1060V620" class="wire"/><text x="1055" y="640" class="s">12 V + tach individual</text>
+  <text x="55" y="850" class="h">SEQUÊNCIA: mistura 5 s → rotação válida → CalMag → 60 s → Micro → 60 s → Bloom → 60 s → Veg → 60 s → diluição</text>
+  <text x="55" y="885" class="s">pH Down/Up são rotina separada e mutuamente exclusiva. Tubos permanecem separados até a injeção em TK-201.</text>
+  <text x="1370" y="915" class="s">09/10</text>
+</svg>
