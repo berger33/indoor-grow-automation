@@ -17,8 +17,9 @@ A BOM cobre:
 - dois reservatórios de 50 L;
 - pH, EC, temperatura, umidade, CO₂, nível/peso e vazamento;
 - hub Raspberry Pi e interfaces de campo.
-- rack vertical de 1.200 × 600 × 2.000 mm, backboard selado, ancoragem,
-  prateleiras de três frascos, clips segregados e contenção comum.
+- rack vertical de até 900 × 600 × 2.000 mm, duas prateleiras de tanque
+  independentes, backboard selado, ancoragem, prateleiras de três frascos,
+  clips segregados e contenção em cascata `CT2 → CT1`.
 
 Tubos, conexões, recipientes, plataformas e contenção já aparecem como linhas
 `HOLD` no arquivo mestre. As especificações e quantidades finais serão fechadas
@@ -34,7 +35,7 @@ depois de receber dimensões/alturas, traçar o P&ID e medir o percurso hidrául
 | Química | pH, EC, temperatura, carriers e padrões de calibração | procedência/ensaio pendentes |
 | Clima | temperatura/UR, CO₂, folha, exaustor e umidificador | modelos finais pendentes |
 | Hub | Raspberry Pi, armazenamento e fonte | classe definida; kit final pendente |
-| Estrutura compacta | rack, backboard, ancoragem, duas prateleiras e contenção | carga, parede, tanques e amostras pendentes |
+| Estrutura compacta | rack, backboard, ancoragem, prateleiras dos frascos e dois níveis de tanque | carga/flecha, parede, tanques e amostras pendentes |
 
 ## Critérios de substituição
 
@@ -84,10 +85,13 @@ da marcação recebida.
 - bomba de irrigação depende de altura manométrica e vazão, ainda desconhecidas;
 - Atlas em marketplace pode ter procedência incerta e custo elevado;
 - gabinete 500 × 400 × 200 mm é envelope preliminar, não desenho final.
-- rack de 1.200 × 600 × 2.000 mm e carga superior a 150 kg são metas de
-  envelope, não especificação aprovada de um anúncio;
-- a contenção comum precisa ter ao menos 110 L úteis somente se o ensaio e a
-  análise de vazamento confirmarem essa estratégia;
+- rack de até 900 × 600 × 2.000 mm, capacidade total de 250 kg e 100 kg por
+  prateleira de tanque são requisitos A0, não especificação aprovada de anúncio;
+- `TK-101` cheio eleva o centro de gravidade; a ancoragem deve ser calculada e
+  o rack não pode ser usado sem retenção antitombamento aprovada;
+- `CT1` precisa demonstrar ao menos 110 L de volume **livre**, já descontados
+  `TK-201`, plataforma, pés e tubos; volume geométrico bruto não basta;
+- `CT2` precisa drenar por dois caminhos a `CT1` mesmo com um deles obstruído;
 - ancoragem depende do material e estado reais da parede e do piso;
 - madeira crua observada na referência não é superfície final aprovada.
 
