@@ -1,0 +1,14 @@
+{
+  "name": "native",
+  "title": "Native",
+  "description": "Vendored PlatformIO Native 1.2.1 for reproducible offline HIL builds.",
+  "homepage": "https://registry.platformio.org/platforms/platformio/native",
+  "license": "Apache-2.0",
+  "keywords": ["dev-platform", "native", "desktop"],
+  "engines": { "platformio": "^6" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/platformio/platform-native.git"
+  },
+  "version": "1.2.1"
+}

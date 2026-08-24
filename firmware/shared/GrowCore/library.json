@@ -1,0 +1,6 @@
+{
+  "name": "GrowCore",
+  "version": "1.0.0",
+  "description": "Invariantes locais fail-safe compartilhadas pelos nós ESP32",
+  "build": { "includeDir": "src" }
+}
