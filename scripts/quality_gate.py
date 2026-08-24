@@ -66,6 +66,18 @@ def main() -> int:
             )
         run("firmware HIL scenarios", [str(executable)])
 
+    if os.environ.get("CI") == "true":
+        pio = shutil.which("pio")
+        for project in ("fertigation", "climate", "safety"):
+            manifest = ROOT / "firmware" / project / "platformio.ini"
+            if manifest.exists():
+                if pio is None:
+                    raise SystemExit("PlatformIO ausente no CI")
+                run(
+                    f"firmware ESP32 {project}",
+                    [pio, "run", "--project-dir", f"firmware/{project}"],
+                )
+
     web_package = ROOT / "web" / "package.json"
     if web_package.exists():
         run(
