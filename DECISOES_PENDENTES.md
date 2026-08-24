@@ -13,13 +13,21 @@ devem bloquear trabalho independente em outros módulos.
   mostra quatro fios para ligação 110/220 V, sem interface PWM/0–10 V comprovada.
 - [x] Reservar seis recipientes de concentrado de 1 L, um reservatório de água
   de 50 L e um reservatório de mistura/rega de 50 L.
+- [x] Empilhar `TK-101` sobre `TK-201` no mesmo prumo, usando prateleiras e
+  plataformas independentes; descartar a disposição horizontal anterior.
 - [x] Autorizar a elaboração e auditoria da BOM e da PCB Rev A.
 
 ## Instalação física — validações ainda necessárias
 
 - [ ] Fotografar a plaqueta do exaustor atual e fornecer a do futuro substituto.
 - [ ] Medir dimensões internas, altura útil e material dos dois reservatórios de
-  50 L e dos seis recipientes de 1 L.
+  50 L, inclusive tampa/alças/curso de retirada, e dos seis recipientes de 1 L.
+- [ ] Medir a área disponível para confirmar o envelope máximo de 900 × 600 ×
+  2.000 mm e registrar material/estado da parede e do piso.
+- [ ] Selecionar rack com documentação de pelo menos 250 kg distribuídos e
+  prateleiras de tanque de pelo menos 100 kg, depois validar flecha e ancoragem.
+- [ ] Fabricar/selecionar `CT1` e `CT2` e demonstrar 110 L livres, dois drenos
+  superiores e esvaziamento seguro em teste somente com água.
 - [ ] Informar a altura entre reservatórios, cultivo e destino do dreno, além da
   distância total de cada linha hidráulica.
 - [ ] Confirmar se o reservatório de água será abastecido manualmente ou por uma
