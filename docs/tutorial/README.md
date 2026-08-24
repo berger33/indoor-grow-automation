@@ -13,7 +13,7 @@ responsabilidade de profissional habilitado.
 | Etapa | Capítulo | Resultado verificável | Libera |
 |---:|---|---|---|
 | 00 | segurança, escopo e responsabilidades | usuário identifica zonas e atividades proibidas | leitura dos demais capítulos |
-| 01 | inventário e inspeção de recebimento | cada MPN/lote/foto/teste registrado | separação de kits |
+| 01 | [inventário e inspeção de recebimento](01-inventario-e-conferencia.md) | cada MPN/lote/foto/teste registrado | separação de kits |
 | 02 | [estrutura e zonas seca/molhada](02-estrutura-e-zonas.md) | suporte nivelado e distâncias aprovadas | montagem de tanques |
 | 03 | tanques e plataformas de pesagem | tara repetível e batentes funcionais | hidráulica |
 | 04 | bombas, válvulas e tubulação | teste de estanqueidade sem eletrônica | dosagem |
