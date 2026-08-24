@@ -112,10 +112,63 @@ class CommandAcknowledgement:
     handled_at: datetime
 
     def __post_init__(self) -> None:
-        uuid.UUID(self.command_id)
+        try:
+            canonical = str(uuid.UUID(self.command_id))
+        except (ValueError, AttributeError) as exc:
+            raise ValueError("command_id de ACK/NACK deve ser UUID") from exc
+        if canonical != self.command_id.lower():
+            raise ValueError("command_id de ACK/NACK deve ser UUID canônico")
+        if isinstance(self.sequence, bool) or not isinstance(self.sequence, int) or self.sequence < 0:
+            raise ValueError("sequence de ACK/NACK deve ser inteiro não negativo")
+        if not isinstance(self.status, AckStatus):
+            raise ValueError("status de ACK/NACK inválido")
         _aware(self.handled_at, "handled_at")
         if IDENTIFIER.fullmatch(self.reason) is None:
             raise ValueError("reason de ACK/NACK inválido")
+
+    def to_json(self) -> str:
+        return json.dumps(
+            {
+                "schema_version": 1,
+                "command_id": self.command_id,
+                "sequence": self.sequence,
+                "status": self.status.value,
+                "reason": self.reason,
+                "handled_at": self.handled_at.isoformat(),
+            },
+            ensure_ascii=False,
+            separators=(",", ":"),
+            sort_keys=True,
+        )
+
+    @classmethod
+    def from_json(cls, payload: str | bytes) -> CommandAcknowledgement:
+        try:
+            raw = json.loads(payload)
+        except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+            raise ValueError("JSON de ACK/NACK inválido") from exc
+        expected = {
+            "schema_version",
+            "command_id",
+            "sequence",
+            "status",
+            "reason",
+            "handled_at",
+        }
+        if not isinstance(raw, dict) or set(raw) != expected or raw["schema_version"] != 1:
+            raise ValueError("estrutura de ACK/NACK inválida")
+        try:
+            handled_at = datetime.fromisoformat(raw["handled_at"].replace("Z", "+00:00"))
+            ack_status = AckStatus(raw["status"])
+        except (AttributeError, ValueError) as exc:
+            raise ValueError("campos de ACK/NACK inválidos") from exc
+        return cls(
+            command_id=raw["command_id"],
+            sequence=raw["sequence"],
+            status=ack_status,
+            reason=raw["reason"],
+            handled_at=handled_at,
+        )
 
 
 class IdempotentCommandProcessor:

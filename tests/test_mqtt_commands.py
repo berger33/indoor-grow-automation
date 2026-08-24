@@ -4,6 +4,7 @@ from uuid import uuid4
 
 from hub.growhub.contracts.commands import (
     AckStatus,
+    CommandAcknowledgement,
     CommandEnvelope,
     IdempotentCommandProcessor,
 )
@@ -34,6 +35,23 @@ class MqttCommandTests(TestCase):
         self.assertEqual(command, CommandEnvelope.from_json(command.to_json()))
         with self.assertRaises(ValueError):
             CommandEnvelope.from_json(command.to_json()[:-1] + ',"extra":1}')
+
+    def test_round_trip_preserves_strict_acknowledgement(self) -> None:
+        acknowledgement = CommandAcknowledgement(
+            command_id=self.command().command_id,
+            sequence=4,
+            status=AckStatus.ACK,
+            reason="command_applied",
+            handled_at=self.now,
+        )
+        self.assertEqual(
+            acknowledgement,
+            CommandAcknowledgement.from_json(acknowledgement.to_json()),
+        )
+        with self.assertRaises(ValueError):
+            CommandAcknowledgement.from_json(
+                acknowledgement.to_json()[:-1] + ',"extra":1}'
+            )
 
     def test_duplicate_uuid_returns_same_ack_without_second_execution(self) -> None:
         calls = []
