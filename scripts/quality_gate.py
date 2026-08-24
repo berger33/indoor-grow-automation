@@ -97,6 +97,10 @@ def main() -> int:
     if drawing_validator.exists():
         run("Rev A drawings", [sys.executable, str(drawing_validator)])
 
+    sbom_generator = ROOT / "scripts" / "generate_sbom.py"
+    if sbom_generator.exists():
+        run("SBOM SPDX", [sys.executable, str(sbom_generator), "--check"])
+
     secret_scanner = ROOT / "scripts" / "secret_scan.py"
     if secret_scanner.exists():
         run("secret scan", [sys.executable, str(secret_scanner), "--tracked"])
