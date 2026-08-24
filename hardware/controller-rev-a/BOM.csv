@@ -40,7 +40,7 @@ SAFE-004,"QF-F1,QF-H1,QF-C1",3,panel,WEG/Schneider,MCB-TBD,disjuntores de exaust
 SAFE-005,E-STOP,1,panel,WEG/Schneider,22MM-2NC-LATCH,parada de emergência,2 contacts NC,panel 22mm,Brasil/Mercado Livre,APPROVED_CLASS,"corta 24V de atuação por hardware"
 ACT-002,K-F1,1,panel,WEG,CWC07-10-30C03,contator do exaustor atual,3NO 7A; coil 24VDC,DIN rail,Brasil/Mercado Livre,HOLD,"validar corrente/partida da plaqueta"
 ACT-006,K-H1,1,panel,WEG,CWC07-10-30C03,contator do umidificador,3NO 7A; coil 24VDC,DIN rail,Brasil/Mercado Livre,HOLD,"validar modelo corrente e partida"
-ACT-003,P-D1-P-D6,6,dosing,Qualified generic,24V-PERISTALTIC-30-200ML,captação de concentrados,24VDC <=0.5A replaceable tube,panel mount,Brasil/Shopee/AliExpress,PROVISIONAL,"calibrar 10 ciclos; tubo compatível"
+ACT-003,PD1-PD6,6,dosing,Qualified generic,24V-PERISTALTIC-30-200ML,captação de concentrados,24VDC <=0.5A replaceable tube,panel mount,Brasil/Shopee/AliExpress,PROVISIONAL,"calibrar 10 ciclos; tubo compatível"
 ACT-004,V-W1-V-W2,2,hydraulic,Qualified generic,24V-NC-1/2IN,válvula solenoide normalmente fechada,24VDC; 1/2in; duty 100%,plumbed,Brasil/Mercado Livre,PROVISIONAL,"material do selo e pressão"
 ACT-005,P-W1-P-W4,4,hydraulic,Qualified generic,24V-PUMP-TBD,bombas transferência/mistura/irrigação/dreno,24VDC; head/flow TBD,plumbed,Brasil/Mercado Livre/Shopee,HOLD,"selecionar após altura e vazão"
 ACT-007,M1-M6,6,dosing,ARCTIC,AFACO-080P2-GBA01,ventiladores F8 PWM usados como agitadores magnéticos,12VDC; 80x80x25mm; PWM/tach; full-speed reference,mechanical bracket,Mercado Livre/AliExpress,PROVISIONAL,"comprar uma amostra; validar MPN corrente tacômetro balanceamento ruído e temperatura"

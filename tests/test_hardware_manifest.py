@@ -1,3 +1,4 @@
+from copy import deepcopy
 from unittest import TestCase
 
 from scripts.validate_hardware_manifest import (
@@ -7,6 +8,7 @@ from scripts.validate_hardware_manifest import (
     validate_actuator_rows,
     validate_layout_contract,
     validate_manifests,
+    validate_stirrer_contract,
 )
 
 
@@ -142,3 +144,68 @@ class LayoutContractTests(TestCase):
         errors = validate_layout_contract(self.contract)
         self.assertTrue(any("dois drenos" in error for error in errors))
         self.assertTrue(any("110 L livres" in error for error in errors))
+
+
+class StirrerContractTests(TestCase):
+    def setUp(self) -> None:
+        names = ("ph_down", "calmag", "micro", "bloom", "veg", "ph_up")
+        self.contract = {
+            "schema_version": 1,
+            "release_state": "HOLD",
+            "channel_count": 6,
+            "channels": [
+                {
+                    "index": index,
+                    "name": name,
+                    "pump": f"PD{index + 1}",
+                    "stirrer": f"M{index + 1}",
+                    "tach": f"STIR_TACH_{index + 1}",
+                }
+                for index, name in enumerate(names)
+            ],
+            "drive": {
+                "enable_output": "OUT07",
+                "supply_vdc": 12,
+                "mode": "grouped_full_speed",
+                "converter": "DC2",
+                "branch_fusing_required": True,
+            },
+            "mechanics": {
+                "magnets_per_fan": 2,
+                "magnet_retention_guard_required": True,
+                "stir_bar_coating": "PTFE",
+            },
+            "feedback": {
+                "required_before_dosing": True,
+                "required_during_dosing": True,
+            },
+            "reference_sequence": {
+                "nutrient_order": ["calmag", "micro", "bloom", "veg"],
+                "settling_between_nutrients_seconds": 60,
+                "ph_channels_excluded_from_batch_recipe": ["ph_down", "ph_up"],
+            },
+        }
+        self.references = {
+            "DC2",
+            *(f"PD{number}" for number in range(1, 7)),
+            *(f"M{number}" for number in range(1, 7)),
+        }
+
+    def test_accepts_complete_six_channel_contract(self) -> None:
+        self.assertEqual((), validate_stirrer_contract(self.contract, self.references))
+
+    def test_rejects_wrong_order_voltage_and_missing_tach(self) -> None:
+        broken = deepcopy(self.contract)
+        broken["channels"][1]["name"] = "bloom"
+        broken["channels"][1]["tach"] = "STIR_TACH_1"
+        broken["drive"]["supply_vdc"] = 24
+        errors = validate_stirrer_contract(broken, self.references)
+        self.assertTrue(any("ordem química" in error for error in errors))
+        self.assertTrue(any("tacômetro exclusivo" in error for error in errors))
+        self.assertTrue(any("supply_vdc" in error for error in errors))
+
+    def test_rejects_dosing_without_rotation_interlock(self) -> None:
+        broken = deepcopy(self.contract)
+        broken["feedback"]["required_during_dosing"] = False
+        errors = validate_stirrer_contract(broken, self.references)
+        self.assertTrue(any("intertravar" in error for error in errors))

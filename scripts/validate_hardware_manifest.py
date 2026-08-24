@@ -144,6 +144,93 @@ def validate_layout_contract(contract: dict[str, object]) -> tuple[str, ...]:
     return tuple(errors)
 
 
+def validate_stirrer_contract(
+    contract: dict[str, object], references: set[str] | frozenset[str]
+) -> tuple[str, ...]:
+    """Valida quantidade, identidade, energia e feedback da dosagem de referência."""
+    errors: list[str] = []
+    if contract.get("schema_version") != 1:
+        errors.append("stirrer-contract: schema_version deve ser 1")
+    if contract.get("release_state") != "HOLD":
+        errors.append("stirrer-contract: revisão A0 deve permanecer em HOLD")
+    if contract.get("channel_count") != 6:
+        errors.append("stirrer-contract: devem existir exatamente seis canais")
+
+    channels = contract.get("channels")
+    expected_names = ["ph_down", "calmag", "micro", "bloom", "veg", "ph_up"]
+    if not isinstance(channels, list) or len(channels) != 6:
+        errors.append("stirrer-contract: lista de canais deve conter seis itens")
+    else:
+        names = [channel.get("name") for channel in channels if isinstance(channel, dict)]
+        indices = [channel.get("index") for channel in channels if isinstance(channel, dict)]
+        tachs = [channel.get("tach") for channel in channels if isinstance(channel, dict)]
+        if names != expected_names:
+            errors.append("stirrer-contract: ordem química divergente da referência")
+        if indices != list(range(6)):
+            errors.append("stirrer-contract: índices devem ser 0..5")
+        if len(set(tachs)) != 6:
+            errors.append("stirrer-contract: cada canal deve ter tacômetro exclusivo")
+        for channel in channels:
+            if not isinstance(channel, dict):
+                continue
+            for field in ("pump", "stirrer"):
+                reference = channel.get(field)
+                if reference not in references:
+                    errors.append(
+                        f"stirrer-contract: referência {reference} ausente da BOM"
+                    )
+
+    drive = contract.get("drive")
+    if not isinstance(drive, dict):
+        errors.append("stirrer-contract: acionamento ausente")
+    else:
+        expected_drive = {
+            "enable_output": "OUT07",
+            "supply_vdc": 12,
+            "mode": "grouped_full_speed",
+            "converter": "DC2",
+            "branch_fusing_required": True,
+        }
+        for key, expected in expected_drive.items():
+            if drive.get(key) != expected:
+                errors.append(f"stirrer-contract: {key} deve ser {expected}")
+        if drive.get("converter") not in references:
+            errors.append("stirrer-contract: conversor DC2 ausente da BOM")
+
+    mechanics = contract.get("mechanics")
+    if not isinstance(mechanics, dict):
+        errors.append("stirrer-contract: mecânica ausente")
+    else:
+        if mechanics.get("magnets_per_fan") != 2:
+            errors.append("stirrer-contract: cada ventilador deve usar dois ímãs")
+        if mechanics.get("magnet_retention_guard_required") is not True:
+            errors.append("stirrer-contract: proteção de retenção é obrigatória")
+        if mechanics.get("stir_bar_coating") != "PTFE":
+            errors.append("stirrer-contract: barra deve ser revestida em PTFE")
+
+    feedback = contract.get("feedback")
+    if not isinstance(feedback, dict) or any(
+        feedback.get(key) is not True
+        for key in ("required_before_dosing", "required_during_dosing")
+    ):
+        errors.append("stirrer-contract: rotação deve intertravar toda dosagem")
+
+    sequence = contract.get("reference_sequence")
+    if not isinstance(sequence, dict):
+        errors.append("stirrer-contract: sequência de referência ausente")
+    else:
+        if sequence.get("nutrient_order") != ["calmag", "micro", "bloom", "veg"]:
+            errors.append("stirrer-contract: ordem deve ser CalMag/Micro/Bloom/Veg")
+        if sequence.get("settling_between_nutrients_seconds") != 60:
+            errors.append("stirrer-contract: intervalo entre nutrientes deve ser 60 s")
+        if set(sequence.get("ph_channels_excluded_from_batch_recipe", [])) != {
+            "ph_down",
+            "ph_up",
+        }:
+            errors.append("stirrer-contract: pH Up/Down não pertencem à receita base")
+    return tuple(errors)
+
+
 def validate_manifests() -> ManifestResult:
     errors: list[str] = []
     holds: list[str] = []
@@ -206,6 +293,8 @@ def validate_manifests() -> ManifestResult:
     )
     with (SYSTEM_HARDWARE / "layout-contract.json").open(encoding="utf-8") as handle:
         errors.extend(validate_layout_contract(json.load(handle)))
+    with (SYSTEM_HARDWARE / "stirrer-contract.json").open(encoding="utf-8") as handle:
+        errors.extend(validate_stirrer_contract(json.load(handle), references))
     if limits.get("mains_allowed") is not False:
         errors.append("pcb-parameters: rede CA deve permanecer proibida")
     if limits.get("input_maximum_vdc", 999) > 30:

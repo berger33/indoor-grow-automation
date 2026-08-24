@@ -4,12 +4,12 @@
   "release_state": "HOLD",
   "channel_count": 6,
   "channels": [
-    {"index": 0, "name": "ph_down", "display_name": "pH Down", "pump": "P-D1", "stirrer": "M1", "tach": "STIR_TACH_1"},
-    {"index": 1, "name": "calmag", "display_name": "CalMag", "pump": "P-D2", "stirrer": "M2", "tach": "STIR_TACH_2"},
-    {"index": 2, "name": "micro", "display_name": "Micro", "pump": "P-D3", "stirrer": "M3", "tach": "STIR_TACH_3"},
-    {"index": 3, "name": "bloom", "display_name": "Bloom", "pump": "P-D4", "stirrer": "M4", "tach": "STIR_TACH_4"},
-    {"index": 4, "name": "veg", "display_name": "Veg (Grow)", "reference_alias": "Grow", "pump": "P-D5", "stirrer": "M5", "tach": "STIR_TACH_5"},
-    {"index": 5, "name": "ph_up", "display_name": "pH Up", "pump": "P-D6", "stirrer": "M6", "tach": "STIR_TACH_6"}
+    {"index": 0, "name": "ph_down", "display_name": "pH Down", "pump": "PD1", "stirrer": "M1", "tach": "STIR_TACH_1"},
+    {"index": 1, "name": "calmag", "display_name": "CalMag", "pump": "PD2", "stirrer": "M2", "tach": "STIR_TACH_2"},
+    {"index": 2, "name": "micro", "display_name": "Micro", "pump": "PD3", "stirrer": "M3", "tach": "STIR_TACH_3"},
+    {"index": 3, "name": "bloom", "display_name": "Bloom", "pump": "PD4", "stirrer": "M4", "tach": "STIR_TACH_4"},
+    {"index": 4, "name": "veg", "display_name": "Veg (Grow)", "reference_alias": "Grow", "pump": "PD5", "stirrer": "M5", "tach": "STIR_TACH_5"},
+    {"index": 5, "name": "ph_up", "display_name": "pH Up", "pump": "PD6", "stirrer": "M6", "tach": "STIR_TACH_6"}
   ],
   "drive": {
     "enable_output": "OUT07",
