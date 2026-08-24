@@ -15,12 +15,12 @@ responsabilidade de profissional habilitado.
 | 00 | segurança, escopo e responsabilidades | usuário identifica zonas e atividades proibidas | leitura dos demais capítulos |
 | 01 | [inventário e inspeção de recebimento](01-inventario-e-conferencia.md) | cada MPN/lote/foto/teste registrado | separação de kits |
 | 02 | [estrutura e zonas seca/molhada](02-estrutura-e-zonas.md) | suporte nivelado e distâncias aprovadas | montagem de tanques |
-| 03 | tanques e plataformas de pesagem | tara repetível e batentes funcionais | hidráulica |
-| 04 | bombas, válvulas e tubulação | teste de estanqueidade sem eletrônica | dosagem |
-| 05 | frascos, agitadores e peristálticas | seis linhas identificadas e sem sifão | sensores químicos |
-| 06 | pH, EC, temperatura, boias e vazamento | leituras/estados brutos plausíveis | quadro SELV |
-| 07 | controladora, fontes e chicotes SELV | continuidade/polaridade aprovadas sem CA | firmware |
-| 08 | instalação 127 V por profissional | laudo, PE, DR, isolação e proteções aprovados | energização controlada |
+| 03 | [tanques e plataformas de pesagem](03-tanques-e-pesagem.md) | tara repetível e batentes funcionais | hidráulica |
+| 04 | [bombas, válvulas e tubulação](04-hidraulica.md) | teste de estanqueidade sem eletrônica | dosagem |
+| 05 | [frascos, agitadores e peristálticas](05-frascos-e-dosadoras.md) | seis linhas identificadas e sem sifão | sensores químicos |
+| 06 | [pH, EC, temperatura, boias e vazamento](06-sensores.md) | leituras/estados brutos plausíveis | quadro SELV |
+| 07 | [controladora, fontes e chicotes SELV](07-quadro-selv.md) | continuidade/polaridade aprovadas sem CA | firmware |
+| 08 | [instalação 127 V por profissional](08-instalacao-ca-profissional.md) | laudo, PE, DR, isolação e proteções aprovados | energização controlada |
 | 09 | gravação e provisionamento ESP32 | nós em safe boot e diagnosticáveis | hub |
 | 10 | Raspberry Pi, MQTT, API e painel | instalação limpa reproduzida | calibração |
 | 10A | [integração lógica com tomadas EKAZA](10a-integracao-tomadas-ekaza.md) | estados remotos confirmados sem carga no rack | agenda de luz remota |

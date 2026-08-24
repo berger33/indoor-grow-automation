@@ -148,12 +148,12 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F5-029 P1` Publicar imagens realistas marcadas como ilustrativas.
 - [x] `F5-030 P0` Criar tutorial 01 de inventário e conferência da compra.
 - [x] `F5-031 P0` Criar tutorial 02 de montagem da estrutura seca.
-- [ ] `F5-032 P0` Criar tutorial 03 de reservatórios e plataformas de pesagem.
-- [ ] `F5-033 P0` Criar tutorial 04 de válvulas, bombas e tubulação.
-- [ ] `F5-034 P0` Criar tutorial 05 de frascos, dosadoras e agitadores.
-- [ ] `F5-035 P0` Criar tutorial 06 de sondas e sensores de segurança.
-- [ ] `F5-036 P0` Criar tutorial 07 do quadro e chicotes SELV.
-- [ ] `F5-037 P0` Criar tutorial 08 da instalação CA por profissional habilitado.
+- [x] `F5-032 P0` Criar tutorial 03 de reservatórios e plataformas de pesagem.
+- [x] `F5-033 P0` Criar tutorial 04 de válvulas, bombas e tubulação.
+- [x] `F5-034 P0` Criar tutorial 05 de frascos, dosadoras e agitadores.
+- [x] `F5-035 P0` Criar tutorial 06 de sondas e sensores de segurança.
+- [x] `F5-036 P0` Criar tutorial 07 do quadro e chicotes SELV.
+- [x] `F5-037 P0` Criar tutorial 08 da instalação CA por profissional habilitado.
 - [ ] `F5-038 P0` Criar tutorial 09 de gravação e provisionamento dos ESP32.
 - [ ] `F5-039 P0` Criar tutorial 10 de instalação do hub e painel.
 - [ ] `F5-040 P0` Criar tutorial 11 de calibração de massa, bombas, pH e EC.
