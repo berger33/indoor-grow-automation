@@ -31,7 +31,26 @@ class PersistenceTests(TestCase):
             path = Path(directory) / "grow.db"
             repository = self.migrated_repository(path)
             tables = set(inspect(repository._sessions.kw["bind"]).get_table_names())
-            self.assertTrue({"stations", "sensors", "telemetry", "telemetry_hourly", "lighting_schedules", "lighting_overrides"}.issubset(tables))
+            self.assertTrue(
+                {
+                    "stations",
+                    "sensors",
+                    "telemetry",
+                    "telemetry_hourly",
+                    "lighting_schedules",
+                    "lighting_overrides",
+                    "setpoints",
+                    "recipes",
+                    "recipe_steps",
+                    "irrigation_schedules",
+                    "users",
+                    "alarms",
+                    "command_audit",
+                    "calibrations",
+                    "batch_runs",
+                    "realtime_outbox",
+                }.issubset(tables)
+            )
 
     def test_telemetry_is_idempotent_and_retention_is_explicit(self) -> None:
         now = datetime(2026, 8, 24, 15, tzinfo=UTC)
