@@ -19,7 +19,8 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F0-011 P1` Documentar política de branches e releases.
 - [x] `F0-012 P1` Configurar atualização automatizada de dependências.
 - [x] `F0-013 P0` Fixar escopo v1 em fertirrigação, irrigação e clima.
-- [x] `F0-014 P0` Excluir iluminação de hardware, software e interface.
+- [x] `F0-014 P0` Excluir integralmente a iluminação do hardware elétrico.
+- [x] `F0-017 P1` Registrar integração lógica opcional das tomadas EKAZA.
 - [x] `F0-015 P1` Revisar novamente o vídeo V1 de hardware com timestamps.
 - [x] `F0-016 P1` Estudar em detalhe a disposição compacta do painel original.
 
@@ -91,6 +92,11 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F3-012 P1` Criar backup e teste de restauração.
 - [ ] `F3-013 P2` Implementar buffer offline e deduplicação.
 - [ ] `F3-014 P1` Criar Docker Compose ARM64 do hub.
+- [x] `F3-015 P1` Modelar agenda semanal de tomadas com timezone e override.
+- [x] `F3-016 P1` Integrar entidades `switch` pela API do Home Assistant.
+- [x] `F3-017 P1` Reconciliar estado desejado e observado sem comando repetido.
+- [ ] `F3-018 P1` Persistir agendas e overrides de tomadas no banco.
+- [ ] `F3-019 P1` Executar reconciliação periódica com backoff e telemetria.
 
 ## Fase 4 — Painel mobile-first
 
@@ -106,6 +112,8 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F4-010 P2` Criar comparação de múltiplas tendas.
 - [ ] `F4-011 P2` Criar PWA com cache somente de leitura.
 - [ ] `F4-012 P1` Cobrir acessibilidade e operação por teclado.
+- [ ] `F4-013 P1` Criar tela opcional de tomadas com agenda e confirmação.
+- [ ] `F4-014 P1` Exibir tomada indisponível/divergente sem falso positivo.
 
 ## Fase 5 — Instalação e release
 
@@ -159,3 +167,5 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F5-048 P1` Publicar P&ID hidráulico compacto A0/HOLD.
 - [x] `F5-049 P1` Publicar projeto elétrico e rotas de instalações A0/HOLD.
 - [x] `F5-050 P1` Validar automaticamente todas as pranchas Rev A.
+- [x] `F5-051 P1` Documentar pareamento e homologação das tomadas EKAZA.
+- [ ] `F5-052 P0` Homologar o modelo EKAZA real em cem ciclos por canal.

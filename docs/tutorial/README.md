@@ -23,6 +23,7 @@ responsabilidade de profissional habilitado.
 | 08 | instalação 127 V por profissional | laudo, PE, DR, isolação e proteções aprovados | energização controlada |
 | 09 | gravação e provisionamento ESP32 | nós em safe boot e diagnosticáveis | hub |
 | 10 | Raspberry Pi, MQTT, API e painel | instalação limpa reproduzida | calibração |
+| 10A | [integração lógica com tomadas EKAZA](10a-integracao-tomadas-ekaza.md) | estados remotos confirmados sem carga no rack | agenda de luz remota |
 | 11 | calibração guiada | massa, bombas, pH e EC dentro da tolerância | HIL |
 | 12 | teste seco, HIL e piloto com água | todas as falhas críticas injetadas | primeira batelada |
 | 13 | primeira batelada supervisionada | relatório aprovado sem alarme pendente | operação assistida |

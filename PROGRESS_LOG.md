@@ -97,3 +97,20 @@ foi preservado apenas para rastreabilidade.
 - Próximos passos: calibrar volume por tempo de cada dosadora; implementar a
   receita de nutrientes como máquina de estados; criar diluição por EC com
   timeout e confirmação por massa.
+
+### Continuação dirigida — tomadas EKAZA
+
+- Commits: 7
+- Itens concluídos: agenda semanal com timezone; override temporário; adaptador
+  REST do Home Assistant; confirmação de estado observado; reconciliação sem
+  comandos redundantes; ADR de isolamento; tutorial de pareamento e homologação;
+  escopo, backlog, decisões e histórico atualizados.
+- Decisões tomadas: somente o Raspberry Pi possui a credencial do Home Assistant;
+  o ESP32, a PCB, o quadro e os chicotes não possuem função de iluminação; falha
+  de tomada/nuvem não interfere no controle do cultivo; comando sem confirmação
+  é exibido como divergente.
+- Bloqueios/pendências: código exato e plaqueta das tomadas; comprovação como
+  entidades `switch`; corrente e inrush das quatro luminárias; cem ciclos por
+  canal; persistência, execução periódica, API e tela ainda não implementadas.
+- Próximos passos: persistir agendas; executar reconciliação com backoff;
+  integrar o snapshot à futura API e à tela mobile-first.

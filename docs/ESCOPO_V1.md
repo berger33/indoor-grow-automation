@@ -2,7 +2,7 @@
 
 Este documento transforma a referência estudada nas fronteiras do produto que
 será construído. Em caso de conflito com uma observação histórica de vídeo, este
-escopo e o ADR 0006 prevalecem.
+escopo, o ADR 0006 e sua substituição parcial pelo ADR 0009 prevalecem.
 
 ## Resultado esperado
 
@@ -37,7 +37,11 @@ receita, concentração e limites.
 | Segurança | vazamento latched, E-stop, timeout, watchdog, estado seguro | confiar apenas em Wi-Fi, servidor ou UI |
 | Hub/painel | MQTT, API, histórico, alarmes, configuração mobile | dependência obrigatória de nuvem |
 | Instalação | BOM, chicotes, desenhos, inspeções e tutorial leigo | energização de rede por pessoa não habilitada |
-| Iluminação | nenhuma função | acionamento, medição, agenda, dimerização e PPFD |
+| Iluminação remota | agenda, override temporário, comando e confirmação das tomadas EKAZA existentes via Home Assistant | alimentação, relé, contator, PCB, chicote, dimerização, PPFD e medição elétrica |
+
+A integração de luz é opcional e isolada. O Raspberry Pi pode comandar somente
+entidades `switch` já homologadas; nenhum condutor de luminária entra na estação,
+nenhuma credencial chega ao ESP32 e uma falha de nuvem jamais bloqueia o cultivo.
 
 ## Fluxo operacional-alvo
 
