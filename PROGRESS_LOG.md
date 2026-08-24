@@ -98,3 +98,31 @@ foi preservado apenas para rastreabilidade.
   coerentes; scan de segredos aprovado; 19 itens continuam em HOLD explícito.
 - Próximos passos: levantar as dimensões as-built; cotar uma amostra de rack que
   cumpra carga/flecha; iniciar a máquina de estados local e os intertravamentos.
+
+### Continuação dirigida — imagens, dosagem, clima e EKAZA
+
+- Commits: 23
+- Itens concluídos: substituição dos WebP truncados por quatro PNGs validados;
+  três vistas rotuladas; confirmação de seis F8, doze ímãs e seis barras PTFE;
+  contrato pH Down/CalMag/Micro/Bloom/Veg/pH Up; tacômetros e intertravamento de
+  rotação; tutorial 05; revisão do vídeo de PCB e da Parte 2; perfil CLOUDLINE
+  S6; fallback de exaustão; ADR, agenda e tutorial de tomadas EKAZA; duas novas
+  pranchas; backlog, decisões, changelog e diário atualizados.
+- Decisões tomadas: `Veg` mantém alias `Grow` do original; agitadores usam 12 V
+  em velocidade total; pH fica fora da receita base; CLOUDLINE S6 `AI-CLS6` é o
+  alvo, mas controle direto aguarda pinagem da amostra; iluminação não possui
+  hardware no rack, porém o hub pode comandar tomadas EKAZA via integração
+  oficial Home Assistant/Tuya.
+- Bloqueios/pendências: medir frascos, ímãs, barras, tubos, duto, filtros e
+  tanques; comprovar Smart Life/Tuya nas tomadas; medir corrente/inrush das
+  quatro luminárias; receber S6 e confirmar revisão; ERC/DRC, revisão elétrica,
+  protótipo, HIL e piloto somente com água.
+- Testes: 132 testes unitários; 10 SVG Rev A; 4 PNG íntegros; 288 referências de
+  hardware coerentes; scan de segredos aprovado; 24 HOLDs explícitos.
+- Próximos passos: implementar adaptador Home Assistant/Tuya com confirmação;
+  criar máquina de estados completa da receita; fechar calibrações e agenda de
+  cinco fertirrigações.
+
+Esta entrada supera a decisão anterior de excluir toda integração de luz: a
+fronteira elétrica continua absoluta, mas o ADR 0008 autoriza comando lógico das
+tomadas EKAZA pelo Raspberry Pi.
