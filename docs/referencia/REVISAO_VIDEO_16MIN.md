@@ -15,12 +15,11 @@ inferidos.
 
 | Tempo | Evidência visual/narrada útil | Decisão para o projeto próprio |
 |---:|---|---|
-| 00:00–00:47 | estação vertical com tablet, caixa das dosadoras, duas prateleiras de frascos e dois totes preto/amarelo | separar interface, dosagem e reservatórios em módulos identificáveis |
+| 00:00–00:47 | estação vertical com tablet, caixa das dosadoras, duas prateleiras de frascos e a tampa amarela de um tote preto ocupando praticamente toda a largura útil | preservar um único eixo vertical compacto; não inferir volume pela aparência |
 | 00:48–01:14 | alimentação por osmose reversa e linha azul de água | aceitar reservatório de origem cheio manualmente ou por entrada protegida; RO não é obrigatória |
 | 01:15–01:34 | válvula solenoide na entrada e corte de água | usar válvula normalmente fechada e corte independente do software |
-| 01:28–02:19 | tote superior, boia mecânica, tampa perfurada e tubulações | reservatório de origem de 50 L com limite alto físico e tampa removível |
-| 01:40–02:19 | segundo recipiente/tote e circulação entre níveis | reservatório de mistura/rega de 50 L separado da água de origem |
-| 02:20–02:49 | discos/plataforma sob o tote e passagem de sondas pela tampa | medir massa com plataforma de quatro células; suportes de sonda devem preservar imersão e manutenção |
+| 01:28–02:19 | primeiro trecho de reservatório, boia mecânica, tampa perfurada e tubulações | manter o reservatório de origem separado, com limite alto físico e tampa removível |
+| 02:20–03:43 | trecho do reservatório de mistura com sondas, tubulações e plataforma de quatro células | usar um segundo reservatório funcional, em nível estrutural independente, com pesagem e manutenção frontal |
 | 02:35–03:15 | linhas de bomba e transferência/mistura | dimensionar cada bomba por vazão e altura reais, não pela aparência do vídeo |
 | 03:16–03:43 | plataforma de pesagem sob reservatório | massa é a medição primária de volume; boias funcionam como limites independentes |
 | 03:44–04:18 | seis cabeçotes peristálticos e seis frascos de concentrado em duas fileiras | adotar seis canais de 1 L, removíveis, etiquetados e calibrados individualmente |
@@ -58,8 +57,14 @@ inferidos.
 
 ## Adaptações deliberadas
 
-- O vídeo usa totes comerciais de capacidade não legível. A réplica usa os dois
-  volumes de 50 L confirmados pelo responsável, sem alegar equivalência de modelo.
+- O vídeo e o repositório original confirmam as funções separadas de reservatório
+  RO e reservatório de mistura. Os trechos mostram totes pretos com tampa amarela,
+  mas não há um plano geral nítido que prove a posição relativa das duas caixas.
+- A capacidade e o modelo dos totes não aparecem legíveis e a lista oficial de
+  peças não os identifica. Portanto, **não está confirmado que sejam de 50 L**.
+  A réplica usa 2 × 50 L porque esse volume foi fixado pelo responsável.
+- A réplica organiza `TK-101` acima de `TK-201`, cada um em sua própria
+  prateleira e plataforma de pesagem. Uma caixa nunca se apoia na tampa da outra.
 - Os frascos vistos lembram potes de vidro. A seleção final exigirá tampa
   compatível, retenção de mangueira e resistência química; aparência não aprova
   material.
@@ -73,6 +78,7 @@ inferidos.
 
 - modelos e curvas das quatro bombas hidráulicas;
 - capacidade nominal dos totes mostrados;
+- dimensões e posição relativa exata dos dois totes no rack original;
 - diâmetros, materiais e comprimentos de todas as mangueiras;
 - materiais das vedações das válvulas;
 - massa nominal das células de carga e dimensões da plataforma;
