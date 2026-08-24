@@ -6,6 +6,8 @@ import { HomePage } from "./HomePage";
 import { LightingPage } from "./LightingPage";
 import { OperationPage } from "./OperationPage";
 import { CalibrationPage } from "./CalibrationPage";
+import { AlarmsPage } from "./AlarmsPage";
+import { HelpPage } from "./HelpPage";
 import { connectRealtime, RealtimeStatus } from "./realtime";
 import "./styles.css";
 
@@ -28,10 +30,6 @@ function LoginPanel({ onLogin }: { onLogin: () => void }) {
     finally { setBusy(false); }
   }
   return <main className="login-shell"><section className="login-card"><div className="brand-mark" aria-hidden="true">GH</div><p className="eyebrow">Grow Hub local</p><h1>Acesso ao painel</h1><p>Use uma conta cadastrada no Raspberry Pi. A sessão expira automaticamente e não é salva no navegador.</p><form onSubmit={(event) => void submit(event)}><label>Usuário<input autoComplete="username" value={userId} onChange={(event) => setUserId(event.target.value)} required /></label><label>Senha<input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} required /></label><button disabled={busy}>{busy ? "Entrando…" : "Entrar"}</button></form>{message && <p className="form-error" role="alert">{message}</p>}</section></main>;
-}
-
-function Placeholder({ title }: { title: string }) {
-  return <section className="empty"><h2>{title}</h2><p>Esta área será ligada à API na próxima etapa desta mesma entrega.</p></section>;
 }
 
 function App() {
@@ -66,8 +64,9 @@ function App() {
     <a className="skip-link" href="#content">Pular para o conteúdo</a>
     <header><div className="brand-mark" aria-hidden="true">GH</div><div><p className="eyebrow">Grow Hub · estação local</p><h1>Painel de cultivo</h1></div><div className="header-actions"><label>Estação<select value={stationId} onChange={(event) => setStationId(event.target.value)}>{stations.map((item) => <option value={item.stationId} key={item.stationId}>{item.name}</option>)}</select></label><div className="hub-status"><span className={`dot dot-${realtime}`} /><div><strong>{realtime === "online" ? "Tempo real conectado" : realtime === "connecting" ? "Reconectando" : "Modo offline"}</strong><small>{realtime === "offline" ? "Eventos serão retomados pelo número de sequência" : "Canal autenticado"}</small></div></div><button className="ghost-button" onClick={() => void logout().then(() => setAuthenticated(false))}>Sair</button></div></header>
     <nav aria-label="Seções do painel">{pages.map((item) => <button key={item.id} className={page === item.id ? "active" : ""} aria-current={page === item.id ? "page" : undefined} onClick={() => setPage(item.id)}>{item.label}</button>)}</nav>
-    <main id="content" tabIndex={-1}>{error && <div className="alert" role="alert">{error}<button onClick={() => void refreshStations()}>Tentar novamente</button></div>}{station && page === "home" && <HomePage station={station} refreshKey={refreshKey} />}{station && page === "charts" && <ChartsPage station={station} refreshKey={refreshKey} />}{page === "lighting" && <LightingPage refreshKey={refreshKey} />}{station && page === "operation" && <OperationPage station={station} refreshKey={refreshKey} />}{station && page === "calibration" && <CalibrationPage station={station} refreshKey={refreshKey} />}{page === "alarms" && <Placeholder title="Alarmes" />}{page === "help" && <Placeholder title="Ajuda offline" />}{!station && page !== "lighting" && <section className="empty"><h2>Nenhuma estação cadastrada</h2><p>Cadastre a estação no banco antes de habilitar a operação.</p></section>}</main>
+    <main id="content" tabIndex={-1}>{error && <div className="alert" role="alert">{error}<button onClick={() => void refreshStations()}>Tentar novamente</button></div>}{station && page === "home" && <HomePage station={station} refreshKey={refreshKey} />}{station && page === "charts" && <ChartsPage station={station} refreshKey={refreshKey} />}{page === "lighting" && <LightingPage refreshKey={refreshKey} />}{station && page === "operation" && <OperationPage station={station} refreshKey={refreshKey} />}{station && page === "calibration" && <CalibrationPage station={station} refreshKey={refreshKey} />}{station && page === "alarms" && <AlarmsPage station={station} refreshKey={refreshKey} />}{page === "help" && <HelpPage />}{!station && page !== "lighting" && page !== "help" && <section className="empty"><h2>Nenhuma estação cadastrada</h2><p>Cadastre a estação no banco antes de habilitar a operação.</p></section>}</main>
   </div>;
 }
 
 createRoot(document.getElementById("root")!).render(<App />);
+if ("serviceWorker" in navigator) window.addEventListener("load", () => void navigator.serviceWorker.register("/service-worker.js"));

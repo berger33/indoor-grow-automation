@@ -49,6 +49,7 @@ export interface Recipe { recipeId: string; name: string; batchLiters: number; t
 export interface IrrigationWindow { windowId: string; startTime: string; durationSeconds: number; weekdays: number[]; enabled: boolean; }
 export interface BatchRun { batchId: string; recipeId: string; status: string; currentStep: string; progressPercent: number; startedAt: string; finishedAt: string | null; failureCode: string | null; }
 export interface CalibrationRecord { calibrationId: string; deviceId: string; kind: string; coefficients: Record<string, unknown>; status: string; calibratedAt: string; calibratedBy: string; }
+export interface Alarm { alarmId: string; code: string; severity: string; cause: string; procedure: string; raisedAt: string; latched: boolean; acknowledgedAt: string | null; acknowledgedBy: string | null; }
 
 export class ApiError extends Error {
   constructor(public readonly status: number, message: string) { super(message); }
@@ -93,6 +94,8 @@ export function loadBatchRuns(stationId: string): Promise<{ runs: BatchRun[] }> 
 export function sendCommand(stationId: string, action: string, target: string): Promise<{ auditId: string; status: string; explanation: string }> { return request(`/api/v1/stations/${encodeURIComponent(stationId)}/commands`, { method: "POST", body: JSON.stringify({ action, target }) }); }
 export function loadCalibrations(stationId: string): Promise<{ calibrations: CalibrationRecord[] }> { return request(`/api/v1/stations/${encodeURIComponent(stationId)}/calibrations`); }
 export function saveCalibration(stationId: string, payload: { deviceId: string; kind: string; measurements: Record<string, unknown> }): Promise<{ calibrationId: string; status: string; coefficients: Record<string, unknown>; explanation: string }> { return request(`/api/v1/stations/${encodeURIComponent(stationId)}/calibrations`, { method: "POST", body: JSON.stringify(payload) }); }
+export function loadAlarms(stationId: string): Promise<{ alarms: Alarm[] }> { return request(`/api/v1/stations/${encodeURIComponent(stationId)}/alarms`); }
+export function acknowledgeAlarm(alarmId: string): Promise<{ alarmId: string; status: string }> { return request(`/api/v1/alarms/${encodeURIComponent(alarmId)}/ack`, { method: "POST" }); }
 export function loadLighting(): Promise<{ channels: RemoteLight[]; reconciledAt: string | null }> {
   return request("/api/v1/lighting");
 }
