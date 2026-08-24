@@ -14,49 +14,55 @@
   <text x="55" y="48" class="title">REV-A-05 — ELEVAÇÃO FRONTAL DO PAINEL COMPACTO</text>
   <text x="55" y="78" class="hold">A0 / HOLD — DISPOSIÇÃO VINCULANTE; COTAS DE COMPONENTES A CONFIRMAR</text>
 
-  <rect x="220" y="120" width="780" height="720" class="rack"/>
-  <line x1="220" y1="565" x2="1000" y2="565" class="shelf"/>
-  <line x1="220" y1="300" x2="1000" y2="300" class="shelf"/>
-  <rect x="250" y="150" width="340" height="380" rx="8" class="dry"/>
-  <rect x="315" y="178" width="210" height="90" rx="6" fill="#263238"/>
-  <text x="358" y="230" font-family="Arial" font-size="19" fill="white">HMI / AJUDA</text>
-  <circle cx="555" cy="195" r="18" fill="#d32f2f" stroke="#f9a825" stroke-width="6"/>
-  <text x="500" y="230" class="small">E-STOP</text>
+  <rect x="300" y="120" width="585" height="720" class="rack"/>
+  <line x1="300" y1="400" x2="885" y2="400" class="shelf"/>
+  <line x1="300" y1="610" x2="720" y2="610" class="shelf"/>
+  <line x1="300" y1="820" x2="720" y2="820" class="shelf"/>
+  <rect x="325" y="150" width="250" height="225" rx="8" class="dry"/>
+  <rect x="365" y="170" width="170" height="62" rx="6" fill="#263238"/>
+  <text x="393" y="208" font-family="Arial" font-size="17" fill="white">HMI / AJUDA</text>
+  <circle cx="550" cy="175" r="12" fill="#d32f2f" stroke="#f9a825" stroke-width="4"/>
+  <text x="515" y="205" class="small">E-STOP</text>
 
   <g fill="#eceff1" stroke="#263238" stroke-width="3">
-    <rect x="285" y="315" width="75" height="75" rx="8"/><rect x="385" y="315" width="75" height="75" rx="8"/><rect x="485" y="315" width="75" height="75" rx="8"/>
-    <rect x="285" y="420" width="75" height="75" rx="8"/><rect x="385" y="420" width="75" height="75" rx="8"/><rect x="485" y="420" width="75" height="75" rx="8"/>
+    <rect x="345" y="250" width="58" height="48" rx="6"/><rect x="420" y="250" width="58" height="48" rx="6"/><rect x="495" y="250" width="58" height="48" rx="6"/>
+    <rect x="345" y="315" width="58" height="48" rx="6"/><rect x="420" y="315" width="58" height="48" rx="6"/><rect x="495" y="315" width="58" height="48" rx="6"/>
   </g>
-  <g class="small"><text x="312" y="360">D1</text><text x="412" y="360">D2</text><text x="512" y="360">D3</text><text x="312" y="465">D4</text><text x="412" y="465">D5</text><text x="512" y="465">D6</text></g>
+  <g class="small"><text x="365" y="280">D1</text><text x="440" y="280">D2</text><text x="515" y="280">D3</text><text x="365" y="345">D4</text><text x="440" y="345">D5</text><text x="515" y="345">D6</text></g>
 
   <g class="jar">
-    <rect x="635" y="150" width="95" height="125" rx="12"/><rect x="750" y="150" width="95" height="125" rx="12"/><rect x="865" y="150" width="95" height="125" rx="12"/>
-    <rect x="635" y="340" width="95" height="125" rx="12"/><rect x="750" y="340" width="95" height="125" rx="12"/><rect x="865" y="340" width="95" height="125" rx="12"/>
+    <rect x="605" y="150" width="70" height="92" rx="10"/><rect x="690" y="150" width="70" height="92" rx="10"/><rect x="775" y="150" width="70" height="92" rx="10"/>
+    <rect x="605" y="275" width="70" height="92" rx="10"/><rect x="690" y="275" width="70" height="92" rx="10"/><rect x="775" y="275" width="70" height="92" rx="10"/>
   </g>
-  <g class="small"><text x="668" y="215">C1</text><text x="783" y="215">C2</text><text x="898" y="215">C3</text><text x="668" y="405">C4</text><text x="783" y="405">C5</text><text x="898" y="405">C6</text></g>
-  <rect x="620" y="280" width="355" height="22" class="tray"/><rect x="620" y="470" width="355" height="22" class="tray"/>
-  <path d="M682 275V510M797 275V510M912 275V510" class="pipe" opacity=".7"/>
+  <g class="small"><text x="630" y="202">C1</text><text x="715" y="202">C2</text><text x="800" y="202">C3</text><text x="630" y="327">C4</text><text x="715" y="327">C5</text><text x="800" y="327">C6</text></g>
+  <rect x="592" y="245" width="266" height="16" class="tray"/><rect x="592" y="370" width="266" height="16" class="tray"/>
+  <path d="M640 242V390M725 242V390M810 242V390" class="pipe" opacity=".7"/>
 
-  <rect x="250" y="590" width="720" height="105" rx="8" class="wet"/>
-  <text x="430" y="630" class="txt">PAINEL HIDRÁULICO REMOVÍVEL</text>
-  <text x="330" y="665" class="small">uniões • bombas • válvulas • pH • EC • temperatura • amostra</text>
-  <path d="M250 645H185V795" class="pipe"/><path d="M970 645H1040V795" class="pipe"/>
+  <rect x="745" y="425" width="115" height="370" rx="8" class="wet"/>
+  <text x="785" y="475" class="small" transform="rotate(90 785 475)">PAINEL HIDRÁULICO REMOVÍVEL</text>
+  <text x="830" y="455" class="small" transform="rotate(90 830 455)">P1…P4 • XV1…XV2 • SONDAS</text>
 
-  <rect x="260" y="720" width="335" height="105" rx="12" class="wet"/>
-  <rect x="625" y="720" width="335" height="105" rx="12" class="wet"/>
-  <text x="360" y="775" class="txt">TK-101 50 L</text><text x="725" y="775" class="txt">TK-201 50 L</text>
-  <rect x="245" y="710" width="730" height="130" rx="10" class="tray" fill-opacity=".25"/>
+  <rect x="340" y="435" width="350" height="145" rx="12" class="wet"/>
+  <text x="448" y="505" class="txt">TK-101 50 L</text>
+  <text x="405" y="535" class="small">água • WIT-101 • prateleira própria</text>
+  <rect x="325" y="585" width="380" height="20" rx="6" class="tray"/>
+  <text x="360" y="630" class="small">CT2 coleta e drena por gravidade → CT1</text>
+  <rect x="325" y="640" width="380" height="180" rx="10" class="tray" fill-opacity=".35"/>
+  <rect x="340" y="655" width="350" height="145" rx="12" class="wet"/>
+  <text x="448" y="725" class="txt">TK-201 50 L</text>
+  <text x="390" y="755" class="small">mistura/rega • WIT-201 • nível inferior</text>
+  <path d="M705 595H730V785H705" class="pipe"/>
 
-  <path d="M265 135H575" class="cable"/><text x="268" y="115" class="small">rota seca SELV/dados</text>
-  <path d="M990 150H1050V690" class="pipe"/><text x="1060" y="420" class="small" transform="rotate(90 1060 420)">rota molhada vertical</text>
+  <path d="M325 135H575" class="cable"/><text x="328" y="115" class="small">rota seca SELV/dados</text>
+  <path d="M870 150H925V795" class="pipe"/><text x="935" y="420" class="small" transform="rotate(90 935 420)">rota molhada vertical</text>
 
-  <line x1="220" y1="875" x2="1000" y2="875" class="dim"/><text x="570" y="900" class="small">1.200</text>
-  <line x1="170" y1="120" x2="170" y2="840" class="dim"/><text x="135" y="510" class="small" transform="rotate(-90 135 510)">2.000</text>
-  <line x1="1085" y1="120" x2="1085" y2="300" class="dim"/><text x="1095" y="220" class="small">500</text>
-  <line x1="1085" y1="300" x2="1085" y2="565" class="dim"/><text x="1095" y="442" class="small">735</text>
-  <line x1="1085" y1="565" x2="1085" y2="840" class="dim"/><text x="1095" y="712" class="small">765</text>
+  <line x1="300" y1="875" x2="885" y2="875" class="dim"/><text x="575" y="900" class="small">900</text>
+  <line x1="250" y1="120" x2="250" y2="840" class="dim"/><text x="215" y="510" class="small" transform="rotate(-90 215 510)">2.000</text>
+  <line x1="970" y1="120" x2="970" y2="400" class="dim"/><text x="980" y="265" class="small">780</text>
+  <line x1="970" y1="400" x2="970" y2="610" class="dim"/><text x="980" y="510" class="small">585</text>
+  <line x1="970" y1="610" x2="970" y2="840" class="dim"/><text x="980" y="730" class="small">635</text>
 
   <rect x="55" y="930" width="1290" height="48" fill="none" stroke="#263238" stroke-width="2"/>
-  <text x="70" y="960" class="small">Frente de manutenção. Pesos embaixo; seco acima/esquerda; fluido à direita/abaixo; nenhuma iluminação.</text>
+  <text x="70" y="960" class="small">TK-101 nunca apoia em TK-201. Cada nível ≥100 kg; rack ≥250 kg; CT1 ≥110 L livres; nenhuma iluminação.</text>
   <text x="1190" y="960" class="small">FOLHA 05/08</text>
 </svg>
