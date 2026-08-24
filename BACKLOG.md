@@ -69,8 +69,8 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F2-016 P1` Implementar umidade com histerese e anti-ciclo.
 - [x] `F2-017 P1` Implementar exaustor por temperatura/VPD.
 - [x] `F2-018 P0` Criar testes de perda de rede em cada estado crítico.
-- [ ] `F2-019 P0` Intertravar umidificador por nível mínimo e timeout.
-- [ ] `F2-020 P1` Monitorar CO₂ sem comandar injeção no MVP.
+- [x] `F2-019 P0` Intertravar umidificador por nível mínimo e timeout.
+- [x] `F2-020 P1` Monitorar CO₂ sem comandar injeção no MVP.
 - [x] `F2-021 P1` Definir limites absolutos de temperatura e UR sobre o VPD.
 - [x] `F2-022 P1` Detectar exaustor comandado sem feedback de corrente/contato.
 - [x] `F2-023 P1` Implementar prioridade entre exaustão e umidificação.

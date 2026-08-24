@@ -54,6 +54,53 @@ class HumidityControllerTests(TestCase):
         self.assertEqual(HumidifierAction.OFF, decision.action)
         self.assertEqual("absolute_humidity_high", decision.reason)
 
+    def test_absolute_timeout_latches_and_requires_safe_reset(self) -> None:
+        controller = HumidityController(
+            HumidityConfig(
+                target_percent=60,
+                minimum_on_time=timedelta(0),
+                absolute_timeout=timedelta(seconds=30),
+            )
+        )
+        controller.evaluate(
+            40,
+            now=self.now,
+            reading_valid=True,
+            water_level_ok=True,
+            leak_detected=False,
+        )
+        decision = controller.evaluate(
+            40,
+            now=self.now + timedelta(seconds=30),
+            reading_valid=True,
+            water_level_ok=True,
+            leak_detected=False,
+        )
+        self.assertEqual(HumidifierAction.OFF, decision.action)
+        self.assertEqual("humidifier_absolute_timeout", controller.safety_latch)
+        held = controller.evaluate(
+            40,
+            now=self.now + timedelta(seconds=31),
+            reading_valid=True,
+            water_level_ok=True,
+            leak_detected=False,
+        )
+        self.assertEqual("safety_latched:humidifier_absolute_timeout", held.reason)
+        with self.assertRaises(RuntimeError):
+            controller.reset_safety(water_level_ok=False, leak_detected=False)
+        with self.assertRaises(RuntimeError):
+            controller.reset_safety(water_level_ok=True, leak_detected=True)
+        controller.reset_safety(water_level_ok=True, leak_detected=False)
+        self.assertIsNone(controller.safety_latch)
+
+    def test_low_level_is_latched_until_explicit_safe_reset(self) -> None:
+        first = self.evaluate(50, water_level_ok=False)
+        self.assertEqual("humidifier_level_low", first.reason)
+        held = self.evaluate(50, seconds=1, water_level_ok=True)
+        self.assertEqual("safety_latched:humidifier_level_low", held.reason)
+        self.controller.reset_safety(water_level_ok=True, leak_detected=False)
+        self.assertEqual(HumidifierAction.ON, self.evaluate(50, seconds=2).action)
+
     def test_rejects_unsafe_target_and_naive_time(self) -> None:
         with self.assertRaises(ValueError):
             HumidityConfig(target_percent=95)
