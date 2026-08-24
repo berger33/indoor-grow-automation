@@ -13,6 +13,8 @@ class DeploymentTests(TestCase):
         self.assertIn("eclipse-mosquitto:2.0.22", compose)
         self.assertIn("POSTGRES_PASSWORD_FILE", compose)
         self.assertIn("GROWHUB_SESSION_KEY_FILE", compose)
+        self.assertIn("/run/growhub-mqtt:ro", compose)
+        self.assertIn("GROWHUB_MQTT_CERT", compose)
         self.assertIn("127.0.0.1:${GROWHUB_HTTP_PORT", compose)
 
     def test_restore_requires_confirmation_checksum_and_prebackup(self) -> None:

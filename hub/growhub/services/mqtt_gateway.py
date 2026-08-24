@@ -124,6 +124,36 @@ class MqttGateway:
             "lastError": self.last_error,
         }
 
+    def expire_pending(self, *, now: datetime | None = None) -> int:
+        reference = now or self.clock()
+        if reference.tzinfo is None or reference.utcoffset() is None:
+            raise ValueError("horário de expiração MQTT deve conter timezone")
+        expired = [item for item in self._pending.values() if reference > item.envelope.expires_at]
+        for pending in expired:
+            command = pending.envelope
+            del self._pending[command.command_id]
+            record = self.operations.update_audit_status(
+                pending.audit_id,
+                "timeout",
+                now=reference,
+                reason="command_timeout",
+            )
+            timeout_ack = CommandAcknowledgement(
+                command.command_id,
+                command.sequence,
+                AckStatus.NACK,
+                "command_timeout",
+                reference,
+            )
+            self._update_batch(record.action, record.station_id, record.audit_id, timeout_ack)
+            self._emit(
+                "command.timeout",
+                record.station_id,
+                reference,
+                {"auditId": record.audit_id, "reason": "command_timeout"},
+            )
+        return len(expired)
+
     def start(self, loop: asyncio.AbstractEventLoop) -> None:
         self._loop = loop
         self._client.connect_async(
@@ -147,6 +177,7 @@ class MqttGateway:
         target: str,
         now: datetime,
     ) -> CommandEnvelope:
+        self.expire_pending(now=now)
         if not self.connected:
             raise MqttUnavailable("broker MQTT desconectado; comando não foi enviado")
         try:
@@ -334,5 +365,5 @@ class MqttGateway:
     def _on_message(self, _client, _userdata, message) -> None:
         try:
             self.handle_message(message.topic, message.payload, received_at=self.clock())
-        except (KeyError, ValueError) as exc:
+        except Exception as exc:  # limite da thread Paho: falha nunca derruba o loop de rede
             self.last_error = f"mqtt_message_rejected:{exc}"

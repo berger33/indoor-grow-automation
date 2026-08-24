@@ -15,3 +15,8 @@ Certificados e chaves não pertencem ao Git. Em produção, monte:
 O teste `scripts/test_mosquitto_tls.sh` cria uma CA efêmera, sobe Mosquitto
 2.0.22 em contêiner, confirma uma publicação autorizada e comprova que um nó
 não publica no espaço de outro. Nenhuma chave de teste é preservada.
+
+O contêiner do hub monta a mesma pasta em `/run/growhub-mqtt`, usando somente
+`ca.crt`, `grow-hub.crt` e `grow-hub.key`. Se o broker estiver desconectado, a
+API devolve HTTP 503 e registra `transport_unavailable`; ela nunca informa que
+um comando foi enfileirado quando a publicação não ocorreu.

@@ -44,6 +44,10 @@ pela placa efetivamente comprada.
 5. Execute `docker compose --env-file deploy/.env -f deploy/docker-compose.yml up -d --build`.
 6. Confira `docker compose -f deploy/docker-compose.yml ps` e abra `/health`.
 
+Em `/health`, `mqtt.status` deve ser `connected`. `disconnected` significa que
+telemetria, alarmes e ACK/NACK não estão chegando; nesse estado a API recusa
+novos comandos com HTTP 503, em vez de simular uma fila offline insegura.
+
 O painel fica ligado apenas a `127.0.0.1` por padrão. Para acesso pela rede,
 adicione proxy HTTPS autenticado; não exponha diretamente a API na internet.
 

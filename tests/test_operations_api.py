@@ -10,6 +10,7 @@ from hub.growhub.api import create_app
 from hub.growhub.domain.sensors import SensorKind, SensorReading, Unit
 from hub.growhub.services.lighting_application import LightingApplicationService
 from hub.growhub.services.lighting_store import FileLightingStore
+from hub.growhub.services.mqtt_gateway import MqttUnavailable
 from hub.growhub.services.operations import (
     AlarmRecord,
     InMemoryOperations,
@@ -28,7 +29,7 @@ class OperationsApiTests(TestCase):
     def setUp(self) -> None:
         self.temporary = TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
-        lighting = LightingApplicationService(FileLightingStore(Path(self.temporary.name) / "lighting.json"), clock=lambda: NOW)
+        self.lighting = LightingApplicationService(FileLightingStore(Path(self.temporary.name) / "lighting.json"), clock=lambda: NOW)
         hasher = PasswordHasher()
         self.auth = AuthService(
             b"0123456789abcdef0123456789abcdef",
@@ -50,7 +51,7 @@ class OperationsApiTests(TestCase):
         )
         self.realtime = RealtimeBuffer()
         app = create_app(
-            lighting,
+            self.lighting,
             operations=self.operations,
             auth=self.auth,
             realtime=self.realtime,
@@ -135,6 +136,34 @@ class OperationsApiTests(TestCase):
         self.assertEqual(202, batch.status_code, batch.text)
         run = self.client.get("/api/v1/stations/grow_a/batch-runs").json()["runs"][0]
         self.assertEqual("awaiting_ack", run["currentStep"])
+
+    def test_production_transport_failure_is_explicit_and_fail_safe(self) -> None:
+        class UnavailableDispatcher:
+            def start(self, _loop) -> None: pass
+            def stop(self) -> None: pass
+            def health(self): return {"status": "disconnected"}
+            def expire_pending(self): return 0
+            def dispatch(self, **_kwargs):
+                raise MqttUnavailable("broker MQTT desconectado; comando não foi enviado")
+
+        app = create_app(
+            self.lighting,
+            operations=self.operations,
+            auth=self.auth,
+            realtime=self.realtime,
+            operations_clock=lambda: NOW,
+            mqtt_gateway=UnavailableDispatcher(),  # type: ignore[arg-type]
+        )
+        with TestClient(app, base_url="https://testserver") as client:
+            login = client.post("/api/v1/auth/login", json={"userId": "operator", "password": "operator-password"})
+            self.assertEqual(200, login.status_code)
+            response = client.post(
+                "/api/v1/stations/grow_a/commands",
+                json={"action": "safe_stop", "target": "station"},
+            )
+            self.assertEqual(503, response.status_code)
+            self.assertIn("não foi enviado", response.json()["detail"])
+            self.assertEqual("transport_unavailable", self.operations.audit[-1].status)
 
     def test_admin_creates_user_and_reads_audit(self) -> None:
         self.login("admin", "administrator-password")

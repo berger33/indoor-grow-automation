@@ -13,9 +13,11 @@ from ..persistence.database import create_database_engine, create_session_factor
 from ..persistence.lighting import SqlLightingStore
 from ..persistence.operations import SqlOperations
 from ..persistence.security import SqlUserRepository
+from ..persistence.telemetry import SqlTelemetryRepository
 from ..domain.sensors import EXPECTED_UNIT, SensorKind
 from ..domain.staleness import DEFAULT_MAX_AGE
 from ..services.lighting_application import LightingApplicationService
+from ..services.mqtt_gateway import MqttConnectionSettings, MqttGateway
 from ..services.operations import SensorDefinition, Setpoints, StationDefinition
 from ..services.realtime import RealtimeBuffer
 from ..services.security import AuthService, UserRole
@@ -108,6 +110,20 @@ def build_runtime_app():
     )
     if station_id not in operations.setpoints:
         operations.save_setpoints(station_id, Setpoints(5.8, 1.8, 25, 65, 1.1), user_id=admin_id, now=datetime.now(UTC))
+    realtime = RealtimeBuffer()
+    mqtt_gateway = MqttGateway(
+        MqttConnectionSettings(
+            host=os.environ.get("GROWHUB_MQTT_HOST", "broker").strip(),
+            port=int(os.environ.get("GROWHUB_MQTT_INTERNAL_PORT", "8883")),
+            ca_cert=Path(os.environ.get("GROWHUB_MQTT_CA", "/run/growhub-mqtt/ca.crt")),
+            client_cert=Path(os.environ.get("GROWHUB_MQTT_CERT", "/run/growhub-mqtt/grow-hub.crt")),
+            client_key=Path(os.environ.get("GROWHUB_MQTT_KEY", "/run/growhub-mqtt/grow-hub.key")),
+        ),
+        operations,
+        SqlTelemetryRepository(sessions),
+        realtime,
+        sensor_nodes={(station_id, sensor_id): node for sensor_id, _, _, node in sensor_layout},
+    )
     default_dist = Path(__file__).resolve().parents[3] / "web" / "dist"
     web_dist = Path(os.environ.get("GROWHUB_WEB_DIST", default_dist))
     return create_app(
@@ -115,5 +131,6 @@ def build_runtime_app():
         web_dist=web_dist,
         operations=operations,
         auth=auth,
-        realtime=RealtimeBuffer(),
+        realtime=realtime,
+        mqtt_gateway=mqtt_gateway,
     )

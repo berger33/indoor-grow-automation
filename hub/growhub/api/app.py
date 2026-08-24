@@ -19,6 +19,7 @@ from ..services.lighting_application import (
     RemoteLightView,
 )
 from ..services.operations import InMemoryOperations
+from ..services.mqtt_gateway import MqttGateway
 from ..services.realtime import RealtimeBuffer
 from ..services.security import AuthService, UserRole
 from .operations_router import create_operations_router
@@ -76,14 +77,25 @@ def create_app(
     auth: AuthService | None = None,
     realtime: RealtimeBuffer | None = None,
     operations_clock: Callable[[], datetime] | None = None,
+    mqtt_gateway: MqttGateway | None = None,
 ) -> FastAPI:
     @asynccontextmanager
     async def lifespan(_: FastAPI) -> AsyncIterator[None]:
         stop = asyncio.Event()
+        if mqtt_gateway is not None:
+            mqtt_gateway.start(asyncio.get_running_loop())
 
         async def reconcile_forever() -> None:
             while not stop.is_set():
                 await asyncio.to_thread(service.reconcile_once)
+                try:
+                    await asyncio.wait_for(stop.wait(), timeout=1)
+                except TimeoutError:
+                    pass
+
+        async def expire_mqtt_commands_forever() -> None:
+            while not stop.is_set():
+                mqtt_gateway.expire_pending()  # type: ignore[union-attr]
                 try:
                     await asyncio.wait_for(stop.wait(), timeout=1)
                 except TimeoutError:
@@ -94,6 +106,11 @@ def create_app(
             if service.can_reconcile
             else None
         )
+        mqtt_task = (
+            asyncio.create_task(expire_mqtt_commands_forever())
+            if mqtt_gateway is not None
+            else None
+        )
         try:
             yield
         finally:
@@ -102,6 +119,12 @@ def create_app(
                 task.cancel()
                 with suppress(asyncio.CancelledError):
                     await task
+            if mqtt_task is not None:
+                mqtt_task.cancel()
+                with suppress(asyncio.CancelledError):
+                    await mqtt_task
+            if mqtt_gateway is not None:
+                mqtt_gateway.stop()
 
     app = FastAPI(title="Grow Hub API", version="1.0", lifespan=lifespan)
 
@@ -116,6 +139,7 @@ def create_app(
                 auth,
                 realtime,
                 clock=clock,
+                dispatcher=mqtt_gateway,
             )
         )
 
@@ -131,8 +155,11 @@ def create_app(
             return await call_next(request)
 
     @app.get("/health")
-    def health() -> dict[str, str]:
-        return {"status": "ok"}
+    def health() -> dict[str, object]:
+        result: dict[str, object] = {"status": "ok"}
+        if mqtt_gateway is not None:
+            result["mqtt"] = mqtt_gateway.health()
+        return result
 
     @app.get("/api/v1/lighting")
     def get_lighting() -> dict[str, object]:

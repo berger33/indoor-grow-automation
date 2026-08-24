@@ -11,6 +11,7 @@ from fastapi import APIRouter, Cookie, Depends, HTTPException, Query, Response, 
 from pydantic import BaseModel, ConfigDict, Field
 
 from ..services.calibration import evaluate_calibration
+from ..services.mqtt_gateway import MqttGateway, MqttUnavailable
 from ..services.operations import BatchRunRecord, CalibrationRecord, InMemoryOperations, IrrigationWindow, Recipe, RecipeStep, Setpoints
 from ..services.realtime import RealtimeBuffer
 from ..services.security import AuthService, UserAccount, UserRole
@@ -99,6 +100,7 @@ def create_operations_router(
     realtime: RealtimeBuffer,
     *,
     clock: Callable[[], datetime] = lambda: datetime.now(UTC),
+    dispatcher: MqttGateway | None = None,
 ) -> APIRouter:
     router = APIRouter(prefix="/api/v1")
 
@@ -296,16 +298,46 @@ def create_operations_router(
             active = any(run.station_id == station_id and run.status in {"queued", "running"} for run in operations.batch_runs.values())
             if active:
                 raise HTTPException(status_code=409, detail="já existe uma batelada ativa")
-        audit = operations.record_audit(account.user_id, station_id, payload.action, payload.target, "queued", clock())
+        now = clock()
+        audit = operations.record_audit(account.user_id, station_id, payload.action, payload.target, "queued", now)
         if payload.action == "start_batch":
-            operations.save_batch_run(BatchRunRecord(audit.audit_id, station_id, payload.target, "queued", "awaiting_ack", 0, clock()))
+            operations.save_batch_run(BatchRunRecord(audit.audit_id, station_id, payload.target, "queued", "awaiting_ack", 0, now))
         elif payload.action == "stop_batch":
             for run in operations.batch_runs.values():
                 if run.station_id == station_id and run.status in {"queued", "running"}:
                     run.status = "stop_queued"
                     operations.save_batch_run(run)
-        await realtime.publish("command.queued", station_id, clock(), {"auditId": audit.audit_id, "action": payload.action, "target": payload.target})
-        return {"auditId": audit.audit_id, "status": "queued", "explanation": "aguardando ACK/NACK do firmware"}
+        transport_status = "queued"
+        if dispatcher is not None:
+            try:
+                dispatcher.dispatch(
+                    audit_id=audit.audit_id,
+                    station_id=station_id,
+                    action=payload.action,
+                    target=payload.target,
+                    now=now,
+                )
+            except MqttUnavailable as exc:
+                operations.update_audit_status(audit.audit_id, "transport_unavailable", now=now, reason=str(exc))
+                if payload.action == "start_batch":
+                    run = operations.batch_runs[audit.audit_id]
+                    run.status = "failed"
+                    run.current_step = "transport_unavailable"
+                    run.failure_code = "mqtt_unavailable"
+                    run.finished_at = now
+                    operations.save_batch_run(run)
+                elif payload.action == "stop_batch":
+                    for run in operations.batch_runs.values():
+                        if run.station_id == station_id and run.status == "stop_queued":
+                            run.status = "stop_rejected"
+                            run.current_step = "transport_unavailable"
+                            run.failure_code = "mqtt_unavailable"
+                            operations.save_batch_run(run)
+                await realtime.publish("command.rejected", station_id, now, {"auditId": audit.audit_id, "reason": "mqtt_unavailable"})
+                raise HTTPException(status_code=503, detail=str(exc)) from exc
+            transport_status = "sent"
+        await realtime.publish("command.queued", station_id, now, {"auditId": audit.audit_id, "action": payload.action, "target": payload.target, "transportStatus": transport_status})
+        return {"auditId": audit.audit_id, "status": transport_status, "explanation": "aguardando ACK/NACK do firmware"}
 
     @router.get("/stations/{station_id}/batch-runs")
     def batch_runs(station_id: str, _: UserAccount = Depends(viewer)) -> dict[str, object]:

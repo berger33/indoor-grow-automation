@@ -1,4 +1,5 @@
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
 from types import SimpleNamespace
 from unittest import TestCase
 from uuid import uuid4
@@ -58,7 +59,7 @@ class MqttGatewayTests(TestCase):
         self.client = FakeClient()
         self.telemetry = FakeTelemetry()
         self.gateway = MqttGateway(
-            MqttConnectionSettings("broker", 8883, None, None, None),  # type: ignore[arg-type]
+            MqttConnectionSettings("broker", 8883, Path("unused-ca"), Path("unused-cert"), Path("unused-key")),
             self.operations,
             self.telemetry,
             RealtimeBuffer(),
@@ -94,6 +95,14 @@ class MqttGatewayTests(TestCase):
         with self.assertRaises(MqttUnavailable):
             self.gateway.dispatch(audit_id=audit.audit_id, station_id="grow-01", action="safe_stop", target="station", now=NOW)
         self.assertEqual([], self.client.published)
+
+    def test_pending_command_expires_without_ack_and_is_not_replayed(self) -> None:
+        audit = self.operations.record_audit("operator", "grow-01", "safe_stop", "station", "queued", NOW)
+        command = self.gateway.dispatch(audit_id=audit.audit_id, station_id="grow-01", action="safe_stop", target="station", now=NOW)
+        self.assertEqual(0, self.gateway.expire_pending(now=command.expires_at))
+        self.assertEqual(1, self.gateway.expire_pending(now=command.expires_at + timedelta(microseconds=1)))
+        self.assertEqual("timeout", self.operations.audit[0].status)
+        self.assertEqual(0, self.gateway.health()["pendingCommands"])
 
     def test_persists_latched_alarm_idempotently(self) -> None:
         alarm = AlarmEnvelope(str(uuid4()), "grow-01", "leak_detected", AlarmSeverity.CRITICAL, "Água confirmada.", "Mantenha OFF e inspecione.", NOW)
