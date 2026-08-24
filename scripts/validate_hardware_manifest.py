@@ -231,6 +231,47 @@ def validate_stirrer_contract(
     return tuple(errors)
 
 
+def validate_exhaust_contract(
+    contract: dict[str, object], references: set[str] | frozenset[str]
+) -> tuple[str, ...]:
+    """Mantém a transição do exaustor reversível e sem presumir pinagem."""
+    errors: list[str] = []
+    if contract.get("schema_version") != 1:
+        errors.append("exhaust-contract: schema_version deve ser 1")
+    if contract.get("release_state") != "HOLD":
+        errors.append("exhaust-contract: interface direta deve permanecer em HOLD")
+    installed = contract.get("installed_profile")
+    if not isinstance(installed, dict) or installed.get("control_mode") != "contactor_on_off_only":
+        errors.append("exhaust-contract: exaustor atual deve ser somente liga/desliga")
+    target = contract.get("target_profile")
+    if not isinstance(target, dict):
+        errors.append("exhaust-contract: perfil alvo ausente")
+    else:
+        if (target.get("mpn"), target.get("duct_in"), target.get("airflow_cfm")) != (
+            "AI-CLS6",
+            6,
+            402,
+        ):
+            errors.append("exhaust-contract: alvo deve ser AI-CLS6 de 6 pol/402 CFM")
+        if target.get("direct_control_state") != "HOLD_UNTIL_EXACT_REVISION_PINOUT":
+            errors.append("exhaust-contract: pinagem direta não pode estar liberada")
+    requirements = contract.get("control_requirements")
+    required_true = (
+        "local_fallback_required",
+        "loss_of_esp32_must_not_stop_required_ventilation",
+        "anti_cycle_required",
+        "command_feedback_separation_required",
+        "absolute_temperature_and_humidity_limits_override_vpd",
+    )
+    if not isinstance(requirements, dict) or any(
+        requirements.get(key) is not True for key in required_true
+    ):
+        errors.append("exhaust-contract: requisitos fail-safe incompletos")
+    if not {"FAN1", "IF-F1"}.issubset(references):
+        errors.append("exhaust-contract: FAN1 e IF-F1 devem constar na BOM")
+    return tuple(errors)
+
+
 def validate_manifests() -> ManifestResult:
     errors: list[str] = []
     holds: list[str] = []
@@ -295,6 +336,8 @@ def validate_manifests() -> ManifestResult:
         errors.extend(validate_layout_contract(json.load(handle)))
     with (SYSTEM_HARDWARE / "stirrer-contract.json").open(encoding="utf-8") as handle:
         errors.extend(validate_stirrer_contract(json.load(handle), references))
+    with (SYSTEM_HARDWARE / "exhaust-contract.json").open(encoding="utf-8") as handle:
+        errors.extend(validate_exhaust_contract(json.load(handle), references))
     if limits.get("mains_allowed") is not False:
         errors.append("pcb-parameters: rede CA deve permanecer proibida")
     if limits.get("input_maximum_vdc", 999) > 30:

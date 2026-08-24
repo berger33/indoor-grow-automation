@@ -6,6 +6,7 @@ from scripts.validate_hardware_manifest import (
     expand_reference_expression,
     expand_reference_group,
     validate_actuator_rows,
+    validate_exhaust_contract,
     validate_layout_contract,
     validate_manifests,
     validate_stirrer_contract,
@@ -209,3 +210,40 @@ class StirrerContractTests(TestCase):
         broken["feedback"]["required_during_dosing"] = False
         errors = validate_stirrer_contract(broken, self.references)
         self.assertTrue(any("intertravar" in error for error in errors))
+
+
+class ExhaustContractTests(TestCase):
+    def setUp(self) -> None:
+        self.contract = {
+            "schema_version": 1,
+            "release_state": "HOLD",
+            "installed_profile": {"control_mode": "contactor_on_off_only"},
+            "target_profile": {
+                "mpn": "AI-CLS6",
+                "duct_in": 6,
+                "airflow_cfm": 402,
+                "direct_control_state": "HOLD_UNTIL_EXACT_REVISION_PINOUT",
+            },
+            "control_requirements": {
+                "local_fallback_required": True,
+                "loss_of_esp32_must_not_stop_required_ventilation": True,
+                "anti_cycle_required": True,
+                "command_feedback_separation_required": True,
+                "absolute_temperature_and_humidity_limits_override_vpd": True,
+            },
+        }
+
+    def test_accepts_fail_safe_transition_profile(self) -> None:
+        self.assertEqual(
+            (), validate_exhaust_contract(self.contract, {"FAN1", "IF-F1"})
+        )
+
+    def test_rejects_direct_control_release_and_missing_fallback(self) -> None:
+        broken = deepcopy(self.contract)
+        broken["release_state"] = "APPROVED"
+        broken["target_profile"]["direct_control_state"] = "APPROVED"
+        broken["control_requirements"]["local_fallback_required"] = False
+        errors = validate_exhaust_contract(broken, {"FAN1", "IF-F1"})
+        self.assertTrue(any("HOLD" in error for error in errors))
+        self.assertTrue(any("pinagem" in error for error in errors))
+        self.assertTrue(any("fail-safe" in error for error in errors))
