@@ -19,9 +19,10 @@ painel web responsivo.
 - oferecer documentação suficientemente detalhada para montagem por terceiros;
 - preservar operação segura quando Wi-Fi, broker ou servidor falharem.
 
-**Iluminação não faz parte deste projeto.** O responsável já possui uma
-automação independente; por isso não haverá acionamento, dimerização,
-fotoperíodo, carga elétrica, API ou tela de luz. Consulte o
+**A potência da iluminação não faz parte deste projeto.** As luminárias continuam
+nas tomadas Wi-Fi EKAZA existentes. O painel apenas oferece uma integração lógica
+opcional via Home Assistant para agenda, comando e confirmação de estado; não há
+relé, contator, fiação, PCB, dimerização, PPFD ou credencial no ESP32. Consulte o
 [`escopo executável da v1.0`](docs/ESCOPO_V1.md).
 
 ## Arquitetura planejada
@@ -31,6 +32,7 @@ Painel web responsivo
         │ HTTPS / WebSocket
         ▼
 Hub Raspberry Pi ── API + banco + MQTT ── Wi-Fi/LAN
+        ├── Home Assistant ── tomada EKAZA │
         │                                  │
         │                                  ├── ESP32 fertirrigação/pH/EC
         │                                  ├── ESP32 clima/VPD
@@ -115,6 +117,9 @@ inclui:
 - [BOM consolidada com disponibilidade e critérios de substituição](docs/hardware/rev-a/BOM_SISTEMA.md);
 - [controladora SELV, pinagem, netlist e parâmetros](hardware/controller-rev-a/README.md);
 - [laudo preliminar e gates de fabricação](docs/hardware/rev-a/LAUDO_REVISAO_REVA.md).
+
+A [integração opcional das tomadas EKAZA](docs/tutorial/10a-integracao-tomadas-ekaza.md)
+é exclusivamente de software e não altera o hardware Rev A.
 
 ![Unifilar da variante 127 V](desenhos/REV-A-01_UNIFILAR_127V.svg)
 

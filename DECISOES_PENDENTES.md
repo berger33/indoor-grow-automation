@@ -7,8 +7,8 @@ devem bloquear trabalho independente em outros módulos.
 
 - [x] Adotar 127 V/60 Hz como base da instalação. A frequência brasileira é
   60 Hz; ainda deve ser conferida no ponto de alimentação antes do comissionamento.
-- [x] Excluir por completo a iluminação: a automação Yuxinou existente permanece
-  independente deste sistema.
+- [x] Manter toda a potência de iluminação fora da estação: as luminárias Yuxinou
+  permanecem nas tomadas EKAZA existentes e recebem apenas comandos de software.
 - [x] Tratar o exaustor atual como motor CA liga/desliga. A imagem fornecida
   mostra quatro fios para ligação 110/220 V, sem interface PWM/0–10 V comprovada.
 - [x] Reservar seis recipientes de concentrado de 1 L, um reservatório de água
@@ -18,6 +18,12 @@ devem bloquear trabalho independente em outros módulos.
 ## Instalação física — validações ainda necessárias
 
 - [ ] Fotografar a plaqueta do exaustor atual e fornecer a do futuro substituto.
+- [ ] Fotografar a plaqueta e informar o código exato de cada tomada EKAZA;
+  confirmar que cada unidade aparece como entidade `switch` no Home Assistant.
+- [ ] Fotografar as plaquetas das quatro luminárias e medir corrente e inrush por
+  tomada; os 390 W nominais totais não homologam plugue, carga ou circuito.
+- [ ] Executar cem ciclos por tomada e ensaiar perda/retorno de Wi-Fi, internet,
+  Home Assistant e nuvem Tuya antes de habilitar a agenda automática.
 - [ ] Medir dimensões internas, altura útil e material dos dois reservatórios de
   50 L e dos seis recipientes de 1 L.
 - [ ] Informar a altura entre reservatórios, cultivo e destino do dreno, além da

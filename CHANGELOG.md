@@ -67,6 +67,13 @@ versionamento semântico a partir da primeira release.
 - exclusão mútua retida de pH+ e pH−;
 - orçamento de dosagem por evento, janela horária e janela diária;
 - ADR do núcleo fail-safe e tutorial de inventário/inspeção de recebimento.
+- agenda semanal de tomadas Wi-Fi com timezone, períodos cruzando meia-noite e
+  override manual com expiração;
+- cliente da API REST do Home Assistant para entidades `switch`, com token
+  somente em runtime e confirmação após o comando;
+- reconciliador que compara estado desejado e observado sem repetir comandos;
+- ADR e tutorial de pareamento/homologação das tomadas EKAZA, mantendo toda a
+  alimentação e fiação de iluminação fora da estação.
 
 ### Segurança
 
@@ -79,3 +86,5 @@ versionamento semântico a partir da primeira release.
 - novo comando não renova o timeout absoluto de uma saída energizada;
 - perda do hub não deixa `MANUAL` ou `BATCH` operando sem supervisão;
 - pedido simultâneo de pH+ e pH− desenergiza ambos e bloqueia nova dose.
+- falha ou divergência de tomada remota permanece explícita e nunca interfere
+  nos intertravamentos de fertirrigação, hidráulica ou clima.
