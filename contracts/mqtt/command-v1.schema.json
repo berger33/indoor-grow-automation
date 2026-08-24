@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://indoor-grow.local/contracts/mqtt/command-v1.schema.json",
+  "title": "Indoor Grow Command Envelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "command_id", "station_id", "node_id", "function", "action", "sequence", "issued_at", "expires_at", "parameters"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "command_id": { "type": "string", "format": "uuid" },
+    "station_id": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$" },
+    "node_id": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$" },
+    "function": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$" },
+    "action": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$" },
+    "sequence": { "type": "integer", "minimum": 0 },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "number", "integer", "boolean"] }
+    }
+  }
+}

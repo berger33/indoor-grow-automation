@@ -79,8 +79,8 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 ## Fase 3 — Hub e conectividade
 
 - [x] `F3-001 P0` Criar serviço FastAPI com healthcheck.
-- [ ] `F3-002 P0` Definir tópicos MQTT por estação e função.
-- [ ] `F3-003 P0` Implementar ACK/NACK idempotente de comandos.
+- [x] `F3-002 P0` Definir tópicos MQTT por estação e função.
+- [x] `F3-003 P0` Implementar ACK/NACK idempotente de comandos.
 - [ ] `F3-004 P0` Configurar Mosquitto com ACL e TLS.
 - [ ] `F3-005 P1` Persistir telemetria no PostgreSQL.
 - [ ] `F3-006 P1` Criar migrações iniciais Alembic.
