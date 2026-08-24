@@ -36,6 +36,8 @@ pela placa efetivamente comprada.
    - `postgres_password`: senha aleatória do usuário do banco;
    - `database_url`: URL completa `postgresql+psycopg://...` correspondente;
    - `session_key`: ao menos 32 bytes aleatórios;
+   - `admin_password`: senha inicial forte, com ao menos 12 caracteres; depois
+     crie contas individuais e preserve o arquivo somente para recuperação;
    - `home_assistant_token`: token de longa duração do Home Assistant;
    - `certs/`: CA, servidor MQTT e cliente `grow-hub` conforme o README do broker.
 4. Execute `docker compose --env-file deploy/.env -f deploy/docker-compose.yml config`.

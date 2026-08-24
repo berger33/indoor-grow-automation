@@ -11,6 +11,7 @@ import os
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from enum import IntEnum
+from typing import Protocol
 
 from ..domain.sensors import IDENTIFIER
 
@@ -28,6 +29,11 @@ class UserAccount:
     role: UserRole
     password_hash: str
     enabled: bool = True
+
+
+class UserRepository(Protocol):
+    def load(self) -> tuple[UserAccount, ...]: ...
+    def save(self, account: UserAccount) -> None: ...
 
 
 class PasswordHasher:
@@ -60,17 +66,25 @@ def _decode(value: str) -> bytes:
 
 
 class AuthService:
-    def __init__(self, signing_key: bytes, users: tuple[UserAccount, ...] = ()) -> None:
+    def __init__(self, signing_key: bytes, users: tuple[UserAccount, ...] = (), repository: UserRepository | None = None) -> None:
         if len(signing_key) < 32:
             raise ValueError("chave de sessão deve possuir ao menos 32 bytes")
         self._key = signing_key
-        self._users = {user.user_id: user for user in users}
+        self._repository = repository
+        persisted = repository.load() if repository is not None else ()
+        self._users = {user.user_id: user for user in (*persisted, *users)}
         self._hasher = PasswordHasher()
+
+    @property
+    def has_users(self) -> bool:
+        return bool(self._users)
 
     def add_user(self, user_id: str, display_name: str, role: UserRole, password: str) -> UserAccount:
         if IDENTIFIER.fullmatch(user_id) is None or user_id in self._users or not display_name.strip():
             raise ValueError("usuário inválido ou duplicado")
         account = UserAccount(user_id, display_name, role, self._hasher.hash(password))
+        if self._repository is not None:
+            self._repository.save(account)
         self._users[user_id] = account
         return account
 

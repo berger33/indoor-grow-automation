@@ -143,7 +143,8 @@ def create_operations_router(
             created = auth.add_user(payload.user_id, payload.display_name, UserRole[payload.role.upper()], payload.password)
         except ValueError as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
-        operations.record_audit(account.user_id, "system", "create_user", created.user_id, "applied", clock(), role=payload.role)
+        audit_station = next(iter(operations.stations), "system")
+        operations.record_audit(account.user_id, audit_station, "create_user", created.user_id, "applied", clock(), role=payload.role)
         return {"userId": created.user_id, "displayName": created.display_name, "role": created.role.name.lower()}
 
     @router.get("/stations")
@@ -194,7 +195,7 @@ def create_operations_router(
             value = Setpoints(**payload.model_dump())
         except ValueError as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
-        operations.setpoints[station_id] = value
+        operations.save_setpoints(station_id, value, user_id=account.user_id, now=clock())
         operations.record_audit(account.user_id, station_id, "update_setpoints", station_id, "applied", clock())
         await realtime.publish("configuration.updated", station_id, clock(), {"resource": "setpoints"})
         return _setpoints_payload(value)
@@ -229,7 +230,7 @@ def create_operations_router(
             )
         except ValueError as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
-        operations.recipes.setdefault(station_id, {})[recipe.recipe_id] = recipe
+        operations.save_recipe(station_id, recipe, user_id=account.user_id, now=clock())
         operations.record_audit(account.user_id, station_id, "save_recipe", recipe.recipe_id, "applied", clock())
         return {"recipeId": recipe.recipe_id, "status": "saved"}
 
@@ -297,11 +298,12 @@ def create_operations_router(
                 raise HTTPException(status_code=409, detail="já existe uma batelada ativa")
         audit = operations.record_audit(account.user_id, station_id, payload.action, payload.target, "queued", clock())
         if payload.action == "start_batch":
-            operations.batch_runs[audit.audit_id] = BatchRunRecord(audit.audit_id, station_id, payload.target, "queued", "awaiting_ack", 0, clock())
+            operations.save_batch_run(BatchRunRecord(audit.audit_id, station_id, payload.target, "queued", "awaiting_ack", 0, clock()))
         elif payload.action == "stop_batch":
             for run in operations.batch_runs.values():
                 if run.station_id == station_id and run.status in {"queued", "running"}:
                     run.status = "stop_queued"
+                    operations.save_batch_run(run)
         await realtime.publish("command.queued", station_id, clock(), {"auditId": audit.audit_id, "action": payload.action, "target": payload.target})
         return {"auditId": audit.audit_id, "status": "queued", "explanation": "aguardando ACK/NACK do firmware"}
 
@@ -347,7 +349,7 @@ def create_operations_router(
         except ValueError as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
         record = CalibrationRecord(str(uuid.uuid4()), station_id, payload.device_id, payload.kind, result.coefficients, result.status, clock(), account.user_id)
-        operations.calibrations.append(record)
+        operations.save_calibration(record)
         operations.record_audit(account.user_id, station_id, "calibration_record", payload.device_id, result.status, clock(), kind=payload.kind)
         await realtime.publish("calibration.updated", station_id, clock(), {"calibrationId": record.calibration_id, "status": result.status})
         return {"calibrationId": record.calibration_id, "status": result.status, "coefficients": result.coefficients, "explanation": result.explanation}

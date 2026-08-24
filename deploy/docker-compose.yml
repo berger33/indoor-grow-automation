@@ -58,13 +58,19 @@ services:
       GROWHUB_BIND_PORT: "8000"
       GROWHUB_DATABASE_URL_FILE: /run/secrets/database_url
       GROWHUB_SESSION_KEY_FILE: /run/secrets/session_key
+      GROWHUB_ADMIN_PASSWORD_FILE: /run/secrets/admin_password
       GROWHUB_HA_TOKEN_FILE: /run/secrets/home_assistant_token
       GROWHUB_HA_URL: ${GROWHUB_HA_URL:-http://homeassistant.local:8123}
       GROWHUB_EKAZA_ENTITIES: ${GROWHUB_EKAZA_ENTITIES:-}
+      GROWHUB_ADMIN_USER: ${GROWHUB_ADMIN_USER:-admin}
+      GROWHUB_ADMIN_NAME: ${GROWHUB_ADMIN_NAME:-Administrador local}
+      GROWHUB_STATION_ID: ${GROWHUB_STATION_ID:-grow-01}
+      GROWHUB_STATION_NAME: ${GROWHUB_STATION_NAME:-Estufa principal}
       TZ: America/Sao_Paulo
     secrets:
       - database_url
       - session_key
+      - admin_password
       - home_assistant_token
     ports:
       - "127.0.0.1:${GROWHUB_HTTP_PORT:-8000}:8000"
@@ -96,5 +102,7 @@ secrets:
     file: ${GROWHUB_DATABASE_URL_FILE:-./secrets/database_url}
   session_key:
     file: ${GROWHUB_SESSION_KEY_FILE:-./secrets/session_key}
+  admin_password:
+    file: ${GROWHUB_ADMIN_PASSWORD_FILE:-./secrets/admin_password}
   home_assistant_token:
     file: ${GROWHUB_HA_TOKEN_FILE:-./secrets/home_assistant_token}

@@ -261,6 +261,18 @@ class InMemoryOperations:
             raise ValueError("são permitidas no máximo cinco irrigações")
         self.irrigation[station_id] = windows
 
+    def save_setpoints(self, station_id: str, value: Setpoints, *, user_id: str, now: datetime) -> None:
+        self.setpoints[station_id] = value
+
+    def save_recipe(self, station_id: str, value: Recipe, *, user_id: str, now: datetime) -> None:
+        self.recipes.setdefault(station_id, {})[value.recipe_id] = value
+
+    def save_calibration(self, value: CalibrationRecord) -> None:
+        self.calibrations.append(value)
+
+    def save_batch_run(self, value: BatchRunRecord) -> None:
+        self.batch_runs[value.batch_id] = value
+
     def record_audit(self, user_id: str, station_id: str, action: str, target: str, status: str, now: datetime, **details: object) -> AuditRecord:
         record = AuditRecord(str(uuid.uuid4()), user_id, station_id, action, target, status, now, details)
         self.audit.append(record)
