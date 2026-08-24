@@ -55,6 +55,18 @@ versionamento semântico a partir da primeira release.
   estado HOLD;
 - tutorial A0 de montagem seca, inspeção dimensional e segregação das zonas;
 - validador de integridade para oito pranchas SVG integrado ao Quality Gate.
+- simuladores determinísticos para todos os tipos de sensor, com injeção de
+  falhas canônicas;
+- diagnóstico por leitura e resumo de saúde da estação com sensores ausentes;
+- máquina local `BOOT/IDLE/MANUAL/BATCH/ALARM` com alarme retido;
+- timeout absoluto de atuador que comandos repetidos não conseguem prorrogar;
+- supervisor de vazamento integrado ao corte local e rearme seco explícito;
+- inicialização de GPIO por polaridade com enable posterior ao estado seguro;
+- watchdog local, motivo de reset e heartbeat sequenciado do hub;
+- política de perda de rede que interrompe modos ativos e rejeita comandos;
+- exclusão mútua retida de pH+ e pH−;
+- orçamento de dosagem por evento, janela horária e janela diária;
+- ADR do núcleo fail-safe e tutorial de inventário/inspeção de recebimento.
 
 ### Segurança
 
@@ -63,3 +75,7 @@ versionamento semântico a partir da primeira release.
 - scanner impede tokens, chaves privadas e segredos atribuídos.
 - falhas de aquisição preservam valor e timestamp brutos para diagnóstico;
 - vazamento não é apagado automaticamente quando o sensor volta a indicar seco.
+- alarme local não pode ser limpo pelo painel enquanto a causa física persiste;
+- novo comando não renova o timeout absoluto de uma saída energizada;
+- perda do hub não deixa `MANUAL` ou `BATCH` operando sem supervisão;
+- pedido simultâneo de pH+ e pH− desenergiza ambos e bloqueia nova dose.
