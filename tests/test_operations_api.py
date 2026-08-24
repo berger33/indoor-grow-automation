@@ -65,6 +65,7 @@ class OperationsApiTests(TestCase):
 
     def test_requires_session_and_enforces_roles(self) -> None:
         self.assertEqual(401, self.client.get("/api/v1/stations").status_code)
+        self.assertEqual(401, self.client.get("/api/v1/lighting").status_code)
         self.login("viewer", "viewer-password")
         self.assertEqual(200, self.client.get("/api/v1/stations").status_code)
         forbidden = self.client.put(

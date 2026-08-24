@@ -16,6 +16,8 @@ NOMINAL_VALUES = {
     SensorKind.HUMIDITY: 60.0,
     SensorKind.CO2: 650.0,
     SensorKind.RESERVOIR_LEVEL: 40.0,
+    SensorKind.MASS: 4.5,
+    SensorKind.VPD: 1.1,
     SensorKind.FLOW: 2.0,
     SensorKind.LEAK: 0.0,
 }

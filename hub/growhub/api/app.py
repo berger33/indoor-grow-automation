@@ -8,7 +8,8 @@ from datetime import UTC, datetime, time
 from pathlib import Path
 from typing import AsyncIterator, Callable, Literal
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -19,7 +20,7 @@ from ..services.lighting_application import (
 )
 from ..services.operations import InMemoryOperations
 from ..services.realtime import RealtimeBuffer
-from ..services.security import AuthService
+from ..services.security import AuthService, UserRole
 from .operations_router import create_operations_router
 
 
@@ -108,14 +109,26 @@ def create_app(
     if any(configured) and not all(configured):
         raise ValueError("operações, autenticação e tempo real devem ser configurados juntos")
     if operations is not None and auth is not None and realtime is not None:
+        clock = operations_clock or (lambda: datetime.now(UTC))
         app.include_router(
             create_operations_router(
                 operations,
                 auth,
                 realtime,
-                clock=operations_clock or (lambda: datetime.now(UTC)),
+                clock=clock,
             )
         )
+
+        @app.middleware("http")
+        async def secure_lighting(request: Request, call_next):
+            if request.url.path.startswith("/api/v1/lighting"):
+                account = auth.verify(request.cookies.get("growhub_session", ""), now=clock())
+                minimum = UserRole.VIEWER if request.method == "GET" else UserRole.OPERATOR
+                if account is None:
+                    return JSONResponse({"detail": "sessão inválida ou expirada"}, status_code=401)
+                if account.role < minimum:
+                    return JSONResponse({"detail": "perfil sem permissão"}, status_code=403)
+            return await call_next(request)
 
     @app.get("/health")
     def health() -> dict[str, str]:
