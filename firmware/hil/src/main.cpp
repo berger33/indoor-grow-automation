@@ -1,4 +1,5 @@
 #include <GrowCore.h>
+#include <GrowProcess.h>
 
 #include <cstdlib>
 #include <iostream>
@@ -57,6 +58,23 @@ int main() {
   require(!guarded.command(0, true, 1, 1000, false), "sensor crítico inválido deve inibir comando");
   require(guarded.reason() == TripReason::SensorInvalid, "falha de sensor deve ficar retida");
 
-  std::cout << "HIL virtual: 5 cenários fail-safe aprovados\n";
+  const grow::PumpCalibration fill_cal{100.0F, 0.0F, true};
+  const grow::PumpCalibration dose_cal{1.0F, 0.0F, true};
+  const std::array<grow::PumpCalibration, 6> dose_calibrations{
+      dose_cal, dose_cal, dose_cal, dose_cal, dose_cal, dose_cal};
+  grow::BatchController batch;
+  require(batch.start(0, 10.0F, {1, 1, 1, 1, 1, 1}, fill_cal,
+                      dose_calibrations, dose_cal, dose_cal),
+          "batelada calibrada deve iniciar");
+  grow::BatchInputs process{0.0F, 6.0F, 1.8F, true, true, true, false, false};
+  require(batch.tick(1, process) == grow::FillWater, "batelada deve encher primeiro");
+  process.mix_liters = 10.0F;
+  require(batch.tick(100, process) == grow::Mixer, "massa alvo deve iniciar dosagem");
+  require(batch.tick(101, process) == grow::Nutrient0, "primeiro nutriente deve seguir a ordem");
+  process.leak_detected = true;
+  require(batch.tick(102, process) == 0 && batch.stage() == grow::BatchStage::Alarm,
+          "vazamento deve abortar batelada e zerar saídas");
+
+  std::cout << "HIL virtual: 6 cenários fail-safe aprovados\n";
   return 0;
 }
