@@ -1,7 +1,8 @@
 from datetime import UTC, datetime, timedelta
 from unittest import TestCase
 
-from hub.growhub.domain.sensors import SensorKind, Unit
+from hub.growhub.domain.faults import SensorFaultCode
+from hub.growhub.domain.sensors import ReadingQuality, SensorKind, Unit
 from hub.growhub.simulation.sensors import SequenceSensorSimulator, SimulationFrame
 
 
@@ -55,3 +56,18 @@ class SequenceSensorSimulatorTests(TestCase):
         simulator.next_reading(started_at=started)
         with self.assertRaises(StopIteration):
             simulator.next_reading(started_at=started)
+
+    def test_injects_canonical_fault_without_losing_raw_value(self) -> None:
+        simulator = SequenceSensorSimulator(
+            station_id="grow-01",
+            sensor_id="ph-01",
+            kind=SensorKind.PH,
+            unit=Unit.PH,
+            frames=(SimulationFrame(6.2, fault=SensorFaultCode.TIMEOUT),),
+        )
+        reading = simulator.next_reading(
+            started_at=datetime(2026, 8, 24, tzinfo=UTC)
+        )
+        self.assertEqual(6.2, reading.value)
+        self.assertEqual(ReadingQuality.TIMEOUT, reading.quality)
+        self.assertEqual("sensor_timeout", reading.error_code)

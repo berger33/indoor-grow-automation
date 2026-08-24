@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 
+from ..domain.faults import SensorFaultCode, mark_sensor_fault
 from ..domain.sensors import SensorKind, SensorReading, Unit
 
 
@@ -14,6 +15,7 @@ class SimulationFrame:
 
     value: float
     offset: timedelta = timedelta(0)
+    fault: SensorFaultCode | None = None
 
     def __post_init__(self) -> None:
         if self.offset < timedelta(0):
@@ -55,7 +57,7 @@ class SequenceSensorSimulator:
             raise StopIteration("sequência simulada concluída")
         frame = self._frames[self._index]
         self._index += 1
-        return SensorReading(
+        reading = SensorReading(
             station_id=self._station_id,
             sensor_id=self._sensor_id,
             kind=self._kind,
@@ -63,3 +65,6 @@ class SequenceSensorSimulator:
             unit=self._unit,
             observed_at=started_at + frame.offset,
         )
+        if frame.fault is not None:
+            return mark_sensor_fault(reading, frame.fault)
+        return reading
