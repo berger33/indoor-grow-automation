@@ -18,6 +18,7 @@ somente o que é visualmente defensável e separa observação de adaptação.
 | painel branco com tablet | metade superior esquerda | comando e dosagem ficam acessíveis em pé | tela no gabinete seco, sem depender dela para segurança |
 | cabeçotes peristálticos | sob a tela, matriz compacta | reduz comprimento dos tubos e área frontal | seis canais de concentrado; funções auxiliares vão ao painel hidráulico |
 | seis frascos transparentes | duas prateleiras de três, à direita | inspeção visual e troca frontal | seis recipientes de 1 L com bandeja, retenção e identificação |
+| seis ventoinhas de 80 mm | uma sob cada frasco | transforma a própria prateleira em banco compacto de agitação magnética | seis módulos protegidos, 12 VCC, dois ímãs balanceados, barra PTFE e tacômetro individual |
 | prateleiras de madeira | apoios estreitos, empilhados | aproveita faixa vertical que ficaria vazia | material selado ou suporte lavável, com contenção individual |
 | feixes de tubo | laterais, topo e frente | caminho visível facilita diagnóstico | rotas segregadas, clips, raio mínimo e laços de gotejamento |
 | tote preto/tampa amarela | nível inferior do rack em tomadas distintas | ocupa praticamente toda a largura útil e sugere uso de níveis, não duplicação horizontal | dois tanques de 50 L empilhados em prateleiras estruturais independentes |
@@ -34,6 +35,16 @@ Não será inventado um sétimo nutriente.
 O projeto próprio mantém seis peristálticas de concentrado. Transferência,
 mistura, irrigação e dreno ficam no painel hidráulico e são identificados por
 função. Uma saída elétrica permanece reserva e bloqueada no firmware.
+
+## Agitação dos frascos
+
+O trecho adicional e a lista oficial eliminam a ambiguidade sobre as peças:
+seis Arctic F8 PWM, doze ímãs e seis barras magnéticas PTFE tipo C. O autor opera
+as ventoinhas em velocidade total e usa relé para liga/desliga. A adaptação Rev A
+preserva essa compactação, mas alimenta o banco por 12 VCC derivado da fonte de
+24 VCC, protege os rotores e exige tacômetro individual antes de dosar. A revisão
+com timestamps e HOLDs está em
+[`REVISAO_AGITACAO_MAGNETICA.md`](REVISAO_AGITACAO_MAGNETICA.md).
 
 ## Regras dimensionais derivadas
 
