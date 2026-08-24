@@ -74,6 +74,11 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F2-022 P1` Detectar exaustor comandado sem feedback de corrente/contato.
 - [ ] `F2-023 P1` Implementar prioridade entre exaustão e umidificação.
 - [ ] `F2-024 P2` Modelar módulos opcionais de desumidificação e climatização.
+- [x] `F2-025 P0` Intertravar cada dosadora pela rotação válida do agitador.
+- [x] `F2-026 P0` Fixar identidade e separação dos seis canais químicos.
+- [ ] `F2-027 P0` Validar estabilidade, lote e validade de toda calibração.
+- [ ] `F2-028 P0` Aplicar timeout e auditoria a todo comando manual.
+- [x] `F2-029 P1` Modelar agenda timezone-aware das tomadas EKAZA.
 
 ## Fase 3 — Hub e conectividade
 
@@ -91,6 +96,11 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F3-012 P1` Criar backup e teste de restauração.
 - [ ] `F3-013 P2` Implementar buffer offline e deduplicação.
 - [ ] `F3-014 P1` Criar Docker Compose ARM64 do hub.
+- [ ] `F3-015 P1` Publicar diagnóstico de CPU, memória, disco, nós e serviços.
+- [ ] `F3-016 P1` Implementar roteamento e confirmação de notificações.
+- [ ] `F3-017 P1` Persistir histórico e validade das calibrações.
+- [ ] `F3-018 P1` Implementar adaptador Home Assistant/Tuya para EKAZA.
+- [ ] `F3-019 P1` Reconciliar estado desejado/observado das tomadas após reboot.
 
 ## Fase 4 — Painel mobile-first
 
@@ -106,6 +116,11 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [ ] `F4-010 P2` Criar comparação de múltiplas tendas.
 - [ ] `F4-011 P2` Criar PWA com cache somente de leitura.
 - [ ] `F4-012 P1` Cobrir acessibilidade e operação por teclado.
+- [ ] `F4-013 P1` Criar tela de saúde do hub e dos nós.
+- [ ] `F4-014 P1` Criar preferências e histórico de notificações.
+- [ ] `F4-015 P1` Criar histórico de calibrações e padrões.
+- [ ] `F4-016 P1` Criar tela de tomadas EKAZA com estado confirmado.
+- [ ] `F4-017 P1` Criar editor de fotoperíodo e override com expiração.
 
 ## Fase 5 — Instalação e release
 
@@ -142,7 +157,7 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F5-031 P0` Criar tutorial 02 de montagem da estrutura seca.
 - [x] `F5-032 P0` Criar tutorial 03 de reservatórios e plataformas de pesagem.
 - [ ] `F5-033 P0` Criar tutorial 04 de válvulas, bombas e tubulação.
-- [ ] `F5-034 P0` Criar tutorial 05 de frascos, dosadoras e agitadores.
+- [x] `F5-034 P0` Criar tutorial 05 de frascos, dosadoras e agitadores.
 - [ ] `F5-035 P0` Criar tutorial 06 de sondas e sensores de segurança.
 - [ ] `F5-036 P0` Criar tutorial 07 do quadro e chicotes SELV.
 - [ ] `F5-037 P0` Criar tutorial 08 da instalação CA por profissional habilitado.
@@ -162,3 +177,10 @@ compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
 - [x] `F5-051 P0` Remover a disposição antiga de tanques lado a lado dos artefatos correntes.
 - [x] `F5-052 P0` Fixar contrato executável do rack 900 × 600 × 2.000 mm máximo.
 - [x] `F5-053 P1` Substituir a vista realista pela estação com tanques empilhados.
+- [x] `F5-054 P0` Substituir WebP inválido por PNG decodificável e validado.
+- [x] `F5-055 P1` Confirmar peças e sequência da agitação magnética.
+- [x] `F5-056 P1` Incorporar a Parte 2 em uma análise de lacunas verificável.
+- [x] `F5-057 P1` Documentar CLOUDLINE S6 e interface de fan em HOLD.
+- [x] `F5-058 P1` Publicar pranchas de dosagem e quadro SELV aberto.
+- [x] `F5-059 P1` Rotular as vistas realistas com os seis produtos.
+- [x] `F5-060 P1` Criar tutorial 10A de integração das tomadas EKAZA.
