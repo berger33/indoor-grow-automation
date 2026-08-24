@@ -17,9 +17,9 @@ evidências visuais de adaptações de segurança.
 |---|---|---|
 | A — quadro seco | proteções CA, fontes, controladora, bornes, HMI e E-stop | alto à esquerda, fechado e lateralmente afastado dos frascos |
 | B — dosagem | seis frascos de 1 L, seis agitadores e seis peristálticas | duas fileiras de três à direita, com bombas no painel seco adjacente |
-| C — água | reservatório de origem de 50 L, plataforma e boias | base rígida, nivelada, dentro de contenção |
-| D — mistura | reservatório de mistura/rega de 50 L, plataforma, sondas e bomba | base rígida, tampa acessível e sem apoiar tubos na balança |
-| E — hidráulica | bombas, válvulas, manifold, uniões e dreno | travessa central removível, abaixo de dosagem e acima dos tanques |
+| C — água | `TK-101` de 50 L, plataforma, boias e bandeja `CT2` | nível intermediário próprio, acima de `TK-201`, sem contato entre caixas |
+| D — mistura | `TK-201` de 50 L, plataforma, sondas e bomba | nível inferior dentro de `CT1`, tampa acessível e sem esforço na balança |
+| E — hidráulica | bombas, válvulas, manifold, uniões e dreno | coluna lateral removível que atende os dois níveis sem passar sobre o quadro |
 | F — cultivo | emissores, bandeja de coleta, dreno e sensores climáticos | nenhum equipamento de rede exposto à névoa/rega |
 | G — hub | Raspberry Pi, rede e armazenamento | caixa seca, ventilada e acessível para backup |
 
@@ -30,16 +30,20 @@ molhada formam laço de gotejamento antes do prensa-cabo.
 
 | Parâmetro | Meta A0 | Estado |
 |---|---:|---|
-| rack | 1.200 × 600 × 2.000 mm | provisional; confirmar modelo/carga |
-| área de piso do rack | 0,72 m² | calculada pelo envelope |
+| rack | máximo 900 × 600 × 2.000 mm | provisional; confirmar modelo/carga |
+| área de piso do rack | máximo 0,54 m² | redução de 25% sobre a revisão anterior |
 | faixa frontal de manutenção | mínimo 900 mm | conferir no ambiente |
-| tanque individual | máximo provisório 500 × 400 mm | HOLD por medição |
-| contenção inferior | mínimo 110 L úteis | HOLD por seleção/ensaio |
-| carga de projeto do rack | superior a 150 kg | HOLD por cálculo e fabricante |
+| tanque individual | máximo provisório 700 × 450 mm | HOLD por medição externa e curso da tampa |
+| `CT2` superior | bandeja com dois drenos por gravidade | HOLD por vazão e ensaio de obstrução |
+| `CT1` inferior | mínimo 110 L livres já descontados obstáculos | HOLD por cálculo geométrico e ensaio |
+| prateleira por tanque | mínimo 100 kg documentados | HOLD por fabricante e ensaio de flecha |
+| carga total do rack | mínimo 250 kg distribuídos | HOLD por cálculo, fabricante e ancoragem |
 
 O rack não poderá ser comprado antes de conferir carga, dimensões dos tanques,
-ancoragem e risco de tombamento. O painel de fundo deve ser selado e removível;
-madeira crua não é superfície final aprovada.
+flecha de cada nível, ancoragem e risco de tombamento com `TK-101` cheio. O
+tanque superior nunca se apoia na tampa, nas paredes ou na plataforma do tanque
+inferior. O painel de fundo deve ser selado e removível; madeira crua não é
+superfície final aprovada.
 
 ## 2. Capacidade de atuação
 
@@ -85,11 +89,15 @@ não é critério de dimensionamento.
 ## 5. Manutenção incorporada ao layout
 
 - todos os seis frascos saem pela frente sem remover mangueiras de outros canais;
+- `TK-101` e `TK-201` saem pela frente do respectivo nível somente depois de
+  drenados; nenhuma manutenção exige levantar manualmente um tanque cheio;
 - cabeçotes peristálticos e tubos são substituíveis individualmente;
 - sondas podem ser retiradas, limpas e armazenadas sem esvaziar o quadro;
 - bombas e válvulas possuem união nos dois lados;
 - plataformas de pesagem têm batentes contra sobrecarga e não recebem esforço
   lateral de mangueiras;
+- a bandeja `CT2` pode ser testada com água em cada dreno, e `CT1` pode ser
+  inspecionada e esvaziada sem desmontar o rack;
 - cada cabo, tubo, borne, fusível, canal e sentido de fluxo recebe identificador;
 - bandejas e piso permitem testar cada sensor de vazamento sem molhar eletrônica.
 
