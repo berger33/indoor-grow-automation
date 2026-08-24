@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import asyncio
 from contextlib import asynccontextmanager, suppress
-from datetime import time
+from datetime import UTC, datetime, time
 from pathlib import Path
-from typing import AsyncIterator, Literal
+from typing import AsyncIterator, Callable, Literal
 
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
@@ -17,6 +17,10 @@ from ..services.lighting_application import (
     LightingApplicationService,
     RemoteLightView,
 )
+from ..services.operations import InMemoryOperations
+from ..services.realtime import RealtimeBuffer
+from ..services.security import AuthService
+from .operations_router import create_operations_router
 
 
 class SchedulePayload(BaseModel):
@@ -67,6 +71,10 @@ def create_app(
     service: LightingApplicationService,
     *,
     web_dist: Path | None = None,
+    operations: InMemoryOperations | None = None,
+    auth: AuthService | None = None,
+    realtime: RealtimeBuffer | None = None,
+    operations_clock: Callable[[], datetime] | None = None,
 ) -> FastAPI:
     @asynccontextmanager
     async def lifespan(_: FastAPI) -> AsyncIterator[None]:
@@ -95,6 +103,19 @@ def create_app(
                     await task
 
     app = FastAPI(title="Grow Hub API", version="1.0", lifespan=lifespan)
+
+    configured = (operations is not None, auth is not None, realtime is not None)
+    if any(configured) and not all(configured):
+        raise ValueError("operações, autenticação e tempo real devem ser configurados juntos")
+    if operations is not None and auth is not None and realtime is not None:
+        app.include_router(
+            create_operations_router(
+                operations,
+                auth,
+                realtime,
+                clock=operations_clock or (lambda: datetime.now(UTC)),
+            )
+        )
 
     @app.get("/health")
     def health() -> dict[str, str]:
