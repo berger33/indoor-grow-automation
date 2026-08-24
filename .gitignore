@@ -18,8 +18,8 @@ build/
 .vscode/
 .idea/
 node_modules/
+*.tsbuildinfo
 coverage/
 *.log
 .DS_Store
 Thumbs.db
-
