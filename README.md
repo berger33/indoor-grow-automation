@@ -119,6 +119,10 @@ As [vistas realistas e suas limitações](docs/images/realistic/README.md)
 mostram a aparência pretendida. Elas não substituem desenhos cotados, P&ID,
 unifilar ou arquivos de fabricação.
 
+Galeria validada: [estação completa](docs/images/realistic/01_ESTACAO_COMPLETA_REALISTA.png),
+[conjunto técnico aberto](docs/images/realistic/02_VISTA_TECNICA_CONJUNTO_ABERTO.png)
+e [quadro de controle aberto](docs/images/realistic/03_QUADRO_CONTROLE_ABERTO_REALISTA.png).
+
 O [caderno multidisciplinar Rev A](docs/hardware/rev-a/CADERNO_PRANCHAS.md)
 reúne implantação, planta baixa, elevação, projeto hidráulico, projeto elétrico
 e rotas de instalações da disposição vertical compacta.

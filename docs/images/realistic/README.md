@@ -4,6 +4,11 @@ Estas imagens foram geradas em PNG e validadas byte a byte em 2026-08-23. O
 portão de qualidade rejeita assinatura, CRC, dados comprimidos ou dimensões
 inválidas e também proíbe novas referências a WebP nesta pasta.
 
+As três vistas principais receberam uma faixa inferior renderizada de forma
+determinística. Ela fixa os nomes `pH Down`, `CalMag`, `Micro`, `Bloom`,
+`Veg (Grow)` e `pH Up`, as quantidades do banco de agitação e a fronteira da
+iluminação remota; essa faixa prevalece sobre qualquer microtexto ilustrativo.
+
 | Arquivo | Uso | O que deve aparecer |
 |---|---|---|
 | `01_ESTACAO_COMPLETA_REALISTA.png` | fotografia conceitual do sistema pronto | seis frascos, seis agitadores, seis dosadoras, dois tanques de 50 L empilhados, manifold, tenda, exaustor e umidificador |
@@ -44,7 +49,8 @@ fabricar ou montar, prevalecem, nesta ordem:
 - rótulos e microdetalhes gerados não definem tensão, MPN ou pinagem;
 - formas dos tanques são ilustrativas até medir os recipientes adquiridos;
 - nenhum desenho autoriza ligação em 127 V, compra em lote ou fabricação;
-- iluminação foi deliberadamente omitida e não integra o sistema.
+- nenhuma carga de iluminação integra o rack; somente tomadas EKAZA/Tuya são
+  acessadas logicamente pelo hub, conforme ADR 0008.
 - fotos reais substituirão estes conceitos depois do protótipo, HIL e piloto
   supervisionado somente com água.
 
