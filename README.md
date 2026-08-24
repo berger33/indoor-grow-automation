@@ -111,7 +111,7 @@ para fabricar lote ou energizar cargas reais.
 
 ![Estação compacta vertical — visualização conceitual](docs/images/realistic/ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp)
 
-As [três vistas realistas e suas limitações](docs/images/realistic/README.md)
+As [vistas realistas e suas limitações](docs/images/realistic/README.md)
 mostram a aparência pretendida. Elas não substituem desenhos cotados, P&ID,
 unifilar ou arquivos de fabricação.
 

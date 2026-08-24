@@ -5,10 +5,8 @@ do escopo de engenharia em 2026-08-23; não retratam um protótipo já fabricado
 
 | Arquivo | Intenção visual |
 |---|---|
-| `ESTACAO_COMPLETA_CONCEITUAL.webp` | relação espacial entre quadro seco, seis canais, dois tanques, hidráulica e tenda |
-| `FERTIRRIGACAO_CONCEITUAL.webp` | aproximação frontal dos frascos, dosadoras, bombas, válvulas, sondas e contenção |
+| `ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp` | vista principal corrigida: seis canais e dois tanques de 50 L empilhados em níveis independentes |
 | `CLIMA_CONCEITUAL.webp` | exaustor, umidificador, sensores na copa, bandeja e dreno |
-| `ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp` | revisão compacta inspirada na disposição vertical do vídeo, com seis canais e dois tanques |
 
 ## O que é vinculante
 
@@ -24,6 +22,8 @@ geral. Para comprar ou montar, prevalecem nesta ordem:
 ## Limitações conhecidas
 
 - formas e dimensões dos tanques são ilustrativas até medir os recipientes reais;
+- a imagem mostra `TK-101` sobre `TK-201`, mas cada caixa usa prateleira e
+  plataforma próprias; não existe apoio sobre a tampa do tanque inferior;
 - conexões, válvulas e linhas visuais não constituem o P&ID;
 - suportes de frascos/agitadores serão detalhados em desenho mecânico;
 - gabinete fechado não mostra a segregação interna CA/SELV;
@@ -36,10 +36,9 @@ validada antes da release v1.0.
 
 ## Direção usada na geração
 
-- vista geral: estação compacta completa, seis frascos de 1 L, duas caixas de
-  50 L, quadro seco elevado, painel hidráulico, exaustão e umidificação;
-- vista úmida: manutenção frontal, quatro funções de bomba, duas válvulas,
-  peristálticas, pH/EC/temperatura, plataformas e contenção;
+- vista geral: estação compacta, exatamente seis frascos de 1 L e seis
+  peristálticas, duas caixas de 50 L empilhadas, quadro seco elevado, painel
+  hidráulico lateral, exaustão e umidificação;
 - vista de clima: tenda 80 × 80 cm, exaustor, umidificador externo, sensores de
   temperatura/UR/CO₂/folha, bandeja, dreno e detecção de vazamento;
 - em todas: sem luminárias, drivers, dimmers ou controles de iluminação; sem
@@ -47,12 +46,17 @@ validada antes da release v1.0.
 
 ### Revisão compacta vertical
 
-A revisão compacta foi gerada por edição da primeira vista geral, usando os
-quadros do painel original apenas como referência de disposição. O pedido fixou
-um rack de aproximadamente 1.200 × 600 × 2.000 mm, painel seco e seis
-peristálticas no alto à esquerda, seis recipientes em duas fileiras à direita,
-manifold úmido central e dois tanques de 50 L na contenção inferior. A imagem
-preserva a tenda, exaustão e umidificação e omite integralmente iluminação.
+A revisão compacta foi gerada por edição da vista anterior e refinada com os
+quadros do painel original como referência de disposição. O envelope A0 passou
+a no máximo 900 × 600 × 2.000 mm. O painel seco/HMI e as seis peristálticas
+ficam no alto à esquerda; os seis recipientes em duas fileiras de três ficam à
+direita; `TK-101` e `TK-201` ocupam níveis sobrepostos e independentes; o
+manifold usa uma faixa lateral molhada. A imagem preserva tenda, exaustão e
+umidificação e omite integralmente iluminação.
+
+As antigas vistas com os dois tanques lado a lado foram removidas da revisão
+corrente para evitar que sejam confundidas com instruções de montagem. Elas
+continuam recuperáveis apenas pelo histórico Git.
 
 Essa disposição é a direção A0 do projeto; cotas e componentes continuam
 dependentes da medição física e dos desenhos vinculantes.

@@ -69,8 +69,6 @@ conector de campo correspondente está liberado para fabricação.
 
 ## 4. Fluxo hidráulico funcional
 
-![Visualização realista conceitual da fertirrigação](../../images/realistic/FERTIRRIGACAO_CONCEITUAL.webp)
-
 1. a entrada enche o tanque de água até limite de massa/boia;
 2. válvula e bomba transferem a quantidade prevista ao tanque de mistura;
 3. a mistura circula enquanto as dosadoras adicionam um canal por vez;
