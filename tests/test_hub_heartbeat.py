@@ -48,5 +48,18 @@ class HubHeartbeatMonitorTests(TestCase):
             self.monitor.loss_action(ControlState.IDLE),
         )
 
+    def test_loss_trips_every_state_that_can_energize_outputs(self) -> None:
+        for state in (
+            ControlState.MANUAL,
+            ControlState.BATCH,
+            ControlState.IRRIGATING,
+            ControlState.MAINTENANCE,
+        ):
+            with self.subTest(state=state):
+                self.assertEqual(
+                    HubLossAction.TRIP_LOCAL_CONTROL,
+                    self.monitor.loss_action(state),
+                )
+
     def test_is_lost_before_first_heartbeat(self) -> None:
         self.assertEqual(HubLinkState.LOST, self.monitor.state(now=self.now))

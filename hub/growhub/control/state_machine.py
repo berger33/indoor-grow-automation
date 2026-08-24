@@ -13,6 +13,8 @@ class ControlState(StrEnum):
     IDLE = "idle"
     MANUAL = "manual"
     BATCH = "batch"
+    IRRIGATING = "irrigating"
+    MAINTENANCE = "maintenance"
     ALARM = "alarm"
 
 
@@ -20,6 +22,8 @@ class ControlEvent(StrEnum):
     BOOT_COMPLETE = "boot_complete"
     START_MANUAL = "start_manual"
     START_BATCH = "start_batch"
+    START_IRRIGATION = "start_irrigation"
+    START_MAINTENANCE = "start_maintenance"
     STOP = "stop"
     TRIP = "trip"
     RESET = "reset"
@@ -29,8 +33,12 @@ TRANSITIONS = {
     (ControlState.BOOT, ControlEvent.BOOT_COMPLETE): ControlState.IDLE,
     (ControlState.IDLE, ControlEvent.START_MANUAL): ControlState.MANUAL,
     (ControlState.IDLE, ControlEvent.START_BATCH): ControlState.BATCH,
+    (ControlState.IDLE, ControlEvent.START_IRRIGATION): ControlState.IRRIGATING,
+    (ControlState.IDLE, ControlEvent.START_MAINTENANCE): ControlState.MAINTENANCE,
     (ControlState.MANUAL, ControlEvent.STOP): ControlState.IDLE,
     (ControlState.BATCH, ControlEvent.STOP): ControlState.IDLE,
+    (ControlState.IRRIGATING, ControlEvent.STOP): ControlState.IDLE,
+    (ControlState.MAINTENANCE, ControlEvent.STOP): ControlState.IDLE,
 }
 
 
