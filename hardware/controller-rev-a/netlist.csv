@@ -19,3 +19,4 @@ DIN1-DIN8,"U4.C-U11.C,U12.GPA0-U12.GPA7,R49.2-R56.2",isolated inputs,3.3,SIGNAL,
 FIELD_IN1+-FIELD_IN8+,"J18.1-J25.1,R33.1-R48.1",24V field inputs,24,POWER_24V_LOGIC,blue,"two 2.2k resistors in series per channel"
 FIELD_IN1--FIELD_IN8-,"J18.2-J25.2,U4.K-U11.K",field input returns,0,POWER_24V_LOGIC,blue,"isolated from logic side"
 AIN1-AIN4,"J30.1-J30.4,R57.1-R60.1,R61.1-R64.1",4-20mA sense,3.0,SIGNAL,shielded,"150ohm shunt plus RC and clamp"
+STIR_TACH1-STIR_TACH6,"J31.1-J31.6,U12.GPB0-U12.GPB5,R68.1-R73.1",stirrer rotation heartbeat,3.3,SIGNAL,shielded,"open-collector fan outputs; validate MCP23017 interrupt load in HIL"
