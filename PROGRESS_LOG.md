@@ -78,3 +78,22 @@ foi preservado apenas para rastreabilidade.
   projeto elétrico profissional; ERC/DRC; HIL e piloto com água.
 - Próximos passos: levantar dimensões reais; converter cotas A0 em as-built;
   desenvolver tutorial de tanques/plataformas e hidráulica.
+
+## 2026-08-24
+
+- Commits: 19
+- Itens concluídos: simulador determinístico de todos os sensores; injeção de
+  falhas; diagnóstico de qualidade/idade e saúde da estação; estados locais;
+  timeout absoluto; corte por vazamento; safe boot de GPIO; watchdog; heartbeat;
+  política de perda do hub; bloqueio pH+/pH−; orçamento de dose; ADR fail-safe;
+  tutorial 01 de inventário; README, backlog, changelog e diário atualizados.
+- Decisões tomadas: modos `MANUAL` e `BATCH` entram em alarme na perda confirmada
+  do hub; timeout não pode ser renovado por comando repetido; conflito entre
+  pH+ e pH− desenergiza ambos; o Python é a especificação executável que deverá
+  ser reproduzida no firmware ESP32 antes de HIL.
+- Bloqueios/pendências: persistência no firmware de alarmes, orçamento e motivo
+  de reset; amostras e footprints; dimensões/alturas hidráulicas; plaquetas;
+  aterramento; ERC/DRC; revisão elétrica; protótipo; HIL e piloto com água.
+- Próximos passos: calibrar volume por tempo de cada dosadora; implementar a
+  receita de nutrientes como máquina de estados; criar diluição por EC com
+  timeout e confirmação por massa.
