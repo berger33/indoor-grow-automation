@@ -1,172 +1,72 @@
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  LightSchedule,
-  RemoteLight,
-  loadLighting,
-  saveSchedule,
-  setOverride,
-} from "./api";
+import { ApiError, login, loadStations, logout, Station } from "./api";
+import { ChartsPage } from "./ChartsPage";
+import { HomePage } from "./HomePage";
+import { LightingPage } from "./LightingPage";
+import { OperationPage } from "./OperationPage";
+import { CalibrationPage } from "./CalibrationPage";
+import { AlarmsPage } from "./AlarmsPage";
+import { HelpPage } from "./HelpPage";
+import { connectRealtime, RealtimeStatus } from "./realtime";
 import "./styles.css";
 
-const weekdays = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+type Page = "home" | "charts" | "operation" | "calibration" | "lighting" | "alarms" | "help";
+const pages: { id: Page; label: string }[] = [
+  { id: "home", label: "Visão geral" }, { id: "charts", label: "Gráficos" },
+  { id: "operation", label: "Operação" }, { id: "calibration", label: "Calibração" },
+  { id: "lighting", label: "Tomadas Wi-Fi" }, { id: "alarms", label: "Alarmes" }, { id: "help", label: "Ajuda" },
+];
 
-function statusLabel(light: RemoteLight) {
-  if (light.status === "confirmed") return "Confirmada";
-  if (light.status === "divergent") return "Divergente";
-  return "Indisponível";
-}
-
-function LightCard({ light, onChanged }: { light: RemoteLight; onChanged: (light: RemoteLight) => void }) {
-  const [schedule, setSchedule] = useState<LightSchedule>(light.schedule);
-  const [saving, setSaving] = useState(false);
+function LoginPanel({ onLogin }: { onLogin: () => void }) {
+  const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
   const [message, setMessage] = useState<string | null>(null);
-
-  useEffect(() => setSchedule(light.schedule), [light.schedule]);
-
-  async function updateOverride(state: "on" | "off" | null) {
-    setSaving(true);
-    setMessage(null);
-    try {
-      onChanged(await setOverride(light.entityId, state));
-      setMessage(state === null ? "Override cancelado." : "Override aplicado por 30 minutos.");
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Não foi possível enviar o comando.");
-    } finally {
-      setSaving(false);
-    }
-  }
-
+  const [busy, setBusy] = useState(false);
   async function submit(event: FormEvent) {
-    event.preventDefault();
-    setSaving(true);
-    setMessage(null);
-    try {
-      onChanged(await saveSchedule(light.entityId, schedule));
-      setMessage("Agenda salva e enviada para reconciliação.");
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Não foi possível salvar a agenda.");
-    } finally {
-      setSaving(false);
-    }
+    event.preventDefault(); setBusy(true); setMessage(null);
+    try { await login(userId, password); setPassword(""); onLogin(); }
+    catch (reason) { setMessage(reason instanceof Error ? reason.message : "Não foi possível entrar."); }
+    finally { setBusy(false); }
   }
-
-  function toggleDay(day: number) {
-    const selected = schedule.weekdays.includes(day);
-    setSchedule({
-      ...schedule,
-      weekdays: selected
-        ? schedule.weekdays.filter((item) => item !== day)
-        : [...schedule.weekdays, day].sort(),
-    });
-  }
-
-  return (
-    <article className="light-card">
-      <div className="card-heading">
-        <div>
-          <p className="eyebrow">Tomada remota</p>
-          <h2>{light.label}</h2>
-          <code>{light.entityId}</code>
-        </div>
-        <span className={`status status-${light.status}`}>{statusLabel(light)}</span>
-      </div>
-
-      <div className="state-grid" aria-label="Estado da tomada">
-        <div><span>Desejado</span><strong>{light.desired === "on" ? "Ligada" : "Desligada"}</strong></div>
-        <div><span>Observado</span><strong>{light.observed === null ? "Sem resposta" : light.observed === "on" ? "Ligada" : "Desligada"}</strong></div>
-        <div><span>Origem</span><strong>{light.source === "schedule" ? "Agenda" : "Override"}</strong></div>
-      </div>
-      <p className="explanation">{light.explanation}</p>
-
-      <div className="quick-actions" aria-label="Override temporário">
-        <button disabled={saving} onClick={() => updateOverride("on")}>Ligar 30 min</button>
-        <button disabled={saving} className="secondary" onClick={() => updateOverride("off")}>Desligar 30 min</button>
-        <button disabled={saving || !light.override} className="ghost" onClick={() => updateOverride(null)}>Cancelar</button>
-      </div>
-
-      <form onSubmit={submit}>
-        <div className="schedule-title">
-          <h3>Agenda semanal</h3>
-          <label className="switch-label">
-            <input type="checkbox" checked={schedule.enabled} onChange={(event) => setSchedule({ ...schedule, enabled: event.target.checked })} />
-            Ativa
-          </label>
-        </div>
-        <div className="time-row">
-          <label>Ligar<input type="time" value={schedule.onTime} onChange={(event) => setSchedule({ ...schedule, onTime: event.target.value })} /></label>
-          <label>Desligar<input type="time" value={schedule.offTime} onChange={(event) => setSchedule({ ...schedule, offTime: event.target.value })} /></label>
-        </div>
-        <div className="weekday-row" aria-label="Dias da semana">
-          {weekdays.map((label, day) => (
-            <button key={label} type="button" aria-pressed={schedule.weekdays.includes(day)} className={schedule.weekdays.includes(day) ? "day-selected" : "day"} onClick={() => toggleDay(day)}>{label}</button>
-          ))}
-        </div>
-        <button className="save" disabled={saving || schedule.weekdays.length === 0}>{saving ? "Salvando…" : "Salvar agenda"}</button>
-      </form>
-      {message && <p className="message" role="status">{message}</p>}
-    </article>
-  );
+  return <main className="login-shell"><section className="login-card"><div className="brand-mark" aria-hidden="true">GH</div><p className="eyebrow">Grow Hub local</p><h1>Acesso ao painel</h1><p>Use uma conta cadastrada no Raspberry Pi. A sessão expira automaticamente e não é salva no navegador.</p><form onSubmit={(event) => void submit(event)}><label>Usuário<input autoComplete="username" value={userId} onChange={(event) => setUserId(event.target.value)} required /></label><label>Senha<input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} required /></label><button disabled={busy}>{busy ? "Entrando…" : "Entrar"}</button></form>{message && <p className="form-error" role="alert">{message}</p>}</section></main>;
 }
 
 function App() {
-  const [lights, setLights] = useState<RemoteLight[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState<Page>("home");
+  const [stations, setStations] = useState<Station[]>([]);
+  const [stationId, setStationId] = useState("");
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [reconciledAt, setReconciledAt] = useState<string | null>(null);
+  const [realtime, setRealtime] = useState<RealtimeStatus>("connecting");
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const refresh = useCallback(async () => {
+  const refreshStations = useCallback(async () => {
     try {
-      const response = await loadLighting();
-      setLights(response.channels);
-      setReconciledAt(response.reconciledAt);
-      setError(null);
+      const response = await loadStations(); setStations(response.stations);
+      setStationId((current) => current || response.stations[0]?.stationId || "");
+      setAuthenticated(true); setError(null);
     } catch (reason) {
-      setError(reason instanceof Error ? reason.message : "Grow Hub indisponível.");
-    } finally {
-      setLoading(false);
+      if (reason instanceof ApiError && reason.status === 401) setAuthenticated(false);
+      else setError(reason instanceof Error ? reason.message : "Grow Hub indisponível.");
     }
   }, []);
-
+  useEffect(() => { void refreshStations(); }, [refreshStations]);
   useEffect(() => {
-    void refresh();
-    const interval = window.setInterval(() => void refresh(), 30_000);
-    return () => window.clearInterval(interval);
-  }, [refresh]);
+    if (!authenticated) return;
+    return connectRealtime(setRealtime, () => setRefreshKey((current) => current + 1));
+  }, [authenticated]);
 
-  function replaceLight(updated: RemoteLight) {
-    setLights((current) => current.map((light) => light.entityId === updated.entityId ? updated : light));
-  }
-
-  return (
-    <div className="app-shell">
-      <header>
-        <div className="brand-mark" aria-hidden="true">GH</div>
-        <div>
-          <p className="eyebrow">Grow Hub · estação local</p>
-          <h1>Iluminação remota</h1>
-        </div>
-        <div className="hub-status">
-          <span className={error ? "dot dot-error" : "dot"}></span>
-          <div><strong>{error ? "Hub indisponível" : "Hub conectado"}</strong><small>{reconciledAt ? `Última confirmação ${new Date(reconciledAt).toLocaleTimeString("pt-BR")}` : "Aguardando confirmação"}</small></div>
-        </div>
-      </header>
-
-      <nav aria-label="Seções do painel">
-        <span>Visão geral</span><span>Calibração</span><span>Controle</span><span>Agenda</span><strong>Tomadas Wi‑Fi</strong><span>Alarmes</span>
-      </nav>
-
-      <main>
-        <section className="intro">
-          <div><p className="eyebrow">Home Assistant + EKAZA</p><h2>Quatro luminárias, nenhum circuito de luz no controlador</h2></div>
-          <p>O Raspberry Pi envia comandos ao Home Assistant e só mostra sucesso quando a tomada confirma o estado. Falhas remotas não interrompem clima, irrigação ou dosagem.</p>
-        </section>
-
-        {error && <div className="alert" role="alert"><strong>Não foi possível carregar as tomadas.</strong><span>{error} Verifique o serviço do Grow Hub e o Home Assistant.</span><button onClick={() => void refresh()}>Tentar novamente</button></div>}
-        {loading ? <div className="loading">Carregando estados confirmados…</div> : !error && lights.length === 0 ? <div className="empty"><h2>Nenhuma tomada configurada</h2><p>Conclua o pareamento no Home Assistant e cadastre as entidades <code>switch.*</code>.</p></div> : <section className="cards" aria-label="Tomadas de iluminação">{lights.map((light) => <LightCard key={light.entityId} light={light} onChanged={replaceLight} />)}</section>}
-      </main>
-    </div>
-  );
+  if (authenticated === null) return <div className="loading-screen">Abrindo painel seguro…</div>;
+  if (!authenticated) return <LoginPanel onLogin={() => void refreshStations()} />;
+  const station = stations.find((item) => item.stationId === stationId);
+  return <div className="app-shell">
+    <a className="skip-link" href="#content">Pular para o conteúdo</a>
+    <header><div className="brand-mark" aria-hidden="true">GH</div><div><p className="eyebrow">Grow Hub · estação local</p><h1>Painel de cultivo</h1></div><div className="header-actions"><label>Estação<select value={stationId} onChange={(event) => setStationId(event.target.value)}>{stations.map((item) => <option value={item.stationId} key={item.stationId}>{item.name}</option>)}</select></label><div className="hub-status"><span className={`dot dot-${realtime}`} /><div><strong>{realtime === "online" ? "Tempo real conectado" : realtime === "connecting" ? "Reconectando" : "Modo offline"}</strong><small>{realtime === "offline" ? "Eventos serão retomados pelo número de sequência" : "Canal autenticado"}</small></div></div><button className="ghost-button" onClick={() => void logout().then(() => setAuthenticated(false))}>Sair</button></div></header>
+    <nav aria-label="Seções do painel">{pages.map((item) => <button key={item.id} className={page === item.id ? "active" : ""} aria-current={page === item.id ? "page" : undefined} onClick={() => setPage(item.id)}>{item.label}</button>)}</nav>
+    <main id="content" tabIndex={-1}>{error && <div className="alert" role="alert">{error}<button onClick={() => void refreshStations()}>Tentar novamente</button></div>}{station && page === "home" && <HomePage station={station} refreshKey={refreshKey} />}{station && page === "charts" && <ChartsPage station={station} refreshKey={refreshKey} />}{page === "lighting" && <LightingPage refreshKey={refreshKey} />}{station && page === "operation" && <OperationPage station={station} refreshKey={refreshKey} />}{station && page === "calibration" && <CalibrationPage station={station} refreshKey={refreshKey} />}{station && page === "alarms" && <AlarmsPage station={station} refreshKey={refreshKey} />}{page === "help" && <HelpPage />}{!station && page !== "lighting" && page !== "help" && <section className="empty"><h2>Nenhuma estação cadastrada</h2><p>Cadastre a estação no banco antes de habilitar a operação.</p></section>}</main>
+  </div>;
 }
 
 createRoot(document.getElementById("root")!).render(<App />);
+if ("serviceWorker" in navigator) window.addEventListener("load", () => void navigator.serviceWorker.register("/service-worker.js"));

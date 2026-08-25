@@ -11,10 +11,13 @@ __pycache__/
 .coverage
 htmlcov/
 .venv/
+.pio-venv/
+.platformio-venv/
 venv/
 dist/
 build/
 .pio/
+.platformio-core/
 .vscode/
 .idea/
 node_modules/

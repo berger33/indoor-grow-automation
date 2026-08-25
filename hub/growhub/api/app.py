@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import asyncio
 from contextlib import asynccontextmanager, suppress
-from datetime import time
+from datetime import UTC, datetime, time
 from pathlib import Path
-from typing import AsyncIterator, Literal
+from typing import AsyncIterator, Callable, Literal
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -17,6 +18,11 @@ from ..services.lighting_application import (
     LightingApplicationService,
     RemoteLightView,
 )
+from ..services.operations import InMemoryOperations
+from ..services.mqtt_gateway import MqttGateway
+from ..services.realtime import RealtimeBuffer
+from ..services.security import AuthService, UserRole
+from .operations_router import create_operations_router
 
 
 class SchedulePayload(BaseModel):
@@ -67,14 +73,29 @@ def create_app(
     service: LightingApplicationService,
     *,
     web_dist: Path | None = None,
+    operations: InMemoryOperations | None = None,
+    auth: AuthService | None = None,
+    realtime: RealtimeBuffer | None = None,
+    operations_clock: Callable[[], datetime] | None = None,
+    mqtt_gateway: MqttGateway | None = None,
 ) -> FastAPI:
     @asynccontextmanager
     async def lifespan(_: FastAPI) -> AsyncIterator[None]:
         stop = asyncio.Event()
+        if mqtt_gateway is not None:
+            mqtt_gateway.start(asyncio.get_running_loop())
 
         async def reconcile_forever() -> None:
             while not stop.is_set():
                 await asyncio.to_thread(service.reconcile_once)
+                try:
+                    await asyncio.wait_for(stop.wait(), timeout=1)
+                except TimeoutError:
+                    pass
+
+        async def expire_mqtt_commands_forever() -> None:
+            while not stop.is_set():
+                mqtt_gateway.expire_pending()  # type: ignore[union-attr]
                 try:
                     await asyncio.wait_for(stop.wait(), timeout=1)
                 except TimeoutError:
@@ -85,6 +106,11 @@ def create_app(
             if service.can_reconcile
             else None
         )
+        mqtt_task = (
+            asyncio.create_task(expire_mqtt_commands_forever())
+            if mqtt_gateway is not None
+            else None
+        )
         try:
             yield
         finally:
@@ -93,12 +119,47 @@ def create_app(
                 task.cancel()
                 with suppress(asyncio.CancelledError):
                     await task
+            if mqtt_task is not None:
+                mqtt_task.cancel()
+                with suppress(asyncio.CancelledError):
+                    await mqtt_task
+            if mqtt_gateway is not None:
+                mqtt_gateway.stop()
 
     app = FastAPI(title="Grow Hub API", version="1.0", lifespan=lifespan)
 
+    configured = (operations is not None, auth is not None, realtime is not None)
+    if any(configured) and not all(configured):
+        raise ValueError("operações, autenticação e tempo real devem ser configurados juntos")
+    if operations is not None and auth is not None and realtime is not None:
+        clock = operations_clock or (lambda: datetime.now(UTC))
+        app.include_router(
+            create_operations_router(
+                operations,
+                auth,
+                realtime,
+                clock=clock,
+                dispatcher=mqtt_gateway,
+            )
+        )
+
+        @app.middleware("http")
+        async def secure_lighting(request: Request, call_next):
+            if request.url.path.startswith("/api/v1/lighting"):
+                account = auth.verify(request.cookies.get("growhub_session", ""), now=clock())
+                minimum = UserRole.VIEWER if request.method == "GET" else UserRole.OPERATOR
+                if account is None:
+                    return JSONResponse({"detail": "sessão inválida ou expirada"}, status_code=401)
+                if account.role < minimum:
+                    return JSONResponse({"detail": "perfil sem permissão"}, status_code=403)
+            return await call_next(request)
+
     @app.get("/health")
-    def health() -> dict[str, str]:
-        return {"status": "ok"}
+    def health() -> dict[str, object]:
+        result: dict[str, object] = {"status": "ok"}
+        if mqtt_gateway is not None:
+            result["mqtt"] = mqtt_gateway.health()
+        return result
 
     @app.get("/api/v1/lighting")
     def get_lighting() -> dict[str, object]:

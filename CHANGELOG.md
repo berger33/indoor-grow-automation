@@ -8,6 +8,26 @@ versionamento semântico a partir da primeira release.
 
 ### Adicionado
 
+- umidificador com nível mínimo, timeout absoluto retido e rearme seguro;
+- monitor de CO₂ somente leitura, sem qualquer caminho de comando de injeção;
+- três firmwares ESP32 PlatformIO e HIL nativo com seis cenários fail-safe;
+- drivers/contratos de sensores ambientais e químicos, incluindo compensação
+  térmica, qualidade e falhas explícitas;
+- contratos MQTT v1 para comando, ACK/NACK e alarmes retidos, com gateway TLS
+  ligado ao PostgreSQL, auditoria e WebSocket;
+- Mosquitto TLS 1.3 mútuo, ACL por nó e teste de isolamento em contêiner;
+- banco operacional PostgreSQL/Alembic, retenção e previsão de capacidade;
+- API autenticada de estações, sensores, histórico, configuração, receitas,
+  agendas, alarmes, calibração, comandos e auditoria;
+- painel Home, gráficos, central de alarmes, calibração, operação, Ajuda
+  offline, acessibilidade e reconexão em tempo real;
+- Docker Compose ARM64, scripts protegidos de backup/restauração e guia de
+  operação do Raspberry Pi;
+- persistência SQL e migração sem sobrescrita das agendas/overrides EKAZA;
+- tutoriais 03–14 com diagramas, passos, riscos, aceitação e separação clara
+  entre ilustração e evidência física;
+- SBOM SPDX 2.3 determinística, triagem inicial de licenças e relatório de
+  prontidão `A0/HOLD` das tarefas 01–30;
 - estrutura inicial do repositório;
 - especificação de referência e seis pranchas técnicas;
 - decisões iniciais de arquitetura e segurança;
@@ -90,6 +110,11 @@ versionamento semântico a partir da primeira release.
 
 ### Segurança
 
+- broker desconectado devolve HTTP 503 e não cria falso estado de fila;
+- comando sem ACK/NACK expira em 15 segundos e fica registrado como timeout;
+- tópico, estação, nó, função e envelope MQTT precisam corresponder antes
+  de persistir leitura, alarme ou confirmação;
+- segredos do hub e certificados MQTT são montados em arquivos somente leitura;
 - rejeição de identificadores, unidades e números não finitos;
 - rejeição de campos MQTT ausentes, extras ou com tipos ambíguos;
 - scanner impede tokens, chaves privadas e segredos atribuídos.

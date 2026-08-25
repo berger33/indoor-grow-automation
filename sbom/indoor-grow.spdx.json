@@ -1,0 +1,1894 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "creationInfo": {
+    "created": "2026-08-24T00:00:00Z",
+    "creators": [
+      "Tool: scripts/generate_sbom.py"
+    ]
+  },
+  "dataLicense": "CC0-1.0",
+  "documentDescribes": [
+    "SPDXRef-Package-indoor-grow-automation"
+  ],
+  "documentNamespace": "https://indoor-grow.local/sbom/v1/2026-08-24",
+  "name": "indoor-grow-automation-sbom",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-indoor-grow-automation",
+      "copyrightText": "Copyright (c) 2026 Indoor Grow Automation contributors",
+      "downloadLocation": "https://github.com/berger33/indoor-grow-automation",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "indoor-grow-automation",
+      "supplier": "Organization: Indoor Grow Automation contributors",
+      "versionInfo": "1.0.0-a0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-github-1299283241429b3d",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/adafruit/Adafruit-MLX90614-Library.git",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:github/adafruit/Adafruit-MLX90614-Library@8c32c95768e0960d7c27258b1d9bac16b8d7fdfc",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "adafruit/Adafruit-MLX90614-Library",
+      "supplier": "NOASSERTION",
+      "versionInfo": "8c32c95768e0960d7c27258b1d9bac16b8d7fdfc"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-github-1a3f4073672819a0",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/platformio/platform-espressif32.git",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:github/platformio/platform-espressif32@11f8c40be7591c82858b6f7cd310cb166a5d2e3e",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "platformio/platform-espressif32",
+      "supplier": "NOASSERTION",
+      "versionInfo": "11f8c40be7591c82858b6f7cd310cb166a5d2e3e"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-github-56f83fd426f9f2ac",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/PaulStoffregen/OneWire.git",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:github/PaulStoffregen/OneWire@72249e22ef9092b0750e303d266199965a89e500",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "name": "PaulStoffregen/OneWire",
+      "supplier": "NOASSERTION",
+      "versionInfo": "72249e22ef9092b0750e303d266199965a89e500"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-github-5a6a0f465f010668",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/adafruit/Adafruit_BME280_Library.git",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:github/adafruit/Adafruit_BME280_Library@ef712e95147de926b4545e379f6296ad271529b5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "adafruit/Adafruit_BME280_Library",
+      "supplier": "NOASSERTION",
+      "versionInfo": "ef712e95147de926b4545e379f6296ad271529b5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-github-5d463ca858b0fcd2",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/bogde/HX711.git",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:github/bogde/HX711@01e8a1e8eb22d4380f83194e266a2f75ea0c993c",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "bogde/HX711",
+      "supplier": "NOASSERTION",
+      "versionInfo": "01e8a1e8eb22d4380f83194e266a2f75ea0c993c"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-github-7b87167858aee194",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/milesburton/Arduino-Temperature-Control-Library.git",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:github/milesburton/Arduino-Temperature-Control-Library@3f570bbe2d0ad3cae55663cfaec1fedbc5b4fa50",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "milesburton/Arduino-Temperature-Control-Library",
+      "supplier": "NOASSERTION",
+      "versionInfo": "3f570bbe2d0ad3cae55663cfaec1fedbc5b4fa50"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-01921317b26e1a97",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-openharmony-arm64/-/binding-openharmony-arm64-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-openharmony-arm64@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-openharmony-arm64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-032e6b5b05364192",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-netbsd-x64/-/typescript-netbsd-x64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-netbsd-x64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-netbsd-x64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-08b812292183484c",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-darwin-arm64/-/binding-darwin-arm64-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-darwin-arm64@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-darwin-arm64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-0c98f3ae3e8d1a3b",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-linux-ppc64-gnu/-/binding-linux-ppc64-gnu-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-linux-ppc64-gnu@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-linux-ppc64-gnu",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-0ed9a6cf8657b467",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-win32-x64-msvc/-/binding-win32-x64-msvc-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-win32-x64-msvc@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-win32-x64-msvc",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-0f143402a85434c4",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-sunos-x64/-/typescript-sunos-x64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-sunos-x64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-sunos-x64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-1096a1ead88defa9",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/tinyglobby/-/tinyglobby-0.2.17.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/tinyglobby@0.2.17",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "tinyglobby",
+      "supplier": "NOASSERTION",
+      "versionInfo": "0.2.17"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-13fff5f50877f217",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-freebsd-arm64/-/typescript-freebsd-arm64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-freebsd-arm64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-freebsd-arm64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-161c14692e08f4db",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-netbsd-arm64/-/typescript-netbsd-arm64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-netbsd-arm64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-netbsd-arm64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-1793b3c337f82f79",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@oxc-project/types/-/types-0.146.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40oxc-project%2Ftypes@0.146.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@oxc-project/types",
+      "supplier": "NOASSERTION",
+      "versionInfo": "0.146.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-18f397b1a8be0a72",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-linux-mips64el/-/typescript-linux-mips64el-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-linux-mips64el@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-linux-mips64el",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-22ee3f8d7a0348dd",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-linux-arm64-gnu/-/binding-linux-arm64-gnu-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-linux-arm64-gnu@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-linux-arm64-gnu",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-288aa240323486d4",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-linux-arm64-musl/-/binding-linux-arm64-musl-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-linux-arm64-musl@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-linux-arm64-musl",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-2c20599eb1e23942",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/typescript/-/typescript-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/typescript@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "typescript",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-31c2e8cd722e0f5b",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-linux-riscv64/-/typescript-linux-riscv64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-linux-riscv64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-linux-riscv64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-3499669bbff45728",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss-linux-x64-gnu/-/lightningcss-linux-x64-gnu-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss-linux-x64-gnu@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss-linux-x64-gnu",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-37064df82568a706",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss-win32-arm64-msvc/-/lightningcss-win32-arm64-msvc-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss-win32-arm64-msvc@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss-win32-arm64-msvc",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-3977a2ba56c77845",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-aix-ppc64/-/typescript-aix-ppc64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-aix-ppc64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-aix-ppc64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-41912edeb03db0bf",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/detect-libc/-/detect-libc-2.1.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/detect-libc@2.1.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "detect-libc",
+      "supplier": "NOASSERTION",
+      "versionInfo": "2.1.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-4db0632dda2b95aa",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/pluginutils/-/pluginutils-1.0.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fpluginutils@1.0.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/pluginutils",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.0.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-4de4ffd52ce36326",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/picocolors/-/picocolors-1.1.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/picocolors@1.1.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "ISC",
+      "licenseDeclared": "ISC",
+      "name": "picocolors",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.1.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-531f48155ed9e2d4",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@vitejs/plugin-react/-/plugin-react-6.1.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40vitejs%2Fplugin-react@6.1.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@vitejs/plugin-react",
+      "supplier": "NOASSERTION",
+      "versionInfo": "6.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-53746cc126b5d536",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-freebsd-x64/-/typescript-freebsd-x64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-freebsd-x64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-freebsd-x64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-53fd2cdf30b7e2cb",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-linux-arm64/-/typescript-linux-arm64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-linux-arm64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-linux-arm64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-5b3b41c98f1af695",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-linux-x64/-/typescript-linux-x64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-linux-x64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-linux-x64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-5d36585bad9fb9b0",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/scheduler/-/scheduler-0.27.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/scheduler@0.27.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "scheduler",
+      "supplier": "NOASSERTION",
+      "versionInfo": "0.27.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-60b0e97461cb7d2c",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.2.3.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types%2Freact-dom@19.2.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@types/react-dom",
+      "supplier": "NOASSERTION",
+      "versionInfo": "19.2.3"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-66fa0b30b20ff105",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-win32-x64/-/typescript-win32-x64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-win32-x64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-win32-x64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-67b7d56e4601de3e",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/fsevents@2.3.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "fsevents",
+      "supplier": "NOASSERTION",
+      "versionInfo": "2.3.3"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-6f132e3ea7a32125",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-linux-arm-gnueabihf/-/binding-linux-arm-gnueabihf-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-linux-arm-gnueabihf@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-linux-arm-gnueabihf",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-745afec9b01d93ca",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-win32-arm64-msvc/-/binding-win32-arm64-msvc-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-win32-arm64-msvc@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-win32-arm64-msvc",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-82247e3fba14f8ec",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-linux-x64-musl/-/binding-linux-x64-musl-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-linux-x64-musl@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-linux-x64-musl",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-83d4c92cbf062602",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-linux-loong64/-/typescript-linux-loong64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-linux-loong64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-linux-loong64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-852a7f4f02cd5402",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-linux-arm/-/typescript-linux-arm-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-linux-arm@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-linux-arm",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-886e726fc234b404",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/fdir/-/fdir-6.5.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/fdir@6.5.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "fdir",
+      "supplier": "NOASSERTION",
+      "versionInfo": "6.5.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-8a69277b034f9ea5",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-darwin-x64/-/typescript-darwin-x64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-darwin-x64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-darwin-x64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-8afbf8bc2c13cb6f",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/picomatch/-/picomatch-4.0.7.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/picomatch@4.0.7",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "picomatch",
+      "supplier": "NOASSERTION",
+      "versionInfo": "4.0.7"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-8e59b67f3875100b",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-win32-arm64/-/typescript-win32-arm64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-win32-arm64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-win32-arm64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-982a23f36f508aa6",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss-linux-arm64-musl/-/lightningcss-linux-arm64-musl-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss-linux-arm64-musl@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss-linux-arm64-musl",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-9c2e3a10499b4b1c",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-android-arm-eabi/-/binding-android-arm-eabi-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-android-arm-eabi@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-android-arm-eabi",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-9d04e6e48ff0547e",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-openbsd-x64/-/typescript-openbsd-x64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-openbsd-x64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-openbsd-x64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-a24d57c32fe02d84",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss-darwin-arm64/-/lightningcss-darwin-arm64-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss-darwin-arm64@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss-darwin-arm64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-a25a251aa267e281",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss-win32-x64-msvc/-/lightningcss-win32-x64-msvc-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss-win32-x64-msvc@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss-win32-x64-msvc",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-a29ca5166ddd4ac4",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-android-arm64/-/binding-android-arm64-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-android-arm64@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-android-arm64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-a482079d71ffc18f",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-linux-x64-gnu/-/binding-linux-x64-gnu-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-linux-x64-gnu@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-linux-x64-gnu",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-a8c7d3fcfd5e1711",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss-freebsd-x64/-/lightningcss-freebsd-x64-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss-freebsd-x64@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss-freebsd-x64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-aab368fa241d9eb6",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/react-dom/-/react-dom-19.2.8.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/react-dom@19.2.8",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "react-dom",
+      "supplier": "NOASSERTION",
+      "versionInfo": "19.2.8"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-af05f94373d49f5f",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-darwin-x64/-/binding-darwin-x64-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-darwin-x64@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-darwin-x64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-af911dcfba181ec4",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/react/-/react-19.2.8.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/react@19.2.8",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "react",
+      "supplier": "NOASSERTION",
+      "versionInfo": "19.2.8"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-b29e627de793064e",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/react/-/react-19.2.14.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types%2Freact@19.2.14",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@types/react",
+      "supplier": "NOASSERTION",
+      "versionInfo": "19.2.14"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-b2e46bb06a9b637c",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss-linux-arm64-gnu/-/lightningcss-linux-arm64-gnu-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss-linux-arm64-gnu@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss-linux-arm64-gnu",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-b95a5f5e68ca2c51",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-linux-ppc64/-/typescript-linux-ppc64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-linux-ppc64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-linux-ppc64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-c14f890403418f47",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/vite/-/vite-8.2.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/vite@8.2.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "vite",
+      "supplier": "NOASSERTION",
+      "versionInfo": "8.2.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-c2e575c54198298c",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss/-/lightningcss-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-c6e9deb51311cf8d",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/csstype/-/csstype-3.2.3.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/csstype@3.2.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "csstype",
+      "supplier": "NOASSERTION",
+      "versionInfo": "3.2.3"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-cfdb6f2b4e849541",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss-linux-x64-musl/-/lightningcss-linux-x64-musl-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss-linux-x64-musl@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss-linux-x64-musl",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-d4f4e6bd82ac7a24",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-linux-s390x-gnu/-/binding-linux-s390x-gnu-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-linux-s390x-gnu@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-linux-s390x-gnu",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-d7d08dd455d5e4ab",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-darwin-arm64/-/typescript-darwin-arm64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-darwin-arm64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-darwin-arm64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-da381fcadd642c20",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/source-map-js@1.2.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "source-map-js",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-df7964c0fee53261",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-openbsd-arm64/-/typescript-openbsd-arm64-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-openbsd-arm64@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-openbsd-arm64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-dfe240edb156056a",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/binding-freebsd-x64/-/binding-freebsd-x64-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rolldown%2Fbinding-freebsd-x64@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@rolldown/binding-freebsd-x64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-e242733656a139cd",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss-darwin-x64/-/lightningcss-darwin-x64-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss-darwin-x64@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss-darwin-x64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-e2457edbe8191a22",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/postcss/-/postcss-8.5.26.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/postcss@8.5.26",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "postcss",
+      "supplier": "NOASSERTION",
+      "versionInfo": "8.5.26"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-e66dd2ce95ba188f",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/rolldown/-/rolldown-1.2.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/rolldown@1.2.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "rolldown",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-ea5462fd96eb6aea",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss-android-arm64/-/lightningcss-android-arm64-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss-android-arm64@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss-android-arm64",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-f381856a93295d2d",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.18.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/nanoid@3.3.18",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "nanoid",
+      "supplier": "NOASSERTION",
+      "versionInfo": "3.3.18"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-f3ed5b4f1db55d76",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@typescript/typescript-linux-s390x/-/typescript-linux-s390x-7.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40typescript%2Ftypescript-linux-s390x@7.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "@typescript/typescript-linux-s390x",
+      "supplier": "NOASSERTION",
+      "versionInfo": "7.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-npm-f75a241d2ebc8e90",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lightningcss-linux-arm-gnueabihf/-/lightningcss-linux-arm-gnueabihf-1.33.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lightningcss-linux-arm-gnueabihf@1.33.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "name": "lightningcss-linux-arm-gnueabihf",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.33.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pypi-1f9f6ecfe9493bb6",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/uvicorn@0.52.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "uvicorn",
+      "supplier": "NOASSERTION",
+      "versionInfo": "0.52.4"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pypi-852a08dcdfbbd541",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/fastapi@0.141.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "fastapi",
+      "supplier": "NOASSERTION",
+      "versionInfo": "0.141.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pypi-c11a8f2dceb69cfb",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/alembic@1.19.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "alembic",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.19.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pypi-c92099938eb900b1",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/sqlalchemy@2.0.52",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "SQLAlchemy",
+      "supplier": "NOASSERTION",
+      "versionInfo": "2.0.52"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pypi-e117bfc3b26f2086",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/paho-mqtt@2.1.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "EPL-2.0 OR BSD-3-Clause",
+      "licenseDeclared": "EPL-2.0 OR BSD-3-Clause",
+      "name": "paho-mqtt",
+      "supplier": "NOASSERTION",
+      "versionInfo": "2.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pypi-f0db83393c750a6e",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/psycopg@3.3.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "LGPL-3.0-only",
+      "licenseDeclared": "LGPL-3.0-only",
+      "name": "psycopg[binary]",
+      "supplier": "NOASSERTION",
+      "versionInfo": "3.3.4"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-vendored-1bf7bfb5dd969ff3",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/platformio/platform-native",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:github/platformio/platform-native@7df81639bc84474e9b1812d241762cffad9c69e7",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "platformio/platform-native",
+      "supplier": "NOASSERTION",
+      "versionInfo": "1.2.1+7df81639bc84474e9b1812d241762cffad9c69e7"
+    }
+  ],
+  "relationships": [
+    {
+      "relatedSpdxElement": "SPDXRef-Package-github-1299283241429b3d",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-github-1a3f4073672819a0",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-github-56f83fd426f9f2ac",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-github-5a6a0f465f010668",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-github-5d463ca858b0fcd2",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-github-7b87167858aee194",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-01921317b26e1a97",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-032e6b5b05364192",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-08b812292183484c",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-0c98f3ae3e8d1a3b",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-0ed9a6cf8657b467",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-0f143402a85434c4",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-1096a1ead88defa9",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-13fff5f50877f217",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-161c14692e08f4db",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-1793b3c337f82f79",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-18f397b1a8be0a72",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-22ee3f8d7a0348dd",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-288aa240323486d4",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-2c20599eb1e23942",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-31c2e8cd722e0f5b",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-3499669bbff45728",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-37064df82568a706",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-3977a2ba56c77845",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-41912edeb03db0bf",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-4db0632dda2b95aa",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-4de4ffd52ce36326",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-531f48155ed9e2d4",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-53746cc126b5d536",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-53fd2cdf30b7e2cb",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-5b3b41c98f1af695",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-5d36585bad9fb9b0",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-60b0e97461cb7d2c",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-66fa0b30b20ff105",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-67b7d56e4601de3e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-6f132e3ea7a32125",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-745afec9b01d93ca",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-82247e3fba14f8ec",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-83d4c92cbf062602",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-852a7f4f02cd5402",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-886e726fc234b404",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-8a69277b034f9ea5",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-8afbf8bc2c13cb6f",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-8e59b67f3875100b",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-982a23f36f508aa6",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-9c2e3a10499b4b1c",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-9d04e6e48ff0547e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-a24d57c32fe02d84",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-a25a251aa267e281",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-a29ca5166ddd4ac4",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-a482079d71ffc18f",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-a8c7d3fcfd5e1711",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-aab368fa241d9eb6",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-af05f94373d49f5f",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-af911dcfba181ec4",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-b29e627de793064e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-b2e46bb06a9b637c",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-b95a5f5e68ca2c51",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-c14f890403418f47",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-c2e575c54198298c",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-c6e9deb51311cf8d",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-cfdb6f2b4e849541",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-d4f4e6bd82ac7a24",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-d7d08dd455d5e4ab",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-da381fcadd642c20",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-df7964c0fee53261",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-dfe240edb156056a",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-e242733656a139cd",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-e2457edbe8191a22",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-e66dd2ce95ba188f",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-ea5462fd96eb6aea",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-f381856a93295d2d",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-f3ed5b4f1db55d76",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-npm-f75a241d2ebc8e90",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-pypi-1f9f6ecfe9493bb6",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-pypi-852a08dcdfbbd541",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-pypi-c11a8f2dceb69cfb",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-pypi-c92099938eb900b1",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-pypi-e117bfc3b26f2086",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-pypi-f0db83393c750a6e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-vendored-1bf7bfb5dd969ff3",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    }
+  ],
+  "spdxVersion": "SPDX-2.3"
+}

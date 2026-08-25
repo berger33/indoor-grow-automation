@@ -19,6 +19,8 @@ DEFAULT_MAX_AGE: Mapping[SensorKind, timedelta] = MappingProxyType(
         SensorKind.HUMIDITY: timedelta(seconds=90),
         SensorKind.CO2: timedelta(seconds=90),
         SensorKind.RESERVOIR_LEVEL: timedelta(seconds=10),
+        SensorKind.MASS: timedelta(seconds=30),
+        SensorKind.VPD: timedelta(seconds=90),
         SensorKind.FLOW: timedelta(seconds=10),
         SensorKind.LEAK: timedelta(seconds=15),
     }
@@ -50,4 +52,3 @@ class StalenessPolicy:
             quality=ReadingQuality.STALE,
             error_code="reading_stale",
         )
-

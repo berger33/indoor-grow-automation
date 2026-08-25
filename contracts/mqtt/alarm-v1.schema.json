@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://indoor-grow.local/contracts/mqtt/alarm-v1.schema.json",
+  "title": "Indoor Grow Latched Alarm v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "alarm_id", "station_id", "code", "severity", "cause", "procedure", "raised_at", "latched"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "alarm_id": { "type": "string", "format": "uuid" },
+    "station_id": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$" },
+    "code": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$" },
+    "severity": { "enum": ["warning", "critical"] },
+    "cause": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "procedure": { "type": "string", "minLength": 1, "maxLength": 1000 },
+    "raised_at": { "type": "string", "format": "date-time" },
+    "latched": { "const": true }
+  }
+}

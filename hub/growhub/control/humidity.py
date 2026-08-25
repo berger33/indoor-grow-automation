@@ -25,6 +25,7 @@ class HumidityConfig:
     deadband_percent: float = 5
     minimum_on_time: timedelta = timedelta(seconds=30)
     minimum_off_time: timedelta = timedelta(seconds=30)
+    absolute_timeout: timedelta = timedelta(minutes=15)
     absolute_high_percent: float = 90
 
     def __post_init__(self) -> None:
@@ -44,6 +45,8 @@ class HumidityConfig:
         for duration in (self.minimum_on_time, self.minimum_off_time):
             if not timedelta(0) <= duration <= timedelta(minutes=30):
                 raise ValueError("tempo mínimo de ciclo inválido")
+        if not timedelta(seconds=30) <= self.absolute_timeout <= timedelta(hours=2):
+            raise ValueError("timeout absoluto do umidificador inválido")
 
 
 class HumidityController:
@@ -52,6 +55,20 @@ class HumidityController:
         self._on = False
         self._changed_at: datetime | None = None
         self._last_now: datetime | None = None
+        self._safety_latch: str | None = None
+
+    @property
+    def safety_latch(self) -> str | None:
+        """Motivo retido que impede religamento até rearme explícito."""
+        return self._safety_latch
+
+    def reset_safety(self, *, water_level_ok: bool, leak_detected: bool) -> None:
+        """Libera o rearme somente depois de confirmar condições físicas seguras."""
+        if not water_level_ok:
+            raise RuntimeError("nível mínimo ainda não foi restabelecido")
+        if leak_detected:
+            raise RuntimeError("vazamento ainda está presente")
+        self._safety_latch = None
 
     def evaluate(
         self,
@@ -70,11 +87,15 @@ class HumidityController:
         if leak_detected:
             return self._force_off(now, "leak_detected")
         if not water_level_ok:
-            return self._force_off(now, "humidifier_level_low")
+            return self._trip(now, "humidifier_level_low")
+        if self._safety_latch is not None:
+            return self._force_off(now, f"safety_latched:{self._safety_latch}")
         if humidity_percent >= self._config.absolute_high_percent:
             return self._force_off(now, "absolute_humidity_high")
 
         if self._on:
+            if self._elapsed(now) >= self._config.absolute_timeout:
+                return self._trip(now, "humidifier_absolute_timeout")
             if humidity_percent >= self._config.target_percent + self._config.deadband_percent:
                 if self._elapsed(now) >= self._config.minimum_on_time:
                     return self._force_off(now, "upper_hysteresis")
@@ -93,6 +114,10 @@ class HumidityController:
             self._on = False
             self._changed_at = now
         return HumidityDecision(HumidifierAction.OFF, reason)
+
+    def _trip(self, now: datetime, reason: str) -> HumidityDecision:
+        self._safety_latch = reason
+        return self._force_off(now, reason)
 
     def _elapsed(self, now: datetime) -> timedelta:
         return now - self._changed_at  # type: ignore[operator]

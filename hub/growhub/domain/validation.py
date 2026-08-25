@@ -32,6 +32,8 @@ DEFAULT_RANGES: Mapping[SensorKind, PlausibilityRange] = MappingProxyType(
         SensorKind.HUMIDITY: PlausibilityRange(0.0, 100.0),
         SensorKind.CO2: PlausibilityRange(0.0, 10_000.0),
         SensorKind.RESERVOIR_LEVEL: PlausibilityRange(0.0, 10_000.0),
+        SensorKind.MASS: PlausibilityRange(-5.0, 100.0),
+        SensorKind.VPD: PlausibilityRange(-5.0, 10.0),
         SensorKind.FLOW: PlausibilityRange(0.0, 1_000.0),
         SensorKind.LEAK: PlausibilityRange(0.0, 1.0),
     }
@@ -60,4 +62,3 @@ class ReadingValidator:
             quality=ReadingQuality.INVALID,
             error_code="out_of_plausible_range",
         )
-

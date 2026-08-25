@@ -3,11 +3,15 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
+import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+os.environ.setdefault("PLATFORMIO_CORE_DIR", str(ROOT / ".platformio-core"))
+os.environ.setdefault("PLATFORMIO_SETTING_ENABLE_TELEMETRY", "no")
 
 
 def run(label: str, command: list[str]) -> None:
@@ -36,6 +40,44 @@ def main() -> int:
             [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"],
         )
 
+    hil_project = ROOT / "firmware" / "hil" / "platformio.ini"
+    if hil_project.exists():
+        if os.environ.get("CI") == "true":
+            pio = shutil.which("pio")
+            if pio is None:
+                raise SystemExit("PlatformIO ausente no CI")
+            run("firmware HIL PlatformIO", [pio, "run", "--project-dir", "firmware/hil"])
+            executable = ROOT / "firmware" / "hil" / ".pio" / "build" / "native_hil" / "program"
+        else:
+            executable = Path("/tmp/indoor-grow-hil")
+            run(
+                "firmware HIL compiler fallback",
+                [
+                    "g++",
+                    "-std=c++17",
+                    "-Wall",
+                    "-Wextra",
+                    "-Werror",
+                    "-Ifirmware/shared/GrowCore/src",
+                    "firmware/hil/src/main.cpp",
+                    "-o",
+                    str(executable),
+                ],
+            )
+        run("firmware HIL scenarios", [str(executable)])
+
+    if os.environ.get("CI") == "true":
+        pio = shutil.which("pio")
+        for project in ("fertigation", "climate", "safety"):
+            manifest = ROOT / "firmware" / project / "platformio.ini"
+            if manifest.exists():
+                if pio is None:
+                    raise SystemExit("PlatformIO ausente no CI")
+                run(
+                    f"firmware ESP32 {project}",
+                    [pio, "run", "--project-dir", f"firmware/{project}"],
+                )
+
     web_package = ROOT / "web" / "package.json"
     if web_package.exists():
         run(
@@ -54,6 +96,10 @@ def main() -> int:
     drawing_validator = ROOT / "scripts" / "validate_drawings.py"
     if drawing_validator.exists():
         run("Rev A drawings", [sys.executable, str(drawing_validator)])
+
+    sbom_generator = ROOT / "scripts" / "generate_sbom.py"
+    if sbom_generator.exists():
+        run("SBOM SPDX", [sys.executable, str(sbom_generator), "--check"])
 
     secret_scanner = ROOT / "scripts" / "secret_scan.py"
     if secret_scanner.exists():

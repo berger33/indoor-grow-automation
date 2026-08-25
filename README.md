@@ -4,9 +4,9 @@ Stack open-source para automatizar fertirrigação, irrigação e ambiente de cu
 indoor em pequena escala, composta por nós ESP32, hub local em Raspberry Pi e
 painel web responsivo.
 
-> **Status:** núcleo de sensores e laços principais da Fase 2 concluídos em
-> software; API e tela EKAZA operacionais no hub. O sistema ainda não deve
-> comandar cargas reais antes de firmware, testes elétricos, HIL e comissionamento.
+> **Status:** as tarefas 01–30 estão implementadas em software/documentação e o
+> gate local está aprovado. A revisão física permanece `A0/HOLD`: ainda não se
+> deve fabricar lote, energizar cargas ou operar com nutrientes.
 
 ## Objetivos
 
@@ -25,20 +25,15 @@ opcional via Home Assistant para agenda, comando e confirmação de estado; não
 relé, contator, fiação, PCB, dimerização, PPFD ou credencial no ESP32. Consulte o
 [`escopo executável da v1.0`](docs/ESCOPO_V1.md).
 
-## Arquitetura planejada
+## Arquitetura implementada em software
 
-```text
-Painel web responsivo
-        │ HTTPS / WebSocket
-        ▼
-Hub Raspberry Pi ── API + banco + MQTT ── Wi-Fi/LAN
-        ├── Home Assistant ── tomada EKAZA │
-        │                                  │
-        │                                  ├── ESP32 fertirrigação/pH/EC
-        │                                  ├── ESP32 clima/VPD
-        │                                  └── ESP32 segurança/I/O
-        ▼
-Backup, histórico e alertas locais
+```mermaid
+flowchart TD
+    UI["Painel React"] -->|"HTTPS + WebSocket"| HUB["Hub Raspberry Pi"]
+    HUB --> DB["PostgreSQL"]
+    HUB <-->|"MQTT v1 + TLS mútuo"| ESP["3 nós ESP32"]
+    HUB <-->|"API local"| HA["Home Assistant + EKAZA"]
+    HUB --> BK["Backup e histórico"]
 ```
 
 O arranjo físico padrão usa seis recipientes de concentrado de 1 L, um
@@ -89,6 +84,11 @@ O detalhamento executável está em [`BACKLOG.md`](BACKLOG.md); as entregas fica
 em [`CHANGELOG.md`](CHANGELOG.md) e o diário em
 [`PROGRESS_LOG.md`](PROGRESS_LOG.md).
 
+A explicação simples, tarefa por tarefa, está em
+[`docs/ENTREGA_TAREFAS_01_30.md`](docs/ENTREGA_TAREFAS_01_30.md). O estado de
+liberação e todos os bloqueios físicos estão em
+[`docs/RELATORIO_PRONTIDAO_V1.md`](docs/RELATORIO_PRONTIDAO_V1.md).
+
 ## Núcleo local executável
 
 O pacote `hub/growhub/control` funciona como especificação testável do firmware:
@@ -104,7 +104,13 @@ O pacote `hub/growhub/control` funciona como especificação testável do firmwa
 
 Os simuladores em `hub/growhub/simulation` cobrem todos os sensores da v1 e
 permitem injetar falhas canônicas sem hardware. O ADR 0008 fixa as invariantes
-que deverão ser reproduzidas no ESP32 antes de qualquer teste com atuadores.
+portadas ao núcleo C++; elas ainda precisam ser verificadas no ESP32 e na PCB
+reais antes de qualquer teste com atuadores.
+
+O runtime do hub conecta contratos e operação: persiste telemetria MQTT no
+PostgreSQL, recebe alarmes retidos, publica comandos com expiração e atualiza
+auditoria/progresso somente após ACK/NACK. Broker desconectado resulta em HTTP
+503; comando sem confirmação nunca aparece como executado.
 
 Contribuições seguem o fluxo de branches, commits, testes e releases descrito
 em [`CONTRIBUTING.md`](CONTRIBUTING.md).

@@ -137,3 +137,30 @@ foi preservado apenas para rastreabilidade.
   hidráulicas; ERC/DRC; protótipo; HIL e piloto supervisionado com água.
 - Próximos passos: receber os IDs `switch.*` e plaquetas, homologar EKAZA em
   bancada, portar os laços testados para o firmware e avançar as telas gerais.
+
+### Continuação dirigida — tarefas 01–30 em um ciclo
+
+- Commits: 22.
+- Itens concluídos em software/documentação: proteção do umidificador;
+  monitor de CO₂; três projetos ESP32 e HIL nativo; sensores ambientais e
+  químicos; processo de fertirrigação; hidráulica/clima; MQTT/ACK/NACK;
+  Mosquitto TLS/ACL; PostgreSQL/Alembic; telemetria/retenção; API e
+  configuração; usuários/perfis/auditoria; WebSocket; Compose ARM64 e
+  backup/restauração; EKAZA em SQL; todas as telas planejadas; tutoriais
+  03–14; SBOM e relatório de prontidão.
+- Integração fechada: o runtime recebe telemetria/alarmes MQTT no banco,
+  publica comandos QoS 1 com validade de 15 s e atualiza auditoria/batelada
+  somente por ACK/NACK. Broker indisponível ou ACK ausente produz falha
+  explícita, nunca sucesso presumido.
+- Verificação local: 279 testes Python; seis cenários HIL fail-safe; typecheck
+  e build Vite; 255 referências de hardware; oito pranchas Rev A; SBOM
+  sincronizada; scanner de segredos aprovado.
+- Decisões preservadas: nenhuma alteração de escopo; CO₂ continua somente
+  monitorado; iluminação continua fora da elétrica e apenas a integração
+  lógica EKAZA permanece; merge depende de autorização específica.
+- Bloqueios/pendências: checks remotos do PR; medidas e plaquetas; IDs/modelos
+  EKAZA e cem ciclos; footprints, ERC/DRC, protótipo e ensaios; Pi/SSD reais;
+  HIL físico, piloto com água e primeira batelada; revisão 127 V profissional;
+  montagem limpa/fotos reais; SBOM transitiva e licença OneWire conclusiva.
+- Próximos passos: abrir PR e aguardar CI; depois, com autorização de merge,
+  iniciar somente as atividades físicas desbloqueadas por dados/equipamentos.

@@ -20,6 +20,8 @@ class SensorKind(StrEnum):
     HUMIDITY = "humidity"
     CO2 = "co2"
     RESERVOIR_LEVEL = "reservoir_level"
+    MASS = "mass"
+    VPD = "vpd"
     FLOW = "flow"
     LEAK = "leak"
 
@@ -33,6 +35,8 @@ class Unit(StrEnum):
     LITER = "L"
     LITER_PER_MINUTE = "L/min"
     BOOLEAN = "bool"
+    KILOGRAM = "kg"
+    KILOPASCAL = "kPa"
 
 
 class ReadingQuality(StrEnum):
@@ -54,6 +58,8 @@ EXPECTED_UNIT = {
     SensorKind.HUMIDITY: Unit.PERCENT,
     SensorKind.CO2: Unit.PPM,
     SensorKind.RESERVOIR_LEVEL: Unit.LITER,
+    SensorKind.MASS: Unit.KILOGRAM,
+    SensorKind.VPD: Unit.KILOPASCAL,
     SensorKind.FLOW: Unit.LITER_PER_MINUTE,
     SensorKind.LEAK: Unit.BOOLEAN,
 }

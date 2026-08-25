@@ -16,7 +16,7 @@ quadros. Textos ou modelos que não ficam legíveis não foram inferidos.
 |---:|---|---|
 | 00:00–02:50 | frascos, agitadores magnéticos, dosadoras e acionamentos físicos | seis canais calibrados, etiquetados e dosados em sequência; nenhuma receita é presumida |
 | 02:50–03:35 | comando remoto e resposta de relé/tomada | comandos remotos exigem leitura de confirmação; voz não é requisito de segurança |
-| 03:35–05:25 | visão geral, sensores e gráficos no Home Assistant | painel local deve explicitar qualidade/idade; histórico e gráficos permanecem trabalho do hub |
+| 03:35–05:25 | visão geral, sensores e gráficos no Home Assistant | painel local explicita qualidade/idade e consulta histórico do hub |
 | 05:25–12:25 | controle de relés, tomadas, pH, EC, receita e clima | separar comando, estado observado e feedback físico; aplicar limites, espera e intertravamentos |
 | 07:20–10:45 | alvos de pH/EC e proporções CalMag, Micro, Bloom e Grow | usar lote em mL/L, sequência CalMag→Micro→Bloom→Grow e configuração validada pelo operador |
 | 10:45–12:25 | temperatura, umidade, exaustor e automações | exaustor atual somente liga/desliga, com histerese, anti-ciclo e falha segura; PWM fica fora até existir manual compatível |
@@ -61,8 +61,7 @@ quadros. Textos ou modelos que não ficam legíveis não foram inferidos.
 - medir corrente, fator de potência e inrush de cada luminária e executar cem
   ciclos por canal;
 - obter modelo, plaqueta, corrente de partida e tipo de comando do exaustor;
-- concluir firmware ESP32, API geral, histórico/gráficos e as demais telas do
-  painel;
+- comprovar builds ESP32, API, banco e painel no CI e depois no Raspberry Pi real;
 - validar vazão, altura manométrica, volumes, contenção, ERC/DRC, HIL e piloto
   supervisionado apenas com água.
 
