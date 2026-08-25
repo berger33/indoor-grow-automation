@@ -47,13 +47,13 @@ def evaluate_calibration(kind: str, measurements: dict[str, object], *, device_i
             standards = [float(value) for value in measurements["standardsPh"]]  # type: ignore[index]
             if len(standards) != 3 or any(abs(value - expected) > 0.2 for value, expected in zip(standards, (4.0, 7.0, 10.0), strict=True)):
                 raise ValueError("use padrões pH 4,00, 7,00 e 10,00 dentro da tolerância")
-            return CalibrationResult(kind, {"standardsPh": standards}, "requires_device_ack", "Padrões validados; só conclua após ACK do circuito Atlas em cada ponto.")
+            return CalibrationResult(kind, {"standardsPh": standards}, "requires_device_ack", "Padrões validados; só conclua após o ESP32 gravar e confirmar cada ponto.")
         if kind == "ec":
             standard = float(measurements["standardMsCm"])
             observed = float(measurements["observedMsCm"])
             if not math.isfinite(standard) or not math.isfinite(observed) or not 0.1 <= standard <= 20 or abs(observed - standard) / standard > 0.30:
                 raise ValueError("padrão EC ou leitura inicial fora da faixa de 30%")
-            return CalibrationResult(kind, {"standardMsCm": standard, "observedMsCm": observed}, "requires_device_ack", "Referência validada; só conclua após ACK do circuito Atlas e releitura do padrão.")
+            return CalibrationResult(kind, {"standardMsCm": standard, "observedMsCm": observed}, "requires_device_ack", "Referência validada; só conclua após o ESP32 gravar a calibração e reler o padrão.")
     except (KeyError, TypeError, ValueError, OverflowError) as exc:
         if isinstance(exc, ValueError) and str(exc):
             raise

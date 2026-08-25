@@ -19,7 +19,8 @@ class PanelQualityTests(TestCase):
         self.assertIn('url.pathname.startsWith("/api/")', worker)
         self.assertIn('caches.match("/index.html")', worker)
 
-    def test_help_explains_co2_and_unconfirmed_commands(self) -> None:
+    def test_help_explains_diy_sensors_and_unconfirmed_commands(self) -> None:
         help_page = (ROOT / "web/src/HelpPage.tsx").read_text(encoding="utf-8")
-        self.assertIn("somente monitorado", help_page)
+        self.assertIn("DHT22", help_page)
+        self.assertIn("não excedem 3,3 V", help_page)
         self.assertIn("queued indica apenas pedido", help_page)

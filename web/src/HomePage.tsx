@@ -48,7 +48,7 @@ export function HomePage({ station, refreshKey }: { station: Station; refreshKey
         </article>
         <article className="panel-card"><h3>Controles e intertravamentos</h3><ul className="plain-list">
           {inhibition.map((control) => <li key={control.name}><span className={`control-dot ${control.inhibited ? "inhibited" : "released"}`} aria-hidden="true" /><span><strong>{control.name}: {control.inhibited ? "inibido" : "liberado"}</strong><small>{control.inhibited ? control.reason : "Sensores necessários disponíveis; demais intertravamentos continuam ativos."}</small></span></li>)}
-          <li><span className="control-dot monitor" aria-hidden="true" /><span><strong>CO₂: somente monitoramento</strong><small>O sistema alerta, mas não possui comando de injeção.</small></span></li>
+          <li><span className="control-dot monitor" aria-hidden="true" /><span><strong>CO₂: não instalado</strong><small>O conjunto DIY mede temperatura e umidade pelo DHT22; o domínio legado continua compatível com sensores opcionais.</small></span></li>
         </ul></article>
       </section>
     </>
