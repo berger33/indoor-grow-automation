@@ -76,6 +76,31 @@ class SafeController {
     return true;
   }
 
+  bool commandExclusive(std::size_t output, std::size_t conflicting_output,
+                        bool energize, uint32_t now_ms,
+                        uint32_t absolute_timeout_ms,
+                        bool critical_sensor_valid = true) {
+    if (energize && conflicting_output < OutputCount && outputs_[conflicting_output]) {
+      return false;
+    }
+    return command(output, energize, now_ms, absolute_timeout_ms,
+                   critical_sensor_valid);
+  }
+
+  bool commandOneOf(std::size_t output, std::size_t first,
+                    std::size_t last_exclusive, bool energize,
+                    uint32_t now_ms, uint32_t absolute_timeout_ms,
+                    bool critical_sensor_valid = true) {
+    if (energize) {
+      if (first >= last_exclusive || last_exclusive > OutputCount) return false;
+      for (std::size_t index = first; index < last_exclusive; ++index) {
+        if (index != output && outputs_[index]) return false;
+      }
+    }
+    return command(output, energize, now_ms, absolute_timeout_ms,
+                   critical_sensor_valid);
+  }
+
   void tick(uint32_t now_ms, bool leak_wet, bool hub_online, bool emergency_stop) {
     if (state_ == NodeState::Alarm) return;
     if (emergency_stop) return trip(TripReason::EmergencyStop);
