@@ -6,7 +6,32 @@ versionamento semântico a partir da primeira release.
 
 ## [Não publicado]
 
+### Alterado
+
+- arquitetura física simplificada para notebook, ESP32 único, placa perfurada,
+  relés/MOSFETs genéricos, bombas econômicas e recipientes domésticos;
+- BOM ativa substituída por checklist cotável de R$ 1.620, com fornecedores por
+  categoria e critérios de equivalência sem anúncios inventados;
+- pinagem e mapa de atuadores convertidos para 12 GPIO diretos, com saídas
+  seguras no boot, exclusão de dosagem e conflito irrigação/dreno;
+- operação do hub generalizada para Linux AMD64/ARM64 com Docker;
+- tutorial refeito na sequência compra, eletrônica, estrutura, bombas,
+  sensores, firmware, hub, água e primeira receita;
+- painel passou a descrever DHT22 e módulos analógicos, mantendo o domínio e a
+  integração Home Assistant/EKAZA existentes.
+
+### Arquivado
+
+- PCB, Gerbers, netlist, pranchas, laudo, painel industrial, rack sob medida,
+  imagens conceituais e tutorial Rev A em `archive/engenharia-pesada/`;
+- três firmwares distribuídos e driver Atlas local, substituídos pelo
+  controlador DIY único.
+
 ### Adicionado
+
+- firmware `controller` com bancos GPIO diretos para seis MOSFETs e seis relés;
+- validação nativa do controlador e sete cenários HIL fail-safe;
+- validador do orçamento/mapas DIY e inventário automatizado do arquivo.
 
 - umidificador com nível mínimo, timeout absoluto retido e rearme seguro;
 - monitor de CO₂ somente leitura, sem qualquer caminho de comando de injeção;

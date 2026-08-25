@@ -1,7 +1,10 @@
 # ADR 0006 — Escopo v1 sem automação de iluminação
 
-- Estado: aceito
+- Estado: substituído pelos ADRs 0009 e 0010
 - Data: 2026-08-23
+
+> Registro histórico. O conjunto DIY atual usa notebook, ESP32 único, recipientes
+> comuns e mantém a integração lógica EKAZA já implementada no hub.
 
 ## Contexto
 

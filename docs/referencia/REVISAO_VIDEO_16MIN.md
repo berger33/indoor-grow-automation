@@ -1,5 +1,9 @@
 # Revisão dirigida — vídeo V1 de hardware (16:36)
 
+> **Referência histórica.** As observações continuam úteis para entender a
+> inspiração, mas decisões por PCB, Raspberry Pi, tanque técnico e painel foram
+> substituídas pelo [ADR 0010](../adr/0010-controlador-diy-unico.md).
+
 - Arquivo revisado: `My DIY Home Assistant Garden Automation System — Pt.1 — Hardware`
 - Duração verificada: 16:36
 - Data da revisão dirigida: 2026-08-23

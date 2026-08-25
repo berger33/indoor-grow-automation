@@ -1,76 +1,90 @@
-# Escopo executável da release v1.0
+# Escopo executável da versão DIY
 
-Este documento transforma a referência estudada nas fronteiras do produto que
-será construído. Em caso de conflito com uma observação histórica de vídeo, este
-escopo, o ADR 0006 e sua substituição parcial pelo ADR 0009 prevalecem.
+Este documento prevalece sobre observações históricas em vídeos, pranchas e
+ADRs arquivados. O objetivo atual é um sistema doméstico barato, compreensível e
+funcional, não uma estação de engenharia industrial.
 
 ## Resultado esperado
 
-Ao concluir a v1.0, uma pessoa deverá conseguir comprar componentes aprovados,
-montar a estação com o tutorial, comissioná-la primeiro com água e operar
-fertirrigação e clima localmente sem depender da nuvem.
+Uma pessoa deverá conseguir comprar peças comuns, montar a estação pelo
+tutorial, executar o hub no próprio notebook, calibrar o conjunto, testar
+somente com água e então operar uma primeira receita supervisionada.
 
-## Configuração física padrão
+## Configuração-base
 
-| Elemento | Configuração-base | Configurável antes do uso |
-|---|---|---|
-| Área de cultivo | 0,80 × 0,80 m | quantidade de zonas de irrigação |
-| Concentrados | 6 recipientes de 1 L | nome, densidade, limite e ordem de cada canal |
-| Água de origem | 1 reservatório de 50 L | tara, massa útil e limites alto/baixo |
-| Solução preparada | 1 reservatório de 50 L | tara, massa útil e volume de batelada |
-| Rede do local | 127 V, 60 Hz | somente após medição e validação profissional |
-| Exaustor atual | CA liga/desliga | modelo futuro pode usar 0–10 V documentado |
-| Hub | Raspberry Pi local | hostname, retenção, backup e usuários |
-
-Os nomes de produtos químicos vistos no vídeo são exemplos de canais, não uma
-receita agronômica. O software exige que o operador cadastre e valide sua própria
-receita, concentração e limites.
+| Elemento | Configuração |
+|---|---|
+| Hub | notebook Linux `amd64/arm64` já disponível, com Docker |
+| Controlador | 1 ESP32 DevKit genérico em placa perfurada soldada |
+| Dosagem | 6 peristálticas 12 V por módulos MOSFET |
+| Atuadores | módulo relé 8 canais; 6 usados e 2 desconectados |
+| Reservatórios | 2 caixas organizadoras plásticas de 40–50 L |
+| Concentrados | 6 potes de vidro de aproximadamente 1 L |
+| Estrutura | estante aramada comum e fundo de madeira selada |
+| Química | pH e EC analógicos, calibrados localmente |
+| Clima | DHT22, exaustão e umidificação por histerese |
+| Iluminação | tomadas EKAZA existentes via Home Assistant |
+| Orçamento | R$ 1.620 estimados, sem notebook/frete/ferramentas/serviço elétrico |
 
 ## Matriz de escopo
 
-| Subsistema | Incluído na v1.0 | Fora da v1.0 |
-|---|---|---|
-| Dosagem | seis bombas calibradas, receita, limites por evento/hora/dia | recomendação automática de fertilizante |
-| Química | pH, EC, temperatura, mistura, espera, correção segura | controle sem sonda válida ou dose ilimitada |
-| Hidráulica | enchimento, transferência, mistura, irrigação, dreno, massa/nível | operação sem contenção e sem teste com água |
-| Clima | temperatura, UR, VPD, CO₂, exaustão e umidificação | CO₂ injetado no MVP; controle sem plaqueta/manual |
-| Segurança | vazamento latched, E-stop, timeout, watchdog, estado seguro | confiar apenas em Wi-Fi, servidor ou UI |
-| Hub/painel | MQTT, API, histórico, alarmes, configuração mobile | dependência obrigatória de nuvem |
-| Instalação | BOM, chicotes, desenhos, inspeções e tutorial leigo | energização de rede por pessoa não habilitada |
-| Iluminação remota | agenda, override temporário, comando e confirmação das tomadas EKAZA existentes via Home Assistant | alimentação, relé, contator, PCB, chicote, dimerização, PPFD e medição elétrica |
+| Incluído | Fora do escopo ativo |
+|---|---|
+| notebook com Docker e serviços existentes | compra de Raspberry Pi |
+| ESP32 único e GPIO direto | três nós, `SN74HCT595` e `MCP23017` |
+| placa perfurada e módulos prontos | PCB customizada, KiCad, Gerber, ERC/DRC |
+| relés e MOSFETs genéricos | controladora industrial de 16 saídas |
+| pH/EC analógicos econômicos | Atlas EZO e carriers isolados |
+| DHT22 | CO₂ dedicado, MLX90614 e sensores redundantes caros |
+| caixas organizadoras e potes comuns | tanques técnicos e plataformas de pesagem |
+| estante aramada | rack fabricado sob medida e gabinete IP65 |
+| segurança elétrica básica | painel dedicado com DR/DPS/contatores industriais |
+| parada local em baixa tensão | E-stop certificado |
+| agitação manual periódica | seis agitadores magnéticos dedicados |
 
-A integração de luz é opcional e isolada. O Raspberry Pi pode comandar somente
-entidades `switch` já homologadas; nenhum condutor de luminária entra na estação,
-nenhuma credencial chega ao ESP32 e uma falha de nuvem jamais bloqueia o cultivo.
+O diretório `archive/engenharia-pesada/` guarda a arquitetura anterior apenas
+para histórico. Ele não define a montagem atual.
 
-## Fluxo operacional-alvo
+## Funções de software preservadas
 
-1. confirmar disponibilidade de água e capacidade livre na mistura;
-2. transferir a massa de água configurada;
-3. misturar e estabilizar temperatura/leituras;
-4. dosar cada concentrado sequencialmente, com pausa de homogeneização;
-5. verificar EC e diluir apenas dentro dos limites configurados;
-6. corrigir pH em pequenos pulsos, nunca pH+ e pH− simultaneamente;
-7. aguardar estabilidade e liberar a batelada;
-8. irrigar as zonas nos horários/durações configurados;
-9. coletar/drenar com timeout e confirmar variação de massa/fluxo;
-10. manter clima por histerese/anti-ciclo e registrar todo comando e alarme.
+- receitas, agendas e calibração;
+- limites de dose por evento, hora e dia;
+- pH+ e pH− mutuamente exclusivos;
+- mistura, irrigação e drenagem com timeout;
+- clima por histerese e anti-ciclo;
+- telemetria, histórico, alarmes e painel React;
+- FastAPI, PostgreSQL, Mosquitto e contratos MQTT v1;
+- integração Home Assistant/EKAZA sem acoplamento ao cultivo.
 
-Qualquer vazamento, E-stop, leitura inválida crítica, timeout ou comportamento
-incompatível com a variação de massa leva o sistema a estado seguro local.
+## Segurança mínima obrigatória
 
-## Definição de pronto físico
+- saídas OFF no boot e após reboot;
+- timeout absoluto que comando repetido não renova;
+- somente uma dosadora por vez;
+- irrigação e drenagem mutuamente exclusivas;
+- corte por vazamento e botão local;
+- fusível nos ramais de 12 V;
+- eletrônica fechada, elevada e protegida contra respingos;
+- tomada aterrada e proteção DR existente;
+- teste completo somente com água antes de qualquer produto;
+- primeira receita e primeiras agendas supervisionadas.
 
-A expressão “pronto para comprar e montar” só poderá aparecer quando todos os
-itens abaixo estiverem aprovados:
+Qualquer criação/alteração de cabo ou circuito de 127 V fica fora da montagem
+DIY e deve ser feita por pessoa qualificada. Não existe exigência de painel
+industrial dedicado.
 
-- BOM com MPN, alternativa, fornecedor e teste de recebimento;
-- esquema e PCB com ERC/DRC reais, revisão independente e protótipo aprovado;
-- P&ID, unifilar SELV/CA, chicotes e desenhos mecânicos congelados;
-- ensaio de bancada, térmico, HIL e piloto somente com água;
-- tutorial validado por uma montagem limpa feita a partir dos próprios arquivos;
-- lista explícita das etapas que exigem eletricista/profissional habilitado;
-- release reproduzível do firmware, hub e painel.
+## Critério de pronto
 
-Até lá, documentos A0 são material de engenharia e cotação, não autorização de
-compra em lote nem de energização.
+1. BOM comprada e recebida sem substituição não documentada.
+2. Firmware `controller` e HIL compilados.
+3. Cinco boots sem pulso de saída.
+4. pH/EC limitados a 3,3 V, calibrados e verificados.
+5. Dez ciclos medidos por bomba peristáltica.
+6. Corrente e aquecimento das bombas/fonte registrados.
+7. Vazamento, parada, timeout, perda do hub e reboot aprovados.
+8. Ciclo completo somente com água aprovado.
+9. Backup do hub restaurado em ambiente de teste.
+10. Primeira receita real concluída com supervisão e histórico.
+
+“DIY” significa simplificado e econômico; não significa operar sem proteção,
+calibração ou verificação.

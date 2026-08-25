@@ -1,51 +1,45 @@
-# Decisões pendentes
+# Decisões e validações pendentes — versão DIY
 
-Itens deste arquivo exigem confirmação humana ou evidência física. Eles não
-devem bloquear trabalho independente em outros módulos.
+## Já decidido
 
-## Instalação física — informações incorporadas
+- [x] Usar notebook existente como hub; não comprar Raspberry Pi.
+- [x] Manter hub, banco, painel, MQTT e Home Assistant/EKAZA.
+- [x] Usar um ESP32 e GPIO direto.
+- [x] Usar seis canais MOSFET para dosagem.
+- [x] Usar seis canais do módulo relé de oito canais; dois ficam desconectados.
+- [x] Usar pH/EC analógicos, DHT22, boias e sensores simples de vazamento.
+- [x] Usar caixas organizadoras, potes de vidro e estante aramada.
+- [x] Fazer agitação manual periódica dos concentrados.
+- [x] Manter timeout, vazamento, parada local e interlocks básicos.
+- [x] Arquivar a engenharia pesada sem apagar o histórico.
 
-- [x] Adotar 127 V/60 Hz como base da instalação. A frequência brasileira é
-  60 Hz; ainda deve ser conferida no ponto de alimentação antes do comissionamento.
-- [x] Manter toda a potência de iluminação fora da estação: as luminárias Yuxinou
-  permanecem nas tomadas EKAZA existentes e recebem apenas comandos de software.
-- [x] Tratar o exaustor atual como motor CA liga/desliga. A imagem fornecida
-  mostra quatro fios para ligação 110/220 V, sem interface PWM/0–10 V comprovada.
-- [x] Reservar seis recipientes de concentrado de 1 L, um reservatório de água
-  de 50 L e um reservatório de mistura/rega de 50 L.
-- [x] Autorizar a elaboração e auditoria da BOM e da PCB Rev A.
+## Confirmar com o hardware recebido
 
-## Instalação física — validações ainda necessárias
+- [ ] Variante e pinagem exatas do ESP32.
+- [ ] Se o módulo relé é realmente compatível com 3,3 V e ativo em LOW.
+- [ ] Se os MOSFETs desligam com entrada flutuante e suportam a corrente medida.
+- [ ] Tensão máxima das saídas analógicas de pH/EC.
+- [ ] Faixa real e repetibilidade do kit EC em solução nutritiva.
+- [ ] Vazão e corrente de cada peristáltica.
+- [ ] Vazão/altura das bombas de mistura, irrigação e dreno.
+- [ ] Posição/orientação elétrica das duas boias.
+- [ ] Detecção de água limpa pelos sensores de vazamento.
+- [ ] Capacidade real da estante com as caixas no volume de trabalho.
 
-- [ ] Fotografar a plaqueta do exaustor atual e fornecer a do futuro substituto.
-- [ ] Fotografar a plaqueta e informar o código exato de cada tomada EKAZA;
-  confirmar que cada unidade aparece como entidade `switch` no Home Assistant.
-- [ ] Fotografar as plaquetas das quatro luminárias e medir corrente e inrush por
-  tomada; os 390 W nominais totais não homologam plugue, carga ou circuito.
-- [ ] Executar cem ciclos por tomada e ensaiar perda/retorno de Wi-Fi, internet,
-  Home Assistant e nuvem Tuya antes de habilitar a agenda automática.
-- [ ] Medir dimensões internas, altura útil e material dos dois reservatórios de
-  50 L e dos seis recipientes de 1 L.
-- [ ] Informar a altura entre reservatórios, cultivo e destino do dreno, além da
-  distância total de cada linha hidráulica.
-- [ ] Confirmar se o reservatório de água será abastecido manualmente ou por uma
-  linha fixa com osmose reversa.
-- [ ] Definir modelo do umidificador ou autorizar a seleção após ensaio de bancada.
-- [ ] Informar distância do quadro ao ponto de alimentação, método de instalação
-  dos cabos, esquema de aterramento e cargas auxiliares pretendidas.
-- [ ] Dimensionar e executar circuito dedicado, DR/DPS, proteção e aterramento
-  com profissional habilitado conforme NBR 5410 e NR-10.
-- [ ] Executar ERC/DRC no KiCad, revisão independente, montagem de uma unidade,
-  ensaios elétricos/HIL e piloto com água antes de fabricar lote.
+## Confirmar no local
+
+- [ ] Tomada aterrada e proteção DR existente.
+- [ ] Zona seca elevada para notebook, fonte e caixa eletrônica.
+- [ ] Distância e caminho dos tubos até o cultivo e dreno.
+- [ ] Volume de irrigação necessário por evento.
+- [ ] Destino seguro da drenagem.
+- [ ] IDs reais das tomadas EKAZA no Home Assistant.
 
 ## Regras
 
-Nenhuma compra, fabricação, ligação à rede elétrica ou publicação de release
-v1.0 será executada automaticamente com base apenas em suposição.
-
-## Resolvidas
-
-- [x] Repositório público `berger33/indoor-grow-automation` criado, conectado e
-  populado em 2026-08-22.
-- [x] Escopo v1.0 limitado a fertirrigação, irrigação, clima, segurança, hub e
-  tutorial de montagem em 2026-08-23.
+- Nenhuma medição será substituída por suposição de anúncio.
+- Nenhum nutriente será usado antes do teste completo com água.
+- Nenhuma receita será tratada como recomendação agronômica universal.
+- Nenhum cabo ou borne de 127 V ficará exposto.
+- Se for necessário criar/alterar cabo, tomada ou circuito de rede, a execução é
+  de pessoa qualificada e fica fora do orçamento-base.

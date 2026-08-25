@@ -17,7 +17,7 @@ ou marca não bastam para homologar uma unidade.
 
 ## Decisão
 
-O Raspberry Pi será a única ponte para iluminação:
+O notebook que executa o Grow Hub será a única ponte para iluminação:
 
 1. Home Assistant integra as tomadas EKAZA/Tuya e mantém as credenciais externas;
 2. o Grow Hub usa a API REST local do Home Assistant;
@@ -27,8 +27,8 @@ O Raspberry Pi será a única ponte para iluminação:
 5. indisponibilidade da tomada, nuvem ou Home Assistant não interfere em
    fertirrigação, clima ou intertravamentos locais.
 
-O ESP32 não recebe token, não comanda a luz e não depende desse serviço. A PCB,
-BOM, unifilar, chicotes e quadro continuam sem qualquer circuito de iluminação.
+O ESP32 não recebe token, não comanda a luz e não depende desse serviço. A placa
+perfurada, os relés DIY e a fiação de 12 V não possuem circuito de iluminação.
 Não haverá dimerização, PPFD, medição elétrica nem recomendação agronômica de
 fotoperíodo na v1.0.
 
@@ -46,7 +46,7 @@ fotoperíodo na v1.0.
 ## Consequências
 
 O painel poderá centralizar a experiência do operador sem levar potência de
-iluminação ao rack. Em contrapartida, esta função pode depender da nuvem Tuya e
+iluminação à estante. Em contrapartida, esta função pode depender da nuvem Tuya e
 deve mostrar degradação com transparência. O ADR 0006 permanece válido para toda
 a fronteira física/elétrica; somente a proibição de API, tela e agenda lógica é
 substituída por esta decisão.
@@ -55,5 +55,5 @@ substituída por esta decisão.
 
 Cada tomada precisa aparecer como `switch` estável, completar cem ciclos de
 bancada, recuperar-se de reinicialização e falhas de rede e ter sua plaqueta e
-carga aprovadas. Até isso ocorrer, a integração permanece `HOLD` e não autoriza
-alteração elétrica nem compra em lote.
+carga aprovadas. Até isso ocorrer, a agenda automática permanece desabilitada e
+não autoriza alteração elétrica.

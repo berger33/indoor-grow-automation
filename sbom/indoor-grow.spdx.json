@@ -1,7 +1,7 @@
 {
   "SPDXID": "SPDXRef-DOCUMENT",
   "creationInfo": {
-    "created": "2026-08-24T00:00:00Z",
+    "created": "2026-08-25T00:00:00Z",
     "creators": [
       "Tool: scripts/generate_sbom.py"
     ]
@@ -10,7 +10,7 @@
   "documentDescribes": [
     "SPDXRef-Package-indoor-grow-automation"
   ],
-  "documentNamespace": "https://indoor-grow.local/sbom/v1/2026-08-24",
+  "documentNamespace": "https://indoor-grow.local/sbom/v1/2026-08-25",
   "name": "indoor-grow-automation-sbom",
   "packages": [
     {
@@ -22,25 +22,7 @@
       "licenseDeclared": "MIT",
       "name": "indoor-grow-automation",
       "supplier": "Organization: Indoor Grow Automation contributors",
-      "versionInfo": "1.0.0-a0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-github-1299283241429b3d",
-      "copyrightText": "NOASSERTION",
-      "downloadLocation": "https://github.com/adafruit/Adafruit-MLX90614-Library.git",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceLocator": "pkg:github/adafruit/Adafruit-MLX90614-Library@8c32c95768e0960d7c27258b1d9bac16b8d7fdfc",
-          "referenceType": "purl"
-        }
-      ],
-      "filesAnalyzed": false,
-      "licenseConcluded": "BSD-3-Clause",
-      "licenseDeclared": "BSD-3-Clause",
-      "name": "adafruit/Adafruit-MLX90614-Library",
-      "supplier": "NOASSERTION",
-      "versionInfo": "8c32c95768e0960d7c27258b1d9bac16b8d7fdfc"
+      "versionInfo": "1.0.0-diy"
     },
     {
       "SPDXID": "SPDXRef-Package-github-1a3f4073672819a0",
@@ -61,76 +43,22 @@
       "versionInfo": "11f8c40be7591c82858b6f7cd310cb166a5d2e3e"
     },
     {
-      "SPDXID": "SPDXRef-Package-github-56f83fd426f9f2ac",
+      "SPDXID": "SPDXRef-Package-github-71a2d421eefcb85d",
       "copyrightText": "NOASSERTION",
-      "downloadLocation": "https://github.com/PaulStoffregen/OneWire.git",
+      "downloadLocation": "https://github.com/adafruit/DHT-sensor-library.git",
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
-          "referenceLocator": "pkg:github/PaulStoffregen/OneWire@72249e22ef9092b0750e303d266199965a89e500",
-          "referenceType": "purl"
-        }
-      ],
-      "filesAnalyzed": false,
-      "licenseConcluded": "NOASSERTION",
-      "licenseDeclared": "NOASSERTION",
-      "name": "PaulStoffregen/OneWire",
-      "supplier": "NOASSERTION",
-      "versionInfo": "72249e22ef9092b0750e303d266199965a89e500"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-github-5a6a0f465f010668",
-      "copyrightText": "NOASSERTION",
-      "downloadLocation": "https://github.com/adafruit/Adafruit_BME280_Library.git",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceLocator": "pkg:github/adafruit/Adafruit_BME280_Library@ef712e95147de926b4545e379f6296ad271529b5",
-          "referenceType": "purl"
-        }
-      ],
-      "filesAnalyzed": false,
-      "licenseConcluded": "BSD-3-Clause",
-      "licenseDeclared": "BSD-3-Clause",
-      "name": "adafruit/Adafruit_BME280_Library",
-      "supplier": "NOASSERTION",
-      "versionInfo": "ef712e95147de926b4545e379f6296ad271529b5"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-github-5d463ca858b0fcd2",
-      "copyrightText": "NOASSERTION",
-      "downloadLocation": "https://github.com/bogde/HX711.git",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceLocator": "pkg:github/bogde/HX711@01e8a1e8eb22d4380f83194e266a2f75ea0c993c",
+          "referenceLocator": "pkg:github/adafruit/DHT-sensor-library@2295fe471c38d5e649a7b68cecccc42193c8e41c",
           "referenceType": "purl"
         }
       ],
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
-      "name": "bogde/HX711",
+      "name": "adafruit/DHT-sensor-library",
       "supplier": "NOASSERTION",
-      "versionInfo": "01e8a1e8eb22d4380f83194e266a2f75ea0c993c"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-github-7b87167858aee194",
-      "copyrightText": "NOASSERTION",
-      "downloadLocation": "https://github.com/milesburton/Arduino-Temperature-Control-Library.git",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceLocator": "pkg:github/milesburton/Arduino-Temperature-Control-Library@3f570bbe2d0ad3cae55663cfaec1fedbc5b4fa50",
-          "referenceType": "purl"
-        }
-      ],
-      "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
-      "name": "milesburton/Arduino-Temperature-Control-Library",
-      "supplier": "NOASSERTION",
-      "versionInfo": "3f570bbe2d0ad3cae55663cfaec1fedbc5b4fa50"
+      "versionInfo": "2295fe471c38d5e649a7b68cecccc42193c8e41c"
     },
     {
       "SPDXID": "SPDXRef-Package-npm-01921317b26e1a97",
@@ -1485,32 +1413,12 @@
   ],
   "relationships": [
     {
-      "relatedSpdxElement": "SPDXRef-Package-github-1299283241429b3d",
-      "relationshipType": "DEPENDS_ON",
-      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
-    },
-    {
       "relatedSpdxElement": "SPDXRef-Package-github-1a3f4073672819a0",
       "relationshipType": "DEPENDS_ON",
       "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
     },
     {
-      "relatedSpdxElement": "SPDXRef-Package-github-56f83fd426f9f2ac",
-      "relationshipType": "DEPENDS_ON",
-      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-github-5a6a0f465f010668",
-      "relationshipType": "DEPENDS_ON",
-      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-github-5d463ca858b0fcd2",
-      "relationshipType": "DEPENDS_ON",
-      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-github-7b87167858aee194",
+      "relatedSpdxElement": "SPDXRef-Package-github-71a2d421eefcb85d",
       "relationshipType": "DEPENDS_ON",
       "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
     },

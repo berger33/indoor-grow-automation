@@ -1,5 +1,9 @@
 # Revisão dirigida — vídeo Parte 2 de funcionalidades (18:00)
 
+> **Referência histórica.** As funções observadas permanecem válidas; a tradução
+> para o hardware econômico atual é definida pelo
+> [ADR 0010](../adr/0010-controlador-diy-unico.md).
+
 - Arquivo revisado: `My DIY Home Assistant Garden Automation System - Climate Control, Dosing & More. Pt.2_ Functionality.mp4`
 - Duração verificada: 18:00
 - Resolução do anexo: 640 × 360
