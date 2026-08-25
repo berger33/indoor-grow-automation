@@ -24,7 +24,9 @@ class DeploymentTests(TestCase):
         self.assertIn("pre-restore", restore)
         self.assertNotIn("rm -rf", restore)
 
-    def test_document_marks_power_as_forecast(self) -> None:
-        guide = (ROOT / "docs/RASPBERRY_PI_OPERACAO.md").read_text(encoding="utf-8")
-        self.assertIn("estimativa de planejamento", guide)
-        self.assertIn("não uma medição", guide)
+    def test_document_supports_notebook_on_both_container_architectures(self) -> None:
+        guide = (ROOT / "docs/HUB_OPERACAO.md").read_text(encoding="utf-8")
+        self.assertIn("notebook", guide)
+        self.assertIn("amd64", guide)
+        self.assertIn("arm64", guide)
+        self.assertNotIn("Raspberry Pi OS", guide)

@@ -1,11 +1,11 @@
 # ADR 0003 — Stack do hub e painel
 
-- **Status:** aceito
+- **Status:** aceito; hardware de hub atualizado pelo ADR 0010
 - **Data:** 2026-08-22
 
 ## Contexto
 
-O hub precisa caber em Raspberry Pi, funcionar sem nuvem, oferecer API e
+O hub precisa caber em um computador Linux, funcionar sem nuvem, oferecer API e
 histórico e ser compreensível por mantenedores. O painel precisa operar bem em
 telefone e tablet. A escolha deve ser reversível enquanto o domínio ainda é
 pequeno.
@@ -17,7 +17,7 @@ pequeno.
 - **Persistência inicial:** PostgreSQL; testes de domínio não dependem do banco.
 - **Migrações:** Alembic.
 - **Painel:** TypeScript, React e Vite, com PWA apenas depois da UI básica.
-- **Empacotamento do hub:** containers Docker Compose compatíveis com ARM64.
+- **Empacotamento do hub:** containers Docker Compose compatíveis com AMD64 e ARM64.
 - **Firmware:** ESP32 com PlatformIO e framework Arduino inicialmente.
 
 O domínio Python não importará FastAPI, driver de banco ou cliente MQTT. Portas
@@ -26,10 +26,10 @@ e adaptadores permitirão testar regras sem hardware e trocar infraestrutura.
 ## Consequências
 
 - a primeira fase pode avançar com biblioteca padrão e testes rápidos;
-- o Raspberry Pi executará API, broker e banco como serviços separados;
+- o notebook existente executará API, broker e banco como serviços separados;
 - dependências serão fixadas por versão e atualizadas por tarefa específica;
 - Home Assistant poderá consumir MQTT/API, mas não será requisito do núcleo;
-- imagens ARM64 e consumo de memória devem integrar os critérios de release.
+- imagens AMD64/ARM64 e consumo de memória devem integrar os critérios de release.
 
 ## Alternativas rejeitadas
 

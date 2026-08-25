@@ -21,6 +21,6 @@ Para uma estação com 16 sensores, uma amostra por sensor a cada 30 segundos:
 | Espaço provisionado a ~550 bytes/amostra | 8,61 GiB/ano |
 
 O provisionamento inclui índices, folga de página, WAL, manutenção e margem de
-crescimento. É uma previsão de engenharia, não uma medição do Raspberry Pi. O
+crescimento. É uma previsão de engenharia, não uma medição do notebook. O
 valor real deve ser recalculado após 30 dias de operação e antes de escolher o
 armazenamento definitivo.
