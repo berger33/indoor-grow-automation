@@ -1,166 +1,255 @@
 # Indoor Grow Automation
 
-Stack open-source para automatizar fertirrigação, irrigação e ambiente de cultivo
-indoor em pequena escala, composta por nós ESP32, hub local em Raspberry Pi e
-painel web responsivo.
+[![Quality Gate](https://github.com/berger33/indoor-grow-automation/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/berger33/indoor-grow-automation/actions/workflows/quality.yml)
 
-> **Status:** as tarefas 01–30 estão implementadas em software/documentação e o
-> gate local está aprovado. A revisão física permanece `A0/HOLD`: ainda não se
-> deve fabricar lote, energizar cargas ou operar com nutrientes.
+Sistema open source para automatizar **fertirrigação, irrigação, drenagem e clima**
+de uma estufa indoor compacta. Três nós ESP32 executam o controle local seguro;
+um Raspberry Pi hospeda MQTT, banco, API e painel; o operador configura receitas,
+agendas, calibrações, alarmes e as tomadas EKAZA em uma interface responsiva.
 
-## Objetivos
+![Resultado final esperado: estação vertical compacta ao lado da estufa](docs/images/realistic/RESULTADO_FINAL_ESPERADO_VERTICAL.webp)
 
-- adquirir pH, EC, temperatura da solução, temperatura/umidade do ar, nível e
-  vazamento com qualidade de dado explícita;
-- controlar fertirrigação, correção química, irrigação e clima com limites e
-  timeouts locais;
-- manter telemetria, API e interface no hub local, sem dependência obrigatória
-  de nuvem;
-- oferecer documentação suficientemente detalhada para montagem por terceiros;
-- preservar operação segura quando Wi-Fi, broker ou servidor falharem.
+> **Visualização conceitual do resultado esperado.** A imagem mostra a disposição
+> final pretendida: quadro seco elevado, seis frascos e seis dosadoras, painel
+> hidráulico central e duas caixas de aproximadamente 50 L empilhadas, cada uma
+> em sua plataforma de pesagem. Dimensões, componentes e ligações finais serão
+> vinculados somente pelos desenhos e pela BOM liberados após os ensaios físicos.
 
-**A potência da iluminação não faz parte deste projeto.** As luminárias continuam
-nas tomadas Wi-Fi EKAZA existentes. O painel apenas oferece uma integração lógica
-opcional via Home Assistant para agenda, comando e confirmação de estado; não há
-relé, contator, fiação, PCB, dimerização, PPFD ou credencial no ESP32. Consulte o
-[`escopo executável da v1.0`](docs/ESCOPO_V1.md).
+## Objetivo final
 
-## Arquitetura implementada em software
+A release v1.0 deverá permitir que uma pessoa:
+
+1. compre os componentes aprovados na lista final;
+2. monte a estrutura seguindo o tutorial visual;
+3. solicite a um profissional habilitado a instalação de 127 V;
+4. instale firmware, Raspberry Pi e painel;
+5. calibre massa, bombas, pH e EC;
+6. comissione primeiro sem carga e depois somente com água;
+7. opere fertirrigação e clima localmente, sem depender da nuvem.
+
+O escopo vinculante e os critérios de conclusão estão em
+[`docs/ESCOPO_V1.md`](docs/ESCOPO_V1.md).
+
+## Estado atual
+
+| Camada | Estado | O que significa |
+|---|---|---|
+| Controle, API, banco e painel | Implementado e testado | Fluxos principais funcionam em software |
+| Firmware ESP32 | Compilável e coberto por HIL virtual | Falta validação nos nós e na placa reais |
+| MQTT e segurança do hub | Implementados | TLS, ACL, ACK/NACK, auditoria e buffer offline |
+| Integração EKAZA | Implementada em software | Faltam IDs reais e homologação de 100 ciclos por canal |
+| Hardware Rev A | `A0/HOLD` | Requisitos definidos; KiCad, protótipo e ensaios pendentes |
+| Hidráulica e mecânica | `A0/HOLD` | Fluxo definido; bombas, tubos, cotas e plataformas pendentes |
+| Tutoriais 00-14 | Publicados para revisão | Falta montagem limpa e fotografias reais |
+| Release | Em desenvolvimento | Ainda não é uma lista liberada para compra em lote |
+
+O estado detalhado, incluindo todos os bloqueios físicos, esta no
+[`relatório de prontidão`](docs/RELATORIO_PRONTIDAO_V1.md). O trabalho restante
+fica rastreado no [`BACKLOG.md`](BACKLOG.md).
+
+## O que o sistema automatiza
+
+| Subsistema | Funções |
+|---|---|
+| Fertirrigação | seis canais calibrados, ordem de receita, mistura e limites de dose |
+| Química | pH, EC, temperatura, compensação térmica, estabilizacao e correção segura |
+| Água | enchimento, transferência, mistura, irrigação, coleta e drenagem |
+| Clima | temperatura, umidade, VPD, exaustão, umidificação e monitoramento de CO2 |
+| Segurança | E-stop, vazamento retido, nível mínimo, timeout, watchdog e safe boot |
+| Supervisão | histórico, gráficos, alarmes, calibração, receitas e agendas |
+| Iluminação remota | agenda e override de tomadas EKAZA existentes via Home Assistant |
+
+CO2 é **somente monitorado**: a v1.0 não possui injeção. O sistema também não
+recomenda doses agronômicas; produtos, concentrações e limites são cadastrados
+pelo operador conforme fabricante e orientação aplicável.
+
+## Iluminação fora do quadro
+
+A potência das luminárias não integra esta automação. Elas permanecem ligadas
+às tomadas Wi-Fi EKAZA existentes. O hub pode solicitar ligar/desligar pela API
+do Home Assistant e confirma o resultado relendo o estado real da tomada.
+
+Não entram no projeto elétrico da estação:
+
+- alimentação ou cabeamento das luminárias;
+- relés, contatores ou dimmers de iluminação;
+- medição de PPFD;
+- credenciais EKAZA nos ESP32.
+
+Uma falha da integração de luz não bloqueia a fertirrigação nem o controle de
+clima.
+
+## Organização física esperada
+
+O rack vertical concentra o sistema sem misturar as zonas seca e molhada:
+
+- **topo seco:** quadro, fontes, controladora, tela e E-stop;
+- **dosagem:** seis frascos de 1 L e seis bombas peristálticas;
+- **centro umido:** manifold, válvulas, bombas, unioes e pontos de amostragem;
+- **caixa superior:** reservatorio de água de origem, aproximadamente 50 L;
+- **caixa inferior:** reservatorio de mistura/rega, aproximadamente 50 L;
+- **base:** contenção secundaria e sensores de vazamento;
+- **ao lado:** estufa 80 x 80 cm, exaustão, umidificação, sensores, rega e dreno;
+- **zona seca separada:** Raspberry Pi, rede e armazenamento.
+
+A imagem e uma referência de aparência e organização. Para fabricar ou montar,
+prevalecem a BOM liberada, os desenhos cotados, o P&ID, o unifilar, os chicotes,
+os arquivos KiCad e o tutorial da revisão aprovada.
+
+## Arquitetura
 
 ```mermaid
 flowchart TD
     UI["Painel React"] -->|"HTTPS + WebSocket"| HUB["Hub Raspberry Pi"]
     HUB --> DB["PostgreSQL"]
-    HUB <-->|"MQTT v1 + TLS mútuo"| ESP["3 nós ESP32"]
+    HUB <-->|"MQTT v1 + TLS mútuo"| ESP["3 nos ESP32"]
     HUB <-->|"API local"| HA["Home Assistant + EKAZA"]
     HUB --> BK["Backup e histórico"]
 ```
 
-O arranjo físico padrão usa seis recipientes de concentrado de 1 L, um
-reservatório de água de 50 L e um reservatório de mistura/rega de 50 L. A
-revisão dirigida do vídeo de hardware está em
-[`docs/referencia/REVISAO_VIDEO_16MIN.md`](docs/referencia/REVISAO_VIDEO_16MIN.md)
-e a conferência completa da Parte 2 de funcionalidades está em
-[`docs/referencia/REVISAO_VIDEO_PARTE2_FUNCIONALIDADES.md`](docs/referencia/REVISAO_VIDEO_PARTE2_FUNCIONALIDADES.md).
+Os ESP32 mantem os intertravamentos essenciais mesmo sem Wi-Fi, broker ou hub.
+Uma reinicialização sempre volta a `BOOT` com saídas desligadas; o último comando
+não é restaurado automaticamente.
 
-## Estrutura
+## Ciclo operacional
 
-| Caminho | Responsabilidade |
+1. Confirmar água disponível, capacidade livre e sensores validos.
+2. Transferir a massa de água configurada para o tanque de mistura.
+3. Misturar e águardar estabilizacao das leituras.
+4. Dosar os seis canais sequêncialmente, conforme a receita cadastrada.
+5. Homogeneizar e conferir EC; diluir somente dentro dos limites.
+6. Corrigir pH em pulsos pequenos, impedindo pH+ e pH- simultaneos.
+7. Liberar a batelada apenas com leituras estáveis e sem alarmes.
+8. Irrigar as zonas conforme agenda e duracao configuradas.
+9. Coletar/drenar com timeout e confirmação por massa, nível ou fluxo.
+10. Manter clima por histerese e registrar comandos, feedbacks e alarmes.
+
+Vazamento, E-stop, timeout, leitura critica invalida ou variação de massa
+incompatível levam o sistema ao estado seguro local.
+
+## Componentes principais da configuração-base
+
+| Grupo | Configuração planejada |
 |---|---|
-| `firmware/` | projetos PlatformIO dos nós ESP32 |
-| `hub/` | domínio, API, persistência e serviços do Raspberry Pi |
-| `web/` | painel mobile-first |
-| `hardware/` | esquemas, PCB, gabinetes, chicotes e BOM |
-| `docs/` | arquitetura, tutoriais, ADRs e referência estudada |
-| `tests/` | testes unitários, integração, simulação e HIL |
-| `scripts/` | qualidade, segurança, instalação e manutenção |
+| Controle | três nós ESP32 e controladora SELV de 16 saídas |
+| Hub | Raspberry Pi 4, armazenamento endurance e backup |
+| Dosagem | seis frascos de 1 L, seis peristálticas e seis agitadores |
+| Reservatorios | duas caixas opacas com tampa, aproximadamente 50 L cada |
+| Pesagem | oito celulas de carga e dois HX711 |
+| Química | Atlas EZO pH/EC isolados e DS18B20 da solução |
+| Clima | sensores redundantes de temperatura/UR, MLX90614 e SCD41 |
+| Segurança | boias, vazamento fail-safe, E-stop, watchdog e proteções independentes |
+| Hidráulica | transferência, mistura, irrigação, dreno, válvulas e retenções |
 
-## Desenvolvimento local
+Consulte a [`BOM Rev A`](docs/hardware/rev-a/BOM_SISTEMA.md) para requisitos,
+alternativas e estado de aprovação. Itens `HOLD` ou `PROVISIONAL` não constituem
+autorizacao de compra definitiva.
 
-Requisitos: Python 3.12 ou superior e Node.js 24 para o painel.
+## Estrutura do repositorio
+
+| Caminho | Conteudo |
+|---|---|
+| `firmware/` | projetos PlatformIO dos nos de fertirrigação, clima e segurança |
+| `hub/` | dominio, FastAPI, persistencia, MQTT, segurança e tempo real |
+| `web/` | painel React mobile-first e Ajuda offline |
+| `hardware/` | BOM, I/O, netlist, parametros e mapas do sistema |
+| `desenhos/` | arquitetura, P&ID, unifilar, implantacao e vistas Rev A |
+| `docs/tutorial/` | sequência completa de montagem, configuração e operação |
+| `tests/` | testes unitarios, integração, simulacao e HIL |
+| `deploy/` | Docker Compose ARM64, Mosquitto, segredos e persistencia |
+| `scripts/` | qualidade, segurança, migracao, backup e restauração |
+
+## Executar o portao de qualidade
+
+Requisitos de desenvolvimento: Python 3.12+, Node.js 24, PlatformIO e Docker
+para os testes de integração correspondentes.
 
 ```bash
 python -m venv .venv
 . .venv/bin/activate
-python -m pip install -r requirements-dev.txt
+python -m pip install --requirement requirements-dev.txt
 npm ci --prefix web
 python scripts/quality_gate.py
 ```
 
-O serviço do Raspberry Pi é iniciado com `python -m hub.growhub.api` depois da
-configuração descrita no
-[`Tutorial 10A`](docs/tutorial/10a-integracao-tomadas-ekaza.md). Segredos ficam
-somente no ambiente do serviço e nunca são versionados.
+O gate cobre testes Python, contratos, HIL virtual, firmware, TypeScript, build
+Vite, manifestos de hardware, SBOM e scanner de segredos. O Quality Gate oficial
+também é executado pelo GitHub Actions em cada PR e atualização da `main`.
 
-## Roadmap
+## Instalar no Raspberry Pi
 
-1. Núcleo de firmware e modelo confiável de sensores.
-2. Controle de fertirrigação, química, clima e segurança.
-3. Hub, MQTT, persistência e API.
-4. Painel responsivo, histórico, setpoints e alertas.
-5. Documentação de montagem, comissionamento e release v1.0.
+O pacote ARM64 usa Docker Compose para iniciar PostgreSQL, Mosquitto e o hub com
+healthchecks, limites e segredos montados como arquivos somente leitura.
 
-O detalhamento executável está em [`BACKLOG.md`](BACKLOG.md); as entregas ficam
-em [`CHANGELOG.md`](CHANGELOG.md) e o diário em
-[`PROGRESS_LOG.md`](PROGRESS_LOG.md).
+Siga [`docs/RASPBERRY_PI_OPERACAO.md`](docs/RASPBERRY_PI_OPERACAO.md) para:
 
-A explicação simples, tarefa por tarefa, está em
-[`docs/ENTREGA_TAREFAS_01_30.md`](docs/ENTREGA_TAREFAS_01_30.md). O estado de
-liberação e todos os bloqueios físicos estão em
-[`docs/RELATORIO_PRONTIDAO_V1.md`](docs/RELATORIO_PRONTIDAO_V1.md).
+1. preparar o Raspberry Pi e o armazenamento;
+2. criar certificados e segredos locais;
+3. iniciar os serviços;
+4. aplicar as migrações do banco;
+5. acessar o painel;
+6. testar backup e restauração.
 
-## Núcleo local executável
+Não exponha diretamente a API, o broker ou o PostgreSQL à internet.
 
-O pacote `hub/growhub/control` funciona como especificação testável do firmware:
+## Tutorial de montagem e configuração
 
-- estados `BOOT`, `IDLE`, `MANUAL`, `BATCH` e `ALARM` retido;
-- corte por vazamento e timeout absoluto de cada atuador;
-- inicialização elétrica segura antes de habilitar saídas;
-- watchdog e heartbeat sem dependência de nuvem;
-- exclusão mútua de pH+ e pH−;
-- limites independentes de dose por evento, hora e dia;
-- calibração de bombas, receita sequencial, correção de pH/EC, mistura,
-  irrigação, dreno, umidificação e exaustão testados por simulação.
+O tutorial completo esta em [`docs/tutorial/README.md`](docs/tutorial/README.md)
+e deve ser seguido na ordem:
 
-Os simuladores em `hub/growhub/simulation` cobrem todos os sensores da v1 e
-permitem injetar falhas canônicas sem hardware. O ADR 0008 fixa as invariantes
-portadas ao núcleo C++; elas ainda precisam ser verificadas no ESP32 e na PCB
-reais antes de qualquer teste com atuadores.
+1. segurança, inventario e estrutura;
+2. tanques, plataformas, hidráulica e dosadoras;
+3. sensores, quadro SELV e instalação CA profissional;
+4. firmware ESP32, Raspberry Pi, painel e EKAZA;
+5. calibração, HIL, teste com água e primeira batelada;
+6. manutenção e resposta a falhas.
 
-O runtime do hub conecta contratos e operação: persiste telemetria MQTT no
-PostgreSQL, recebe alarmes retidos, publica comandos com expiração e atualiza
-auditoria/progresso somente após ACK/NACK. Broker desconectado resulta em HTTP
-503; comando sem confirmação nunca aparece como executado.
+Cada gate precisa ser aprovado antes de liberar a etapa seguinte. A instalação
+127 V, proteções, aterramento e ensaios correspondentes são exclusivos de
+profissional habilitado.
 
-Contribuições seguem o fluxo de branches, commits, testes e releases descrito
-em [`CONTRIBUTING.md`](CONTRIBUTING.md).
+## Documentos essenciais
 
-## Segurança física
+- [escopo executavel da v1.0](docs/ESCOPO_V1.md);
+- [entrega explicada das tarefas 01-30](docs/ENTREGA_TAREFAS_01_30.md);
+- [relatório de prontidão](docs/RELATORIO_PRONTIDAO_V1.md);
+- [BOM e critérios de substituicao](docs/hardware/rev-a/BOM_SISTEMA.md);
+- [caderno de pranchas Rev A](docs/hardware/rev-a/CADERNO_PRANCHAS.md);
+- [laudo preliminar do hardware](docs/hardware/rev-a/LAUDO_REVISAO_REVA.md);
+- [SBOM e licenças](docs/SBOM_E_LICENCAS.md);
+- [backlog executavel](BACKLOG.md) e [histórico](CHANGELOG.md).
 
-Água e fertilizantes próximos à rede elétrica exigem projeto e execução por
-profissional habilitado, aterramento, DR/GFCI, fusíveis/disjuntores, separação
-CA/SELV, gabinete apropriado e contenção de vazamentos. Software não substitui
-proteções mecânicas e elétricas independentes.
+## Reta final para a v1.0
 
-## Hardware Rev A
+Antes da lista definitiva de compra e da release, ainda e necessario:
 
-A primeira revisão própria adota instalação fixa 127 V/60 Hz, sem qualquer
-ramal de iluminação, e mantém toda a rede CA fora da PCB. O pacote preliminar
-inclui:
+1. receber e medir amostras criticas;
+2. congelar modelos, footprints, bombas, tubos e vedacoes;
+3. concluir esquema e PCB no KiCad com ERC/DRC aprovados;
+4. publicar desenhos mecânicos cotados, P&ID, unifilar e chicotes finais;
+5. montar e ensaiar um protótipo A0;
+6. executar teste térmico, HIL físico e piloto somente com água;
+7. homologar cada tomada EKAZA em 100 ciclos;
+8. validar o tutorial em uma montagem limpa e incluir fotografias reais;
+9. fechar SBOM, release candidate e critérios de aceitação.
 
-- [base elétrica de controle, hidráulica e clima](docs/hardware/rev-a/BASE_ELETRICA_127V.md);
-- [BOM consolidada com disponibilidade e critérios de substituição](docs/hardware/rev-a/BOM_SISTEMA.md);
-- [controladora SELV, pinagem, netlist e parâmetros](hardware/controller-rev-a/README.md);
-- [laudo preliminar e gates de fabricação](docs/hardware/rev-a/LAUDO_REVISAO_REVA.md).
+Enquanto esses gates estiverem abertos, o estado permanece `A0/HOLD`: o projeto
+serve para engenharia, cotação e prototipagem, mas não para energização ou compra
+em lote.
 
-A [integração opcional das tomadas EKAZA](docs/tutorial/10a-integracao-tomadas-ekaza.md)
-é exclusivamente de software e não altera o hardware Rev A.
+## Segurança
 
-![Unifilar da variante 127 V](desenhos/REV-A-01_UNIFILAR_127V.svg)
+Água e fertilizantes próximos a rede elétrica podem causar choque, incêndio,
+vazamento e danos materiais. Software não substitui contenção, E-stop,
+aterramento, DR, disjuntores, fusível, segregação CA/SELV, gabinete apropriado e
+inspeção profissional. Nunca energize uma revisão marcada como `HOLD`.
 
-![Zonas funcionais da PCB Rev A](desenhos/REV-A-02_PCB_ZONAS.svg)
+## Origem e licença
 
-O estado atual é `A0/HOLD`: os arquivos servem para revisão e prototipagem, não
-para fabricar lote ou energizar cargas reais.
+O projeto foi desenvolvido a partir da especificacao estudada nos videos e no
+repositorio MIT `ledgardener/gardenAutomation`, com arquitetura, segurança,
+firmware, hub e painel proprios. Consulte
+[`ESPECIFICACAO_REFERENCIA.md`](ESPECIFICACAO_REFERENCIA.md).
 
-## Visualização do sistema pronto
-
-![Estação compacta vertical — visualização conceitual](docs/images/realistic/ESTACAO_COMPACTA_VERTICAL_CONCEITUAL.webp)
-
-As [três vistas realistas e suas limitações](docs/images/realistic/README.md)
-mostram a aparência pretendida. Elas não substituem desenhos cotados, P&ID,
-unifilar ou arquivos de fabricação.
-
-O [caderno multidisciplinar Rev A](docs/hardware/rev-a/CADERNO_PRANCHAS.md)
-reúne implantação, planta baixa, elevação, projeto hidráulico, projeto elétrico
-e rotas de instalações da disposição vertical compacta.
-
-## Origem da referência
-
-O backlog parte de `ESPECIFICACAO_REFERENCIA.md`, produzido por análise dos
-vídeos e do repositório MIT `ledgardener/gardenAutomation`. O código novo não
-pressupõe que a PCB experimental publicada esteja validada.
-
-## Licença
-
-MIT. Componentes de terceiros mantêm seus respectivos avisos e licenças.
+Licenca MIT. Dependencias de terceiros mantem seus respectivos avisos e
+obrigações.
