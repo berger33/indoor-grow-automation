@@ -58,6 +58,22 @@ int main() {
   require(!guarded.command(0, true, 1, 1000, false), "sensor crítico inválido deve inibir comando");
   require(guarded.reason() == TripReason::SensorInvalid, "falha de sensor deve ficar retida");
 
+  SafeController<12> diy;
+  diy.boot(0);
+  require(diy.completeBoot(true), "controlador DIY deve completar boot seguro");
+  require(diy.commandOneOf(0, 0, 6, true, 1, 1000),
+          "primeira dosadora deve iniciar");
+  require(!diy.commandOneOf(1, 0, 6, true, 2, 1000),
+          "segunda dosadora deve ser bloqueada enquanto outra estiver ativa");
+  require(!diy.commandExclusive(5, 0, true, 2, 1000),
+          "pH+ deve ser bloqueado enquanto pH- estiver ativo");
+  require(diy.command(0, false, 3, 1000), "pH- deve desligar");
+  require(diy.commandExclusive(5, 0, true, 4, 1000),
+          "pH+ deve iniciar depois que pH- desligar");
+  diy.tick(5, true, true, false);
+  require(diy.reason() == TripReason::Leak && !diy.output(5),
+          "vazamento deve cortar a dosadora no controlador DIY");
+
   const grow::PumpCalibration fill_cal{100.0F, 0.0F, true};
   const grow::PumpCalibration dose_cal{1.0F, 0.0F, true};
   const std::array<grow::PumpCalibration, 6> dose_calibrations{
@@ -75,6 +91,6 @@ int main() {
   require(batch.tick(102, process) == 0 && batch.stage() == grow::BatchStage::Alarm,
           "vazamento deve abortar batelada e zerar saídas");
 
-  std::cout << "HIL virtual: 6 cenários fail-safe aprovados\n";
+  std::cout << "HIL virtual: 7 cenários fail-safe aprovados\n";
   return 0;
 }
