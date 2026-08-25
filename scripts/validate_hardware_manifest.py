@@ -1,27 +1,34 @@
 #!/usr/bin/env python3
-"""Cruza BOM, I/O, netlist e limites da controladora Rev A."""
+"""Valida BOM, pinagem e mapa de atuadores da montagem DIY."""
 
 from __future__ import annotations
 
 import csv
-import json
 import re
 from dataclasses import dataclass
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HARDWARE = ROOT / "hardware" / "controller-rev-a"
 SYSTEM_HARDWARE = ROOT / "hardware" / "system"
 REFERENCE_RANGE = re.compile(r"^([A-Z]+)(\d+)(?:-([A-Z]+)(\d+))?$")
-REFERENCE_IN_NET = re.compile(r"\b[A-Z]+\d+\b")
-VALID_STATUS = {"APPROVED_CLASS", "APPROVED_MODEL", "PROVISIONAL", "HOLD"}
+VALID_STATUS = {"PLANEJADO", "VALIDAR", "REUTILIZAR", "OPCIONAL"}
+FORBIDDEN_ACTIVE_HARDWARE = {
+    "SN74HCT595",
+    "MCP23017",
+    "ATLAS EZO",
+    "GERBER",
+    "KICAD",
+}
 
 
 @dataclass(frozen=True, slots=True)
 class ManifestResult:
     errors: tuple[str, ...]
-    holds: tuple[str, ...]
+    pending_validation: tuple[str, ...]
     references: frozenset[str]
+    total_brl: Decimal
 
 
 def expand_reference_group(value: str) -> tuple[str, ...]:
@@ -49,8 +56,8 @@ def expand_reference_expression(value: str) -> tuple[str, ...]:
     return tuple(references)
 
 
-def load_csv(name: str) -> list[dict[str, str]]:
-    with (HARDWARE / name).open(encoding="utf-8", newline="") as handle:
+def load_csv(directory: Path, name: str) -> list[dict[str, str]]:
+    with (directory / name).open(encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
 
 
@@ -77,6 +84,8 @@ def validate_actuator_rows(
     for line_number, row in enumerate(rows, start=2):
         if not row.get("safe_state"):
             errors.append(f"actuator-map:{line_number}: safe_state ausente")
+        if row.get("safe_state") != "OFF":
+            errors.append(f"actuator-map:{line_number}: estado seguro deve ser OFF")
         if not row.get("interlock"):
             errors.append(f"actuator-map:{line_number}: interlock ausente")
     return tuple(errors)
@@ -84,29 +93,50 @@ def validate_actuator_rows(
 
 def validate_manifests() -> ManifestResult:
     errors: list[str] = []
-    holds: list[str] = []
+    pending: list[str] = []
     references: set[str] = set()
+    total = Decimal("0")
 
-    bom = load_csv("BOM.csv")
+    bom = load_csv(HARDWARE, "BOM.csv")
+    required_columns = {
+        "item",
+        "refs",
+        "qty",
+        "status",
+        "unit_price_brl",
+        "subtotal_brl",
+        "verification",
+    }
+    if not bom or not required_columns.issubset(bom[0]):
+        errors.append("BOM: colunas obrigatórias ausentes")
+
     for line_number, row in enumerate(bom, start=2):
         item = row.get("item", "")
         status = row.get("status", "")
         if status not in VALID_STATUS:
             errors.append(f"BOM:{line_number}: status inválido em {item}")
-        if status == "HOLD":
-            holds.append(item)
+        if status == "VALIDAR":
+            pending.append(item)
+        if not row.get("verification"):
+            errors.append(f"BOM:{line_number}: verificação ausente em {item}")
         try:
             quantity = int(row.get("qty", ""))
-        except ValueError:
-            errors.append(f"BOM:{line_number}: quantidade inválida em {item}")
+            unit_price = Decimal(row.get("unit_price_brl", ""))
+            subtotal = Decimal(row.get("subtotal_brl", ""))
+        except (ValueError, InvalidOperation):
+            errors.append(f"BOM:{line_number}: quantidade/preço inválido em {item}")
             continue
+        if quantity < 1 or unit_price < 0 or subtotal != unit_price * quantity:
+            errors.append(f"BOM:{line_number}: subtotal incoerente em {item}")
+        total += subtotal
         try:
             expanded = expand_reference_expression(row.get("refs", ""))
         except ValueError as exc:
             errors.append(f"BOM:{line_number}: {exc}")
             continue
-
-        numeric_range = all(REFERENCE_RANGE.fullmatch(ref) for ref in row["refs"].split(","))
+        numeric_range = all(
+            REFERENCE_RANGE.fullmatch(ref) for ref in row.get("refs", "").split(",")
+        )
         if numeric_range and len(expanded) != quantity:
             errors.append(
                 f"BOM:{line_number}: {item} declara qty={quantity}, refs={len(expanded)}"
@@ -116,61 +146,50 @@ def validate_manifests() -> ManifestResult:
                 errors.append(f"BOM:{line_number}: referência duplicada {reference}")
             references.add(reference)
 
-    known_prefixes = {
-        match.group(1)
-        for reference in references
-        if (match := re.match(r"^([A-Z]+)\d+$", reference))
-    }
-    for filename, field in (("io-map.csv", "connector"), ("netlist.csv", "connected_refs")):
-        for line_number, row in enumerate(load_csv(filename), start=2):
-            for reference in REFERENCE_IN_NET.findall(row.get(field, "")):
-                prefix = re.match(r"^([A-Z]+)", reference).group(1)  # type: ignore[union-attr]
-                if prefix not in known_prefixes:
-                    continue
-                if reference not in references:
-                    errors.append(
-                        f"{filename}:{line_number}: referência {reference} ausente da BOM"
-                    )
+    if not Decimal("1000") <= total <= Decimal("1650"):
+        errors.append(f"BOM: total R$ {total} fora da faixa R$ 1.000–1.650")
 
-    with (HARDWARE / "pcb-parameters.json").open(encoding="utf-8") as handle:
-        parameters = json.load(handle)
-    limits = parameters["electrical_limits"]
-    with (SYSTEM_HARDWARE / "actuator-map.csv").open(
-        encoding="utf-8", newline=""
-    ) as handle:
-        actuator_rows = list(csv.DictReader(handle))
-    errors.extend(
-        validate_actuator_rows(actuator_rows, limits.get("output_channel_count", 0))
+    io_rows = load_csv(HARDWARE, "io-map.csv")
+    io_text = " ".join(value for row in io_rows for value in row.values()).upper()
+    for forbidden in FORBIDDEN_ACTIVE_HARDWARE:
+        if forbidden in io_text:
+            errors.append(f"io-map: hardware pesado ativo encontrado: {forbidden}")
+    output_rows = [
+        row
+        for row in io_rows
+        if row.get("source") == "ESP32" and row.get("boot_state") == "OFF"
+    ]
+    if len(output_rows) != 12:
+        errors.append("io-map: deve haver exatamente 12 saídas GPIO em OFF no boot")
+    pins = [row.get("pin_or_address", "") for row in io_rows if row.get("source") == "ESP32"]
+    duplicates = sorted({pin for pin in pins if pins.count(pin) > 1})
+    if duplicates:
+        errors.append("io-map: GPIO duplicado: " + ",".join(duplicates))
+    for function in ("PH_ANALOG", "EC_ANALOG", "LEAK", "LOCAL_STOP"):
+        if not any(row.get("function") == function for row in io_rows):
+            errors.append(f"io-map: função obrigatória ausente: {function}")
+
+    actuator_rows = load_csv(SYSTEM_HARDWARE, "actuator-map.csv")
+    errors.extend(validate_actuator_rows(actuator_rows, 12))
+
+    return ManifestResult(
+        tuple(errors), tuple(pending), frozenset(references), total
     )
-    if limits.get("mains_allowed") is not False:
-        errors.append("pcb-parameters: rede CA deve permanecer proibida")
-    if limits.get("input_maximum_vdc", 999) > 30:
-        errors.append("pcb-parameters: entrada excede limite SELV Rev A")
-    if limits.get("output_channel_maximum_a", 999) > 1:
-        errors.append("pcb-parameters: canal excede 1 A sem nova revisão")
-    if limits.get("output_aggregate_maximum_a", 999) > 4:
-        errors.append("pcb-parameters: agregado excede 4 A sem nova revisão")
-    board_limit = limits.get("output_aggregate_maximum_a", 0)
-    supply_limit = limits.get("installed_power_supply_rated_a", 999)
-    concurrent_limit = limits.get("installation_concurrent_limit_a", 999)
-    if not 0 < concurrent_limit <= supply_limit <= board_limit:
-        errors.append("pcb-parameters: limites placa/fonte/concorrência incoerentes")
-
-    return ManifestResult(tuple(errors), tuple(holds), frozenset(references))
 
 
 def main() -> int:
     result = validate_manifests()
-    for hold in result.holds:
-        print(f"[hardware] HOLD: {hold}")
+    for item in result.pending_validation:
+        print(f"[hardware] VALIDAR: {item}")
     for error in result.errors:
         print(f"[hardware] ERRO: {error}")
     if result.errors:
         print(f"[hardware] reprovado: {len(result.errors)} erro(s)")
         return 1
     print(
-        f"[hardware] manifestos coerentes: {len(result.references)} referências; "
-        f"{len(result.holds)} bloqueio(s) documentado(s)"
+        f"[hardware] DIY coerente: {len(result.references)} referências; "
+        f"total R$ {result.total_brl}; "
+        f"{len(result.pending_validation)} item(ns) para bancada"
     )
     return 0
 

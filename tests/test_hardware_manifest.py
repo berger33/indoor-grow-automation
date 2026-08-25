@@ -32,9 +32,10 @@ class HardwareManifestTests(TestCase):
     def test_repository_manifests_are_structurally_coherent(self) -> None:
         result = validate_manifests()
         self.assertEqual((), result.errors)
-        self.assertIn("PCB-001", result.holds)
-        self.assertIn("U1", result.references)
-        self.assertIn("J31", result.references)
+        self.assertIn("CTRL-001", result.pending_validation)
+        self.assertIn("MCU1", result.references)
+        self.assertIn("PD6", result.references)
+        self.assertEqual("1620", str(result.total_brl))
 
 
 class ActuatorMapTests(TestCase):
