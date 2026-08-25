@@ -164,3 +164,26 @@ foi preservado apenas para rastreabilidade.
   montagem limpa/fotos reais; SBOM transitiva e licença OneWire conclusiva.
 - Próximos passos: abrir PR e aguardar CI; depois, com autorização de merge,
   iniciar somente as atividades físicas desbloqueadas por dados/equipamentos.
+
+## 2026-08-25
+
+### Migração para hardware DIY econômico
+
+- Commits planejados: 15.
+- Itens concluídos: README e escopo DIY; BOM/ checklist de R$ 1.620; GPIO e
+  atuadores diretos; controlador ESP32 único; DHT22 e pH/EC analógicos; tutorial
+  completo; hub documentado para notebook; documentação pesada preservada em
+  arquivo histórico; painel atualizado apenas nas referências físicas.
+- Decisões tomadas: manter FastAPI, PostgreSQL, Mosquitto, contratos MQTT,
+  painel e integração Home Assistant/EKAZA; usar seis MOSFETs para dosagem e
+  seis canais de relé; agitação manual dos potes na configuração-base; manter
+  timeout absoluto, uma dosadora por vez, pH+/pH− e irrigação/dreno exclusivos.
+- Verificação local: 279 testes Python; typecheck e build Vite; compilação
+  PlatformIO `native_syntax` do controlador; sete cenários HIL; BOM, mapas,
+  arquivo, SBOM e scanner de segredos aprovados.
+- Bloqueios físicos: receber e identificar módulos; conferir lógica 3,3 V;
+  limitar pH/EC a 3,3 V; medir corrente/vazão; calibrar seis dosadoras e sondas;
+  testar estrutura/contenção; executar piloto somente com água e primeira
+  receita supervisionada.
+- Próximos passos: aguardar o build ESP32 do CI; depois comprar/conferir peças e
+  seguir os gates do tutorial sem usar os documentos arquivados como montagem.

@@ -68,7 +68,7 @@ def main() -> int:
 
     if os.environ.get("CI") == "true":
         pio = shutil.which("pio")
-        for project in ("fertigation", "climate", "safety"):
+        for project in ("controller",):
             manifest = ROOT / "firmware" / project / "platformio.ini"
             if manifest.exists():
                 if pio is None:
@@ -93,9 +93,9 @@ def main() -> int:
     if hardware_validator.exists():
         run("hardware manifests", [sys.executable, str(hardware_validator)])
 
-    drawing_validator = ROOT / "scripts" / "validate_drawings.py"
-    if drawing_validator.exists():
-        run("Rev A drawings", [sys.executable, str(drawing_validator)])
+    archive_validator = ROOT / "scripts" / "validate_archive.py"
+    if archive_validator.exists():
+        run("engineering archive", [sys.executable, str(archive_validator)])
 
     sbom_generator = ROOT / "scripts" / "generate_sbom.py"
     if sbom_generator.exists():

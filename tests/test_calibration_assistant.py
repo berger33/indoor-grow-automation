@@ -20,12 +20,13 @@ class CalibrationAssistantTests(TestCase):
         )
         self.assertAlmostEqual(2, pump.coefficients["flowMlS"])
 
-    def test_ph_and_ec_never_claim_completion_without_atlas_ack(self) -> None:
+    def test_ph_and_ec_never_claim_completion_without_device_confirmation(self) -> None:
         ph = evaluate_calibration("ph", {"standardsPh": [4, 7, 10]}, device_id="ph_1", now=NOW)
         ec = evaluate_calibration("ec", {"standardMsCm": 1.413, "observedMsCm": 1.4}, device_id="ec_1", now=NOW)
         self.assertEqual("requires_device_ack", ph.status)
         self.assertEqual("requires_device_ack", ec.status)
-        self.assertIn("ACK", ph.explanation)
+        self.assertIn("ESP32", ph.explanation)
+        self.assertIn("ESP32", ec.explanation)
 
     def test_rejects_inconsistent_measurements(self) -> None:
         with self.assertRaises(ValueError):

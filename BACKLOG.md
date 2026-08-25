@@ -1,171 +1,72 @@
-# Backlog executável
+# Backlog executável — versão DIY
 
-Fonte primária: [`ESPECIFICACAO_REFERENCIA.md`](ESPECIFICACAO_REFERENCIA.md).
-Cada item deve caber em um commit coeso. `P0` bloqueia operação segura; `P1`
-compõe o MVP; `P2` melhora operação; `P3` é posterior ao v1.0.
+Fonte de escopo: [`docs/ESCOPO_V1.md`](docs/ESCOPO_V1.md). Itens ligados à PCB,
+Gerber, painel industrial, rack sob medida e Atlas EZO foram encerrados por
+mudança de direção e preservados apenas no histórico Git/arquivo.
 
-## Fase 0 — Fundação
+## Fase D0 — Migração de arquitetura
 
-- [x] `F0-001 P0` Inicializar metadados, ignore e licença.
-- [x] `F0-002 P0` Documentar visão geral e roadmap no README.
-- [x] `F0-003 P0` Incorporar especificação e pranchas de referência.
-- [x] `F0-004 P0` Registrar decisão de monorepo e contratos.
-- [x] `F0-005 P0` Registrar decisão de segurança local.
-- [x] `F0-006 P0` Registrar stack do hub e painel.
-- [x] `F0-007 P0` Implantar portão de qualidade executável localmente.
-- [x] `F0-008 P0` Implantar scanner de segredos com testes.
-- [x] `F0-009 P0` Implantar CI para testes, lint e segredos.
-- [x] `F0-010 P1` Criar templates de issue e pull request.
-- [x] `F0-011 P1` Documentar política de branches e releases.
-- [x] `F0-012 P1` Configurar atualização automatizada de dependências.
-- [x] `F0-013 P0` Fixar escopo v1 em fertirrigação, irrigação e clima.
-- [x] `F0-014 P0` Excluir integralmente a iluminação do hardware elétrico.
-- [x] `F0-017 P1` Registrar integração lógica opcional das tomadas EKAZA.
-- [x] `F0-015 P1` Revisar novamente o vídeo V1 de hardware com timestamps.
-- [x] `F0-016 P1` Estudar em detalhe a disposição compacta do painel original.
+- [x] `D0-001 P0` Substituir objetivo industrial por DIY barato e funcional.
+- [x] `D0-002 P0` Definir notebook como hub `amd64/arm64`.
+- [x] `D0-003 P0` Consolidar um ESP32, GPIO direto, relés e MOSFETs.
+- [x] `D0-004 P0` Publicar pinagem de 12 saídas com estado seguro.
+- [x] `D0-005 P0` Arquivar pranchas, PCB, laudo e tutorial pesado.
+- [x] `D0-006 P0` Registrar ADR 0010.
 
-## Fase 1 — Núcleo de sensores
+## Fase D1 — Compra e montagem
 
-- [x] `F1-001 P0` Modelar amostra com valor, unidade, tempo e qualidade.
-- [x] `F1-002 P0` Validar envelopes físicos por tipo de sensor.
-- [x] `F1-003 P0` Marcar leitura stale por idade máxima.
-- [x] `F1-004 P0` Modelar falhas de timeout, CRC, desconexão e calibração.
-- [x] `F1-005 P0` Definir contrato versionado de telemetria MQTT.
-- [x] `F1-006 P0` Validar schema e rejeitar payload malformado.
-- [x] `F1-007 P1` Implementar filtro de mediana configurável.
-- [x] `F1-008 P1` Implementar média móvel com janela configurável.
-- [x] `F1-009 P1` Implementar debounce de entradas digitais.
-- [x] `F1-010 P1` Modelar driver DS18B20 com timeout e faixa física.
-- [x] `F1-011 P1` Modelar driver BME280 com offset por dispositivo.
-- [x] `F1-012 P1` Modelar driver MLX90614 e temperatura foliar.
-- [x] `F1-013 P1` Modelar driver Atlas pH e códigos de erro.
-- [x] `F1-014 P1` Modelar driver Atlas EC e códigos de erro.
-- [x] `F1-015 P1` Implementar compensação térmica de pH/EC validada.
-- [x] `F1-016 P1` Modelar HX711 com tara e fator persistentes.
-- [x] `F1-017 P1` Modelar nível ultrassônico com filtro e zona morta.
-- [x] `F1-018 P0` Modelar vazamento latched com confirmação multiamostra.
-- [x] `F1-019 P1` Detectar divergência entre sensores climáticos.
-- [x] `F1-020 P1` Calcular VPD com ar e temperatura foliar.
-- [x] `F1-021 P1` Criar simuladores determinísticos de todos os sensores.
-- [x] `F1-022 P1` Publicar diagnóstico de qualidade/idade de cada leitura.
+- [x] `D1-001 P0` Publicar BOM estimada entre R$ 1.000 e R$ 1.650.
+- [x] `D1-002 P0` Publicar checklist com quantidade, fornecedor e preço.
+- [ ] `D1-003 P0` Comprar/receber componentes e registrar variantes.
+- [ ] `D1-004 P0` Conferir relé/MOSFET com lógica de 3,3 V.
+- [ ] `D1-005 P0` Medir corrente de partida e contínua de cada bomba.
+- [ ] `D1-006 P0` Montar placa perfurada soldada e caixa seca.
+- [ ] `D1-007 P0` Montar estante, contenção, caixas e potes.
+- [ ] `D1-008 P0` Testar carga/estabilidade da estante apenas com água.
 
-## Fase 2 — Controle e segurança
+## Fase D2 — Firmware e sensores
 
-- [x] `F2-001 P0` Modelar estados BOOT/IDLE/MANUAL/BATCH/ALARM.
-- [x] `F2-002 P0` Implementar timeout absoluto de atuador local.
-- [x] `F2-003 P0` Implementar corte local latched por vazamento.
-- [x] `F2-004 P0` Definir estado seguro de todos os GPIO no boot.
-- [x] `F2-005 P0` Implementar watchdog e motivo de reset.
-- [x] `F2-006 P0` Implementar heartbeat e política de perda do hub.
-- [x] `F2-007 P0` Bloquear pH+ e pH− simultâneos.
-- [x] `F2-008 P0` Limitar dosagem por evento, hora e dia.
-- [x] `F2-009 P1` Calibrar curva volume×tempo por bomba.
-- [x] `F2-010 P1` Implementar correção de pH com histerese e espera.
-- [x] `F2-011 P1` Implementar receita de nutrientes como máquina de estados.
-- [x] `F2-012 P1` Implementar diluição por EC com timeout.
-- [x] `F2-013 P1` Implementar mistura periódica por nível.
-- [x] `F2-014 P1` Implementar agenda de até cinco irrigações.
-- [x] `F2-015 P1` Implementar drenagem com timeout e pós-tempo.
-- [x] `F2-016 P1` Implementar umidade com histerese e anti-ciclo.
-- [x] `F2-017 P1` Implementar exaustor por temperatura/VPD.
-- [x] `F2-018 P0` Criar testes de perda de rede em cada estado crítico.
-- [x] `F2-019 P0` Intertravar umidificador por nível mínimo e timeout.
-- [x] `F2-020 P1` Monitorar CO₂ sem comandar injeção no MVP.
-- [x] `F2-021 P1` Definir limites absolutos de temperatura e UR sobre o VPD.
-- [x] `F2-022 P1` Detectar exaustor comandado sem feedback de corrente/contato.
-- [x] `F2-023 P1` Implementar prioridade entre exaustão e umidificação.
-- [ ] `F2-024 P2` Modelar módulos opcionais de desumidificação e climatização.
+- [x] `D2-001 P0` Substituir registrador serial por GPIO direto.
+- [x] `D2-002 P0` Criar banco de relés ativo em LOW com boot seguro.
+- [x] `D2-003 P0` Manter timeout, vazamento, parada e watchdog.
+- [x] `D2-004 P0` Testar uma dosadora por vez e exclusão pH+/pH− no HIL.
+- [x] `D2-005 P1` Integrar DHT22 e histerese local.
+- [x] `D2-006 P1` Definir calibração linear configurável de pH/EC analógicos.
+- [ ] `D2-007 P0` Medir saída pH/EC em toda a faixa e limitar a 3,3 V.
+- [ ] `D2-008 P0` Calibrar pH/EC com padrões rastreados.
+- [ ] `D2-009 P0` Medir dez ciclos de cada peristáltica.
+- [ ] `D2-010 P0` Validar pinagem e cinco boots no ESP32 real.
 
-## Fase 3 — Hub e conectividade
+## Fase D3 — Hub e integração
 
-- [x] `F3-001 P0` Criar serviço FastAPI com healthcheck.
-- [x] `F3-002 P0` Definir tópicos MQTT por estação e função.
-- [x] `F3-003 P0` Implementar ACK/NACK idempotente de comandos.
-- [x] `F3-004 P0` Configurar Mosquitto com ACL e TLS.
-- [x] `F3-005 P1` Persistir telemetria no PostgreSQL.
-- [x] `F3-006 P1` Criar migrações iniciais Alembic.
-- [x] `F3-007 P1` Expor API de estações e sensores.
-- [x] `F3-008 P1` Expor API de setpoints e agendas.
-- [x] `F3-009 P1` Expor stream WebSocket de telemetria.
-- [x] `F3-010 P1` Implementar autenticação e perfis de operador.
-- [x] `F3-011 P1` Implementar auditoria de comandos críticos.
-- [x] `F3-012 P1` Criar backup e teste de restauração.
-- [x] `F3-013 P2` Implementar buffer offline e deduplicação.
-- [x] `F3-014 P1` Criar Docker Compose ARM64 do hub.
-- [x] `F3-015 P1` Modelar agenda semanal de tomadas com timezone e override.
-- [x] `F3-016 P1` Integrar entidades `switch` pela API do Home Assistant.
-- [x] `F3-017 P1` Reconciliar estado desejado e observado sem comando repetido.
-- [x] `F3-018 P1` Persistir agendas e overrides de tomadas no banco.
-- [x] `F3-019 P1` Executar reconciliação periódica com backoff e telemetria.
+- [x] `D3-001 P0` Preservar FastAPI, PostgreSQL, Mosquitto e painel React.
+- [x] `D3-002 P0` Preservar contratos MQTT v1.
+- [x] `D3-003 P0` Documentar operação no notebook.
+- [x] `D3-004 P1` Preservar integração Home Assistant/EKAZA.
+- [ ] `D3-005 P0` Executar Compose no notebook real e registrar healthchecks.
+- [ ] `D3-006 P0` Testar perda/retorno do notebook durante atuação simulada.
+- [ ] `D3-007 P0` Restaurar backup em ambiente limpo.
+- [ ] `D3-008 P1` Homologar entidades EKAZA e cem ciclos por canal.
 
-## Fase 4 — Painel mobile-first
+## Fase D4 — Comissionamento
 
-- [x] `F4-001 P1` Criar shell React responsivo e navegação.
-- [x] `F4-002 P1` Criar tela Home com qualidade das leituras.
-- [x] `F4-003 P1` Criar gráficos de pH, EC, água e clima.
-- [x] `F4-004 P1` Criar assistente de calibração guiada.
-- [x] `F4-005 P1` Criar tela de receita e progresso da batelada.
-- [x] `F4-006 P1` Criar tela de agenda de irrigação.
-- [x] `F4-007 P0` Criar central de alarmes latched e confirmação.
-- [x] `F4-008 P1` Diferenciar comando, estado e feedback físico.
-- [x] `F4-009 P1` Explicar por que controles estão inibidos.
-- [ ] `F4-010 P2` Criar comparação de múltiplas tendas.
-- [x] `F4-011 P2` Criar PWA com cache somente de leitura.
-- [x] `F4-012 P1` Cobrir acessibilidade e operação por teclado.
-- [x] `F4-013 P1` Criar tela opcional de tomadas com agenda e confirmação.
-- [x] `F4-014 P1` Exibir tomada indisponível/divergente sem falso positivo.
+- [x] `D4-001 P0` Reescrever tutorial na ordem de montagem real.
+- [ ] `D4-002 P0` Executar teste individual das saídas com carga fictícia.
+- [ ] `D4-003 P0` Testar vazamento, parada, timeout e reboot com cargas simuladas.
+- [ ] `D4-004 P0` Executar ciclo completo somente com água.
+- [ ] `D4-005 P0` Corrigir qualquer desvio de volume, ruído ou aquecimento.
+- [ ] `D4-006 P0` Executar primeira receita real supervisionada.
+- [ ] `D4-007 P1` Repetir agendas supervisionadas até estabilidade documentada.
+- [ ] `D4-008 P1` Fotografar a montagem real e atualizar o tutorial.
 
-## Fase 5 — Instalação e release
+## Fora do backlog ativo
 
-- [ ] `F5-001 P0` Fechar BOM com alternativas e correntes.
-- [ ] `F5-002 P0` Publicar pinagem e chicotes por revisão.
-- [ ] `F5-003 P0` Publicar P&ID e unifilar as-built.
-- [x] `F5-004 P0` Criar guia leigo de montagem mecânica.
-- [x] `F5-005 P0` Criar guia leigo de instalação elétrica segura.
-- [x] `F5-006 P0` Criar assistente de instalação do Raspberry Pi.
-- [x] `F5-007 P0` Criar checklist de comissionamento com água.
-- [ ] `F5-008 P0` Executar HIL e piloto supervisionado.
-- [ ] `F5-009 P1` Publicar matriz de compatibilidade de hardware.
-- [ ] `F5-010 P0` Gerar SBOM e auditar licenças.
-- [ ] `F5-011 P0` Publicar release candidate documentada.
-- [ ] `F5-012 P0` Publicar v1.0 após critérios de aceitação.
-- [x] `F5-013 P0` Documentar variante elétrica fixa 127 V/60 Hz.
-- [x] `F5-014 P0` Consolidar BOM A0 com alternativas e status de aprovação.
-- [x] `F5-015 P0` Definir I/O, netlist e parâmetros da PCB SELV A0.
-- [x] `F5-016 P0` Cruzar automaticamente BOM, I/O e netlist da PCB.
-- [ ] `F5-017 P0` Receber amostras e congelar footprints pela medição física.
-- [ ] `F5-018 P0` Criar esquema KiCad e zerar violações ERC não justificadas.
-- [ ] `F5-019 P0` Rotear PCB KiCad e zerar violações DRC não justificadas.
-- [ ] `F5-020 P0` Fabricar uma unidade A0 e executar ensaio elétrico/térmico.
-- [ ] `F5-021 P0` Liberar A1 somente após HIL e piloto com água.
-- [ ] `F5-022 P0` Congelar matriz de atuadores e capacidade de saídas por nó.
-- [ ] `F5-023 P0` Definir plataforma mecânica de oito células para os dois tanques.
-- [ ] `F5-024 P0` Medir percurso hidráulico, vazão-alvo e altura manométrica.
-- [ ] `F5-025 P0` Selecionar bombas pelas curvas medidas e ensaio de recebimento.
-- [ ] `F5-026 P0` Selecionar tubos e vedações por compatibilidade química.
-- [ ] `F5-027 P0` Desenhar contenção secundária e trajetos de vazamento.
-- [ ] `F5-028 P0` Publicar layout físico cotado da estação em escala.
-- [x] `F5-029 P1` Publicar imagens realistas marcadas como ilustrativas.
-- [x] `F5-030 P0` Criar tutorial 01 de inventário e conferência da compra.
-- [x] `F5-031 P0` Criar tutorial 02 de montagem da estrutura seca.
-- [x] `F5-032 P0` Criar tutorial 03 de reservatórios e plataformas de pesagem.
-- [x] `F5-033 P0` Criar tutorial 04 de válvulas, bombas e tubulação.
-- [x] `F5-034 P0` Criar tutorial 05 de frascos, dosadoras e agitadores.
-- [x] `F5-035 P0` Criar tutorial 06 de sondas e sensores de segurança.
-- [x] `F5-036 P0` Criar tutorial 07 do quadro e chicotes SELV.
-- [x] `F5-037 P0` Criar tutorial 08 da instalação CA por profissional habilitado.
-- [x] `F5-038 P0` Criar tutorial 09 de gravação e provisionamento dos ESP32.
-- [x] `F5-039 P0` Criar tutorial 10 de instalação do hub e painel.
-- [x] `F5-040 P0` Criar tutorial 11 de calibração de massa, bombas, pH e EC.
-- [x] `F5-041 P0` Criar tutorial 12 de teste seco, HIL e teste somente com água.
-- [x] `F5-042 P0` Criar tutorial 13 de primeira batelada supervisionada.
-- [x] `F5-043 P0` Criar guia de manutenção, limpeza e armazenamento de sondas.
-- [ ] `F5-044 P0` Validar o tutorial em montagem limpa sem conhecimento prévio.
-- [ ] `F5-045 P1` Fotografar a montagem validada e substituir imagens conceituais.
-- [x] `F5-046 P1` Publicar implantação e planta baixa compactas A0/HOLD.
-- [x] `F5-047 P1` Publicar elevação vertical do painel A0/HOLD.
-- [x] `F5-048 P1` Publicar P&ID hidráulico compacto A0/HOLD.
-- [x] `F5-049 P1` Publicar projeto elétrico e rotas de instalações A0/HOLD.
-- [x] `F5-050 P1` Validar automaticamente todas as pranchas Rev A.
-- [x] `F5-051 P1` Documentar pareamento e homologação das tomadas EKAZA.
-- [ ] `F5-052 P0` Homologar o modelo EKAZA real em cem ciclos por canal.
+- PCB customizada e fabricação por Gerber;
+- ERC/DRC e netlist Rev A;
+- painel dedicado com DR/DPS/contatores;
+- gabinete IP65 e rack fabricado sob medida;
+- Atlas EZO e carriers isolados;
+- CO₂ dedicado, MLX90614 e plataformas de pesagem;
+- seis agitadores magnéticos dedicados.
+
+Esses itens só podem retornar mediante nova decisão explícita, orçamento e ADR.

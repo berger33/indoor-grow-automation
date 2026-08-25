@@ -2,164 +2,190 @@
 
 [![Quality Gate](https://github.com/berger33/indoor-grow-automation/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/berger33/indoor-grow-automation/actions/workflows/quality.yml)
 
-Sistema open source para automatizar **fertirrigação, irrigação, drenagem e clima**
-de uma estufa indoor compacta. Três nós ESP32 executam o controle local seguro;
-um Raspberry Pi hospeda MQTT, banco, API e painel; o operador configura receitas,
-agendas, calibrações, alarmes e as tomadas EKAZA em uma interface responsiva.
+Automação local de cultivo indoor para **dosagem, irrigação, drenagem, pH/EC e
+clima**, construída com peças comuns e substituíveis. A filosofia atual é
+**DIY barato e funcional**: um notebook usado executa o hub em Docker e um
+ESP32 genérico controla bombas e relés em uma montagem de protótipo organizada.
 
-![Resultado final esperado: estação vertical compacta ao lado da estufa](docs/images/realistic/RESULTADO_FINAL_ESPERADO_VERTICAL.webp)
+O projeto continua oferecendo FastAPI, PostgreSQL, Mosquitto, painel React,
+histórico, alarmes, receitas, agendas, calibração e integração Home Assistant /
+EKAZA. O que mudou foi a camada física: saíram PCB própria, rack sob medida,
+gabinete industrial, tanques técnicos e interfaces Atlas isoladas.
 
-> **Visualização conceitual do resultado esperado.** A imagem mostra a disposição
-> final pretendida: quadro seco elevado, seis frascos e seis dosadoras, painel
-> hidráulico central e duas caixas de aproximadamente 50 L empilhadas, cada uma
-> em sua plataforma de pesagem. Dimensões, componentes e ligações finais serão
-> vinculados somente pelos desenhos e pela BOM liberados após os ensaios físicos.
+> **Estado atual:** software funcional; hardware DIY ainda precisa ser montado,
+> calibrado e validado primeiro com cargas simuladas e depois somente com água.
+> Não use nutrientes nem deixe o sistema sem supervisão antes de concluir esses
+> testes.
 
-## Objetivo final
+## Objetivo
 
-A release v1.0 deverá permitir que uma pessoa:
+Montar uma estação doméstica compreensível e reparável, com orçamento-base de
+**R$ 1.620** para o hardware físico, sem contar o notebook já disponível, frete,
+ferramentas e eventual serviço em rede elétrica.
 
-1. compre os componentes aprovados na lista final;
-2. monte a estrutura seguindo o tutorial visual;
-3. solicite a um profissional habilitado a instalação de 127 V;
-4. instale firmware, Raspberry Pi e painel;
-5. calibre massa, bombas, pH e EC;
-6. comissione primeiro sem carga e depois somente com água;
-7. opere fertirrigação e clima localmente, sem depender da nuvem.
+A configuração-base usa:
 
-O escopo vinculante e os critérios de conclusão estão em
-[`docs/ESCOPO_V1.md`](docs/ESCOPO_V1.md).
+- um notebook Linux ou outro computador `amd64/arm64` com Docker;
+- um ESP32 DevKit genérico;
+- um módulo de relé de 8 canais, com 6 canais usados e 2 reservados;
+- dois módulos MOSFET de 4 canais, com 6 canais usados pelas dosadoras;
+- seis bombas peristálticas pequenas de 12 V;
+- três bombas de água de 12 V para mistura, irrigação e drenagem;
+- sensores analógicos simples de pH e EC, DHT22, boias e vazamento;
+- duas caixas organizadoras plásticas, seis potes de vidro e uma estante
+  aramada comum.
 
-## Estado atual
+Valores e fornecedores são estimativas para cotação. Nenhum anúncio específico
+é obrigatório: compre pela característica técnica, confirme tensão/pinagem e
+teste cada unidade recebida.
 
-| Camada | Estado | O que significa |
-|---|---|---|
-| Controle, API, banco e painel | Implementado e testado | Fluxos principais funcionam em software |
-| Firmware ESP32 | Compilável e coberto por HIL virtual | Falta validação nos nós e na placa reais |
-| MQTT e segurança do hub | Implementados | TLS, ACL, ACK/NACK, auditoria e buffer offline |
-| Integração EKAZA | Implementada em software | Faltam IDs reais e homologação de 100 ciclos por canal |
-| Hardware Rev A | `A0/HOLD` | Requisitos definidos; KiCad, protótipo e ensaios pendentes |
-| Hidráulica e mecânica | `A0/HOLD` | Fluxo definido; bombas, tubos, cotas e plataformas pendentes |
-| Tutoriais 00-14 | Publicados para revisão | Falta montagem limpa e fotografias reais |
-| Release | Em desenvolvimento | Ainda não é uma lista liberada para compra em lote |
-
-O estado detalhado, incluindo todos os bloqueios físicos, esta no
-[`relatório de prontidão`](docs/RELATORIO_PRONTIDAO_V1.md). O trabalho restante
-fica rastreado no [`BACKLOG.md`](BACKLOG.md).
-
-## O que o sistema automatiza
+## Funções mantidas
 
 | Subsistema | Funções |
 |---|---|
-| Fertirrigação | seis canais calibrados, ordem de receita, mistura e limites de dose |
-| Química | pH, EC, temperatura, compensação térmica, estabilizacao e correção segura |
-| Água | enchimento, transferência, mistura, irrigação, coleta e drenagem |
-| Clima | temperatura, umidade, VPD, exaustão, umidificação e monitoramento de CO2 |
-| Segurança | E-stop, vazamento retido, nível mínimo, timeout, watchdog e safe boot |
-| Supervisão | histórico, gráficos, alarmes, calibração, receitas e agendas |
-| Iluminação remota | agenda e override de tomadas EKAZA existentes via Home Assistant |
+| Dosagem | seis canais calibrados, receita sequencial, limite por evento/hora/dia e exclusão de pH+/pH− |
+| Água | mistura, irrigação e drenagem com timeout; enchimento do reservatório é manual |
+| Química | leitura analógica de pH/EC, calibração, espera de mistura e correção em pulsos |
+| Clima | DHT22, exaustão e umidificação por histerese e anti-ciclo |
+| Segurança | boot com saídas desligadas, botão de parada local em baixa tensão, vazamento latched e timeout absoluto |
+| Supervisão | painel, histórico, alarmes, receitas, agendas e calibração |
+| Iluminação | tomadas EKAZA existentes comandadas pelo Home Assistant; nenhuma fiação de luz passa pelo controlador |
 
-CO2 é **somente monitorado**: a v1.0 não possui injeção. O sistema também não
-recomenda doses agronômicas; produtos, concentrações e limites são cadastrados
-pelo operador conforme fabricante e orientação aplicável.
-
-## Iluminação fora do quadro
-
-A potência das luminárias não integra esta automação. Elas permanecem ligadas
-às tomadas Wi-Fi EKAZA existentes. O hub pode solicitar ligar/desligar pela API
-do Home Assistant e confirma o resultado relendo o estado real da tomada.
-
-Não entram no projeto elétrico da estação:
-
-- alimentação ou cabeamento das luminárias;
-- relés, contatores ou dimmers de iluminação;
-- medição de PPFD;
-- credenciais EKAZA nos ESP32.
-
-Uma falha da integração de luz não bloqueia a fertirrigação nem o controle de
-clima.
-
-## Organização física esperada
-
-O rack vertical concentra o sistema sem misturar as zonas seca e molhada:
-
-- **topo seco:** quadro, fontes, controladora, tela e E-stop;
-- **dosagem:** seis frascos de 1 L e seis bombas peristálticas;
-- **centro umido:** manifold, válvulas, bombas, unioes e pontos de amostragem;
-- **caixa superior:** reservatorio de água de origem, aproximadamente 50 L;
-- **caixa inferior:** reservatorio de mistura/rega, aproximadamente 50 L;
-- **base:** contenção secundaria e sensores de vazamento;
-- **ao lado:** estufa 80 x 80 cm, exaustão, umidificação, sensores, rega e dreno;
-- **zona seca separada:** Raspberry Pi, rede e armazenamento.
-
-A imagem e uma referência de aparência e organização. Para fabricar ou montar,
-prevalecem a BOM liberada, os desenhos cotados, o P&ID, o unifilar, os chicotes,
-os arquivos KiCad e o tutorial da revisão aprovada.
+O preparo usa uma receita cadastrada pelo operador. O projeto não recomenda
+fertilizantes, concentrações ou alvos agronômicos universais.
 
 ## Arquitetura
 
 ```mermaid
 flowchart TD
-    UI["Painel React"] -->|"HTTPS + WebSocket"| HUB["Hub Raspberry Pi"]
+    UI["Painel React"] -->|"HTTPS + WebSocket"| HUB["Notebook com Docker"]
     HUB --> DB["PostgreSQL"]
-    HUB <-->|"MQTT v1 + TLS mútuo"| ESP["3 nos ESP32"]
+    HUB <-->|"MQTT v1"| ESP["ESP32 DIY"]
+    ESP --> OUT["Relés + MOSFETs"]
     HUB <-->|"API local"| HA["Home Assistant + EKAZA"]
-    HUB --> BK["Backup e histórico"]
 ```
 
-Os ESP32 mantem os intertravamentos essenciais mesmo sem Wi-Fi, broker ou hub.
-Uma reinicialização sempre volta a `BOOT` com saídas desligadas; o último comando
-não é restaurado automaticamente.
+O hub continua independente da plataforma: as mesmas imagens Docker rodam em
+Linux `amd64` e `arm64`. Os contratos MQTT e as APIs não foram alterados pela
+simplificação física.
 
-## Ciclo operacional
+## Mapa físico resumido
 
-1. Confirmar água disponível, capacidade livre e sensores validos.
-2. Transferir a massa de água configurada para o tanque de mistura.
-3. Misturar e águardar estabilizacao das leituras.
-4. Dosar os seis canais sequêncialmente, conforme a receita cadastrada.
-5. Homogeneizar e conferir EC; diluir somente dentro dos limites.
-6. Corrigir pH em pulsos pequenos, impedindo pH+ e pH- simultaneos.
-7. Liberar a batelada apenas com leituras estáveis e sem alarmes.
-8. Irrigar as zonas conforme agenda e duracao configuradas.
-9. Coletar/drenar com timeout e confirmação por massa, nível ou fluxo.
-10. Manter clima por histerese e registrar comandos, feedbacks e alarmes.
-
-Vazamento, E-stop, timeout, leitura critica invalida ou variação de massa
-incompatível levam o sistema ao estado seguro local.
-
-## Componentes principais da configuração-base
-
-| Grupo | Configuração planejada |
+| Camada | Implementação DIY |
 |---|---|
-| Controle | três nós ESP32 e controladora SELV de 16 saídas |
-| Hub | Raspberry Pi 4, armazenamento endurance e backup |
-| Dosagem | seis frascos de 1 L, seis peristálticas e seis agitadores |
-| Reservatorios | duas caixas opacas com tampa, aproximadamente 50 L cada |
-| Pesagem | oito celulas de carga e dois HX711 |
-| Química | Atlas EZO pH/EC isolados e DS18B20 da solução |
-| Clima | sensores redundantes de temperatura/UR, MLX90614 e SCD41 |
-| Segurança | boias, vazamento fail-safe, E-stop, watchdog e proteções independentes |
-| Hidráulica | transferência, mistura, irrigação, dreno, válvulas e retenções |
+| Hub | notebook usado, Docker Compose e rede local |
+| Controle | ESP32 DevKit em placa perfurada, dentro de caixa plástica seca |
+| Dosagem | 6 peristálticas em 12 V por MOSFET, uma por canal |
+| Atuadores | 6 canais úteis do módulo de 8 relés; 2 ficam desconectados e OFF |
+| Sensores | DHT22, pH/EC analógicos, 2 boias e 2 pontos de vazamento |
+| Recipientes | 2 caixas organizadoras e 6 potes de vidro de aproximadamente 1 L |
+| Estrutura | estante aramada comum com fundo de madeira selada |
+| Agitação | agitar manualmente cada frasco antes do uso e em toda reposição |
 
-Consulte a [`BOM Rev A`](docs/hardware/rev-a/BOM_SISTEMA.md) para requisitos,
-alternativas e estado de aprovação. Itens `HOLD` ou `PROVISIONAL` não constituem
-autorizacao de compra definitiva.
+O [`io-map.csv`](hardware/controller-rev-a/io-map.csv) é a fonte da pinagem. O
+[`actuator-map.csv`](hardware/system/actuator-map.csv) identifica função,
+estado seguro e intertravamento de cada saída.
 
-## Estrutura do repositorio
+## Segurança básica
 
-| Caminho | Conteudo |
+Água e eletricidade podem causar choque, incêndio e danos materiais mesmo em um
+projeto simples.
+
+- use tomada aterrada e protegida por DR existente na instalação;
+- mantenha notebook, fonte, ESP32, relés, emendas e conectores acima dos
+  reservatórios, em zona seca e protegida contra respingos;
+- nunca deixe borne de 127 V exposto; qualquer cabo ou emenda de rede deve ficar
+  em caixa fechada com alívio de tração;
+- desligue da tomada antes de tocar na fiação;
+- use fusível nos ramais de 12 V e fonte compatível com a corrente medida;
+- forme uma alça de gotejamento nos cabos e mantenha tubos abaixo da eletrônica;
+- teste vazamento, parada local, timeout e retorno de energia usando somente água;
+- se precisar criar ou alterar cabo, tomada ou circuito de 127 V, contrate uma
+  pessoa qualificada. O projeto não inclui painel elétrico industrial.
+
+O botão local é um comando de parada em baixa tensão, não um E-stop certificado.
+
+## Lista de compras
+
+A BOM completa, os critérios de substituição e a checklist estão em
+[`docs/hardware/rev-a/BOM_SISTEMA.md`](docs/hardware/rev-a/BOM_SISTEMA.md). O
+CSV importável está em
+[`hardware/controller-rev-a/BOM.csv`](hardware/controller-rev-a/BOM.csv).
+
+Resumo por grupo:
+
+| Grupo | Estimativa |
+|---|---:|
+| Controle, acionamento e proteção 12 V | R$ 300 |
+| Bombas | R$ 405 |
+| Sensores e calibração | R$ 315 |
+| Recipientes e estrutura | R$ 320 |
+| Tubos, fiação, caixa e acessórios | R$ 280 |
+| **Total planejado** | **R$ 1.620** |
+
+Frete e variações regionais não estão incluídos. Estante ou caixas usadas podem
+reduzir o total; não economize eliminando fusíveis, caixa seca ou contenção.
+
+## Organização do repositório
+
+| Caminho | Conteúdo |
 |---|---|
-| `firmware/` | projetos PlatformIO dos nos de fertirrigação, clima e segurança |
-| `hub/` | dominio, FastAPI, persistencia, MQTT, segurança e tempo real |
-| `web/` | painel React mobile-first e Ajuda offline |
-| `hardware/` | BOM, I/O, netlist, parametros e mapas do sistema |
-| `desenhos/` | arquitetura, P&ID, unifilar, implantacao e vistas Rev A |
-| `docs/tutorial/` | sequência completa de montagem, configuração e operação |
-| `tests/` | testes unitarios, integração, simulacao e HIL |
-| `deploy/` | Docker Compose ARM64, Mosquitto, segredos e persistencia |
-| `scripts/` | qualidade, segurança, migracao, backup e restauração |
+| `firmware/controller/` | firmware do ESP32 único |
+| `firmware/shared/` | núcleo de timeout, estado seguro e processo |
+| `hub/` | domínio, FastAPI, persistência, MQTT e integração Home Assistant |
+| `web/` | painel React mobile-first |
+| `hardware/` | BOM, pinagem e mapa de atuadores DIY |
+| `docs/tutorial/` | montagem completa em ordem de execução |
+| `archive/engenharia-pesada/` | pranchas, PCB e documentos Rev A preservados apenas como histórico |
+| `tests/` | testes unitários, integração, simulação e HIL virtual |
+| `deploy/` | Docker Compose, Mosquitto, segredos e persistência |
 
-## Executar o portao de qualidade
+Arquivos arquivados **não descrevem a montagem atual** e não devem ser usados
+para comprar, fabricar ou ligar componentes.
+
+## Hub no notebook
+
+Consulte [`docs/HUB_OPERACAO.md`](docs/HUB_OPERACAO.md). Em resumo:
+
+```bash
+cp deploy/.env.example deploy/.env
+docker compose --env-file deploy/.env -f deploy/docker-compose.yml up -d --build
+docker compose --env-file deploy/.env -f deploy/docker-compose.yml ps
+```
+
+O notebook deve permanecer ligado, sem suspensão automática e conectado à rede
+local. Não exponha PostgreSQL, MQTT ou a API diretamente à internet.
+
+## Firmware
+
+Instale PlatformIO Core 6.1.19 e execute:
+
+```bash
+pio run --project-dir firmware/controller
+pio run --project-dir firmware/hil
+pio run --project-dir firmware/hil --target exec
+```
+
+O firmware considera relés normalmente ativos em nível baixo. Confirme essa
+característica no módulo recebido antes de conectar qualquer carga. Sensores de
+pH/EC permanecem inibidos até existir calibração válida; a saída analógica nunca
+pode exceder 3,3 V no ESP32.
+
+## Tutorial de montagem
+
+Siga [`docs/tutorial/README.md`](docs/tutorial/README.md) na ordem:
+
+1. comprar e conferir componentes;
+2. montar ESP32, placa perfurada, MOSFETs e relés;
+3. montar estante, fundo, caixas e potes;
+4. instalar bombas, tubos e fiação de 12 V;
+5. instalar e calibrar sensores;
+6. gravar e verificar o firmware;
+7. instalar o hub no notebook;
+8. testar tudo apenas com água;
+9. cadastrar e executar a primeira receita supervisionada.
+
+## Portão de qualidade
 
 Requisitos de desenvolvimento: Python 3.12+, Node.js 24, PlatformIO e Docker
 para os testes de integração correspondentes.
@@ -172,84 +198,29 @@ npm ci --prefix web
 python scripts/quality_gate.py
 ```
 
-O gate cobre testes Python, contratos, HIL virtual, firmware, TypeScript, build
-Vite, manifestos de hardware, SBOM e scanner de segredos. O Quality Gate oficial
-também é executado pelo GitHub Actions em cada PR e atualização da `main`.
+O gate verifica testes Python, contratos, HIL virtual, firmware, TypeScript,
+build Vite, BOM/pinagem DIY, arquivo histórico e scanner de segredos.
 
-## Instalar no Raspberry Pi
+## Estado de validação
 
-O pacote ARM64 usa Docker Compose para iniciar PostgreSQL, Mosquitto e o hub com
-healthchecks, limites e segredos montados como arquivos somente leitura.
+| Camada | Estado |
+|---|---|
+| Hub, banco, API e painel | implementados e testados em software |
+| Contratos MQTT e EKAZA | preservados |
+| Firmware ESP32 DIY | compilável e coberto por HIL virtual |
+| Montagem física | pendente |
+| Teste somente com água | pendente |
+| Primeira receita real | pendente e deve ser supervisionada |
 
-Siga [`docs/RASPBERRY_PI_OPERACAO.md`](docs/RASPBERRY_PI_OPERACAO.md) para:
-
-1. preparar o Raspberry Pi e o armazenamento;
-2. criar certificados e segredos locais;
-3. iniciar os serviços;
-4. aplicar as migrações do banco;
-5. acessar o painel;
-6. testar backup e restauração.
-
-Não exponha diretamente a API, o broker ou o PostgreSQL à internet.
-
-## Tutorial de montagem e configuração
-
-O tutorial completo esta em [`docs/tutorial/README.md`](docs/tutorial/README.md)
-e deve ser seguido na ordem:
-
-1. segurança, inventario e estrutura;
-2. tanques, plataformas, hidráulica e dosadoras;
-3. sensores, quadro SELV e instalação CA profissional;
-4. firmware ESP32, Raspberry Pi, painel e EKAZA;
-5. calibração, HIL, teste com água e primeira batelada;
-6. manutenção e resposta a falhas.
-
-Cada gate precisa ser aprovado antes de liberar a etapa seguinte. A instalação
-127 V, proteções, aterramento e ensaios correspondentes são exclusivos de
-profissional habilitado.
-
-## Documentos essenciais
-
-- [escopo executavel da v1.0](docs/ESCOPO_V1.md);
-- [entrega explicada das tarefas 01-30](docs/ENTREGA_TAREFAS_01_30.md);
-- [relatório de prontidão](docs/RELATORIO_PRONTIDAO_V1.md);
-- [BOM e critérios de substituicao](docs/hardware/rev-a/BOM_SISTEMA.md);
-- [caderno de pranchas Rev A](docs/hardware/rev-a/CADERNO_PRANCHAS.md);
-- [laudo preliminar do hardware](docs/hardware/rev-a/LAUDO_REVISAO_REVA.md);
-- [SBOM e licenças](docs/SBOM_E_LICENCAS.md);
-- [backlog executavel](BACKLOG.md) e [histórico](CHANGELOG.md).
-
-## Reta final para a v1.0
-
-Antes da lista definitiva de compra e da release, ainda e necessario:
-
-1. receber e medir amostras criticas;
-2. congelar modelos, footprints, bombas, tubos e vedacoes;
-3. concluir esquema e PCB no KiCad com ERC/DRC aprovados;
-4. publicar desenhos mecânicos cotados, P&ID, unifilar e chicotes finais;
-5. montar e ensaiar um protótipo A0;
-6. executar teste térmico, HIL físico e piloto somente com água;
-7. homologar cada tomada EKAZA em 100 ciclos;
-8. validar o tutorial em uma montagem limpa e incluir fotografias reais;
-9. fechar SBOM, release candidate e critérios de aceitação.
-
-Enquanto esses gates estiverem abertos, o estado permanece `A0/HOLD`: o projeto
-serve para engenharia, cotação e prototipagem, mas não para energização ou compra
-em lote.
-
-## Segurança
-
-Água e fertilizantes próximos a rede elétrica podem causar choque, incêndio,
-vazamento e danos materiais. Software não substitui contenção, E-stop,
-aterramento, DR, disjuntores, fusível, segregação CA/SELV, gabinete apropriado e
-inspeção profissional. Nunca energize uma revisão marcada como `HOLD`.
+Consulte o [`relatório de prontidão`](docs/RELATORIO_PRONTIDAO_V1.md) e o
+[`BACKLOG.md`](BACKLOG.md) para os bloqueios físicos restantes.
 
 ## Origem e licença
 
-O projeto foi desenvolvido a partir da especificacao estudada nos videos e no
-repositorio MIT `ledgardener/gardenAutomation`, com arquitetura, segurança,
-firmware, hub e painel proprios. Consulte
-[`ESPECIFICACAO_REFERENCIA.md`](ESPECIFICACAO_REFERENCIA.md).
+O sistema foi inspirado na série “My DIY Home Assistant Garden Automation
+System”, do canal ledgardener. A pesquisa histórica está em
+[`ESPECIFICACAO_REFERENCIA.md`](ESPECIFICACAO_REFERENCIA.md); partes relacionadas
+a PCB e engenharia pesada são apenas referência arquivada.
 
-Licenca MIT. Dependencias de terceiros mantem seus respectivos avisos e
+Licença MIT. Dependências de terceiros mantêm seus respectivos avisos e
 obrigações.

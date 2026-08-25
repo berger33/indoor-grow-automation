@@ -1,72 +1,49 @@
-# Tutorial de montagem — índice e contrato editorial
+# Tutorial de montagem DIY
 
-> **Status:** capítulos 00–14 publicados para revisão; validação em montagem
-> limpa e fotografias reais continuam pendentes. Não compre nem energize o
-> conjunto usando documentos A0/HOLD.
+Este tutorial substitui integralmente a sequência industrial antiga. Ele usa
+um notebook, um ESP32, placa perfurada, relés, MOSFETs, bombas econômicas,
+sensores analógicos, caixas organizadoras, potes de vidro e estante aramada.
 
-O objetivo deste tutorial é permitir que uma pessoa sem experiência prévia
-entenda o sistema, confira as peças e execute todas as etapas permitidas. Rede
-127 V, dimensionamento, proteções e testes correspondentes continuam sendo
-responsabilidade de profissional habilitado.
+## Antes de começar
 
-## Sequência obrigatória
+Água e eletricidade exigem disciplina mesmo em um projeto doméstico:
 
-| Etapa | Capítulo | Resultado verificável | Libera |
-|---:|---|---|---|
-| 00 | segurança, escopo e responsabilidades | usuário identifica zonas e atividades proibidas | leitura dos demais capítulos |
-| 01 | [inventário e inspeção de recebimento](01-inventario-e-conferencia.md) | cada MPN/lote/foto/teste registrado | separação de kits |
-| 02 | [estrutura e zonas seca/molhada](02-estrutura-e-zonas.md) | suporte nivelado e distâncias aprovadas | montagem de tanques |
-| 03 | [tanques e plataformas de pesagem](03-tanques-e-pesagem.md) | tara repetível e batentes funcionais | hidráulica |
-| 04 | [bombas, válvulas e tubulação](04-hidraulica.md) | teste de estanqueidade sem eletrônica | dosagem |
-| 05 | [frascos, agitadores e peristálticas](05-frascos-e-dosadoras.md) | seis linhas identificadas e sem sifão | sensores químicos |
-| 06 | [pH, EC, temperatura, boias e vazamento](06-sensores.md) | leituras/estados brutos plausíveis | quadro SELV |
-| 07 | [controladora, fontes e chicotes SELV](07-quadro-selv.md) | continuidade/polaridade aprovadas sem CA | firmware |
-| 08 | [instalação 127 V por profissional](08-instalacao-ca-profissional.md) | laudo, PE, DR, isolação e proteções aprovados | energização controlada |
-| 09 | [gravação e provisionamento ESP32](09-firmware-esp32.md) | nós em safe boot e diagnosticáveis | hub |
-| 10 | [Raspberry Pi, MQTT, API e painel](10-hub-e-painel.md) | instalação limpa reproduzida | calibração |
-| 10A | [integração lógica com tomadas EKAZA](10a-integracao-tomadas-ekaza.md) | estados remotos confirmados sem carga no rack | agenda de luz remota |
-| 11 | [calibração guiada](11-calibracao.md) | massa, bombas, pH e EC dentro da tolerância | HIL |
-| 12 | [teste seco, HIL e piloto com água](12-hil-e-agua.md) | todas as falhas críticas injetadas | primeira batelada |
-| 13 | [primeira batelada supervisionada](13-primeira-batelada.md) | relatório aprovado sem alarme pendente | operação assistida |
-| 14 | [manutenção e resposta a falhas](14-manutencao.md) | cronograma e procedimentos acessíveis | operação continuada |
+- trabalhe sempre desenergizado durante a montagem;
+- mantenha toda eletrônica acima da água e dentro de caixa fechada;
+- use tomada aterrada e proteção DR existente;
+- nunca deixe borne de rede exposto;
+- qualquer criação ou alteração de cabo/tomada de 127 V deve ser feita por
+  pessoa qualificada;
+- não use nutrientes antes de aprovar o teste completo somente com água;
+- não deixe a primeira receita real sem supervisão.
 
-## Padrão obrigatório de cada capítulo
+## Ordem obrigatória
 
-Cada capítulo deverá conter:
+1. [Comprar e conferir os componentes](01-compras.md)
+2. [Montar placa perfurada, MOSFETs e relés](02-protoboard-e-reles.md)
+3. [Montar estante, caixas e potes](03-prateleira-e-potes.md)
+4. [Instalar bombas, tubos e fiação](04-bombas-e-fiacao.md)
+5. [Instalar e calibrar sensores](05-sensores-ph-ec-clima.md)
+6. [Configurar e gravar o firmware](06-firmware-esp32.md)
+7. [Instalar o hub no notebook](07-hub-no-notebook.md)
+8. [Executar o primeiro teste com água](08-primeiro-teste-com-agua.md)
+9. [Cadastrar e executar a primeira receita](09-primeira-receita.md)
+10. [Confirmar Home Assistant e tomadas EKAZA](10-home-assistant-ekaza.md)
 
-1. objetivo e resultado final fotografado;
-2. pré-requisitos e gates que precisam estar aprovados;
-3. peças por identificador da BOM, ferramentas e EPIs;
-4. riscos e tarefas exclusivas de profissional habilitado;
-5. desenho técnico vinculante e imagem realista apenas ilustrativa;
-6. passos numerados, uma ação física por passo;
-7. foto ou render do estado esperado nos pontos de inspeção;
-8. teste de aceitação quantitativo e evidência a registrar;
-9. erros comuns, diagnóstico e como retornar ao estado seguro;
-10. limpeza, descarte e próxima etapa liberada.
+Não pule um gate. Se uma etapa falhar, desligue, corrija e repita a própria
+etapa antes de avançar.
 
-Valores químicos e receitas de nutrientes não serão tratados como universais.
-O operador informa produtos, concentrações e limites conforme fabricante e
-orientação agronômica aplicável.
+## Evidências a guardar
 
-## Área Ajuda do painel
+- fotos da montagem seca e das etiquetas;
+- modelo/pinagem dos módulos recebidos;
+- tensão do buck e corrente das bombas;
+- volumes dos dez ciclos de calibração por dosadora;
+- leituras das soluções de pH/EC;
+- resultado dos testes de vazamento, parada, timeout e retorno de energia;
+- commit do firmware e do hub usados;
+- data e resultado do teste com água e da primeira receita.
 
-O painel mobile-first oferece Ajuda local e abre o capítulo compatível com
-a tela atual. Alarmes terão instruções curtas de estado seguro e link para o
-procedimento completo. A Ajuda será instalada localmente no Raspberry Pi e
-continuará disponível sem internet.
-
-O modo de ajuda não poderá:
-
-- liberar um intertravamento;
-- ocultar alarme latched;
-- alterar dose, timeout ou proteção;
-- orientar ligação de rede sem profissional;
-- confundir imagem conceitual com desenho as-built.
-
-## Validação do tutorial
-
-Antes da v1.0, uma montagem limpa deverá ser executada usando somente BOM,
-arquivos de fabricação e estes capítulos. Toda dúvida, passo implícito ou peça
-ausente retorna ao backlog. A versão validada receberá fotos da montagem real e
-hashes dos artefatos exatos usados.
+O tutorial orienta uma montagem experimental. Ele não transforma módulos
+genéricos em instrumentos certificados e não elimina a necessidade de
+supervisão e manutenção.

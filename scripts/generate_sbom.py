@@ -22,6 +22,7 @@ PYTHON_LICENSES = {
 }
 FIRMWARE_LICENSES = {
     "platformio/platform-espressif32": "Apache-2.0",
+    "adafruit/DHT-sensor-library": "MIT",
     "adafruit/Adafruit_BME280_Library": "BSD-3-Clause",
     "adafruit/Adafruit-MLX90614-Library": "BSD-3-Clause",
     "PaulStoffregen/OneWire": "NOASSERTION",
@@ -94,13 +95,13 @@ def document() -> dict[str, object]:
         "dataLicense": "CC0-1.0",
         "SPDXID": "SPDXRef-DOCUMENT",
         "name": "indoor-grow-automation-sbom",
-        "documentNamespace": "https://indoor-grow.local/sbom/v1/2026-08-24",
-        "creationInfo": {"created": "2026-08-24T00:00:00Z", "creators": ["Tool: scripts/generate_sbom.py"]},
+        "documentNamespace": "https://indoor-grow.local/sbom/v1/2026-08-25",
+        "creationInfo": {"created": "2026-08-25T00:00:00Z", "creators": ["Tool: scripts/generate_sbom.py"]},
         "documentDescribes": [root],
         "packages": [{
             "SPDXID": root,
             "name": "indoor-grow-automation",
-            "versionInfo": "1.0.0-a0",
+            "versionInfo": "1.0.0-diy",
             "downloadLocation": "https://github.com/berger33/indoor-grow-automation",
             "filesAnalyzed": False,
             "licenseConcluded": "MIT",

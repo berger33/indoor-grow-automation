@@ -4,6 +4,11 @@
 **Escopo:** engenharia reversa documental de quatro vídeos, conferida contra os arquivos open-source publicados pelo autor.
 **Objetivo:** servir como referência técnica e backlog para uma implementação nova; não é uma autorização para copiar cegamente uma revisão de hardware não ensaiada.
 
+> **Nota de escopo em 2026-08-25:** este arquivo é histórico. As observações de
+> PCB, Atlas EZO, Raspberry Pi, rack sob medida, painel industrial, CO₂ e tanques
+> técnicos não definem a montagem atual. Para implementação e compra, prevalecem
+> [`docs/ESCOPO_V1.md`](docs/ESCOPO_V1.md), a BOM DIY e o tutorial ativo.
+
 > **Segurança:** o sistema combina água, fertilizantes concentrados e rede elétrica. A execução deve usar aterramento, DR/GFCI, proteção por sobrecorrente, segregação entre CA e SELV, gabinete compatível, alívio de tração e profissional habilitado conforme as normas locais. As pranchas são funcionais/conceituais, não desenhos executivos certificados.
 
 > **Aplicação no projeto próprio:** este arquivo preserva tudo que foi observado,
@@ -51,9 +56,9 @@ O terceiro vídeo migra do gabinete central prototipado para estações por tend
 
 O princípio central é uma arquitetura local e modular: Home Assistant coordena horários, receitas, UI, histórico e notificações; microcontroladores transformam MQTT em aquisição/acionamento de campo; a hidráulica prepara solução em batelada e recircula drenagem; clima, iluminação e irrigação usam regras simples. Não há evidência de PID: pH, umidade e temperatura usam histerese/degraus; fertirrigação e luz usam agenda; nutrientes são dosados por receita feed-forward e a EC é atingida por diluição com RO. A geração V1 é funcional, mas experimental e dependente do servidor; a V2 reduz a fiação com uma PCB por tenda, porém os arquivos publicados devem ser tratados como protótipo não validado.
 
-![Arquitetura funcional](desenhos/PRANCHA-01_ARQUITETURA.png)
+![Arquitetura funcional](archive/engenharia-pesada/desenhos/PRANCHA-01_ARQUITETURA.png)
 
-[Abrir prancha vetorial 01](desenhos/PRANCHA-01_ARQUITETURA.svg)
+[Abrir prancha vetorial 01](archive/engenharia-pesada/desenhos/PRANCHA-01_ARQUITETURA.svg)
 
 ## 2. Inventário de hardware
 
@@ -124,9 +129,9 @@ O princípio central é uma arquitetura local e modular: Home Assistant coordena
 | Reservatório de mistura | Preparo/recirculação | Recipiente plástico, volume não identificado | Montado sobre balança DIY; faixa do painel sugere até 60 L por lote, não prova capacidade física. |
 | Bacia de dreno | Coleta retorno | Recipiente plástico + boia | Bomba devolve solução ao tanque de mistura. |
 
-![P&amp;ID hidráulico](desenhos/PRANCHA-02_PID_HIDRAULICO.png)
+![P&amp;ID hidráulico](archive/engenharia-pesada/desenhos/PRANCHA-02_PID_HIDRAULICO.png)
 
-[Abrir prancha vetorial 02](desenhos/PRANCHA-02_PID_HIDRAULICO.svg)
+[Abrir prancha vetorial 02](archive/engenharia-pesada/desenhos/PRANCHA-02_PID_HIDRAULICO.svg)
 
 ### 2.4 Componentes identificados na BOM da PCB V2
 
@@ -145,17 +150,17 @@ O princípio central é uma arquitetura local e modular: Home Assistant coordena
 | R2/R7/R8 | 10 kΩ | Through-hole |
 | R3/R4/R6/R9 | 220 Ω | Through-hole |
 
-![Unifilar elétrico](desenhos/PRANCHA-03_UNIFILAR_ELETRICO.png)
+![Unifilar elétrico](archive/engenharia-pesada/desenhos/PRANCHA-03_UNIFILAR_ELETRICO.png)
 
-[Abrir prancha vetorial 03](desenhos/PRANCHA-03_UNIFILAR_ELETRICO.svg)
+[Abrir prancha vetorial 03](archive/engenharia-pesada/desenhos/PRANCHA-03_UNIFILAR_ELETRICO.svg)
 
-![Layout conceitual dos gabinetes](desenhos/PRANCHA-04_LAYOUT_GABINETE.png)
+![Layout conceitual dos gabinetes](archive/engenharia-pesada/desenhos/PRANCHA-04_LAYOUT_GABINETE.png)
 
-[Abrir prancha vetorial 04](desenhos/PRANCHA-04_LAYOUT_GABINETE.svg)
+[Abrir prancha vetorial 04](archive/engenharia-pesada/desenhos/PRANCHA-04_LAYOUT_GABINETE.svg)
 
-![Mapa funcional da PCB V2](desenhos/PRANCHA-05_PCB_V2_IO.png)
+![Mapa funcional da PCB V2](archive/engenharia-pesada/desenhos/PRANCHA-05_PCB_V2_IO.png)
 
-[Abrir prancha vetorial 05](desenhos/PRANCHA-05_PCB_V2_IO.svg)
+[Abrir prancha vetorial 05](archive/engenharia-pesada/desenhos/PRANCHA-05_PCB_V2_IO.svg)
 
 ## 3. Arquitetura de firmware e lógica de controle
 
@@ -197,9 +202,9 @@ O ESPHome publicado define luz em GPIO 27, LEDC 1220 Hz, saída invertida e gamm
 - Leituras Atlas de erro 2/254/255 estão comentadas. Não há plausibilidade, detecção de stale data, votação de sensores, limite diário de dosagem ou confirmação por variação esperada.
 - Sensores resistivos V2 com cabo nu detectam solução nutritiva, mas não água de baixa condutividade; o próprio autor pede redesenho.
 
-![Sequências de controle](desenhos/PRANCHA-06_SEQUENCIAS_CONTROLE.png)
+![Sequências de controle](archive/engenharia-pesada/desenhos/PRANCHA-06_SEQUENCIAS_CONTROLE.png)
 
-[Abrir prancha vetorial 06](desenhos/PRANCHA-06_SEQUENCIAS_CONTROLE.svg)
+[Abrir prancha vetorial 06](archive/engenharia-pesada/desenhos/PRANCHA-06_SEQUENCIAS_CONTROLE.svg)
 
 ### 3.6 Parâmetros e tempos extraídos
 
@@ -811,12 +816,12 @@ por decisão do ADR 0006. Não devem ser convertidos em tarefas de implementaç�
 
 | Prancha | Conteúdo | Vetor editável |
 |---|---|---|
-| 01 | Arquitetura funcional V1/V2 | [`PRANCHA-01_ARQUITETURA.svg`](desenhos/PRANCHA-01_ARQUITETURA.svg) |
-| 02 | P&amp;ID hidráulico | [`PRANCHA-02_PID_HIDRAULICO.svg`](desenhos/PRANCHA-02_PID_HIDRAULICO.svg) |
-| 03 | Unifilar e segregação elétrica | [`PRANCHA-03_UNIFILAR_ELETRICO.svg`](desenhos/PRANCHA-03_UNIFILAR_ELETRICO.svg) |
-| 04 | Layout conceitual dos gabinetes | [`PRANCHA-04_LAYOUT_GABINETE.svg`](desenhos/PRANCHA-04_LAYOUT_GABINETE.svg) |
-| 05 | PCB V2 / mapa funcional de I/O | [`PRANCHA-05_PCB_V2_IO.svg`](desenhos/PRANCHA-05_PCB_V2_IO.svg) |
-| 06 | Sequências de controle | [`PRANCHA-06_SEQUENCIAS_CONTROLE.svg`](desenhos/PRANCHA-06_SEQUENCIAS_CONTROLE.svg) |
+| 01 | Arquitetura funcional V1/V2 | [`PRANCHA-01_ARQUITETURA.svg`](archive/engenharia-pesada/desenhos/PRANCHA-01_ARQUITETURA.svg) |
+| 02 | P&amp;ID hidráulico | [`PRANCHA-02_PID_HIDRAULICO.svg`](archive/engenharia-pesada/desenhos/PRANCHA-02_PID_HIDRAULICO.svg) |
+| 03 | Unifilar e segregação elétrica | [`PRANCHA-03_UNIFILAR_ELETRICO.svg`](archive/engenharia-pesada/desenhos/PRANCHA-03_UNIFILAR_ELETRICO.svg) |
+| 04 | Layout conceitual dos gabinetes | [`PRANCHA-04_LAYOUT_GABINETE.svg`](archive/engenharia-pesada/desenhos/PRANCHA-04_LAYOUT_GABINETE.svg) |
+| 05 | PCB V2 / mapa funcional de I/O | [`PRANCHA-05_PCB_V2_IO.svg`](archive/engenharia-pesada/desenhos/PRANCHA-05_PCB_V2_IO.svg) |
+| 06 | Sequências de controle | [`PRANCHA-06_SEQUENCIAS_CONTROLE.svg`](archive/engenharia-pesada/desenhos/PRANCHA-06_SEQUENCIAS_CONTROLE.svg) |
 
 ### Critério mínimo de “réplica pronta para piloto”
 

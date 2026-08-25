@@ -1,16 +1,16 @@
 import { useState } from "react";
 
 const topics = [
-  { title: "Antes de iniciar", body: "Confira ausência de vazamento, níveis, dreno livre, recipientes identificados, calibrações válidas e botão de emergência acessível. Nunca ignore um controle inibido." },
+  { title: "Antes de iniciar", body: "Confira ausência de vazamento, níveis, dreno livre, recipientes identificados, calibrações válidas e botão de parada local acessível. Nunca ignore um controle inibido." },
   { title: "Falha ou leitura vencida", body: "O painel mostra idade e qualidade. Verifique alimentação, cabo e conector do sensor. Só rearme depois de obter leituras estáveis e coerentes; não substitua o valor por estimativa." },
   { title: "Vazamento", body: "Interrompa a operação, desligue a alimentação dos atuadores pelo meio seguro previsto, contenha o líquido e corrija a causa. A trava só pode ser rearmada após confirmação física de piso seco." },
   { title: "Nível baixo", body: "Bombas e umidificador ficam desligados. Inspecione o reservatório e o sensor, complete com líquido correto e só então solicite o rearme seguro." },
-  { title: "pH e EC", body: "Use soluções padrão dentro da validade e compensação de temperatura. pH e EC só ficam concluídos após ACK Atlas e releitura do padrão; nunca misture pH+ e pH-." },
+  { title: "pH e EC", body: "Use soluções padrão dentro da validade, confirme que as entradas analógicas não excedem 3,3 V e releia o padrão depois da calibração; nunca misture pH+ e pH-." },
   { title: "Batelada", body: "O status queued indica apenas pedido criado. Aguarde ACK do ESP32 e acompanhe cada etapa. Em falha, o estado local seguro prevalece e todas as saídas voltam desligadas." },
-  { title: "CO₂", body: "Nesta versão o CO₂ é somente monitorado. Alertas não acionam cilindro, válvula ou injetor. Ventile e investigue conforme o procedimento da instalação." },
+  { title: "Sensores econômicos", body: "DHT22 e módulos analógicos podem derivar ou sofrer ruído. Compare com referências, mantenha cabos longe dos motores e bloqueie a automação quando a leitura estiver inválida." },
   { title: "Tomadas EKAZA", body: "Desejado é o que a agenda pede; observado é o que o Home Assistant leu; confirmado exige coincidência entre ambos. A iluminação permanece fora do quadro elétrico do controlador." },
-  { title: "Sem rede ou Raspberry Pi", body: "Os ESP32 mantêm intertravamentos locais, rejeitam comandos vencidos e reiniciam com saídas desligadas. Corrija a rede sem contornar as proteções." },
-  { title: "Instalação 127 V", body: "Montagem, inspeção e energização em corrente alternada são exclusivas de profissional habilitado. Os tutoriais não autorizam trabalho energizado." },
+  { title: "Sem rede ou notebook", body: "O ESP32 mantém intertravamentos locais, rejeita comandos vencidos e reinicia com saídas desligadas. Corrija a rede sem contornar as proteções." },
+  { title: "Instalação 127 V", body: "O projeto não inclui painel industrial. Nunca deixe bornes expostos; criação ou alteração de cabo, tomada ou circuito de rede deve ser feita por pessoa qualificada." },
 ];
 
 export function HelpPage() {

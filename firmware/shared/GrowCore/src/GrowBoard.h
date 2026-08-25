@@ -22,9 +22,9 @@ class DirectOutputBank {
   }
 
   template <typename Controller>
-  void apply(const Controller& controller) {
+  void apply(const Controller& controller, std::size_t offset = 0) {
     for (std::size_t index = 0; index < Count; ++index) {
-      digitalWrite(pins_[index], controller.output(index) ? HIGH : LOW);
+      digitalWrite(pins_[index], controller.output(offset + index) ? HIGH : LOW);
     }
   }
 
@@ -32,47 +32,29 @@ class DirectOutputBank {
   std::array<uint8_t, Count> pins_;
 };
 
-class ShiftRegisterOutputs {
+template <std::size_t Count>
+class ActiveLowRelayBank {
  public:
-  ShiftRegisterOutputs(uint8_t data, uint8_t clock, uint8_t latch, uint8_t output_enable)
-      : data_(data), clock_(clock), latch_(latch), output_enable_(output_enable) {}
+  explicit ActiveLowRelayBank(const std::array<uint8_t, Count>& pins) : pins_(pins) {}
 
   void beginSafe() {
-    digitalWrite(output_enable_, HIGH);
-    pinMode(output_enable_, OUTPUT);
-    pinMode(data_, OUTPUT);
-    pinMode(clock_, OUTPUT);
-    pinMode(latch_, OUTPUT);
-    write(0);
-  }
-
-  void enable() { digitalWrite(output_enable_, LOW); }
-  void disable() {
-    digitalWrite(output_enable_, HIGH);
-    write(0);
+    for (const uint8_t pin : pins_) {
+      // A escrita antes de OUTPUT reduz pulsos em módulos ativos em LOW.
+      digitalWrite(pin, HIGH);
+      pinMode(pin, OUTPUT);
+      digitalWrite(pin, HIGH);
+    }
   }
 
   template <typename Controller>
-  void apply(const Controller& controller) {
-    uint16_t word = 0;
-    for (std::size_t index = 0; index < 16; ++index) {
-      if (controller.output(index)) word |= static_cast<uint16_t>(1U << index);
+  void apply(const Controller& controller, std::size_t offset = 0) {
+    for (std::size_t index = 0; index < Count; ++index) {
+      digitalWrite(pins_[index], controller.output(offset + index) ? LOW : HIGH);
     }
-    write(word);
   }
 
  private:
-  void write(uint16_t word) {
-    digitalWrite(latch_, LOW);
-    shiftOut(data_, clock_, MSBFIRST, static_cast<uint8_t>(word >> 8));
-    shiftOut(data_, clock_, MSBFIRST, static_cast<uint8_t>(word & 0xFF));
-    digitalWrite(latch_, HIGH);
-  }
-
-  uint8_t data_;
-  uint8_t clock_;
-  uint8_t latch_;
-  uint8_t output_enable_;
+  std::array<uint8_t, Count> pins_;
 };
 
 }  // namespace grow
