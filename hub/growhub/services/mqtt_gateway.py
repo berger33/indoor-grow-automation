@@ -51,11 +51,11 @@ class PendingCommand:
 
 
 COMMAND_ROUTES = {
-    "start_batch": ("fertigation", "batch"),
-    "stop_batch": ("fertigation", "batch"),
-    "start_irrigation": ("fertigation", "irrigation"),
-    "stop_irrigation": ("fertigation", "irrigation"),
-    "safe_stop": ("safety", "emergency"),
+    "start_batch": ("controller", "batch"),
+    "stop_batch": ("controller", "batch"),
+    "start_irrigation": ("controller", "irrigation"),
+    "stop_irrigation": ("controller", "irrigation"),
+    "safe_stop": ("controller", "emergency"),
 }
 
 

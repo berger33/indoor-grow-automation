@@ -63,7 +63,7 @@ class MqttGatewayTests(TestCase):
             self.operations,
             self.telemetry,
             RealtimeBuffer(),
-            sensor_nodes={("grow-01", "ph_tank"): "fertigation"},
+            sensor_nodes={("grow-01", "ph_tank"): "controller"},
             client=self.client,  # type: ignore[arg-type]
             clock=lambda: NOW,
         )
@@ -71,12 +71,12 @@ class MqttGatewayTests(TestCase):
     def test_persists_valid_telemetry_once_and_checks_topic_owner(self) -> None:
         reading = SensorReading("grow-01", "ph_tank", SensorKind.PH, 5.8, Unit.PH, NOW, ReadingQuality.VALID)
         envelope = TelemetryEnvelope(str(uuid4()), 1, NOW, reading)
-        topic = telemetry_topic("grow-01", "fertigation", "ph_tank")
+        topic = telemetry_topic("grow-01", "controller", "ph_tank")
         self.assertTrue(self.gateway.handle_message(topic, envelope.to_json(), received_at=NOW))
         self.assertFalse(self.gateway.handle_message(topic, envelope.to_json(), received_at=NOW))
         self.assertEqual(5.8, self.operations.readings[("grow-01", "ph_tank")].value)
         with self.assertRaises(ValueError):
-            self.gateway.handle_message(telemetry_topic("grow-01", "climate", "ph_tank"), envelope.to_json(), received_at=NOW)
+            self.gateway.handle_message(telemetry_topic("grow-01", "legacy_node", "ph_tank"), envelope.to_json(), received_at=NOW)
 
     def test_publishes_command_and_accepts_only_matching_ack(self) -> None:
         audit = self.operations.record_audit("operator", "grow-01", "start_irrigation", "bed_a", "queued", NOW)
@@ -84,7 +84,7 @@ class MqttGatewayTests(TestCase):
         self.assertEqual(command, CommandEnvelope.from_json(self.client.published[0][1]))
         self.assertEqual((1, False), self.client.published[0][2:])
         acknowledgement = CommandAcknowledgement(command.command_id, command.sequence, AckStatus.ACK, "command_applied", NOW)
-        topic = acknowledgement_topic("grow-01", "fertigation", "irrigation")
+        topic = acknowledgement_topic("grow-01", "controller", "irrigation")
         self.assertTrue(self.gateway.handle_message(topic, acknowledgement.to_json(), received_at=NOW))
         self.assertFalse(self.gateway.handle_message(topic, acknowledgement.to_json(), received_at=NOW))
         self.assertEqual("ack", self.operations.audit[0].status)
@@ -106,7 +106,7 @@ class MqttGatewayTests(TestCase):
 
     def test_persists_latched_alarm_idempotently(self) -> None:
         alarm = AlarmEnvelope(str(uuid4()), "grow-01", "leak_detected", AlarmSeverity.CRITICAL, "Água confirmada.", "Mantenha OFF e inspecione.", NOW)
-        topic = "grow/v1/grow-01/safety/alarm/leak_detected"
+        topic = "grow/v1/grow-01/controller/alarm/leak_detected"
         self.assertTrue(self.gateway.handle_message(topic, alarm.to_json(), received_at=NOW))
         self.assertFalse(self.gateway.handle_message(topic, alarm.to_json(), received_at=NOW))
         self.assertTrue(self.operations.alarms[alarm.alarm_id].latched)
