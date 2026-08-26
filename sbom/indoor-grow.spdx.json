@@ -169,6 +169,24 @@
       "versionInfo": "7.0.2"
     },
     {
+      "SPDXID": "SPDXRef-Package-npm-0f7250d8be82446d",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/react/-/react-19.2.18.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types%2Freact@19.2.18",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@types/react",
+      "supplier": "NOASSERTION",
+      "versionInfo": "19.2.18"
+    },
+    {
       "SPDXID": "SPDXRef-Package-npm-1096a1ead88defa9",
       "copyrightText": "NOASSERTION",
       "downloadLocation": "https://registry.npmjs.org/tinyglobby/-/tinyglobby-0.2.17.tgz",
@@ -385,6 +403,24 @@
       "versionInfo": "7.0.2"
     },
     {
+      "SPDXID": "SPDXRef-Package-npm-3d1f1df219517172",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.2.4.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types%2Freact-dom@19.2.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "@types/react-dom",
+      "supplier": "NOASSERTION",
+      "versionInfo": "19.2.4"
+    },
+    {
       "SPDXID": "SPDXRef-Package-npm-41912edeb03db0bf",
       "copyrightText": "NOASSERTION",
       "downloadLocation": "https://registry.npmjs.org/detect-libc/-/detect-libc-2.1.2.tgz",
@@ -527,24 +563,6 @@
       "name": "scheduler",
       "supplier": "NOASSERTION",
       "versionInfo": "0.27.0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-npm-60b0e97461cb7d2c",
-      "copyrightText": "NOASSERTION",
-      "downloadLocation": "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.2.3.tgz",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceLocator": "pkg:npm/%40types%2Freact-dom@19.2.3",
-          "referenceType": "purl"
-        }
-      ],
-      "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
-      "name": "@types/react-dom",
-      "supplier": "NOASSERTION",
-      "versionInfo": "19.2.3"
     },
     {
       "SPDXID": "SPDXRef-Package-npm-66fa0b30b20ff105",
@@ -941,24 +959,6 @@
       "name": "react",
       "supplier": "NOASSERTION",
       "versionInfo": "19.2.8"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-npm-b29e627de793064e",
-      "copyrightText": "NOASSERTION",
-      "downloadLocation": "https://registry.npmjs.org/@types/react/-/react-19.2.14.tgz",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceLocator": "pkg:npm/%40types%2Freact@19.2.14",
-          "referenceType": "purl"
-        }
-      ],
-      "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
-      "name": "@types/react",
-      "supplier": "NOASSERTION",
-      "versionInfo": "19.2.14"
     },
     {
       "SPDXID": "SPDXRef-Package-npm-b2e46bb06a9b637c",
@@ -1453,6 +1453,11 @@
       "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
     },
     {
+      "relatedSpdxElement": "SPDXRef-Package-npm-0f7250d8be82446d",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
       "relatedSpdxElement": "SPDXRef-Package-npm-1096a1ead88defa9",
       "relationshipType": "DEPENDS_ON",
       "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
@@ -1513,6 +1518,11 @@
       "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
     },
     {
+      "relatedSpdxElement": "SPDXRef-Package-npm-3d1f1df219517172",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
       "relatedSpdxElement": "SPDXRef-Package-npm-41912edeb03db0bf",
       "relationshipType": "DEPENDS_ON",
       "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
@@ -1549,11 +1559,6 @@
     },
     {
       "relatedSpdxElement": "SPDXRef-Package-npm-5d36585bad9fb9b0",
-      "relationshipType": "DEPENDS_ON",
-      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-npm-60b0e97461cb7d2c",
       "relationshipType": "DEPENDS_ON",
       "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
     },
@@ -1664,11 +1669,6 @@
     },
     {
       "relatedSpdxElement": "SPDXRef-Package-npm-af911dcfba181ec4",
-      "relationshipType": "DEPENDS_ON",
-      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-npm-b29e627de793064e",
       "relationshipType": "DEPENDS_ON",
       "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
     },
