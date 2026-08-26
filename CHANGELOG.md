@@ -40,7 +40,11 @@ versionamento semântico a partir da primeira release.
   térmica, qualidade e falhas explícitas;
 - contratos MQTT v1 para comando, ACK/NACK e alarmes retidos, com gateway TLS
   ligado ao PostgreSQL, auditoria e WebSocket;
-- Mosquitto TLS 1.3 mútuo, ACL por nó e teste de isolamento em contêiner;
+- Mosquitto com mTLS, ACL por identidade e teste de isolamento em contêiner;
+- conexão Wi-Fi/MQTT mTLS do controlador DIY único, com TLS 1.2 mínimo,
+  validação de CA/hostname, LWT, heartbeat e perda do hub ligada ao fail-safe;
+- identidade `grow-01-controller`, tópicos, ACL e cadastro do hub alinhados ao
+  nó único `controller`, sem restaurar nós ou sensores arquivados;
 - banco operacional PostgreSQL/Alembic, retenção e previsão de capacidade;
 - API autenticada de estações, sensores, histórico, configuração, receitas,
   agendas, alarmes, calibração, comandos e auditoria;

@@ -36,6 +36,9 @@ mudança de direção e preservados apenas no histórico Git/arquivo.
 - [ ] `D2-008 P0` Calibrar pH/EC com padrões rastreados.
 - [ ] `D2-009 P0` Medir dez ciclos de cada peristáltica.
 - [ ] `D2-010 P0` Validar pinagem e cinco boots no ESP32 real.
+- [x] `D2-011 P0` Conectar o controlador único ao broker por Wi-Fi e MQTT mTLS.
+- [ ] `D2-012 P0` Publicar telemetria e alarmes no contrato MQTT v1.
+- [ ] `D2-013 P0` Receber comandos com rejeição e ACK/NACK idempotentes.
 
 ## Fase D3 — Hub e integração
 
@@ -47,6 +50,8 @@ mudança de direção e preservados apenas no histórico Git/arquivo.
 - [ ] `D3-006 P0` Testar perda/retorno do notebook durante atuação simulada.
 - [ ] `D3-007 P0` Restaurar backup em ambiente limpo.
 - [ ] `D3-008 P1` Homologar entidades EKAZA e cem ciclos por canal.
+- [x] `D3-009 P0` Alinhar identidade, ACL, tópicos e sensores ao nó `controller`.
+- [ ] `D3-010 P0` Executar E2E virtual controlador–broker–hub–banco.
 
 ## Fase D4 — Comissionamento
 

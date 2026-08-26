@@ -187,3 +187,25 @@ foi preservado apenas para rastreabilidade.
   receita supervisionada.
 - Próximos passos: aguardar o build ESP32 do CI; depois comprar/conferir peças e
   seguir os gates do tutorial sem usar os documentos arquivados como montagem.
+
+## 2026-08-26
+
+- Commits: 7.
+- Lacuna fechada: transporte Wi-Fi/MQTT com mTLS entre o ESP32 DIY único e o
+  Mosquitto, antes inexistente no firmware.
+- Itens concluídos: identidade única `grow-01-controller`; ACL e rotas do hub
+  alinhadas ao nó `controller`; TLS 1.2 mínimo sem modo inseguro; sincronização
+  de relógio; LWT retido; heartbeat; reconexão limitada; perda real do MQTT
+  entregue ao fail-safe; segredos locais ignorados; SBOM e tutorial atualizados.
+- Verificação local: 286 testes Python; nove cenários HIL virtuais; compilação
+  nativa do controlador; typecheck e build Vite; 49 referências DIY; SBOM e
+  scanner de segredos aprovados. O build ESP32 e o ensaio Mosquitto em contêiner
+  ficam condicionados ao CI, pois este executor não oferece toolchain nem Docker.
+- Decisões tomadas: manter uma única identidade de controlador; aceitar TLS 1.2
+  como mínimo compatível e TLS 1.3 quando negociado; não assinar comandos nesta
+  entrega para separar transporte de execução segura.
+- Bloqueios/pendências: conexão em Wi-Fi/broker físicos; emissão dos
+  certificados reais; cinco boots; HIL físico; teste com água; telemetria,
+  alarmes, comandos e ACK/NACK ainda não estão transportados pelo firmware.
+- Próximos passos: publicar telemetria/alarmes v1; implementar comandos e
+  ACK/NACK idempotentes; executar E2E virtual controlador–broker–hub–banco.
