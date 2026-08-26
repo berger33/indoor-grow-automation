@@ -1285,6 +1285,24 @@
       "versionInfo": "1.33.0"
     },
     {
+      "SPDXID": "SPDXRef-Package-platformio-ac7e141a8bd4510c",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.platformio.org/libraries/knolleary/PubSubClient",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:platformio/knolleary%2FPubSubClient@2.8",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "name": "knolleary/PubSubClient",
+      "supplier": "NOASSERTION",
+      "versionInfo": "2.8"
+    },
+    {
       "SPDXID": "SPDXRef-Package-pypi-1f9f6ecfe9493bb6",
       "copyrightText": "NOASSERTION",
       "downloadLocation": "NOASSERTION",
@@ -1759,6 +1777,11 @@
     },
     {
       "relatedSpdxElement": "SPDXRef-Package-npm-f75a241d2ebc8e90",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-platformio-ac7e141a8bd4510c",
       "relationshipType": "DEPENDS_ON",
       "spdxElementId": "SPDXRef-Package-indoor-grow-automation"
     },

@@ -4,6 +4,7 @@
 *.pem
 *.key
 *.crt
+firmware/controller/include/secrets.h
 __pycache__/
 *.py[cod]
 .pytest_cache/
