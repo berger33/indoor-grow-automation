@@ -20,6 +20,30 @@ pio run --project-dir firmware/hil
 pio run --project-dir firmware/hil --target exec
 ```
 
+## Wi-Fi e MQTT com mTLS
+
+O controlador é o cliente `grow-01-controller` e usa somente o nó MQTT
+`controller`. A porta é 8883, a CA do projeto valida o certificado do broker e
+o broker valida o certificado do ESP32. Não existe modo TLS inseguro nem senha
+MQTT no firmware.
+
+1. copie `controller/include/secrets.example.h` para
+   `controller/include/secrets.h`;
+2. preencha localmente SSID, senha, hostname do broker, CA, certificado e chave
+   do cliente; `secrets.h` nunca entra no Git;
+3. confirme que o certificado do broker contém o hostname usado e que o CN do
+   certificado cliente é exatamente `grow-01-controller`;
+4. compile e grave primeiro com todas as cargas desconectadas.
+
+O ESP32 sincroniza o relógio antes da validação dos certificados, publica
+disponibilidade retida e heartbeat a cada 15 segundos. Configuração incompleta,
+falha de relógio, Wi-Fi, TLS ou MQTT mantém o nó offline. Se a conexão cair
+durante atuação, o núcleo local entra no caminho fail-safe já existente.
+
+Esta entrega ainda não recebe comandos nem publica a telemetria dos sensores;
+esses transportes permanecem itens P0 separados para não misturar conexão com
+execução de atuadores.
+
 ## Pinagem
 
 Não copie pinos de tutoriais genéricos. Use somente
@@ -59,6 +83,8 @@ calibrados. O painel não deve liberar correção química automática.
 8. reinício volta a `BOOT` e nunca repete a última ordem;
 9. sensor crítico inválido inibe o atuador correspondente;
 10. os dois canais físicos de relé sem uso permanecem desconectados.
+11. o firmware não aceita certificado sem validar CA/hostname;
+12. perda do MQTT durante atuação é entregue ao intertravamento de perda do hub.
 
 O botão de parada é um comando local em baixa tensão, não um dispositivo de
 segurança certificado.
