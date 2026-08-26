@@ -29,6 +29,12 @@ FIRMWARE_LICENSES = {
     "milesburton/Arduino-Temperature-Control-Library": "MIT",
     "bogde/HX711": "MIT",
 }
+PLATFORMIO_LIBRARIES = {
+    "knolleary/PubSubClient": (
+        "MIT",
+        "https://registry.platformio.org/libraries/knolleary/PubSubClient",
+    ),
+}
 
 
 def spdx_id(ecosystem: str, name: str, version: str) -> str:
@@ -76,13 +82,32 @@ def npm_packages() -> list[dict[str, object]]:
 
 def firmware_packages() -> list[dict[str, object]]:
     urls: set[str] = set()
+    registry_libraries: set[tuple[str, str]] = set()
     for ini in (ROOT / "firmware").glob("*/platformio.ini"):
-        urls.update(re.findall(r"https://github\.com/[^\s]+#[0-9a-f]{40}", ini.read_text(encoding="utf-8")))
+        manifest = ini.read_text(encoding="utf-8")
+        urls.update(re.findall(r"https://github\.com/[^\s]+#[0-9a-f]{40}", manifest))
+        registry_libraries.update(
+            re.findall(r"^\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@([0-9][^\s]*)$", manifest, re.MULTILINE)
+        )
     result = []
     for url in sorted(urls):
         repository, commit = url.rsplit("#", maxsplit=1)
         identity = repository.removeprefix("https://github.com/").removesuffix(".git")
         result.append(package("github", identity, commit, FIRMWARE_LICENSES.get(identity, "NOASSERTION"), repository, f"pkg:github/{identity}@{commit}"))
+    for identity, version in sorted(registry_libraries):
+        license_id, location = PLATFORMIO_LIBRARIES.get(
+            identity, ("NOASSERTION", "NOASSERTION")
+        )
+        result.append(
+            package(
+                "platformio",
+                identity,
+                version,
+                license_id,
+                location,
+                f"pkg:platformio/{quote(identity, safe='')}@{quote(version)}",
+            )
+        )
     result.append(package("vendored", "platformio/platform-native", "1.2.1+7df81639bc84474e9b1812d241762cffad9c69e7", "Apache-2.0", "https://github.com/platformio/platform-native", "pkg:github/platformio/platform-native@7df81639bc84474e9b1812d241762cffad9c69e7"))
     return result
 

@@ -36,7 +36,7 @@ issue_certificate() {
 
 issue_certificate server
 issue_certificate grow-hub
-issue_certificate grow-01-climate
+issue_certificate grow-01-controller
 chmod 644 "$test_root/certs"/*.key "$test_root/certs"/*.crt
 
 docker run --rm -d --name "$broker_name" \
@@ -58,7 +58,7 @@ client() {
 broker_ready=false
 for _ in $(seq 1 20); do
   if client grow-hub mosquitto_pub -r \
-    -t grow/v1/grow-01/climate/command/exhaust -m off >/dev/null 2>&1; then
+    -t grow/v1/grow-01/controller/command/exhaust -m off >/dev/null 2>&1; then
     broker_ready=true
     break
   fi
@@ -69,15 +69,15 @@ if [[ "$broker_ready" != true ]]; then
   docker logs "$broker_name" >&2 || true
   echo "Última tentativa de conexão mTLS:" >&2
   client grow-hub mosquitto_pub -r \
-    -t grow/v1/grow-01/climate/command/exhaust -m off || true
+    -t grow/v1/grow-01/controller/command/exhaust -m off || true
   exit 1
 fi
 
-received="$(client grow-01-climate mosquitto_sub -C 1 -W 3 -t grow/v1/grow-01/climate/command/exhaust)"
+received="$(client grow-01-controller mosquitto_sub -C 1 -W 3 -t grow/v1/grow-01/controller/command/exhaust)"
 test "$received" = "off"
 
-forbidden_topic="grow/v1/grow-01/fertigation/command/mixer"
-client grow-01-climate mosquitto_pub -r -t "$forbidden_topic" -m start || true
+forbidden_topic="grow/v1/grow-02/controller/command/mixer"
+client grow-01-controller mosquitto_pub -r -t "$forbidden_topic" -m start || true
 if client grow-hub mosquitto_sub -C 1 -W 2 -t "$forbidden_topic" >/dev/null 2>&1; then
   echo "ACL permitiu publicação cruzada proibida" >&2
   exit 1

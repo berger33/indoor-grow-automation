@@ -1,4 +1,5 @@
 #include <GrowCore.h>
+#include <GrowConnectivity.h>
 #include <GrowProcess.h>
 
 #include <cstdlib>
@@ -18,6 +19,24 @@ static void require(bool condition, const char* message) {
 }
 
 int main() {
+  grow::RetryThrottle reconnect(5000);
+  require(reconnect.due(100), "primeira reconexão deve ser imediata");
+  require(!reconnect.due(5099), "reconexão deve respeitar intervalo");
+  require(reconnect.due(5100), "reconexão deve liberar no prazo");
+  reconnect.reset();
+  require(reconnect.due(5200), "conexão estável deve rearmar o throttle");
+
+  grow::HeartbeatSchedule heartbeat(10000);
+  require(!heartbeat.due(0, false), "offline não publica heartbeat");
+  require(heartbeat.due(100, true) && heartbeat.sequence() == 1,
+          "primeiro heartbeat conectado deve ser imediato");
+  require(!heartbeat.due(10099, true), "heartbeat não deve antecipar intervalo");
+  require(heartbeat.due(10100, true) && heartbeat.sequence() == 2,
+          "heartbeat deve incrementar sequência no prazo");
+  require(!heartbeat.due(10200, false), "queda MQTT deve suspender heartbeat");
+  require(heartbeat.due(10300, true) && heartbeat.sequence() == 3,
+          "reconexão deve publicar novo heartbeat imediatamente");
+
   SafeController<4> node(5000);
   node.boot(0);
   require(node.state() == NodeState::Boot, "reinício deve voltar para BOOT");
@@ -91,6 +110,6 @@ int main() {
   require(batch.tick(102, process) == 0 && batch.stage() == grow::BatchStage::Alarm,
           "vazamento deve abortar batelada e zerar saídas");
 
-  std::cout << "HIL virtual: 7 cenários fail-safe aprovados\n";
+  std::cout << "HIL virtual: 9 cenários fail-safe aprovados\n";
   return 0;
 }

@@ -4,6 +4,8 @@
 #include <GrowCore.h>
 #include <Preferences.h>
 
+#include "GrowMqtt.h"
+
 #include <array>
 #include <cmath>
 
@@ -53,6 +55,7 @@ grow::DirectOutputBank<6> dosing_outputs(pins::kDosing);
 grow::ActiveLowRelayBank<6> relay_outputs(pins::kRelays);
 DHT climate_sensor(pins::kDht22, DHT22);
 Preferences preferences;
+grow::mqtt::Connection hub_connection;
 LinearCalibration ph_calibration;
 LinearCalibration ec_calibration;
 uint8_t wet_confirmations = 0;
@@ -115,6 +118,7 @@ void setup() {
   climate_sensor.begin();
   Serial.begin(115200);
   loadCalibration();
+  hub_connection.begin();
   controller.boot(millis());
   controller.completeBoot(physicalInputsSafe());
   // Referencia a função para que warnings tratem o roteador como parte do build.
@@ -124,6 +128,7 @@ void setup() {
 
 void loop() {
   const uint32_t now = millis();
+  hub_connection.loop(now);
   const bool wet_sample = digitalRead(pins::kLeak) == HIGH;
   wet_confirmations = wet_sample
                           ? static_cast<uint8_t>(min(3, wet_confirmations + 1))
@@ -131,7 +136,7 @@ void loop() {
   const bool leak_confirmed = wet_confirmations >= 3;
   const bool local_stop = digitalRead(pins::kLocalStop) == LOW;
   controller.feedWatchdog(now);
-  controller.tick(now, leak_confirmed, true, local_stop);
+  controller.tick(now, leak_confirmed, hub_connection.connected(), local_stop);
 
   if (now - last_sample_ms >= 2000 &&
       controller.state() != grow::NodeState::Boot &&

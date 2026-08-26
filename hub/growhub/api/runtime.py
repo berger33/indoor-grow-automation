@@ -22,6 +22,14 @@ from ..services.operations import SensorDefinition, Setpoints, StationDefinition
 from ..services.realtime import RealtimeBuffer
 from ..services.security import AuthService, UserRole
 
+DIY_SENSOR_LAYOUT = (
+    ("ph_tank", "pH do tanque", SensorKind.PH, "controller"),
+    ("ec_tank", "EC do tanque", SensorKind.EC, "controller"),
+    ("air_temperature", "Temperatura do ar", SensorKind.AIR_TEMPERATURE, "controller"),
+    ("humidity", "Umidade relativa", SensorKind.HUMIDITY, "controller"),
+    ("leak", "Detector de vazamento", SensorKind.LEAK, "controller"),
+)
+
 
 def _required_env(name: str) -> str:
     value = os.environ.get(name, "").strip()
@@ -81,20 +89,7 @@ def build_runtime_app():
         station_id,
         os.environ.get("GROWHUB_STATION_NAME", "Estufa principal").strip(),
     )
-    sensor_layout = (
-        ("ph_tank", "pH do tanque", SensorKind.PH, "fertigation"),
-        ("ec_tank", "EC do tanque", SensorKind.EC, "fertigation"),
-        ("water_temperature", "Temperatura da água", SensorKind.WATER_TEMPERATURE, "fertigation"),
-        ("air_temperature", "Temperatura do ar", SensorKind.AIR_TEMPERATURE, "climate"),
-        ("leaf_temperature", "Temperatura foliar", SensorKind.LEAF_TEMPERATURE, "climate"),
-        ("humidity", "Umidade relativa", SensorKind.HUMIDITY, "climate"),
-        ("co2", "CO₂", SensorKind.CO2, "climate"),
-        ("reservoir_level", "Nível do reservatório", SensorKind.RESERVOIR_LEVEL, "fertigation"),
-        ("reservoir_mass", "Massa do reservatório", SensorKind.MASS, "fertigation"),
-        ("vpd", "VPD", SensorKind.VPD, "climate"),
-        ("flow", "Vazão", SensorKind.FLOW, "fertigation"),
-        ("leak", "Detector de vazamento", SensorKind.LEAK, "safety"),
-    )
+    sensor_layout = DIY_SENSOR_LAYOUT
     operations.bootstrap_station(
         station,
         tuple(

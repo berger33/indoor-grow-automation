@@ -19,7 +19,8 @@ class ReleaseArtifactTests(TestCase):
     def test_licenses_and_physical_validation_are_not_hidden(self) -> None:
         licenses = (ROOT / "docs/SBOM_E_LICENCAS.md").read_text(encoding="utf-8")
         readiness = (ROOT / "docs/RELATORIO_PRONTIDAO_V1.md").read_text(encoding="utf-8")
-        self.assertIn("77 dependências", licenses)
+        dependency_count = len(document()["packages"]) - 1
+        self.assertIn(f"{dependency_count} dependências", licenses)
         self.assertIn("montagem física DIY ainda não validada", readiness)
         self.assertIn("somente com água", readiness)
         self.assertIn("pessoa qualificada", (ROOT / "docs/ESCOPO_V1.md").read_text(encoding="utf-8"))

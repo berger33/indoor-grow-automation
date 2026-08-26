@@ -3,13 +3,13 @@
 ## Resultado
 
 `sbom/indoor-grow.spdx.json` é uma SBOM determinística no formato SPDX 2.3.
-Ela contém **77 dependências** declaradas/lockadas de Python, painel e firmware,
+Ela contém **78 dependências** declaradas/lockadas de Python, painel e firmware,
 além do pacote raiz. O Quality Gate compara o arquivo com os manifests e falha
 quando ele fica desatualizado.
 
 | Licença declarada/concluída | Pacotes | Tratamento inicial |
 |---|---:|---|
-| MIT | 36 | permissiva; preservar avisos |
+| MIT | 37 | permissiva; preservar avisos |
 | Apache-2.0 | 24 | permissiva; preservar licença/NOTICE aplicável |
 | MPL-2.0 | 12 | copyleft por arquivo; preservar fontes/avisos de arquivos modificados |
 | BSD-3-Clause | 2 | permissiva; preservar aviso e condições |
@@ -27,6 +27,7 @@ A SBOM inclui:
 - dependências diretas Python fixadas em `requirements.txt`;
 - toda a árvore presente em `web/package-lock.json`;
 - plataforma e bibliotecas Git fixadas nos `platformio.ini`;
+- biblioteca MQTT PubSubClient fixada no registro PlatformIO;
 - plataforma Native vendorizada e sua licença Apache-2.0.
 
 Ainda não inclui todos os pacotes transitivos baixados pelo PlatformIO para o
@@ -38,7 +39,8 @@ precisam de digest e SBOM própria na RC.
 
 Licenças Python foram conferidas nos metadados das distribuições instaladas.
 Licenças npm vieram do lockfile. O firmware DIY ativo fixa a
-[biblioteca DHT da Adafruit](https://github.com/adafruit/DHT-sensor-library) e a
+[biblioteca DHT da Adafruit](https://github.com/adafruit/DHT-sensor-library), a
+[PubSubClient](https://github.com/knolleary/pubsubclient) e a
 [plataforma ESP32 do PlatformIO](https://github.com/platformio/platform-espressif32).
 Bibliotecas do firmware de três nós permanecem no arquivo histórico, mas não
 entram na SBOM executável porque não são compiladas pelo escopo atual.
