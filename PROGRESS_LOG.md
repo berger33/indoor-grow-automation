@@ -187,3 +187,21 @@ foi preservado apenas para rastreabilidade.
   receita supervisionada.
 - Próximos passos: aguardar o build ESP32 do CI; depois comprar/conferir peças e
   seguir os gates do tutorial sem usar os documentos arquivados como montagem.
+
+## 2026-08-27
+
+### Validação independente das agendas de irrigação
+
+- Commits: 1.
+- Item concluído: `D3-009 P1`; o hub rejeita identificadores duplicados e
+  sobreposição entre janelas ativas, inclusive de domingo para segunda-feira,
+  antes de substituir a agenda válida.
+- Decisões preservadas: nenhuma mudança física, de orçamento ou de
+  intertravamento; o pacote não depende do transporte MQTT em revisão no PR
+  #17 e não executa saídas.
+- Verificação: teste de API cobre rejeição na virada semanal e preservação da
+  configuração anterior; portão completo executado antes da publicação.
+- Pendências: executor periódico idempotente e ACK/NACK (`D3-010 P0`), além de
+  todos os testes físicos já registrados.
+- Próximos passos: autorizar ou rejeitar o PR #17; depois implementar o executor
+  das agendas sobre a identidade MQTT única aprovada.

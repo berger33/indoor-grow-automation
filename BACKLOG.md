@@ -47,6 +47,8 @@ mudança de direção e preservados apenas no histórico Git/arquivo.
 - [ ] `D3-006 P0` Testar perda/retorno do notebook durante atuação simulada.
 - [ ] `D3-007 P0` Restaurar backup em ambiente limpo.
 - [ ] `D3-008 P1` Homologar entidades EKAZA e cem ciclos por canal.
+- [x] `D3-009 P1` Rejeitar agendas de irrigação sobrepostas antes de persistir.
+- [ ] `D3-010 P0` Executar agendas aprovadas com retomada idempotente e ACK/NACK.
 
 ## Fase D4 — Comissionamento
 

@@ -8,6 +8,8 @@ versionamento semântico a partir da primeira release.
 
 ### Alterado
 
+- agendas de irrigação sobrepostas, inclusive na virada semanal, agora são
+  rejeitadas antes de substituir a configuração válida existente;
 - arquitetura física simplificada para notebook, ESP32 único, placa perfurada,
   relés/MOSFETs genéricos, bombas econômicas e recipientes domésticos;
 - BOM ativa substituída por checklist cotável de R$ 1.620, com fornecedores por
