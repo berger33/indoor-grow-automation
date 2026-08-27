@@ -137,6 +137,69 @@ class OperationsApiTests(TestCase):
         run = self.client.get("/api/v1/stations/grow_a/batch-runs").json()["runs"][0]
         self.assertEqual("awaiting_ack", run["currentStep"])
 
+    def test_rejects_overlapping_irrigation_windows_without_replacing_schedule(self) -> None:
+        self.login("operator", "operator-password")
+        accepted = self.client.put(
+            "/api/v1/stations/grow_a/irrigation-schedules",
+            json=[
+                {
+                    "windowId": "sunday_night",
+                    "startTime": "23:58",
+                    "durationSeconds": 180,
+                    "weekdays": [6],
+                }
+            ],
+        )
+        self.assertEqual(200, accepted.status_code, accepted.text)
+
+        rejected = self.client.put(
+            "/api/v1/stations/grow_a/irrigation-schedules",
+            json=[
+                {
+                    "windowId": "sunday_night",
+                    "startTime": "23:58",
+                    "durationSeconds": 180,
+                    "weekdays": [6],
+                },
+                {
+                    "windowId": "monday_early",
+                    "startTime": "00:00",
+                    "durationSeconds": 60,
+                    "weekdays": [0],
+                },
+            ],
+        )
+
+        self.assertEqual(400, rejected.status_code, rejected.text)
+        self.assertIn("sobrepostas", rejected.json()["detail"])
+        self.assertEqual(
+            ("sunday_night",),
+            tuple(item.window_id for item in self.operations.irrigation["grow_a"]),
+        )
+
+    def test_rejects_duplicate_irrigation_window_identifiers(self) -> None:
+        self.login("operator", "operator-password")
+        response = self.client.put(
+            "/api/v1/stations/grow_a/irrigation-schedules",
+            json=[
+                {
+                    "windowId": "morning",
+                    "startTime": "08:00",
+                    "durationSeconds": 60,
+                    "weekdays": [0],
+                },
+                {
+                    "windowId": "morning",
+                    "startTime": "09:00",
+                    "durationSeconds": 60,
+                    "weekdays": [1],
+                },
+            ],
+        )
+
+        self.assertEqual(400, response.status_code, response.text)
+        self.assertIn("duplicado", response.json()["detail"])
+
     def test_production_transport_failure_is_explicit_and_fail_safe(self) -> None:
         class UnavailableDispatcher:
             def start(self, _loop) -> None: pass

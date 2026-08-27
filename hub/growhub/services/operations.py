@@ -259,6 +259,36 @@ class InMemoryOperations:
     def save_irrigation(self, station_id: str, windows: tuple[IrrigationWindow, ...]) -> None:
         if len(windows) > 5:
             raise ValueError("são permitidas no máximo cinco irrigações")
+        ids = [window.window_id for window in windows]
+        if len(ids) != len(set(ids)):
+            raise ValueError("identificador de irrigação duplicado")
+
+        week_seconds = 7 * 24 * 60 * 60
+        intervals: list[tuple[str, int, int]] = []
+        for window in windows:
+            if not window.enabled:
+                continue
+            seconds_after_midnight = (
+                window.start_time.hour * 3600
+                + window.start_time.minute * 60
+                + window.start_time.second
+            )
+            for weekday in window.weekdays:
+                start = weekday * 86_400 + seconds_after_midnight
+                intervals.append((window.window_id, start, start + window.duration_seconds))
+
+        for index, (left_id, left_start, left_end) in enumerate(intervals):
+            for right_id, right_start, right_end in intervals[index + 1 :]:
+                if left_id == right_id:
+                    continue
+                if any(
+                    max(left_start, right_start + shift)
+                    < min(left_end, right_end + shift)
+                    for shift in (-week_seconds, 0, week_seconds)
+                ):
+                    raise ValueError(
+                        f"janelas de irrigação sobrepostas: {left_id}, {right_id}"
+                    )
         self.irrigation[station_id] = windows
 
     def save_setpoints(self, station_id: str, value: Setpoints, *, user_id: str, now: datetime) -> None:
